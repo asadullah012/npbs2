@@ -1,0 +1,82 @@
+<resources>
+    <string name="app_name">নাটোর পল্লী বিদ্যুৎ সমিতি-২</string>
+    <string name="title">নাটোর পল্লী বিদ্যুৎ সমিতি-২\nডিজিটাল সেবা</string>
+    <string name="about">আমাদের সম্পর্কে</string>
+    <string name="about_url">http://pbs2.natore.gov.bd/bn/site/page/7XSs-%E0%A6%8F%E0%A6%95-%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%87</string>
+    <string name="about_details">১. পবিস নিবন্ধিকরণ তারিখ:\t১১/০১/১৯৮০খ্রিঃ\n২. আনুষ্ঠানিক বিদ্যুতায়নের তারিখ:\t১২/১২/১৯৮১খ্রিঃ\n৩. পবিস এর এলাকা সংখ্যা:\t৭টি (পুনঃ বিন্যাসকৃত)\n৪. পবিস এর এলাকা পরিচালকদের অনুমোদিত/বিদ্যমান সংখ্যা:\t১১জন/৭জন\n৫. পবিস এর মহিলা পরিচালকদের অনুমোদিত/বিদ্যমান সংখ্যা:\t৩জন/৩জন\n৬. আয়তন:\t১২৩২.৭২ বর্গ কিঃমিঃ\n৭. অন্তর্ভূক্ত উপজেলার  নাম:\tবড়াইগ্রাম, লালপুর, গুরুদাসপুর, বাঘা, চারঘাট এবং বাগাতিপাড়া (আংশিক)\n৮. পৌরসভার সংখ্যা:\t০৭টি\n৯. বিদ্যুতায়িত পৌরসভার সংখ্যা:\t০৭টি\n১০. অন্তর্ভূক্ত ইউনিয়নের সংখ্যা:\t৩৭টি\n১১. বিদ্যুতায়িত ইউনিয়নের সংখ্যা:\t৩৭টি (চিলমারী ও রামকৃষ্ণপুর সৌর বিদ্যুৎ গ্রীড লাইন ছাড়া)\n১২. অন্তর্ভূক্ত গ্রামের সংখ্যা:\t৭১৫টি\n১৩. বিদ্যুতায়িত গ্রামের সংখ্যা:\t৭১৫টি\n১৪. জোনাল অফিসের সংখ্যা ও নাম:\t০৪টি- চারঘাট, গুরুদাসপুর , লালপুর ও বাঘা জেনাল অফিস\n১৫. সাব জোনাল অফিসের সংখ্যা ও নাম:\t০২টি - লক্ষীকোল এবং দয়ারামপুর সাব জোনাল অফিস\n১৬. অভিযোগ কেন্দ্রের সংখ্যা ও নাম:\t১২টি- আড়ানী, আব্দুলপুর, রাজাপুর, খুবজিপুর, নাজিরপুর, নন্দনগাছি,  ইউসুফপুর, কলসনগর, চক রাজাপুর, জোতরাঘব, শাহীবাজার ও জোনাইল অভিযোগ কেন্দ্র\n১৭. সংযোগকৃত গ্রাহক সংখ্যা:\t৩৯৯৭৬৭ জন।\n১৮. নির্মিত লাইনের পরিমাণ:\t৪৮০২.৬৯১ কিঃমিঃ।\n১৯. বিদ্যুতায়িত লাইনের পরিমাণ:\t৪৮০২.৬৯১ কিঃমিঃ।\n২০. বিল আদায়ের হার (বর্তমান মাস):\t৯৪.১৬ %\n২১. বিল আদায়ের হার (ইয়ার টু ডেট):\t৮৭.৭৭ %\n২২. বকেয়া  মাস (দাতব্য ও রিবেট ব্যতিত):\t১.১১ মাস\n২৩. সিস্টেম লস (বর্তমান মাস):\t৭.৫০ %\n২৪. সিস্টেম লস (ইয়ার টু ডেট):\t১০.১০ %\n২৫. উপকেন্দ্রের সংখ্যা:\t১০ টি (১৬০ এমভিএ)\n</string>
+    <string name="new_connection">নতুন সংযোগের জন্য অনলাইনে আবেদন (আবাসিক)</string>
+    <string name="new_connection_url">http://www.rebpbs.com/</string>
+    <string name="new_connection_industry">নতুন সংযোগের জন্য অনলাইনে আবেদন (শিল্প)</string>
+    <string name="new_connection_industry_url">http://industry.rebpbs.com/</string>
+    <string name="online_bill_payment">অনলাইনে বিদ্যুৎ বিল প্রদান (বিকাশ)</string>
+    <string name="online_bill_payment_url">https://www.bkash.com/paybill/pallibidyut</string>
+    <string name="sms_consumer">গ্রাহককে সেবা সংক্রান্ত এসএমএস প্রদান</string>
+    <string name="sms_consumer_details">গ্রাহককে সেবা সংক্রান্ত যে সব এসএমএস প্রদান করা হয়:</string>
+    <string name="sms_bill_sample">হিঃ XXX/XXXX অক্টোবর বিল XX টাকা। DD/MM/YY মধ্যে পরিশোধ করুন। পবিস</string>
+    <string name="sms_application_1">১. নতুন সংযোগ সংক্রান্ত সকল তথ্য</string>
+    <string name="sms_application_2">২. প্রতি মাসের বিদ্যুৎ বিল সংক্রান্ত তথ্য</string>
+    <string name="sms_application_complete_sample">হাউজ ওয়্যারিং সম্পন্ন করার জন্যঃ\n\t\tSuccess.Your Tracking ID:XXXXXXXXXXXXXXX and Pin Code:XXXXXXXX.Complete House Wiring and Confirm Through Online.Palli Bidyut</string>
+    <string name="sms_application_deposite_sample">আবেদনের ফি জমা দেবার জন্যঃ\n\t\tSuccess.Tracking ID:XXXXXXXXXXXXXXX,Ref/Bill No:XXXXXXXX.Please deposit TK.965(App. Fee:115,CD:800,Mem. Fee:50)within 2 working days.Palli Bidyut</string>
+    <string name="website">ওয়েবসাইট</string>
+    <string name="website_url">http://pbs2.natore.gov.bd/</string>
+    <string name="facebook">ফেসবুক পেজ</string>
+    <string name="facebook_url">https://www.facebook.com/natorepbstwo</string>
+    <string name="facebook_page_id">natorepbstwo</string>
+    <string name="digital_phonebook">পল্লী বিদ্যুৎ ডিজিটাল ফোনবুক</string>
+    <string name="digital_phonebook_app_id">reb.ebook.contackbook</string>
+    <string name="grs">অভিযোগ প্রতিকার ব্যবস্থা (GRS)</string>
+    <string name="grs_url">https://www.grs.gov.bd/</string>
+    <string name="nothi">নথি | অফিস ব্যবস্থাপনা</string>
+    <string name="nothi_url">https://nothi.gov.bd/</string>
+    <string name="complain_pbs">বিদ্যুৎ সেবা সম্পর্কে মতামত প্রদান</string>
+    <string name="complain_pbs_url">http://www.rebpbs.com/UI/frm_feedback.aspx</string>
+    <string name="complain_centre">অভিযোগ কেন্দ্র যোগাযোগ</string>
+    <string-array name="complain_centre_names">
+        <item>সদর দপ্তর, অভিযোগ কেন্দ্র</item>
+        <item>চারঘাট জোনাল অফিস অভিযোগ কেন্দ্র</item>
+        <item>গুরুদাসপুর জোনাল অফিস অভিযোগ কেন্দ্র</item>
+        <item>লালপুর জোনাল অফিসের অভিযোগ কেন্দ্র</item>
+        <item>বাঘা জোনাল অফিস অভিযোগ কেন্দ্র</item>
+        <item>লক্ষীকোল অভিযোগ কেন্দ্র</item>
+        <item>দয়ারামপুর সাব জোনাল অফিস অভিযোগ কেন্দ্র</item>
+        <item>রাজাপুর অভিযোগ কেন্দ্র</item>
+        <item>আব্দুলপুর অভিযোগ কেন্দ্র</item>
+        <item>নাজিরপুর অভিযোগ কেন্দ্র</item>
+        <item>খুবজীপুর অভিযোগ কেন্দ্র</item>
+        <item>আড়ানী অভিযোগ কেন্দ্র</item>
+        <item>নন্দনগাছী অভিযোগ কেন্দ্র</item>
+        <item>ইউসুফপুর অভিযোগ কেন্দ্র</item>
+        <item>কলসনগর অভিযোগ কেন্দ্র</item>
+        <item>চক রাজাপুর অফিযোগ কেন্দ্র</item>
+        <item>জোনাইল অফিযোগ কেন্দ্র</item>
+        <item>নয়াবাজার অফিযোগ কেন্দ্র</item>
+        <item>শাহীবাজার অভিযোগকেন্দ্র</item>
+        <item>যোতরাঘব অভিযোগকেন্দ্র</item>
+        <item>হট লাইন</item>
+    </string-array>
+
+    <string-array name="complain_centre_mobile_numbers">
+        <item>01769401631</item>
+        <item>01769401639</item>
+        <item>01769401635</item>
+        <item>01769401633</item>
+        <item>01769401640</item>
+        <item>01769401636</item>
+        <item>01769402058</item>
+        <item>01769401632</item>
+        <item>01769401634</item>
+        <item>01769401638</item>
+        <item>01769401637</item>
+        <item>01769401641</item>
+        <item>01769402059</item>
+        <item>01769402210</item>
+        <item>01769407557</item>
+        <item>01769407709</item>
+        <item>01769407892</item>
+        <item>01769407893</item>
+        <item>01704106691</item>
+        <item>01704106692</item>
+        <item>01769404040</item>
+    </string-array>
+
+</resources>
