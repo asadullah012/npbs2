@@ -8,14 +8,23 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.NestedScrollView;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
+        findViewById(R.id.aboutUsBtn).setOnClickListener(v -> openAboutUsActivity());
+        //setButtonActions();
+    }
+
+    private void openAboutUsActivity() {
+        Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
+    }
+
+    private void setButtonActions() {
         findViewById(R.id.aboutButton).setOnClickListener( v -> openAtAGlanceActivity());
         findViewById(R.id.complainCentreButton).setOnClickListener(v -> openComplainCentreActivity());
         findViewById(R.id.complainPBSButton).setOnClickListener(v ->
@@ -23,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
                         getResources().getString(R.string.complain_pbs_url))
         );
         findViewById(R.id.newConnectionButton).setOnClickListener(v ->
-            openWebActivity(getResources().getString(R.string.new_connection),
-                    getResources().getString(R.string.new_connection_url))
+                openWebActivity(getResources().getString(R.string.new_connection),
+                        getResources().getString(R.string.new_connection_url))
         );
         findViewById(R.id.newConnectionIndustryButton).setOnClickListener(v ->
                 openWebActivity(getResources().getString(R.string.new_connection_industry),
@@ -34,17 +43,17 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getString(R.string.online_bill_payment_url)));
         findViewById(R.id.consumerSMSButton).setOnClickListener(v -> openConsumerSMSActivity());
         findViewById(R.id.websiteButton).setOnClickListener(v ->
-            openWebActivity(getResources().getString(R.string.website),
-                    getResources().getString(R.string.website_url)));
+                openWebActivity(getResources().getString(R.string.website),
+                        getResources().getString(R.string.website_url)));
         findViewById(R.id.facebookButton).setOnClickListener(v ->
-            openWebActivity(getResources().getString(R.string.facebook), getFacebookPageURL(this)));
+                openWebActivity(getResources().getString(R.string.facebook), getFacebookPageURL(this)));
         findViewById(R.id.phoneBookAppButton).setOnClickListener(v -> openPlayStore());
         findViewById(R.id.nothiButton).setOnClickListener(v ->
                 openWebActivity(getResources().getString(R.string.nothi),
                         getResources().getString(R.string.nothi_url)));
         findViewById(R.id.grsButton).setOnClickListener(v ->
-            openWebActivity(getResources().getString(R.string.grs),
-                    getResources().getString(R.string.grs_url)));
+                openWebActivity(getResources().getString(R.string.grs),
+                        getResources().getString(R.string.grs_url)));
     }
 
     private void openAtAGlanceActivity(){
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             return getResources().getString(R.string.facebook_url); //normal web url
         }
     }
+
     protected void openPlayStore(){
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getResources().getString(R.string.digital_phonebook_app_id))));
