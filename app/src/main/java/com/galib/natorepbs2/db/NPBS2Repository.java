@@ -11,10 +11,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class NPBS2Repository {
 
     private InformationDao informationDao;
+    private AchievementDao achievementDao;
     private static final String TAG = NPBS2Repository.class.getName();
     public NPBS2Repository(Application application) {
         NPBS2DB db = NPBS2DB.getDatabase(application);
         informationDao = db.informationDao();
+        achievementDao = db.achievementDao();
+    }
+
+    public LiveData<List<Achievement>> getAllAchievement() {
+        return achievementDao.getAll();
+    }
+
+    public void insertAchievement(Achievement achievement){
+        achievementDao.insert(achievement);
+    }
+
+    public void insertAchievementAll(List<Achievement> achievements){
+        NPBS2DB.databaseWriteExecutor.execute(() -> {
+            achievementDao.insertAll(achievements);
+        });
     }
 
     public LiveData<List<Information>> getInformationByCategory(String category) {

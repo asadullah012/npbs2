@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.galib.natorepbs2.db.Information;
 import com.galib.natorepbs2.sync.SyncAtAGlance;
 
 import org.jsoup.Jsoup;
@@ -30,7 +31,7 @@ public class AtAGlanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_at_aglance);
         informationViewModel = new ViewModelProvider(this).get(InformationViewModel.class);
-        startSync();
+        startSync(informationViewModel);
         RecyclerView recyclerView = findViewById(R.id.ataglanceRecyclerView);
         final AtAGlanceAdapter adapter = new AtAGlanceAdapter(new AtAGlanceAdapter.WordDiff());
         recyclerView.setAdapter(adapter);
@@ -40,7 +41,7 @@ public class AtAGlanceActivity extends AppCompatActivity {
         });
 
     }
-    protected void startSync(){
+    protected void startSync(InformationViewModel informationViewModel){
         new SyncAtAGlance(informationViewModel).execute();
     }
 }
