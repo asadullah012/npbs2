@@ -34,4 +34,11 @@ public class InformationViewModel extends AndroidViewModel {
     public void deleteAllByCategory(String atAGlance) {
         mRepository.deleteAllByCategory(Category.atAGlance);
     }
+
+    public void insertVisionMission(String vision, String mission) {
+        String s[] = vision.split(": ");
+        mRepository.insertInformation(new Information(0, s[0], s[1], Category.visionMission));
+        s = mission.split(": ");
+        mRepository.insertInformation(new Information(1, s[0], s[1], Category.visionMission));
+    }
 }

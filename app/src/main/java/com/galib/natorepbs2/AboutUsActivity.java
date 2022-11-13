@@ -11,11 +11,7 @@ public class AboutUsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
-        findViewById(R.id.atAGlanceBtn).setOnClickListener(v-> openAtAGlanceActivity());
-    }
-
-    private void openAtAGlanceActivity() {
-        Intent intent = new Intent(this, AtAGlanceActivity.class);
-        startActivity(intent);
+        findViewById(R.id.atAGlanceBtn).setOnClickListener(v-> Utility.openActivity(this, AtAGlanceActivity.class));
+        findViewById(R.id.visionMissionBtn).setOnClickListener(v -> Utility.openActivity(this, VisionMissionActivity.class));
     }
 }
