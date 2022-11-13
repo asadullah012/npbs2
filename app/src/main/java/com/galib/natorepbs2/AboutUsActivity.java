@@ -13,5 +13,6 @@ public class AboutUsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_us);
         findViewById(R.id.atAGlanceBtn).setOnClickListener(v-> Utility.openActivity(this, AtAGlanceActivity.class));
         findViewById(R.id.visionMissionBtn).setOnClickListener(v -> Utility.openActivity(this, VisionMissionActivity.class));
+        findViewById(R.id.achievementBtn).setOnClickListener(v -> Utility.openActivity(this, AchievementActivity.class));
     }
 }
