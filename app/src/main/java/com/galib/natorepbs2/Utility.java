@@ -11,10 +11,11 @@ public class Utility {
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
     }
-    public static void openWebActivity(Context context, String title, String url){
+    public static void openWebActivity(Context context, String title, String url, String html){
         Intent intent = new Intent(context, WebActivity.class);
         intent.putExtra("TITLE", title);
         intent.putExtra("URL", url);
+        intent.putExtra("HTML", html);
         context.startActivity(intent);
     }
 

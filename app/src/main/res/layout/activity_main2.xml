@@ -55,7 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bt2"
+                android:id="@+id/serviceBtn"
                 style="@style/menu_button"
                 android:text="@string/services"
                 app:layout_constraintTop_toBottomOf="@id/aboutUsBtn"
