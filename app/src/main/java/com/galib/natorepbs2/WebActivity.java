@@ -23,23 +23,30 @@ public class WebActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
 
-        Intent intent = getIntent();
-
-        String title = intent.getStringExtra("TITLE");
         TextView titleTextView = findViewById(R.id.titleTextView);
-        titleTextView.setText(title);
-
-        String url = intent.getStringExtra("URL");
         WebView mWebView = findViewById(R.id.webView);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new WebViewClient());
-        mWebView.loadUrl(url);
-
         Button button = findViewById(R.id.openInBrowserButton);
-        button.setOnClickListener(v -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mWebView.getUrl()));
-            startActivity(browserIntent);
-        });
+
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("TITLE");
+        titleTextView.setText(title);
+
+        String url = intent.getStringExtra("URL");
+        if(url != null){
+            mWebView.loadUrl(url);
+            button.setVisibility(View.VISIBLE);
+            button.setOnClickListener(v -> {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mWebView.getUrl()));
+                startActivity(browserIntent);
+            });
+        }
+
+        String html = intent.getStringExtra("HTML");
+        if(html != null){
+            mWebView.loadData(html, "text/html; charset=utf-8", "UTF-8");
+        }
     }
 }
