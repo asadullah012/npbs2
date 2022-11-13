@@ -34,6 +34,9 @@
     <string name="services">আমাদের সেবা</string>
     <string name="at_a_glance">এক নজরে</string>
     <string name="achievement">আমাদের অর্জন</string>
+    <string name="vision_mission">ভিশন ও মিশন</string>
+    <string name="vision">ভিশন (রূপকল্প): নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর আওতাধীন সকল জনগনকে গুনগত মানের বিদ্যুৎ সরবরাহের মাধ্যমে গ্রাহক সেবা নিশ্চিত করা।</string>
+    <string name="mission">মিশন (অভিলক্ষ্য): নতুন সংযোগের আবেদনের প্রেক্ষিতে স্বল্প সময়ের মধ্যে দ্রুত, সংযোগ প্রত্যাশী সকলকে বিদ্যুৎ সুবিধা পৌছে দেওয়া।</string>
     <string-array name="complain_centre_names">
         <item>সদর দপ্তর, অভিযোগ কেন্দ্র</item>
         <item>চারঘাট জোনাল অফিস অভিযোগ কেন্দ্র</item>
