@@ -11,49 +11,67 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ComplainCentreAdapter extends RecyclerView.Adapter<ComplainCentreAdapter.ViewHolder>{
-    String[] names;
-    String[] numbers;
+import com.galib.natorepbs2.db.ComplainCentre;
+import com.galib.natorepbs2.db.Information;
+
+public class ComplainCentreAdapter extends ListAdapter<ComplainCentre, ComplainCentreAdapter.ComplainCentreViewHolder> {
     Context context;
-    public ComplainCentreAdapter(Context context, String []names, String[] numbers){
-        this.names = names;
-        this.numbers = numbers;
-        this.context = context;
-    }
-    @NonNull
-    @Override
-    public ComplainCentreAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+    public ComplainCentreAdapter(Context context, @NonNull DiffUtil.ItemCallback<ComplainCentre> diffCallback) {
+        super(diffCallback);
+        this.context =context;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ComplainCentreAdapter.ViewHolder holder, int position) {
-        holder.name.setText(names[position]);
-        holder.number.setText(numbers[position]);
-        holder.callButton.setOnClickListener(view -> {
-            Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
-            phoneIntent.setData(Uri.parse("tel:" + numbers[position]));
-            context.startActivity(phoneIntent);
-        });
+    public ComplainCentreViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return ComplainCentreViewHolder.create(parent);
     }
 
     @Override
-    public int getItemCount() {
-        return names.length;
+    public void onBindViewHolder(@NonNull ComplainCentreViewHolder holder, int position) {
+        ComplainCentre current = getItem(position);
+        holder.bind(context, current.getName(), current.getMobileNo());
     }
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, number;
-        public Button callButton;
-        public ViewHolder(View itemView) {
+
+    static class WordDiff extends DiffUtil.ItemCallback<ComplainCentre> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull ComplainCentre oldItem, @NonNull ComplainCentre newItem) {
+            return oldItem == newItem;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull ComplainCentre oldItem, @NonNull ComplainCentre newItem) {
+            return oldItem.getName().equals(newItem.getName());
+        }
+    }
+    static class ComplainCentreViewHolder extends RecyclerView.ViewHolder {
+        private final TextView complainCentreName;
+        private final TextView complainCentreMobile;
+        private final Button callButton;
+        private ComplainCentreViewHolder(View itemView) {
             super(itemView);
-            this.name = itemView.findViewById(R.id.name);
-            this.number = itemView.findViewById(R.id.number);
-            this.callButton = itemView.findViewById(R.id.callButton);
+            complainCentreName = itemView.findViewById(R.id.name);
+            complainCentreMobile = itemView.findViewById(R.id.number);
+            callButton = itemView.findViewById(R.id.callButton);
+        }
+
+        public void bind(Context context, String name, String mobileNo) {
+            complainCentreName.setText(name);
+            complainCentreMobile.setText(mobileNo);
+            callButton.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mobileNo));
+                context.startActivity(intent);
+            });
+        }
+
+        static ComplainCentreViewHolder create(ViewGroup parent) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_complain_centre, parent, false);
+            return new ComplainCentreViewHolder(view);
         }
     }
 }

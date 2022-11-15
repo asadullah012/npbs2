@@ -12,11 +12,13 @@ public class NPBS2Repository {
 
     private InformationDao informationDao;
     private AchievementDao achievementDao;
+    private ComplainCentreDao complainCentreDao;
     private static final String TAG = NPBS2Repository.class.getName();
     public NPBS2Repository(Application application) {
         NPBS2DB db = NPBS2DB.getDatabase(application);
         informationDao = db.informationDao();
         achievementDao = db.achievementDao();
+        complainCentreDao = db.complainCentreDao();
     }
 
     public LiveData<List<Achievement>> getAllAchievement() {
@@ -60,5 +62,17 @@ public class NPBS2Repository {
 
     public void deleteAllByCategory(String category) {
         NPBS2DB.databaseWriteExecutor.execute(() -> informationDao.deleteAllByCategory(category));
+    }
+
+    public void insertComplainCentre(ComplainCentre complainCentre){
+        NPBS2DB.databaseWriteExecutor.execute(()->complainCentreDao.insert(complainCentre));
+    }
+
+    public void insertAllComplainCentre(List<ComplainCentre> complainCentreList){
+        NPBS2DB.databaseWriteExecutor.execute(()->complainCentreDao.insertAll(complainCentreList));
+    }
+
+    public LiveData<List<ComplainCentre>> getAllComplainCentre(){
+        return complainCentreDao.getAll();
     }
 }
