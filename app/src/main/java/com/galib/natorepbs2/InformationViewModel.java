@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.galib.natorepbs2.constants.Category;
 import com.galib.natorepbs2.db.Information;
 import com.galib.natorepbs2.db.NPBS2Repository;
 

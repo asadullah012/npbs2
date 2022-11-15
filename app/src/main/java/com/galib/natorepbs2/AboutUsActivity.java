@@ -14,5 +14,6 @@ public class AboutUsActivity extends AppCompatActivity {
         findViewById(R.id.atAGlanceBtn).setOnClickListener(v-> Utility.openActivity(this, AtAGlanceActivity.class));
         findViewById(R.id.visionMissionBtn).setOnClickListener(v -> Utility.openActivity(this, VisionMissionActivity.class));
         findViewById(R.id.achievementBtn).setOnClickListener(v -> Utility.openActivity(this, AchievementActivity.class));
+        findViewById(R.id.complainCentreBtn).setOnClickListener(v -> Utility.openActivity(this, ComplainCentreActivity.class));
     }
 }

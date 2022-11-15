@@ -1,21 +1,34 @@
 package com.galib.natorepbs2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-public class ComplainCentreActivity extends AppCompatActivity {
+import com.galib.natorepbs2.constants.Category;
+import com.galib.natorepbs2.db.ComplainCentre;
+import com.galib.natorepbs2.sync.SyncAtAGlance;
+import com.galib.natorepbs2.sync.SyncComplainCentre;
 
+public class ComplainCentreActivity extends AppCompatActivity {
+    ComplainCentreViewModel complainCentreViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complain_centre);
+        complainCentreViewModel = new ViewModelProvider(this).get(ComplainCentreViewModel.class);
+        startSync(complainCentreViewModel);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        ComplainCentreAdapter adapter = new ComplainCentreAdapter(this, getResources().getStringArray(R.array.complain_centre_names), getResources().getStringArray(R.array.complain_centre_mobile_numbers));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final ComplainCentreAdapter adapter = new ComplainCentreAdapter(this, new ComplainCentreAdapter.WordDiff());
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        complainCentreViewModel.getAllComplainCentre().observe(this, complainCentres -> {
+            adapter.submitList(complainCentres);
+        });
+    }
+    protected void startSync(ComplainCentreViewModel complainCentreViewModel){
+        new SyncComplainCentre(complainCentreViewModel).execute();
     }
 }

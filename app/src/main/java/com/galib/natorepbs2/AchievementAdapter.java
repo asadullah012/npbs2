@@ -68,7 +68,7 @@ public class AchievementAdapter extends ListAdapter<Achievement, AchievementAdap
 
         static AchievementViewHolder create(ViewGroup parent) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.achievement_item, parent, false);
+                    .inflate(R.layout.item_achievement, parent, false);
             return new AchievementViewHolder(view);
         }
     }

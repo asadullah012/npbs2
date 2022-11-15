@@ -1,4 +1,4 @@
-package com.galib.natorepbs2;
+package com.galib.natorepbs2.constants;
 
 public class Category {
     public static final String atAGlance = "ataglance";

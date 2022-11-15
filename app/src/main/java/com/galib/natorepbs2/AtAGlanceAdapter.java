@@ -61,7 +61,7 @@ public class AtAGlanceAdapter extends ListAdapter<Information, AtAGlanceAdapter.
 
         static InformationViewHolder create(ViewGroup parent) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.ataglance_item, parent, false);
+                    .inflate(R.layout.item_ataglance, parent, false);
             return new InformationViewHolder(view);
         }
     }

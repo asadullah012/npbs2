@@ -2,7 +2,7 @@ package com.galib.natorepbs2.sync;
 
 import android.os.AsyncTask;
 
-import com.galib.natorepbs2.AchievementViewModel;
+import com.galib.natorepbs2.ComplainCentreViewModel;
 import com.galib.natorepbs2.InformationViewModel;
 import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;
@@ -11,16 +11,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.jsoup.select.Selector;
 
 import java.io.IOException;
 
-public class SyncAchievement extends AsyncTask<Void, Void, Void> {
-
-    AchievementViewModel viewModel;
+public class SyncComplainCentre extends AsyncTask<Void, Void, Void> {
+    ComplainCentreViewModel viewModel;
     String[][] trtd;
-    public SyncAchievement(AchievementViewModel achievementViewModel){
-        viewModel = achievementViewModel;
+    public SyncComplainCentre(ComplainCentreViewModel complainCentreViewModel){
+        viewModel = complainCentreViewModel;
     }
     @Override
     protected void onPreExecute() {
@@ -31,9 +29,9 @@ public class SyncAchievement extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         try {
             //Connect to the website
-            Document document = Jsoup.connect(URLs.ACHIEVEMENTS).get();
+            Document document = Jsoup.connect(URLs.COMPLAIN_CENTRE).get();
 
-            Elements tables = document.select(Selectors.ACHIEVEMENTS);
+            Elements tables = document.select(Selectors.COMPLAIN_CENTRE);
 
             for (Element table : tables) {
                 Elements trs = table.select("tr");
@@ -56,6 +54,6 @@ public class SyncAchievement extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void unused) {
         super.onPostExecute(unused);
         //viewModel.deleteAllByCategory(Category.atAGlance);
-        viewModel.insertFromArray(trtd);
+        viewModel.insertFromTable(trtd);
     }
 }
