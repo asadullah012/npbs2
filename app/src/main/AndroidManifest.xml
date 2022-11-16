@@ -15,52 +15,49 @@
         android:theme="@style/Theme.NatorePBS2"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <service
+            android:name=".sync.SyncService"
+            android:enabled="true"
+            android:exported="true"></service>
         <activity
-            android:name=".employee.EmployeeListActivity"
+            android:name=".ui.AchievementActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AchievementActivity"
+            android:name=".ui.VisionMissionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".VisionMissionActivity"
+            android:name=".ui.AboutUsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AboutUsActivity"
+            android:name=".ui.AtAGlanceActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AtAGlanceActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ComplainCentreActivity"
+            android:name=".ui.ComplainCentreActivity"
             android:exported="false" />
         <activity
-            android:name=".ConsumerSMSActivity"
+            android:name=".ui.ConsumerSMSActivity"
             android:exported="false" />
         <activity
-            android:name=".WebActivity"
+            android:name=".ui.WebActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

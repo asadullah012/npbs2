@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
@@ -21,7 +21,8 @@
     <ImageView
         android:id="@+id/bannerImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.25"
         android:layout_marginTop="5dp"
         android:src="@drawable/npbs2"
         android:adjustViewBounds="true"
@@ -35,7 +36,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintHeight_percent="0.6"
         android:fillViewport="true"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"

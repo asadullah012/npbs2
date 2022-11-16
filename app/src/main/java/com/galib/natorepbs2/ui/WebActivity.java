@@ -1,4 +1,4 @@
-package com.galib.natorepbs2;
+package com.galib.natorepbs2.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.galib.natorepbs2.R;
 
 import java.net.URI;
 

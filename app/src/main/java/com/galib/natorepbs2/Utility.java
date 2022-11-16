@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.Log;
 
+import com.galib.natorepbs2.ui.WebActivity;
+
 public class Utility {
     public static void openActivity(Context context, Class cls){
         Intent intent = new Intent(context, cls);

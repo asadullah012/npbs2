@@ -1,4 +1,4 @@
-package com.galib.natorepbs2;
+package com.galib.natorepbs2.viewmodel;
 
 import android.app.Application;
 
@@ -19,7 +19,7 @@ public class ComplainCentreViewModel extends AndroidViewModel {
         mRepository = new NPBS2Repository(application);
     }
 
-    LiveData<List<ComplainCentre>> getAllComplainCentre(){
+    public LiveData<List<ComplainCentre>> getAllComplainCentre(){
         return mRepository.getAllComplainCentre();
     }
 

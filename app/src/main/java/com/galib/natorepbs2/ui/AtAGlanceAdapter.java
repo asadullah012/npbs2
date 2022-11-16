@@ -1,4 +1,4 @@
-package com.galib.natorepbs2;
+package com.galib.natorepbs2.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.db.Information;
 
 public class AtAGlanceAdapter extends ListAdapter<Information, AtAGlanceAdapter.InformationViewHolder> {
