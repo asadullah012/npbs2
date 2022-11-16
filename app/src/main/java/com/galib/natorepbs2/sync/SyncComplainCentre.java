@@ -2,8 +2,7 @@ package com.galib.natorepbs2.sync;
 
 import android.os.AsyncTask;
 
-import com.galib.natorepbs2.ComplainCentreViewModel;
-import com.galib.natorepbs2.InformationViewModel;
+import com.galib.natorepbs2.viewmodel.ComplainCentreViewModel;
 import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;
 
@@ -29,7 +28,7 @@ public class SyncComplainCentre extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         try {
             //Connect to the website
-            Document document = Jsoup.connect(URLs.COMPLAIN_CENTRE).get();
+            Document document = Jsoup.connect(URLs.BASE + URLs.COMPLAIN_CENTRE).get();
 
             Elements tables = document.select(Selectors.COMPLAIN_CENTRE);
 

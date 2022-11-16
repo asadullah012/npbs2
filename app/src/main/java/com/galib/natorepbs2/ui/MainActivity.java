@@ -1,10 +1,15 @@
-package com.galib.natorepbs2;
+package com.galib.natorepbs2.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-import com.galib.natorepbs2.sync.SyncTariff;
+import com.galib.natorepbs2.R;
+import com.galib.natorepbs2.Utility;
+import com.galib.natorepbs2.sync.SyncService;
+import com.galib.natorepbs2.ui.AboutUsActivity;
 
 public class MainActivity extends AppCompatActivity {
 

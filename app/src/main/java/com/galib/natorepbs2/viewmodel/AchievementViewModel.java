@@ -1,4 +1,4 @@
-package com.galib.natorepbs2;
+package com.galib.natorepbs2.viewmodel;
 
 import android.app.Application;
 
@@ -20,7 +20,7 @@ public class AchievementViewModel extends AndroidViewModel {
         mRepository = new NPBS2Repository(application);
     }
 
-    LiveData<List<Achievement>> getAllAchievement() {
+    public LiveData<List<Achievement>> getAllAchievement() {
         return mRepository.getAllAchievement();
     }
 

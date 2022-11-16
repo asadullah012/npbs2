@@ -2,8 +2,7 @@ package com.galib.natorepbs2.sync;
 
 import android.os.AsyncTask;
 
-import com.galib.natorepbs2.AchievementViewModel;
-import com.galib.natorepbs2.InformationViewModel;
+import com.galib.natorepbs2.viewmodel.AchievementViewModel;
 import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;
 
@@ -11,7 +10,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.jsoup.select.Selector;
 
 import java.io.IOException;
 
@@ -31,7 +29,7 @@ public class SyncAchievement extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         try {
             //Connect to the website
-            Document document = Jsoup.connect(URLs.ACHIEVEMENTS).get();
+            Document document = Jsoup.connect(URLs.BASE + URLs.ACHIEVEMENTS).get();
 
             Elements tables = document.select(Selectors.ACHIEVEMENTS);
 

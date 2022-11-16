@@ -2,7 +2,7 @@ package com.galib.natorepbs2.sync;
 
 import android.os.AsyncTask;
 
-import com.galib.natorepbs2.InformationViewModel;
+import com.galib.natorepbs2.viewmodel.InformationViewModel;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
