@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="page_title" type="String" />
+        <variable name="at_a_glance" type="String" />
+        <variable name="vision_mission" type="String" />
+        <variable name="achievement" type="String" />
+        <variable name="complain_centre" type="String" />
+        <variable name="fragment" type="com.galib.natorepbs2.ui.AboutUsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.AboutUsFragment">
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/page_title"
+            android:text="@{page_title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.8"
+            android:fillViewport="true"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/atAGlanceBtn"
+                    style="@style/menu_button"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    android:text="@{at_a_glance}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/visionMissionBtn"
+                    style="@style/menu_button"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    android:text="@{vision_mission}"
+                    app:layout_constraintTop_toBottomOf="@id/atAGlanceBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/achievementBtn"
+                    style="@style/menu_button"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    android:text="@{achievement}"
+                    app:layout_constraintTop_toBottomOf="@id/visionMissionBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/complainCentreBtn"
+                    style="@style/menu_button"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    android:text="@{complain_centre}"
+                    app:layout_constraintTop_toBottomOf="@id/achievementBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
