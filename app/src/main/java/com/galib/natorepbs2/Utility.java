@@ -9,6 +9,7 @@ import android.util.Log;
 import com.galib.natorepbs2.ui.WebActivity;
 
 public class Utility {
+    public static String TAG = Utility.class.getName();
     public static void openActivity(Context context, Class cls){
         Intent intent = new Intent(context, cls);
         context.startActivity(intent);
@@ -35,6 +36,16 @@ public class Utility {
             Log.d("NPBS2", "fb app not found");
             return context.getResources().getString(R.string.facebook_url); //normal web url
         }
+    }
+
+    public static String bnDigitToEnDigit(String bnString){
+        StringBuilder sb = new StringBuilder();
+        for(char c : bnString.toCharArray()){
+            if(c >= '০' && c <= '৯')
+                sb.append(c - '০');
+            else sb.append(c);
+        }
+        return sb.toString();
     }
 
     public static void openPlayStore(Context context){
