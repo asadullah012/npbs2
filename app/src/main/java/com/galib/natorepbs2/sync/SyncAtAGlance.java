@@ -14,6 +14,7 @@ public class SyncAtAGlance extends AsyncTask<Void, Void, Void> {
     String url = "http://pbs2.natore.gov.bd/bn/site/page/7XSs-%E0%A6%8F%E0%A6%95-%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%87";
     InformationViewModel viewModel;
     String[][] trtd;
+    String month = null;
     public SyncAtAGlance(InformationViewModel informationViewModel){
         viewModel = informationViewModel;
     }
@@ -27,7 +28,7 @@ public class SyncAtAGlance extends AsyncTask<Void, Void, Void> {
         try {
             //Connect to the website
             Document document = Jsoup.connect(url).get();
-
+            month = document.select("#left > div.page.details > div > div > div.html_text.body > div > p:nth-child(2)").text();
             Elements tables = document.select("#left > div.page.details > div > div > div.html_text.body > div > table");
 
             for (Element table : tables) {
@@ -52,5 +53,6 @@ public class SyncAtAGlance extends AsyncTask<Void, Void, Void> {
         super.onPostExecute(unused);
         //viewModel.deleteAllByCategory(Category.atAGlance);
         viewModel.insertFromArray(trtd);
+        viewModel.setMonth(month);
     }
 }

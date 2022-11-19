@@ -15,10 +15,6 @@
         android:theme="@style/Theme.NatorePBS2"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <service
-            android:name=".sync.SyncService"
-            android:enabled="true"
-            android:exported="true"></service>
         <activity
             android:name=".ui.AchievementActivity"
             android:exported="false">

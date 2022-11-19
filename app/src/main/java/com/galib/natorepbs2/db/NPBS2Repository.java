@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.galib.natorepbs2.constants.Category;
+
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -36,13 +38,22 @@ public class NPBS2Repository {
     }
 
     public LiveData<List<Information>> getInformationByCategory(String category) {
-        return informationDao.getInformationByCategory(category);
+        return informationDao.getInformationsByCategory(category);
     }
 
     public void insertInformation(Information information) {
         NPBS2DB.databaseWriteExecutor.execute(() -> {
             informationDao.insert(information);
         });
+    }
+
+    public void setMonth(String month){
+        insertInformation(new Information(0, month, "", Category.atAGlanceMonth));
+    }
+
+    public LiveData<Information> getMonth(){
+        LiveData<Information> information = informationDao.getInformationByCategory(Category.atAGlanceMonth);
+        return information;
     }
 
     public int insertInformations(List<Information> informationList) {

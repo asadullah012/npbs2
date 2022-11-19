@@ -18,7 +18,6 @@ public class ComplainCentreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complain_centre);
         complainCentreViewModel = new ViewModelProvider(this).get(ComplainCentreViewModel.class);
-        startSync(complainCentreViewModel);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ComplainCentreAdapter adapter = new ComplainCentreAdapter(this, new ComplainCentreAdapter.WordDiff());
         recyclerView.setAdapter(adapter);
@@ -26,8 +25,5 @@ public class ComplainCentreActivity extends AppCompatActivity {
         complainCentreViewModel.getAllComplainCentre().observe(this, complainCentres -> {
             adapter.submitList(complainCentres);
         });
-    }
-    protected void startSync(ComplainCentreViewModel complainCentreViewModel){
-        new SyncComplainCentre(complainCentreViewModel).execute();
     }
 }

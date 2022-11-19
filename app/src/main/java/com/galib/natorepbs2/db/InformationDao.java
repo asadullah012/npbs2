@@ -20,7 +20,10 @@ public interface InformationDao {
     void deleteAll();
 
     @Query("SELECT * FROM information_table where category = :category ORDER BY priority ASC")
-    LiveData<List<Information>> getInformationByCategory(String category);
+    LiveData<List<Information>> getInformationsByCategory(String category);
+
+    @Query("SELECT * FROM information_table where category = :category ORDER BY priority ASC LIMIT 1")
+    LiveData<Information> getInformationByCategory(String category);
 
     @Query("SELECT COUNT(*) FROM information_table")
     int getCount();
