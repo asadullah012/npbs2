@@ -6,11 +6,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.galib.natorepbs2.BR;
 import com.galib.natorepbs2.R;
+import com.galib.natorepbs2.databinding.FragmentAtAGlanceBinding;
 import com.galib.natorepbs2.db.Information;
 
 public class AtAGlanceAdapter extends ListAdapter<Information, AtAGlanceAdapter.InformationViewHolder> {
@@ -20,15 +24,36 @@ public class AtAGlanceAdapter extends ListAdapter<Information, AtAGlanceAdapter.
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return R.layout.item_ataglance;
+    }
+
+    @Override
     public InformationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return InformationViewHolder.create(parent);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, viewType, parent, false);
+        return new InformationViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull InformationViewHolder holder, int position) {
-        Information current = getItem(position);
-        holder.bind(current.getTitle(), current.getDescription(), current.getPriority());
+        holder.bind(getItem(position));
     }
+
+    static class InformationViewHolder extends RecyclerView.ViewHolder {
+        ViewDataBinding binding;
+
+        public InformationViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(Information information) {
+            binding.setVariable(BR.information, information);
+            binding.executePendingBindings();
+        }
+    }
+
 
     static class WordDiff extends DiffUtil.ItemCallback<Information> {
 
@@ -40,30 +65,6 @@ public class AtAGlanceAdapter extends ListAdapter<Information, AtAGlanceAdapter.
         @Override
         public boolean areContentsTheSame(@NonNull Information oldItem, @NonNull Information newItem) {
             return oldItem.getTitle().equals(newItem.getTitle()) && oldItem.getCategory().equals(newItem.getCategory());
-        }
-    }
-    static class InformationViewHolder extends RecyclerView.ViewHolder {
-        private final TextView titleText;
-        private final TextView descText;
-        private final TextView priorityText;
-
-        private InformationViewHolder(View itemView) {
-            super(itemView);
-            titleText = itemView.findViewById(R.id.titleTextView);
-            descText = itemView.findViewById(R.id.descTextView);
-            priorityText = itemView.findViewById(R.id.priorityTextView);
-        }
-
-        public void bind(String title, String desc, int priority) {
-            titleText.setText(title);
-            descText.setText(desc);
-            priorityText.setText(String.valueOf(priority));
-        }
-
-        static InformationViewHolder create(ViewGroup parent) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_ataglance, parent, false);
-            return new InformationViewHolder(view);
         }
     }
 }

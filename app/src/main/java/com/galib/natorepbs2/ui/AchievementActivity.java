@@ -18,7 +18,6 @@ public class AchievementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievement);
         achievementViewModel = new ViewModelProvider(this).get(AchievementViewModel.class);
-        startSync(achievementViewModel);
         RecyclerView recyclerView = findViewById(R.id.achievementRecyclerView);
         final AchievementAdapter adapter = new AchievementAdapter(new AchievementAdapter.WordDiff());
         recyclerView.setAdapter(adapter);
@@ -26,8 +25,5 @@ public class AchievementActivity extends AppCompatActivity {
         achievementViewModel.getAllAchievement().observe(this, achievements -> {
             adapter.submitList(achievements);
         });
-    }
-    protected void startSync(AchievementViewModel achievementViewModel){
-        new SyncAchievement(achievementViewModel).execute();
     }
 }

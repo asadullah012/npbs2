@@ -24,6 +24,14 @@ public class InformationViewModel extends AndroidViewModel {
         return mRepository.getInformationByCategory(category);
     }
 
+    public void setMonth(String month){
+        mRepository.setMonth(month);
+    }
+
+    public LiveData<Information> getMonth(){
+        return  mRepository.getMonth();
+    }
+
     public void insertFromArray(String[][] trtd) {
         List<Information> informationList = new ArrayList<>();
         for(int i =1; i<trtd.length; i++){

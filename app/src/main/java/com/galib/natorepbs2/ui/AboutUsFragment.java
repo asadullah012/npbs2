@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.Utility;
@@ -39,19 +40,15 @@ public class AboutUsFragment extends Fragment {
     }
     public void onClick(View v){
         //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
-        switch (v.getId()){
-            case R.id.atAGlanceBtn:
-                Utility.openActivity(getActivity(), AtAGlanceActivity.class);
-                break;
-            case R.id.visionMissionBtn:
-                Utility.openActivity(getActivity(), VisionMissionActivity.class);
-                break;
-            case R.id.achievementBtn:
-                Utility.openActivity(getActivity(), AchievementActivity.class);
-                break;
-            case R.id.complainCentreBtn:
-                Utility.openActivity(getActivity(), ComplainCentreActivity.class);
-                break;
+        int id = v.getId();
+        if (id == R.id.atAGlanceBtn) {
+            Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_atAGlanceFragment);
+        } else if (id == R.id.visionMissionBtn) {
+            Utility.openActivity(getActivity(), VisionMissionActivity.class);
+        } else if (id == R.id.achievementBtn) {
+            Utility.openActivity(getActivity(), AchievementActivity.class);
+        } else if (id == R.id.complainCentreBtn) {
+            Utility.openActivity(getActivity(), ComplainCentreActivity.class);
         }
     }
 }
