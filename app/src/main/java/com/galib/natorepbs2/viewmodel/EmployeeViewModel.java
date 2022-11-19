@@ -1,0 +1,47 @@
+package com.galib.natorepbs2.viewmodel;
+
+import android.app.Application;
+import android.util.Log;
+
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
+import com.galib.natorepbs2.constants.Category;
+import com.galib.natorepbs2.db.ComplainCentre;
+import com.galib.natorepbs2.db.Employee;
+import com.galib.natorepbs2.db.NPBS2Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmployeeViewModel extends AndroidViewModel {
+    private static final String TAG = EmployeeViewModel.class.getName();
+    private NPBS2Repository mRepository;
+
+    public EmployeeViewModel(Application application){
+        super(application);
+        mRepository = new NPBS2Repository(application);
+    }
+
+    public LiveData<List<Employee>> getOfficerList(){
+        return mRepository.getOfficerList();
+    }
+
+    public void insertFromTable(String[][] tableData){
+        if(tableData == null) return;
+        List<Employee> officersList = new ArrayList<>();
+        for(int i =0; i<tableData.length; i++){
+            if(tableData[i] == null) continue;
+            String s[] = tableData[i][2].split(", ");
+            String designation = s[0], office;
+            if(s.length == 1)
+                office = "সদর দপ্তর";
+            else
+                office = s[1];
+            officersList.add(new Employee(i, tableData[i][0], tableData[i][1], designation, office,
+                    tableData[i][4], tableData[i][5], tableData[i][6], Category.OFFICERS));
+            //Log.d(TAG, "insertFromTable: " + i + " " + tableData[i][0] + " " + tableData[i][1] + " " + designation + " " + office + " " + tableData[i][4] + " " + tableData[i][5] + " " + tableData[i][6] + " " + Category.OFFICERS);
+        }
+        mRepository.insertEmployeeList(officersList);
+    }
+}

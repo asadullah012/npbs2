@@ -9,6 +9,7 @@
         <variable name="vision_mission" type="String" />
         <variable name="achievement" type="String" />
         <variable name="complain_centre" type="String" />
+        <variable name="officer_list" type="String" />
         <variable name="fragment" type="com.galib.natorepbs2.ui.AboutUsFragment" />
     </data>
 
@@ -71,6 +72,13 @@
                     android:onClick="@{(v)-> fragment.onClick(v)}"
                     android:text="@{complain_centre}"
                     app:layout_constraintTop_toBottomOf="@id/achievementBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/officersListBtn"
+                    style="@style/menu_button"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    android:text="@{officer_list}"
+                    app:layout_constraintTop_toBottomOf="@id/complainCentreBtn"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
