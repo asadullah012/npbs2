@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="employee"
+            type="com.galib.natorepbs2.db.Employee" />
+        <variable
+            name="adapter"
+            type="com.galib.natorepbs2.ui.OfficerListAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:background="@drawable/item_background">
+
+        <ImageView
+            android:id="@+id/profilePhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.3"
+            android:src="@mipmap/ic_launcher_round"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:text="@{employee.name}"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/profilePhoto"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:text="@{employee.designation}"
+            app:layout_constraintStart_toEndOf="@id/profilePhoto"
+            app:layout_constraintTop_toBottomOf="@id/nameTextView" />
+
+        <TextView
+            android:id="@+id/officeTextView"
+            android:layout_width="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@{employee.office}"
+            app:layout_constraintStart_toEndOf="@id/profilePhoto"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+        <TextView
+            android:id="@+id/mobileTextView"
+            android:layout_width="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@{employee.mobile}"
+            app:layout_constraintStart_toEndOf="@id/profilePhoto"
+            app:layout_constraintTop_toBottomOf="@id/officeTextView" />
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:text="@{employee.email}"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@id/profilePhoto"
+            app:layout_constraintTop_toBottomOf="@id/mobileTextView" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/callBtn"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            app:layout_constraintTop_toBottomOf="@id/emailTextView"
+            app:layout_constraintStart_toEndOf="@id/profilePhoto"
+            app:layout_constraintEnd_toStartOf="@id/emailBtn"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/emailBtn"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Email"
+            app:layout_constraintTop_toBottomOf="@id/emailTextView"
+            app:layout_constraintStart_toEndOf="@id/callBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
