@@ -42,7 +42,6 @@ public class OfficersFragment extends Fragment {
         binding.setLifecycleOwner(getActivity());
         employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
         final OfficerListAdapter adapter = new OfficerListAdapter(new OfficerListAdapter.OfficerDiff(), new OfficerListAdapter.ClickListener() {
-
             @Override
             public void onClickCall(String mobile) {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mobile));

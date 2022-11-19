@@ -7,8 +7,8 @@
             name="employee"
             type="com.galib.natorepbs2.db.Employee" />
         <variable
-            name="adapter"
-            type="com.galib.natorepbs2.ui.OfficerListAdapter" />
+            name="clickListener"
+            type="com.galib.natorepbs2.ui.OfficerListAdapter.ClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -95,6 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Call"
+            android:onClick="@{()->clickListener.onClickCall(employee.mobile)}"
             app:layout_constraintTop_toBottomOf="@id/emailTextView"
             app:layout_constraintStart_toEndOf="@id/profilePhoto"
             app:layout_constraintEnd_toStartOf="@id/emailBtn"/>
@@ -105,6 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send Email"
+            android:onClick="@{()->clickListener.onClickEmail(employee.email)}"
             app:layout_constraintTop_toBottomOf="@id/emailTextView"
             app:layout_constraintStart_toEndOf="@id/callBtn"
             app:layout_constraintEnd_toEndOf="parent"
