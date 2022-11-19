@@ -56,8 +56,7 @@ public class OfficerListAdapter extends ListAdapter<Employee, OfficerListAdapter
 
         public void bind(Employee employee, ClickListener clickListener) {
             binding.setVariable(BR.employee, employee);
-//            binding.getRoot().findViewById(R.id.callButton).setOnClickListener( v -> clickListener.onClickCall(employee.getMobile()));
-//            binding.getRoot().findViewById(R.id.emailBtn).setOnClickListener(v -> clickListener.onClickEmail(employee.getEmail()));
+            binding.setVariable(BR.clickListener, clickListener);
             binding.executePendingBindings();
         }
     }

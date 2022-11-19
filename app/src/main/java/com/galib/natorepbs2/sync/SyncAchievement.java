@@ -54,6 +54,7 @@ public class SyncAchievement extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void unused) {
         super.onPostExecute(unused);
         //viewModel.deleteAllByCategory(Category.atAGlance);
+        if(trtd == null) return;
         viewModel.insertFromArray(trtd);
     }
 }

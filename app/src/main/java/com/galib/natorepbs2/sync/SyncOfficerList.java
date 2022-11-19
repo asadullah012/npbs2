@@ -53,6 +53,7 @@ public class SyncOfficerList extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void unused) {
         super.onPostExecute(unused);
+        if(tableData == null) return;
         employeeViewModel.insertFromTable(tableData);
     }
 }

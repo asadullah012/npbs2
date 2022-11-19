@@ -51,6 +51,7 @@ public class SyncAtAGlance extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void unused) {
         super.onPostExecute(unused);
+        if(trtd == null) return;
         //viewModel.deleteAllByCategory(Category.atAGlance);
         viewModel.insertFromArray(trtd);
         viewModel.setMonth(month);
