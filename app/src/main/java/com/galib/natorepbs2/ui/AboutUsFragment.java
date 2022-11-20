@@ -35,6 +35,7 @@ public class AboutUsFragment extends Fragment {
         binding.setVisionMission(getString(R.string.vision_mission));
         binding.setComplainCentre(getString(R.string.complain_centre));
         binding.setOfficerList(getString(R.string.officer_list));
+        binding.setJuniorOfficerList(getString(R.string.junior_officer_list));
         binding.setFragment(this);
         binding.setLifecycleOwner(getActivity());
         return binding.getRoot();
@@ -52,6 +53,8 @@ public class AboutUsFragment extends Fragment {
             Utility.openActivity(getActivity(), ComplainCentreActivity.class);
         } else if(id == R.id.officersListBtn){
             Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_officersFragment);
+        } else if(id == R.id.juniorOfficerBtn){
+            Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_juniorOfficerFragment);
         }
     }
 }
