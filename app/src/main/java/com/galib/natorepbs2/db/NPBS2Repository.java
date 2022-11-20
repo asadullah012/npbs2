@@ -98,4 +98,7 @@ public class NPBS2Repository {
     public LiveData<List<Employee>> getOfficerList(){
         return employeeDao.getAllByType(Category.OFFICERS);
     }
+    public LiveData<List<Employee>> getJuniorOfficerList(){
+        return employeeDao.getAllByType(Category.JUNIOR_OFFICER);
+    }
 }

@@ -5,5 +5,5 @@ public class Category {
     public static final String visionMission = "visionmission";
     public static final String atAGlanceMonth = "atAGlanceMonth";
     public static final int OFFICERS = 0;
-    public static final int STAFF = 1;
+    public static final int JUNIOR_OFFICER = 1;
 }

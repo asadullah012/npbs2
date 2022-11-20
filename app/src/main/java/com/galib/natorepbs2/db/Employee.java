@@ -22,14 +22,14 @@ public class Employee {
     @NonNull
     @ColumnInfo(name = "office")
     String office;
-    @NonNull
+
     @ColumnInfo(name = "email")
     String email;
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "mobile")
     String mobile;
-    @NonNull
+
     @ColumnInfo(name = "phone")
     String phone;
 
@@ -57,7 +57,6 @@ public class Employee {
         return office;
     }
 
-    @NonNull
     public String getEmail() {
         return email;
     }
@@ -67,7 +66,6 @@ public class Employee {
         return mobile;
     }
 
-    @NonNull
     public String getPhone() {
         return phone;
     }

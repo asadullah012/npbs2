@@ -55,4 +55,13 @@ public class Utility {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + context.getResources().getString(R.string.digital_phonebook_app_id))));
         }
     }
+    public static String arrayToString(String []arr){
+        if(arr == null) return null;
+        StringBuilder sb = new StringBuilder();
+        for(String s: arr) {
+            sb.append(s);
+            sb.append(' ');
+        }
+        return sb.toString();
+    }
 }

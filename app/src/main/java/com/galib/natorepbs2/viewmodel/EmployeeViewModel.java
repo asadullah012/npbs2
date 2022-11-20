@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.galib.natorepbs2.Utility;
 import com.galib.natorepbs2.constants.Category;
 import com.galib.natorepbs2.db.ComplainCentre;
 import com.galib.natorepbs2.db.Employee;
@@ -27,7 +28,11 @@ public class EmployeeViewModel extends AndroidViewModel {
         return mRepository.getOfficerList();
     }
 
-    public void insertFromTable(String[][] tableData){
+    public LiveData<List<Employee>> getJuniorOfficerList(){
+        return mRepository.getJuniorOfficerList();
+    }
+
+    public void insertOfficersFromTable(String[][] tableData){
         if(tableData == null) return;
         List<Employee> officersList = new ArrayList<>();
         for(int i =0; i<tableData.length; i++){
@@ -43,5 +48,24 @@ public class EmployeeViewModel extends AndroidViewModel {
             //Log.d(TAG, "insertFromTable: " + i + " " + tableData[i][0] + " " + tableData[i][1] + " " + designation + " " + office + " " + tableData[i][4] + " " + tableData[i][5] + " " + tableData[i][6] + " " + Category.OFFICERS);
         }
         mRepository.insertEmployeeList(officersList);
+    }
+
+    public void insertJuniorOfficerFromTable(String[][] tableData) {
+        if(tableData == null) return;
+        List<Employee> employeeList = new ArrayList<>();
+        String office = null;
+        for(int i =0; i<tableData.length; i++){
+            if(tableData[i] == null) continue;
+            Log.d(TAG, "insertJuniorOfficerFromTable: " + Utility.arrayToString(tableData[i]));
+            if(tableData[i].length == 1){
+                office = tableData[i][0];
+                i++; // ignore header row
+            }
+            else
+                employeeList.add(new Employee(i, tableData[i][1], tableData[i][2], tableData[i][3],
+                        office, tableData[i][4], tableData[i][5],null, Category.JUNIOR_OFFICER));
+        }
+        Log.d(TAG, "insertJuniorOfficerFromTable: " + employeeList);
+        mRepository.insertEmployeeList(employeeList);
     }
 }

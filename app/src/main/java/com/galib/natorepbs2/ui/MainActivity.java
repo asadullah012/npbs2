@@ -9,6 +9,7 @@ import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.sync.SyncAchievement;
 import com.galib.natorepbs2.sync.SyncAtAGlance;
 import com.galib.natorepbs2.sync.SyncComplainCentre;
+import com.galib.natorepbs2.sync.SyncJuniorOfficers;
 import com.galib.natorepbs2.sync.SyncOfficerList;
 import com.galib.natorepbs2.viewmodel.AchievementViewModel;
 import com.galib.natorepbs2.viewmodel.ComplainCentreViewModel;
@@ -29,5 +30,6 @@ public class MainActivity extends AppCompatActivity {
         new SyncAchievement(new ViewModelProvider(this).get(AchievementViewModel.class)).execute();
         new SyncComplainCentre(new ViewModelProvider(this).get(ComplainCentreViewModel.class)).execute();
         new SyncOfficerList(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
+        new SyncJuniorOfficers(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
     }
 }
