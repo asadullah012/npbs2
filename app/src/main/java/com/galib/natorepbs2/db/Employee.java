@@ -18,7 +18,6 @@ public class Employee {
     @NonNull
     @ColumnInfo(name = "designation")
     String designation;
-    @NonNull
     @ColumnInfo(name = "office")
     String office;
     @ColumnInfo(name = "email")
@@ -27,9 +26,10 @@ public class Employee {
     @NonNull
     @ColumnInfo(name = "mobile")
     String mobile;
-
     @ColumnInfo(name = "phone")
     String phone;
+    @ColumnInfo(name = "type")
+    int type;
 
     public int getPriority() {
         return priority;
@@ -49,7 +49,6 @@ public class Employee {
         return designation;
     }
 
-    @NonNull
     public String getOffice() {
         return office;
     }
@@ -71,9 +70,6 @@ public class Employee {
         return type;
     }
 
-    @NonNull
-    @ColumnInfo(name = "type")
-    int type;
     public Employee(int priority, String imageUrl, String name, String designation, String office, String email, String mobile, String phone, int type){
         this.priority = priority;
         this.imageUrl = imageUrl;

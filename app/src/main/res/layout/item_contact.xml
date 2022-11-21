@@ -9,7 +9,7 @@
             type="com.galib.natorepbs2.db.Employee" />
         <variable
             name="clickListener"
-            type="com.galib.natorepbs2.ui.OfficerListAdapter.ClickListener" />
+            type="com.galib.natorepbs2.ui.ContactListAdapter.ClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

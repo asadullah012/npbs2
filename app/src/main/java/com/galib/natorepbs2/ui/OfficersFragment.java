@@ -14,13 +14,8 @@ import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.Utility;
-import com.galib.natorepbs2.constants.Category;
-import com.galib.natorepbs2.databinding.FragmentAtAGlanceBinding;
 import com.galib.natorepbs2.databinding.FragmentOfficersBinding;
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
-import com.galib.natorepbs2.viewmodel.InformationViewModel;
-
-import java.util.Locale;
 
 public class OfficersFragment extends Fragment {
 
@@ -44,7 +39,7 @@ public class OfficersFragment extends Fragment {
         binding.setPageTitle(getString(R.string.officer_list));
         binding.setLifecycleOwner(getActivity());
         employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
-        final OfficerListAdapter adapter = new OfficerListAdapter(new OfficerListAdapter.OfficerDiff(), new OfficerListAdapter.ClickListener() {
+        final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {
             @Override
             public void onClickCall(String mobile) {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Utility.bnDigitToEnDigit(mobile)));

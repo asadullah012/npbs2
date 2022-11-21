@@ -1,4 +1,4 @@
-package com.galib.natorepbs2.ui;
+package com.galib.natorepbs2;
 
 import android.os.Bundle;
 
@@ -12,6 +12,7 @@ import com.galib.natorepbs2.sync.SyncBoardMember;
 import com.galib.natorepbs2.sync.SyncComplainCentre;
 import com.galib.natorepbs2.sync.SyncJuniorOfficers;
 import com.galib.natorepbs2.sync.SyncOfficerList;
+import com.galib.natorepbs2.sync.SyncPowerOutageContact;
 import com.galib.natorepbs2.viewmodel.AchievementViewModel;
 import com.galib.natorepbs2.viewmodel.ComplainCentreViewModel;
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
@@ -33,5 +34,6 @@ public class MainActivity extends AppCompatActivity {
         new SyncOfficerList(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
         new SyncJuniorOfficers(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
         new SyncBoardMember(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
+        new SyncPowerOutageContact(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
     }
 }

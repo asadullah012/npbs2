@@ -7,4 +7,5 @@ public class URLs {
     public static final String OFFICER_LIST = "/view/officer_list";
     public static final String JUNIOR_OFFICER_LIST = "/page/জুনিয়র-কর্মকর্তাগণ";
     public static final String BOARD_MEMBER = "/page/sHFm-সমিতি-বোর্ড";
+    public static final String POWER_OUTAGE_CONTACT = "/news/9oH1-“বিদ্যুৎ-বিভ্রাটে-জরুরী-যোগাযোগ”";
 }

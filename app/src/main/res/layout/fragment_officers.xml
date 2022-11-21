@@ -6,7 +6,7 @@
         <variable name="page_title" type="String" />
         <variable
             name="adapter"
-            type="com.galib.natorepbs2.ui.OfficerListAdapter" />
+            type="com.galib.natorepbs2.ui.ContactListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

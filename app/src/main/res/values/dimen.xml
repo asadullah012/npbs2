@@ -3,6 +3,7 @@
     <dimen name="menu_height">40dp</dimen>
     <dimen name="menu_title_text_size">16sp</dimen>
     <dimen name="page_title_text_size">24sp</dimen>
+    <dimen name="body_text_size">16sp</dimen>
     <dimen name="page_margin_top">20dp</dimen>
     <dimen name="menu_margin">10dp</dimen>
 </resources>

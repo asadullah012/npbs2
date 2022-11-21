@@ -37,6 +37,7 @@ public class AboutUsFragment extends Fragment {
         binding.setOfficerList(getString(R.string.officer_list));
         binding.setJuniorOfficerList(getString(R.string.junior_officer_list));
         binding.setBoardMemberList(getString(R.string.board_member_list));
+        binding.setPowerOutageContact(getString(R.string.power_outage_contact));
         binding.setFragment(this);
         binding.setLifecycleOwner(getActivity());
         return binding.getRoot();
@@ -58,6 +59,9 @@ public class AboutUsFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_juniorOfficerFragment);
         } else if(id == R.id.boardMemberBtn){
             Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_boardMemberFragment);
+        } else if(id == R.id.powerOutageContactBtn){
+            Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_powerOutageContactFragment);
         }
+
     }
 }

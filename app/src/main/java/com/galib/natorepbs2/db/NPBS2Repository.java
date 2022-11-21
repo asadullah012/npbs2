@@ -45,6 +45,7 @@ public class NPBS2Repository {
 
     public void insertInformation(Information information) {
         NPBS2DB.databaseWriteExecutor.execute(() -> {
+            Log.d(TAG, "insertInformation: " + information.getCategory() + " " + information.getDescription());
             informationDao.insert(information);
         });
     }
@@ -104,5 +105,17 @@ public class NPBS2Repository {
 
     public LiveData<List<Employee>> getBoardMemberList() {
         return employeeDao.getAllByType(Category.BOARD_MEMBER);
+    }
+
+    public LiveData<List<Employee>> getPowerOutageContactList() {
+        return employeeDao.getAllByType(Category.POWER_OUTAGE_CONTACT);
+    }
+
+    public LiveData<Information> getPowerOutageHeaderText() {
+        return informationDao.getInformationByCategory(Category.powerOutageContactHeader);
+    }
+
+    public LiveData<Information> getPowerOutageFooterText() {
+        return informationDao.getInformationByCategory(Category.powerOutageContactFooter);
     }
 }

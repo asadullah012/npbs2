@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Information.class, Achievement.class, ComplainCentre.class, Employee.class}, version = 8, exportSchema = false)
+@Database(entities = {Information.class, Achievement.class, ComplainCentre.class, Employee.class}, version = 9, exportSchema = false)
 public abstract class NPBS2DB extends RoomDatabase {
 
     public abstract InformationDao informationDao();

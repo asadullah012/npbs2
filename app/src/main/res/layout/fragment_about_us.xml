@@ -12,6 +12,7 @@
         <variable name="officer_list" type="String" />
         <variable name="junior_officer_list" type="String" />
         <variable name="board_member_list" type="String" />
+        <variable name="power_outage_contact" type="String" />
         <variable name="fragment" type="com.galib.natorepbs2.ui.AboutUsFragment" />
     </data>
 
@@ -98,6 +99,14 @@
                     android:onClick="@{(v)-> fragment.onClick(v)}"
                     android:text="@{board_member_list}"
                     app:layout_constraintTop_toBottomOf="@id/juniorOfficerBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/powerOutageContactBtn"
+                    style="@style/menu_button"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    android:text="@{power_outage_contact}"
+                    app:layout_constraintTop_toBottomOf="@id/boardMemberBtn"
                     app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
