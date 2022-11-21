@@ -73,6 +73,7 @@
                     android:id="@+id/serviceBtn"
                     style="@style/menu_button"
                     android:text="@{service}"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
                     app:layout_constraintTop_toBottomOf="@id/aboutUsBtn"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

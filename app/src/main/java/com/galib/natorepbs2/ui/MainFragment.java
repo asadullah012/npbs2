@@ -45,6 +45,8 @@ public class MainFragment extends Fragment {
         if(v.getId() == R.id.aboutUsBtn){
             Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
 //            Navigation.createNavigateOnClickListener(R.id.action_main_to_aboutUsFragment, null);
+        } else if(v.getId() == R.id.serviceBtn){
+            Navigation.findNavController(v).navigate(R.id.action_main_to_ourServicesFragment);
         }
     }
 }

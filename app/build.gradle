@@ -41,6 +41,7 @@ dependencies {
     // Room components
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.webkit:webkit:1.6.0-alpha03'
     annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
