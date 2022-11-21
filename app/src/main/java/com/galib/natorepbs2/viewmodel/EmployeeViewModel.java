@@ -32,6 +32,10 @@ public class EmployeeViewModel extends AndroidViewModel {
         return mRepository.getJuniorOfficerList();
     }
 
+    public LiveData<List<Employee>> getBoardMemberList(){
+        return mRepository.getBoardMemberList();
+    }
+
     public void insertOfficersFromTable(String[][] tableData){
         if(tableData == null) return;
         List<Employee> officersList = new ArrayList<>();
@@ -66,6 +70,19 @@ public class EmployeeViewModel extends AndroidViewModel {
                         office, tableData[i][4], tableData[i][5],null, Category.JUNIOR_OFFICER));
         }
         Log.d(TAG, "insertJuniorOfficerFromTable: " + employeeList);
+        mRepository.insertEmployeeList(employeeList);
+    }
+
+    public void insertBoardMembersFromTable(String[][] tableData) {
+        if(tableData == null) return;
+        List<Employee> employeeList = new ArrayList<>();
+        String office = null;
+        for(int i =0; i<tableData.length; i++){
+            if(tableData[i] == null) continue;
+            Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
+            employeeList.add(new Employee(i, null, tableData[i][1], tableData[i][2],
+                    tableData[i][3], null, tableData[i][4], null,Category.BOARD_MEMBER));
+        }
         mRepository.insertEmployeeList(employeeList);
     }
 }

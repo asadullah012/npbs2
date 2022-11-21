@@ -5,4 +5,5 @@ public class Selectors {
     public static final String ACHIEVEMENTS = "#left > div.page.details > div > div > div.html_text.body > div > table";
     public static final String OFFICERS_LIST = "#left > div.officerlist.list > div.table-responsive.chbappy1 > table";
     public static final String JUNIOR_OFFICER_LIST = "#left > div.page.details > div > div > div.html_text.body > div > table";
+    public static final String BOARD_MEMBER = "#left > div.page.details > div > div > div.html_text.body > div > table";
 }

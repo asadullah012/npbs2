@@ -10,7 +10,6 @@ public class Employee {
     @NonNull
     @ColumnInfo(name = "priority")
     int priority;
-    @NonNull
     @ColumnInfo(name = "image_url")
     String imageUrl;
     @NonNull
@@ -22,7 +21,6 @@ public class Employee {
     @NonNull
     @ColumnInfo(name = "office")
     String office;
-
     @ColumnInfo(name = "email")
     String email;
     @PrimaryKey
@@ -37,7 +35,6 @@ public class Employee {
         return priority;
     }
 
-    @NonNull
     public String getImageUrl() {
         return imageUrl;
     }
