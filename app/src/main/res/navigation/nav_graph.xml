@@ -60,6 +60,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_aboutUsFragment_to_boardMemberFragment"
+            app:destination="@id/boardMemberFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/atAGlanceFragment"
@@ -74,6 +81,10 @@
         android:id="@+id/juniorOfficerFragment"
         android:name="com.galib.natorepbs2.ui.JuniorOfficerFragment"
         android:label="JuniorOfficerFragment" />
+    <fragment
+        android:id="@+id/boardMemberFragment"
+        android:name="com.galib.natorepbs2.ui.BoardMemberFragment"
+        android:label="BoardMemberFragment" />
 
 
 </navigation>

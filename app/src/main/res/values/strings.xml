@@ -91,4 +91,5 @@
     <string name="banner_content_description">নাটোর পল্লী বিদ্যুৎ সমিতি-২</string>
     <string name="officer_list">কর্মকর্তাবৃন্দ</string>
     <string name="junior_officer_list">জুনিয়র কর্মকর্তাগণ</string>
+    <string name="board_member_list">সমিতি বোর্ড</string>
 </resources>

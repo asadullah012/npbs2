@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.sync.SyncAchievement;
 import com.galib.natorepbs2.sync.SyncAtAGlance;
+import com.galib.natorepbs2.sync.SyncBoardMember;
 import com.galib.natorepbs2.sync.SyncComplainCentre;
 import com.galib.natorepbs2.sync.SyncJuniorOfficers;
 import com.galib.natorepbs2.sync.SyncOfficerList;
@@ -31,5 +32,6 @@ public class MainActivity extends AppCompatActivity {
         new SyncComplainCentre(new ViewModelProvider(this).get(ComplainCentreViewModel.class)).execute();
         new SyncOfficerList(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
         new SyncJuniorOfficers(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
+        new SyncBoardMember(new ViewModelProvider(this).get(EmployeeViewModel.class)).execute();
     }
 }
