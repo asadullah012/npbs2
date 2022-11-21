@@ -93,4 +93,5 @@
     <string name="junior_officer_list">জুনিয়র কর্মকর্তাগণ</string>
     <string name="board_member_list">সমিতি বোর্ড</string>
     <string name="power_outage_contact">বিদ্যুৎ বিভ্রাটে জরুরী যোগাযোগ</string>
+    <string name="electricity_price">বিদ্যুতের মূল্যহার</string>
 </resources>

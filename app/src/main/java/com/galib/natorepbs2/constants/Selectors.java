@@ -9,4 +9,5 @@ public class Selectors {
     public static final String POWER_OUTAGE_CONTACT = "#left > div.news.details > div:nth-child(3) > div > div.html_text.body > div.value > div:nth-child(3) > table";
     public static final String POWER_OUTAGE_CONTACT_HEADER = "#left > div.news.details > div:nth-child(3) > div > div.html_text.body > div.value > div:nth-child(1) > span";
     public static final String POWER_OUTAGE_CONTACT_FOOTER = "#left > div.news.details > div:nth-child(3) > div > div.html_text.body > div.value > div:nth-child(5) > p > span";
+    public static final String TARIFF = "#left > div.page.details > div > div > div.html_text.body > div";
 }

@@ -1,10 +1,16 @@
 package com.galib.natorepbs2.ui;
 
+import static androidx.webkit.WebSettingsCompat.FORCE_DARK_OFF;
+import static androidx.webkit.WebSettingsCompat.FORCE_DARK_ON;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.webkit.WebSettingsCompat;
+import androidx.webkit.WebViewFeature;
 
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +37,17 @@ public class WebActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new WebViewClient());
         Button button = findViewById(R.id.openInBrowserButton);
-
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                    WebSettingsCompat.setForceDark(mWebView.getSettings(), FORCE_DARK_ON);
+                    break;
+                case Configuration.UI_MODE_NIGHT_NO:
+                case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                    WebSettingsCompat.setForceDark(mWebView.getSettings(), FORCE_DARK_OFF);
+                    break;
+            }
+        }
         Intent intent = getIntent();
         String title = intent.getStringExtra("TITLE");
         titleTextView.setText(title);
@@ -50,5 +66,6 @@ public class WebActivity extends AppCompatActivity {
         if(html != null){
             mWebView.loadData(html, "text/html; charset=utf-8", "UTF-8");
         }
+
     }
 }
