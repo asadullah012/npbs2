@@ -4,6 +4,8 @@
 
     <data>
         <variable name="page_title" type="String" />
+        <variable name="header" type="com.galib.natorepbs2.db.Information" />
+        <variable name="footer" type="com.galib.natorepbs2.db.Information" />
         <variable
             name="adapter"
             type="com.galib.natorepbs2.ui.ContactListAdapter" />
@@ -22,19 +24,36 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <TextView
+            android:id="@+id/headerTextView"
+            style="@style/body_text"
+            android:text="@{header.description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/officerListRecyclerView"
+            android:id="@+id/contactListRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintHeight_percent="0.7"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/headerTextView" />
+
+        <TextView
+            android:id="@+id/footerTextView"
+            style="@style/body_text"
+            android:text="@{footer.description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contactListRecyclerView"  />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

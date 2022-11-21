@@ -1,9 +1,6 @@
 package com.galib.natorepbs2.ui;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -17,21 +14,21 @@ import com.galib.natorepbs2.BR;
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.db.Employee;
 
-public class OfficerListAdapter extends ListAdapter<Employee, OfficerListAdapter.EmployeeViewHolder> {
+public class ContactListAdapter extends ListAdapter<Employee, ContactListAdapter.EmployeeViewHolder> {
     public ClickListener onClickListener;
 
     public interface ClickListener {
         void onClickCall(String mobile);
         void onClickEmail(String email);
     }
-    public OfficerListAdapter(@NonNull DiffUtil.ItemCallback<Employee> diffCallback, ClickListener listener) {
+    public ContactListAdapter(@NonNull DiffUtil.ItemCallback<Employee> diffCallback, ClickListener listener) {
         super(diffCallback);
         onClickListener = listener;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return R.layout.item_officers;
+        return R.layout.item_contact;
     }
 
     @Override

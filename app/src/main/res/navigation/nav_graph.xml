@@ -67,6 +67,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_aboutUsFragment_to_powerOutageContactFragment"
+            app:destination="@id/powerOutageContactFragment" />
     </fragment>
     <fragment
         android:id="@+id/atAGlanceFragment"
@@ -85,6 +88,10 @@
         android:id="@+id/boardMemberFragment"
         android:name="com.galib.natorepbs2.ui.BoardMemberFragment"
         android:label="BoardMemberFragment" />
+    <fragment
+        android:id="@+id/powerOutageContactFragment"
+        android:name="com.galib.natorepbs2.ui.PowerOutageContactFragment"
+        android:label="PowerOutageContactFragment" />
 
 
 </navigation>

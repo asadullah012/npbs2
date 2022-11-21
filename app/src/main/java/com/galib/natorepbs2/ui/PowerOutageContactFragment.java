@@ -14,28 +14,27 @@ import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.Utility;
-import com.galib.natorepbs2.databinding.FragmentJuniorOfficerBinding;
+import com.galib.natorepbs2.databinding.FragmentPowerOutageContactBinding;
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
 
-public class JuniorOfficerFragment extends Fragment {
+public class PowerOutageContactFragment extends Fragment {
+
     private EmployeeViewModel employeeViewModel;
 
-    public JuniorOfficerFragment() {
-
+    public PowerOutageContactFragment() {
+        // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentJuniorOfficerBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_junior_officer, container,false);
-        binding.setPageTitle(getString(R.string.junior_officer_list));
+        FragmentPowerOutageContactBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_power_outage_contact, container,false);
+        binding.setPageTitle(getString(R.string.power_outage_contact));
         binding.setLifecycleOwner(getActivity());
         employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
         final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {
@@ -51,8 +50,10 @@ public class JuniorOfficerFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        employeeViewModel.getJuniorOfficerList().observe(getViewLifecycleOwner(), adapter::submitList);
+        employeeViewModel.getPowerOutageContactList().observe(getViewLifecycleOwner(), adapter::submitList);
         binding.setAdapter(adapter);
+        employeeViewModel.getHeaderText().observe(getViewLifecycleOwner(), information -> binding.setHeader(information));
+        employeeViewModel.getFooterText().observe(getViewLifecycleOwner(), information -> binding.setFooter(information));
         return binding.getRoot();
     }
 }

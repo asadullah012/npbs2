@@ -37,7 +37,7 @@ public class BoardMemberFragment extends Fragment {
         binding.setPageTitle(getString(R.string.board_member_list));
         binding.setLifecycleOwner(getActivity());
         employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
-        final OfficerListAdapter adapter = new OfficerListAdapter(new OfficerListAdapter.OfficerDiff(), new OfficerListAdapter.ClickListener() {
+        final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {
             @Override
             public void onClickCall(String mobile) {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Utility.bnDigitToEnDigit(mobile)));

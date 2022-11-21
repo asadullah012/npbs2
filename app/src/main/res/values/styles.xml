@@ -18,4 +18,17 @@
         <item name="android:text"></item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="body_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/body_margin</item>
+        <item name="android:layout_marginBottom">@dimen/body_margin</item>
+        <item name="android:textSize">@dimen/body_text_size</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:text"></item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <dimen name="body_margin">5dp</dimen>
 </resources>

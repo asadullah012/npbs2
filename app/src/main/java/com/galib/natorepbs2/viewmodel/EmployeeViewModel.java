@@ -6,10 +6,11 @@ import android.util.Log;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.Utility;
 import com.galib.natorepbs2.constants.Category;
-import com.galib.natorepbs2.db.ComplainCentre;
 import com.galib.natorepbs2.db.Employee;
+import com.galib.natorepbs2.db.Information;
 import com.galib.natorepbs2.db.NPBS2Repository;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class EmployeeViewModel extends AndroidViewModel {
     public EmployeeViewModel(Application application){
         super(application);
         mRepository = new NPBS2Repository(application);
+
+
     }
 
     public LiveData<List<Employee>> getOfficerList(){
@@ -60,7 +63,7 @@ public class EmployeeViewModel extends AndroidViewModel {
         String office = null;
         for(int i =0; i<tableData.length; i++){
             if(tableData[i] == null) continue;
-            Log.d(TAG, "insertJuniorOfficerFromTable: " + Utility.arrayToString(tableData[i]));
+            //Log.d(TAG, "insertJuniorOfficerFromTable: " + Utility.arrayToString(tableData[i]));
             if(tableData[i].length == 1){
                 office = tableData[i][0];
                 i++; // ignore header row
@@ -76,13 +79,40 @@ public class EmployeeViewModel extends AndroidViewModel {
     public void insertBoardMembersFromTable(String[][] tableData) {
         if(tableData == null) return;
         List<Employee> employeeList = new ArrayList<>();
-        String office = null;
         for(int i =0; i<tableData.length; i++){
             if(tableData[i] == null) continue;
-            Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
+            //Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
             employeeList.add(new Employee(i, null, tableData[i][1], tableData[i][2],
                     tableData[i][3], null, tableData[i][4], null,Category.BOARD_MEMBER));
         }
         mRepository.insertEmployeeList(employeeList);
     }
+
+    public void insertPowerOutageContactFromTable(String[][] tableData, String headerText, String footerText) {
+        if(tableData == null) return;
+        List<Employee> employeeList = new ArrayList<>();
+        for(int i =0; i<tableData.length; i++){
+            if(tableData[i] == null) continue;
+            Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
+            employeeList.add(new Employee(i, null, tableData[i][1], tableData[i][2],
+                    null, null, tableData[i][3], null,Category.POWER_OUTAGE_CONTACT));
+        }
+        Log.d(TAG, "insertBoardMembersFromTable: " + headerText + " " + footerText);
+        mRepository.insertEmployeeList(employeeList);
+        mRepository.insertInformation(new Information(0, getApplication().getString(R.string.power_outage_contact), headerText, Category.powerOutageContactHeader));
+        mRepository.insertInformation(new Information(0, getApplication().getString(R.string.power_outage_contact), footerText, Category.powerOutageContactFooter));
+    }
+
+    public LiveData<List<Employee>> getPowerOutageContactList() {
+        return mRepository.getPowerOutageContactList();
+    }
+
+    public LiveData<Information> getHeaderText(){
+        return mRepository.getPowerOutageHeaderText();
+    }
+
+    public LiveData<Information> getFooterText(){
+        return mRepository.getPowerOutageFooterText();
+    }
+
 }
