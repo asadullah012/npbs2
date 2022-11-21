@@ -33,7 +33,7 @@
             android:id="@+id/bannerImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.25"
+            android:maxHeight="@dimen/banner_max_height"
             android:layout_marginTop="5dp"
             android:src="@drawable/npbs2"
             android:adjustViewBounds="true"
