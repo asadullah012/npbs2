@@ -19,12 +19,12 @@ import java.util.List;
 public class EmployeeViewModel extends AndroidViewModel {
     private static final String TAG = EmployeeViewModel.class.getName();
     private NPBS2Repository mRepository;
-
+    LiveData<Information> headerText, footerText;
     public EmployeeViewModel(Application application){
         super(application);
         mRepository = new NPBS2Repository(application);
-
-
+        headerText = mRepository.getPowerOutageHeaderText();
+        footerText = mRepository.getPowerOutageFooterText();
     }
 
     public LiveData<List<Employee>> getOfficerList(){
@@ -105,14 +105,6 @@ public class EmployeeViewModel extends AndroidViewModel {
 
     public LiveData<List<Employee>> getPowerOutageContactList() {
         return mRepository.getPowerOutageContactList();
-    }
-
-    public LiveData<Information> getHeaderText(){
-        return mRepository.getPowerOutageHeaderText();
-    }
-
-    public LiveData<Information> getFooterText(){
-        return mRepository.getPowerOutageFooterText();
     }
 
 }

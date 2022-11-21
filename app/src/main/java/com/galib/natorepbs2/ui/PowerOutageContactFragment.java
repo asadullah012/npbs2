@@ -52,8 +52,6 @@ public class PowerOutageContactFragment extends Fragment {
         });
         employeeViewModel.getPowerOutageContactList().observe(getViewLifecycleOwner(), adapter::submitList);
         binding.setAdapter(adapter);
-        employeeViewModel.getHeaderText().observe(getViewLifecycleOwner(), information -> binding.setHeader(information));
-        employeeViewModel.getFooterText().observe(getViewLifecycleOwner(), information -> binding.setFooter(information));
         return binding.getRoot();
     }
 }
