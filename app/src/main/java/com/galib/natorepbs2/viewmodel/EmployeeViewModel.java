@@ -107,4 +107,7 @@ public class EmployeeViewModel extends AndroidViewModel {
         return mRepository.getPowerOutageContactList();
     }
 
+    public LiveData<Employee> getOfficeHead() {
+        return mRepository.getOfficeHead();
+    }
 }

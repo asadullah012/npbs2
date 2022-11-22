@@ -79,5 +79,8 @@
     <string name="menu_communication_map">যোগাযোগ ম্যাপ</string>
 
     <string name="menu_awareness">বিদ্যুৎ ব্যবহার সংক্রান্ত সচেতনতা</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="call_text">Call</string>
 
 </resources>
