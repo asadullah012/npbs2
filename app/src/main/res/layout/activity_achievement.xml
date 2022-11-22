@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/titleTextView"
         style="@style/page_title"
-        android:text="@string/achievement"
+        android:text="@string/menu_our_achievements"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

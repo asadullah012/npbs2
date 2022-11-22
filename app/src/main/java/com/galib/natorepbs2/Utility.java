@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.Log;
 
+import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.ui.WebActivity;
 
 public class Utility {
@@ -28,13 +29,13 @@ public class Utility {
             int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
             Log.d("NPBS2", "fb" + versionCode);
             if (versionCode >= 3002850) {
-                return "fb://facewebmodal/f?href=" + context.getResources().getString(R.string.facebook_url);
+                return "fb://facewebmodal/f?href=" + URLs.FACEBOOK;
             } else {
-                return "fb://page/" + context.getResources().getString(R.string.facebook_page_id);
+                return "fb://page/" + URLs.FACEBOOK_APP_ID;
             }
         } catch (PackageManager.NameNotFoundException e) {
             Log.d("NPBS2", "fb app not found");
-            return context.getResources().getString(R.string.facebook_url); //normal web url
+            return URLs.FACEBOOK; //normal web url
         }
     }
 
@@ -50,9 +51,9 @@ public class Utility {
 
     public static void openPlayStore(Context context){
         try {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getResources().getString(R.string.digital_phonebook_app_id))));
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + URLs.DIGITAL_PHONEBOOK_APP_ID)));
         } catch (android.content.ActivityNotFoundException anfe) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + context.getResources().getString(R.string.digital_phonebook_app_id))));
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URLs.PLAY_STORE_PREFIX + URLs.DIGITAL_PHONEBOOK_APP_ID)));
         }
     }
     public static String arrayToString(String []arr){

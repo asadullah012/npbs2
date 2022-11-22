@@ -40,6 +40,27 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_main_to_websitesFragment"
+            app:destination="@id/websitesFragment" />
+        <action
+            android:id="@+id/action_main_to_socialMediaFragment"
+            app:destination="@id/socialMediaFragment" />
+        <action
+            android:id="@+id/action_main_to_relatedAppsFragment"
+            app:destination="@id/relatedAppsFragment" />
+        <action
+            android:id="@+id/action_main_to_opinionComplainFragment"
+            app:destination="@id/opinionComplainFragment" />
+        <action
+            android:id="@+id/action_main_to_noticeTenderFragment"
+            app:destination="@id/noticeTenderFragment" />
+        <action
+            android:id="@+id/action_main_to_communicationFragment"
+            app:destination="@id/communicationFragment" />
+        <action
+            android:id="@+id/action_main_to_awarenessFragment"
+            app:destination="@id/awarenessFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -76,7 +97,11 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_aboutUsFragment_to_powerOutageContactFragment"
-            app:destination="@id/powerOutageContactFragment" />
+            app:destination="@id/powerOutageContactFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/atAGlanceFragment"
@@ -102,7 +127,77 @@
     <fragment
         android:id="@+id/ourServicesFragment"
         android:name="com.galib.natorepbs2.ui.OurServicesFragment"
-        android:label="OurServicesFragment" />
+        android:label="OurServicesFragment" >
+        <action
+            android:id="@+id/action_ourServicesFragment_to_electricityConnectionFragment"
+            app:destination="@id/electricityConnectionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_ourServicesFragment_to_electricityBillFragment"
+            app:destination="@id/electricityBillFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/electricityConnectionFragment"
+        android:name="com.galib.natorepbs2.ui.ElectricityConnectionFragment"
+        android:label="ElectricityConnectionFragment" />
+    <fragment
+        android:id="@+id/electricityBillFragment"
+        android:name="com.galib.natorepbs2.ui.ElectricityBillFragment"
+        android:label="ElectricityBillFragment" >
+        <action
+            android:id="@+id/action_electricityBillFragment_to_billFromHomeFragment"
+            app:destination="@id/billFromHomeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/billFromHomeFragment"
+        android:name="com.galib.natorepbs2.ui.BillFromHomeFragment"
+        android:label="BillFromHomeFragment" />
+    <fragment
+        android:id="@+id/websitesFragment"
+        android:name="com.galib.natorepbs2.ui.WebsitesFragment"
+        android:label="fragment_websites"
+        tools:layout="@layout/fragment_websites" />
+    <fragment
+        android:id="@+id/socialMediaFragment"
+        android:name="com.galib.natorepbs2.ui.SocialMediaFragment"
+        android:label="fragment_social_media"
+        tools:layout="@layout/fragment_social_media" />
+    <fragment
+        android:id="@+id/relatedAppsFragment"
+        android:name="com.galib.natorepbs2.ui.RelatedAppsFragment"
+        android:label="fragment_related_apps"
+        tools:layout="@layout/fragment_related_apps" />
+    <fragment
+        android:id="@+id/opinionComplainFragment"
+        android:name="com.galib.natorepbs2.ui.OpinionComplainFragment"
+        android:label="fragment_opinion_complain"
+        tools:layout="@layout/fragment_opinion_complain" />
+    <fragment
+        android:id="@+id/noticeTenderFragment"
+        android:name="com.galib.natorepbs2.ui.NoticeTenderFragment"
+        android:label="fragment_notice_tender"
+        tools:layout="@layout/fragment_notice_tender" />
+    <fragment
+        android:id="@+id/communicationFragment"
+        android:name="com.galib.natorepbs2.ui.CommunicationFragment"
+        android:label="fragment_communication"
+        tools:layout="@layout/fragment_communication" />
+    <fragment
+        android:id="@+id/awarenessFragment"
+        android:name="com.galib.natorepbs2.ui.AwarenessFragment"
+        android:label="fragment_awareness"
+        tools:layout="@layout/fragment_awareness" />
 
 
 </navigation>

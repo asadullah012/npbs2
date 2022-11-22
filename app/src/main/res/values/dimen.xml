@@ -6,4 +6,5 @@
     <dimen name="body_text_size">16sp</dimen>
     <dimen name="page_margin_top">20dp</dimen>
     <dimen name="menu_margin">10dp</dimen>
+    <dimen name="body_margin">5dp</dimen>
 </resources>

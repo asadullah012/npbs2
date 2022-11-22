@@ -35,7 +35,7 @@ public class JuniorOfficerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentJuniorOfficerBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_junior_officer, container,false);
-        binding.setPageTitle(getString(R.string.junior_officer_list));
+        binding.setPageTitle(getString(R.string.menu_junior_officers));
         binding.setLifecycleOwner(getActivity());
         employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
         final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {

@@ -29,15 +29,18 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentAboutUsBinding binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_about_us, container,false);
-        binding.setPageTitle(getString(R.string.about));
-        binding.setAchievement(getString(R.string.achievement));
-        binding.setAtAGlance(getString(R.string.at_a_glance));
-        binding.setVisionMission(getString(R.string.vision_mission));
-        binding.setComplainCentre(getString(R.string.complain_centre));
-        binding.setOfficerList(getString(R.string.officer_list));
-        binding.setJuniorOfficerList(getString(R.string.junior_officer_list));
-        binding.setBoardMemberList(getString(R.string.board_member_list));
-        binding.setPowerOutageContact(getString(R.string.power_outage_contact));
+        binding.setPageTitle(getString(R.string.menu_about_us));
+        binding.setAchievement(getString(R.string.menu_our_achievements));
+        binding.setAtAGlance(getString(R.string.menu_at_a_glance));
+        binding.setVisionMission(getString(R.string.menu_vision_mission));
+        binding.setComplainCentre(getString(R.string.menu_complain_centres));
+        binding.setOfficerList(getString(R.string.menu_officers));
+        binding.setJuniorOfficerList(getString(R.string.menu_junior_officers));
+        binding.setSamityBoard(getString(R.string.menu_samity_board));
+        binding.setOfficerList(getString(R.string.menu_officers));
+        binding.setOfficeHead(getString(R.string.menu_office_head));
+        binding.setOfficeList(getString(R.string.menu_offices));
+        binding.setPowerOutageContact(getString(R.string.menu_power_outage_contact));
         binding.setFragment(this);
         binding.setLifecycleOwner(getActivity());
         return binding.getRoot();

@@ -34,7 +34,7 @@ public class AtAGlanceFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentAtAGlanceBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_at_a_glance, container,false);
-        binding.setPageTitle(getString(R.string.at_a_glance));
+        binding.setPageTitle(getString(R.string.menu_at_a_glance));
         binding.setLifecycleOwner(getActivity());
         informationViewModel = new ViewModelProvider(getActivity()).get(InformationViewModel.class);
         final AtAGlanceAdapter adapter = new AtAGlanceAdapter(new AtAGlanceAdapter.WordDiff());

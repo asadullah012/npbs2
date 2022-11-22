@@ -7,6 +7,13 @@
         <variable name="title" type="String"/>
         <variable name="about" type="String"/>
         <variable name="service" type="String"/>
+        <variable name="website" type="String"/>
+        <variable name="social_media" type="String"/>
+        <variable name="opinion_complain" type="String"/>
+        <variable name="related_apps" type="String"/>
+        <variable name="communication" type="String"/>
+        <variable name="notice_tender" type="String"/>
+        <variable name="awareness" type="String"/>
         <variable name="bannerContentDescription" type="String" />
         <variable name="fragment" type="com.galib.natorepbs2.ui.MainFragment" />
     </data>
@@ -34,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:maxHeight="@dimen/banner_max_height"
+            app:layout_constraintHeight_percent="0.2"
             android:layout_marginTop="5dp"
             android:src="@drawable/npbs2"
             android:adjustViewBounds="true"
@@ -51,6 +59,7 @@
             app:layout_constraintHeight_percent="0.6"
             android:fillViewport="true"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bannerImage">
@@ -76,6 +85,63 @@
                     android:onClick="@{(v)-> fragment.onClick(v)}"
                     app:layout_constraintTop_toBottomOf="@id/aboutUsBtn"
                     app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/websiteBtn"
+                    style="@style/menu_button"
+                    android:text="@{website}"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    app:layout_constraintTop_toBottomOf="@id/serviceBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/social_media_btn"
+                    style="@style/menu_button"
+                    android:text="@{social_media}"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    app:layout_constraintTop_toBottomOf="@id/websiteBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/opinion_complain_btn"
+                    style="@style/menu_button"
+                    android:text="@{opinion_complain}"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    app:layout_constraintTop_toBottomOf="@id/social_media_btn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/related_apps_btn"
+                    style="@style/menu_button"
+                    android:text="@{related_apps}"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    app:layout_constraintTop_toBottomOf="@id/opinion_complain_btn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/notice_tender_btn"
+                    style="@style/menu_button"
+                    android:text="@{notice_tender}"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    app:layout_constraintTop_toBottomOf="@id/related_apps_btn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/communication_btn"
+                    style="@style/menu_button"
+                    android:text="@{communication}"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    app:layout_constraintTop_toBottomOf="@id/notice_tender_btn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/awareness_btn"
+                    style="@style/menu_button"
+                    android:text="@{awareness}"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    app:layout_constraintTop_toBottomOf="@id/communication_btn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
