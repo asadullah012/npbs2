@@ -102,6 +102,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_aboutUsFragment_to_officeHeadFragment"
+            app:destination="@id/officeHeadFragment" />
     </fragment>
     <fragment
         android:id="@+id/atAGlanceFragment"
@@ -198,6 +201,10 @@
         android:name="com.galib.natorepbs2.ui.AwarenessFragment"
         android:label="fragment_awareness"
         tools:layout="@layout/fragment_awareness" />
+    <fragment
+        android:id="@+id/officeHeadFragment"
+        android:name="com.galib.natorepbs2.ui.OfficeHeadFragment"
+        android:label="OfficeHeadFragment" />
 
 
 </navigation>

@@ -118,4 +118,8 @@ public class NPBS2Repository {
     public LiveData<Information> getPowerOutageFooterText() {
         return informationDao.getInformationByCategory(Category.powerOutageContactFooter);
     }
+
+    public LiveData<Employee> getOfficeHead() {
+        return employeeDao.getOfficeHead(Category.OFFICERS);
+    }
 }

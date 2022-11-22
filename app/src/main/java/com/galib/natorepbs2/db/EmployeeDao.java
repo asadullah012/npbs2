@@ -22,5 +22,7 @@ public interface EmployeeDao {
     @Query("SELECT * FROM employee_table where type = :type ORDER BY priority ASC")
     LiveData<List<Employee>> getAllByType(int type);
 
+    @Query("SELECT * FROM employee_table where type = :type ORDER BY priority LIMIT 1")
+    LiveData<Employee> getOfficeHead(int type);
 }
 

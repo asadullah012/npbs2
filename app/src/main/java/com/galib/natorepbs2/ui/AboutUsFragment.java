@@ -64,7 +64,8 @@ public class AboutUsFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_boardMemberFragment);
         } else if(id == R.id.powerOutageContactBtn){
             Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_powerOutageContactFragment);
+        } else if(id == R.id.officeHeadBtn){
+            Navigation.findNavController(v).navigate(R.id.action_aboutUsFragment_to_officeHeadFragment);
         }
-
     }
 }
