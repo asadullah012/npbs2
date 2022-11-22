@@ -34,7 +34,7 @@ public class PowerOutageContactFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentPowerOutageContactBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_power_outage_contact, container,false);
-        binding.setPageTitle(getString(R.string.power_outage_contact));
+        binding.setPageTitle(getString(R.string.menu_power_outage_contact));
         binding.setLifecycleOwner(getActivity());
         employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
         final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {

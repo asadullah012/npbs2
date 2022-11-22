@@ -34,7 +34,7 @@ public class BoardMemberFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentBoardMemberBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_board_member, container,false);
-        binding.setPageTitle(getString(R.string.board_member_list));
+        binding.setPageTitle(getString(R.string.menu_samity_board));
         binding.setLifecycleOwner(getActivity());
         employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
         final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {

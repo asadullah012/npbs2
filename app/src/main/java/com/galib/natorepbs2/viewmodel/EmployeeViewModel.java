@@ -99,8 +99,8 @@ public class EmployeeViewModel extends AndroidViewModel {
         }
         Log.d(TAG, "insertBoardMembersFromTable: " + headerText + " " + footerText);
         mRepository.insertEmployeeList(employeeList);
-        mRepository.insertInformation(new Information(0, getApplication().getString(R.string.power_outage_contact), headerText, Category.powerOutageContactHeader));
-        mRepository.insertInformation(new Information(0, getApplication().getString(R.string.power_outage_contact), footerText, Category.powerOutageContactFooter));
+        mRepository.insertInformation(new Information(0, getApplication().getString(R.string.menu_power_outage_contact), headerText, Category.powerOutageContactHeader));
+        mRepository.insertInformation(new Information(0, getApplication().getString(R.string.menu_power_outage_contact), footerText, Category.powerOutageContactFooter));
     }
 
     public LiveData<List<Employee>> getPowerOutageContactList() {

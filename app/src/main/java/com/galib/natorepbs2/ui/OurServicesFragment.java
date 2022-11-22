@@ -29,9 +29,11 @@ public class OurServicesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentOurServicesBinding binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_our_services, container,false);
-        binding.setPageTitle(getString(R.string.services));
-        binding.setElectricityPrice(getString(R.string.electricity_price));
+        FragmentOurServicesBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_our_services, container,false);
+        binding.setPageTitle(getString(R.string.menu_our_services));
+        binding.setElectricityConnection(getString(R.string.menu_electricity_connection));
+        binding.setElectricityBill(getString(R.string.menu_electricity_bill));
+        binding.setCitizenCharter(getString(R.string.menu_citizen_charter));
         binding.setFragment(this);
         binding.setLifecycleOwner(getActivity());
         return binding.getRoot();
@@ -39,9 +41,12 @@ public class OurServicesFragment extends Fragment {
     public void onClick(View v){
         //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         int id = v.getId();
-        if (id == R.id.electricityPrice) {
-            new SyncTariff(getContext()).execute();
+        if (id == R.id.electricity_connection_btn) {
+            Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_electricityConnectionFragment);
+        } else if (id == R.id.electricity_bill_btn) {
+            Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_electricityBillFragment);
+        } else if (id == R.id.citizen_charter_btn) {
+            //new SyncTariff(getContext()).execute();
         }
-
     }
 }

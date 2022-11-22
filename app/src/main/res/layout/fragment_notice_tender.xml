@@ -5,16 +5,17 @@
 
     <data>
         <variable name="page_title" type="String" />
-        <variable name="electricity_connection" type="String" />
-        <variable name="electricity_bill" type="String" />
-        <variable name="citizen_charter" type="String" />
-        <variable name="fragment" type="com.galib.natorepbs2.ui.OurServicesFragment" />
+        <variable name="notice" type="String" />
+        <variable name="tender" type="String" />
+        <variable name="news" type="String" />
+        <variable name="job" type="String" />
+        <variable name="fragment" type="com.galib.natorepbs2.ui.NoticeTenderFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.AboutUsFragment">
+        tools:context=".ui.NoticeTenderFragment">
 
         <TextView
             android:id="@+id/textView"
@@ -41,29 +42,36 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/electricity_connection_btn"
+                    android:id="@+id/notice_btn"
                     style="@style/menu_button"
                     android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{electricity_connection}"
+                    android:text="@{notice}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/electricity_bill_btn"
+                    android:id="@+id/tender_btn"
                     style="@style/menu_button"
                     android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{electricity_bill}"
-                    app:layout_constraintTop_toBottomOf="@+id/electricity_connection_btn"
+                    android:text="@{tender}"
+                    app:layout_constraintTop_toBottomOf="@+id/notice_btn"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/citizen_charter_btn"
+                    android:id="@+id/news_btn"
                     style="@style/menu_button"
                     android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{citizen_charter}"
-                    app:layout_constraintTop_toBottomOf="@+id/electricity_bill_btn"
+                    android:text="@{news}"
+                    app:layout_constraintTop_toBottomOf="@+id/tender_btn"
                     app:layout_constraintStart_toStartOf="parent" />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/job_btn"
+                    style="@style/menu_button"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    android:text="@{job}"
+                    app:layout_constraintTop_toBottomOf="@+id/news_btn"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
