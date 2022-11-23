@@ -1,9 +1,7 @@
 package com.galib.natorepbs2.utils;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,8 +9,6 @@ import android.util.Log;
 
 import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.ui.WebActivity;
-
-import java.util.List;
 
 public class Utility {
     public static String TAG = Utility.class.getName();
@@ -54,19 +50,31 @@ public class Utility {
         return sb.toString();
     }
 
+    public static void openMap(Context context, String mapUri){
+        Uri gmmIntentUri = Uri.parse(mapUri);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(mapIntent);
+        }
+    }
+
     public static void openPlayStore(Context context, String appId){
-        try {
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo("com.android.vending", 0);
-            Intent launchIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appId));
-            context.startActivity(new Intent(launchIntent).setPackage("com.android.vending"));
-        } catch (PackageManager.NameNotFoundException e){
-            Log.d(TAG, "openPlayStore: play store not found");
-            try {
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appId)));
-            } catch (android.content.ActivityNotFoundException anfe) {
-                Log.d(TAG, "openPlayStore: " + anfe.getLocalizedMessage());
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URLs.PLAY_STORE_PREFIX + appId)));
-            }
+        Uri marketUri = Uri.parse("market://details?id=" + appId);
+        Intent playStoreIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+        playStoreIntent.setPackage("com.android.vending");
+        if (playStoreIntent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(playStoreIntent);
+        } else {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URLs.PLAY_STORE_PREFIX + appId)));
+//            Log.d(TAG, "openPlayStore: play store not found. Trying to find other market apps");
+//            try {
+//                Intent storeIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+//                context.startActivity(storeIntent);
+//            } catch (android.content.ActivityNotFoundException anfe) {
+//                Log.d(TAG, "openPlayStore: no market apps found. opening browser " + anfe.getLocalizedMessage());
+//                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URLs.PLAY_STORE_PREFIX + appId)));
+//            }
         }
     }
     public static String arrayToString(String []arr){
