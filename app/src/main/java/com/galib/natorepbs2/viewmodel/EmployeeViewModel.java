@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.Utility;
+import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.constants.Category;
 import com.galib.natorepbs2.db.Employee;
 import com.galib.natorepbs2.db.Information;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
 
     <data>
         <import type="android.view.View"/>
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintWidth_percent="0.2"
             android:src="@mipmap/ic_launcher_round"
+            setProfilePhoto="@{employee.imageUrl}"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             app:layout_constraintTop_toTopOf="parent"
