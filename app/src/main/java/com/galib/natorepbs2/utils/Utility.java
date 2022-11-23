@@ -2,12 +2,16 @@ package com.galib.natorepbs2.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.Log;
 
 import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.ui.WebActivity;
+
+import java.util.List;
 
 public class Utility {
     public static String TAG = Utility.class.getName();
@@ -26,15 +30,15 @@ public class Utility {
     public static String getFacebookPageURL(Context context) {
         PackageManager packageManager = context.getPackageManager();
         try {
-            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-            Log.d("NPBS2", "fb" + versionCode);
-            if (versionCode >= 3002850) {
+            PackageInfo appInfo = packageManager.getPackageInfo("com.facebook.katana", 0);
+            Log.d("NPBS2", "fb" + appInfo.versionCode);
+            if (appInfo.versionCode >= 3002850) {
                 return "fb://facewebmodal/f?href=" + URLs.FACEBOOK;
             } else {
                 return "fb://page/" + URLs.FACEBOOK_APP_ID;
             }
         } catch (PackageManager.NameNotFoundException e) {
-            Log.d("NPBS2", "fb app not found");
+            Log.d("NPBS2", "fb app not found " + e.getLocalizedMessage());
             return URLs.FACEBOOK; //normal web url
         }
     }
