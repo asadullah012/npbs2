@@ -1,5 +1,6 @@
 package com.galib.natorepbs2.utils;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -53,11 +54,19 @@ public class Utility {
         return sb.toString();
     }
 
-    public static void openPlayStore(Context context){
+    public static void openPlayStore(Context context, String appId){
         try {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + URLs.DIGITAL_PHONEBOOK_APP_ID)));
-        } catch (android.content.ActivityNotFoundException anfe) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URLs.PLAY_STORE_PREFIX + URLs.DIGITAL_PHONEBOOK_APP_ID)));
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo("com.android.vending", 0);
+            Intent launchIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appId));
+            context.startActivity(new Intent(launchIntent).setPackage("com.android.vending"));
+        } catch (PackageManager.NameNotFoundException e){
+            Log.d(TAG, "openPlayStore: play store not found");
+            try {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appId)));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                Log.d(TAG, "openPlayStore: " + anfe.getLocalizedMessage());
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URLs.PLAY_STORE_PREFIX + appId)));
+            }
         }
     }
     public static String arrayToString(String []arr){
