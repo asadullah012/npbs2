@@ -40,14 +40,15 @@ public class OfficeHeadFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentOfficeHeadBinding binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_office_head, container,false);
         binding.setPageTitle(getString(R.string.menu_office_head));
-        officeHead.observe(getViewLifecycleOwner(), employee -> {
-            binding.setEmployee(employee);
-        });
         binding.setFragment(this);
         binding.setLifecycleOwner(getActivity());
-        Picasso.get().load("http://file-rajshahi.portal.gov.bd/files/pbs2.natore.gov.bd/officer_list/de0d2dc5_1f34_4774_b335_5bc5bc176719/de073abfb53ad0b918a8b67489a1d4bc.png").into((ImageView) binding.getRoot().findViewById(R.id.profilePhoto));
+        officeHead.observe(getViewLifecycleOwner(), employee -> {
+            binding.setEmployee(employee);
+            binding.executePendingBindings();
+        });
         return binding.getRoot();
     }
+
     public void onClick(View v, String s){
         int id = v.getId();
         if(id == R.id.callBtn){

@@ -58,7 +58,7 @@ public class ContactListAdapter extends ListAdapter<Employee, ContactListAdapter
         @BindingAdapter("setProfilePhoto")
         public static void setProfilePhoto(ImageView imageView, String imageUrl){
             Picasso.get()
-                    .load(imageUrl.length() == 0 ? null : imageUrl)
+                    .load(imageUrl == null || imageUrl.length() == 0 ? null : imageUrl)
                     .placeholder(R.mipmap.ic_launcher_round)
                     .error(R.mipmap.ic_launcher_round)
                     .into(imageView);
