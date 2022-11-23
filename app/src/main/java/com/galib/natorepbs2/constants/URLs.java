@@ -9,6 +9,8 @@ public class URLs {
     public static final String BOARD_MEMBER = "/page/sHFm-সমিতি-বোর্ড";
     public static final String POWER_OUTAGE_CONTACT = "/news/9oH1-“বিদ্যুৎ-বিভ্রাটে-জরুরী-যোগাযোগ”";
     public static final String TARIFF = "/page/বিদ্যুতের-মূল্যহার";
+    public static final String BREB = "http://www.reb.gov.bd/";
+    public static final String NATORE_PBS_2 = "http://pbs2.natore.gov.bd/";
     public static String FACEBOOK = "";
     public static String FACEBOOK_APP_ID = "";
     public static String DIGITAL_PHONEBOOK_APP_ID = "";

@@ -170,7 +170,11 @@
         android:id="@+id/websitesFragment"
         android:name="com.galib.natorepbs2.ui.WebsitesFragment"
         android:label="fragment_websites"
-        tools:layout="@layout/fragment_websites" />
+        tools:layout="@layout/fragment_websites" >
+        <action
+            android:id="@+id/action_websitesFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/socialMediaFragment"
         android:name="com.galib.natorepbs2.ui.SocialMediaFragment"
@@ -205,6 +209,24 @@
         android:id="@+id/officeHeadFragment"
         android:name="com.galib.natorepbs2.ui.OfficeHeadFragment"
         android:label="OfficeHeadFragment" />
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.galib.natorepbs2.ui.WebViewFragment"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" >
+        <argument
+            android:name="pageTitle"
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="html"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 
 </navigation>
