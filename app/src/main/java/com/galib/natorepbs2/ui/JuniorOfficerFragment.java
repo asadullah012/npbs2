@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.Utility;
+import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.databinding.FragmentJuniorOfficerBinding;
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
 

@@ -11,9 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.Utility;
 import com.galib.natorepbs2.databinding.FragmentOurServicesBinding;
-import com.galib.natorepbs2.sync.SyncTariff;
 
 public class OurServicesFragment extends Fragment {
 

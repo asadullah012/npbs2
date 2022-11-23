@@ -1,4 +1,4 @@
-package com.galib.natorepbs2;
+package com.galib.natorepbs2.utils;
 
 import android.content.Context;
 import android.content.Intent;

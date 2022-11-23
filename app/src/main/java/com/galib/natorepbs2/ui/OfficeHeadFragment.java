@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -16,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.Utility;
+import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.databinding.FragmentOfficeHeadBinding;
 import com.galib.natorepbs2.db.Employee;
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel;

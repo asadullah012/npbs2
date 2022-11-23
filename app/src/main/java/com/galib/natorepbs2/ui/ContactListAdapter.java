@@ -1,9 +1,12 @@
 package com.galib.natorepbs2.ui;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.DiffUtil;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.galib.natorepbs2.BR;
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.db.Employee;
+import com.squareup.picasso.Picasso;
 
 public class ContactListAdapter extends ListAdapter<Employee, ContactListAdapter.EmployeeViewHolder> {
     public ClickListener onClickListener;
@@ -43,14 +47,22 @@ public class ContactListAdapter extends ListAdapter<Employee, ContactListAdapter
         holder.bind(getItem(position), onClickListener);
     }
 
-    static class EmployeeViewHolder extends RecyclerView.ViewHolder {
+
+    public static class EmployeeViewHolder extends RecyclerView.ViewHolder {
         ViewDataBinding binding;
 
         public EmployeeViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
-
+        @BindingAdapter("setProfilePhoto")
+        public static void setProfilePhoto(ImageView imageView, String imageUrl){
+            Picasso.get()
+                    .load(imageUrl.length() == 0 ? null : imageUrl)
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .error(R.mipmap.ic_launcher_round)
+                    .into(imageView);
+        }
         public void bind(Employee employee, ClickListener clickListener) {
             binding.setVariable(BR.employee, employee);
             binding.setVariable(BR.clickListener, clickListener);

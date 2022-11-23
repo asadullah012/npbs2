@@ -3,7 +3,7 @@ package com.galib.natorepbs2.sync;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.galib.natorepbs2.Utility;
+import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;
 
