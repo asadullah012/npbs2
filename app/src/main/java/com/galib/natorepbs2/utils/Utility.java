@@ -1,5 +1,6 @@
 package com.galib.natorepbs2.utils;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -9,6 +10,8 @@ import android.util.Log;
 
 import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.ui.WebActivity;
+
+import java.util.Locale;
 
 public class Utility {
     public static String TAG = Utility.class.getName();
@@ -50,12 +53,19 @@ public class Utility {
         return sb.toString();
     }
 
-    public static void openMap(Context context, String mapUri){
-        Uri gmmIntentUri = Uri.parse(mapUri);
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(mapIntent);
+    public static void openMap(Context context, String loc, Double destLong, Double destLat){
+        String uri = String.format(Locale.ENGLISH, "https://www.google.com/maps/place/%s/@%f,%f", loc, destLat, destLong);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        try {
+            context.startActivity(intent);
+        } catch(ActivityNotFoundException ex) {
+            try {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                context.startActivity(unrestrictedIntent);
+            } catch(ActivityNotFoundException innerEx) {
+                Log.d(TAG, "openMap: " + innerEx.getLocalizedMessage());
+            }
         }
     }
 

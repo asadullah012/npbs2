@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.databinding.FragmentCommunicationBinding;
+import com.galib.natorepbs2.utils.Utility;
 
 public class CommunicationFragment extends Fragment {
 
@@ -42,7 +43,7 @@ public class CommunicationFragment extends Fragment {
         if (id == R.id.communication_post_btn) {
 
         } else if (id == R.id.communication_map_btn) {
-
+            Utility.openMap(getContext(), "Natore+Palli+Bidyut+Samity-2,+Bonpara,+Natore", 24.295823,89.0811235);
         }
     }
 }
