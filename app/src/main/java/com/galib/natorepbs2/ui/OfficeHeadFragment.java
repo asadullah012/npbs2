@@ -12,14 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.databinding.FragmentOfficeHeadBinding;
 import com.galib.natorepbs2.db.Employee;
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
-import com.squareup.picasso.Picasso;
 
 public class OfficeHeadFragment extends Fragment {
     LiveData<Employee> officeHead;

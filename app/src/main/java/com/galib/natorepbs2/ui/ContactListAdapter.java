@@ -1,6 +1,5 @@
 package com.galib.natorepbs2.ui;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;

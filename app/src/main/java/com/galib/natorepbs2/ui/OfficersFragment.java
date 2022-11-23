@@ -19,8 +19,6 @@ import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
 
 public class OfficersFragment extends Fragment {
 
-    private EmployeeViewModel employeeViewModel;
-
     public OfficersFragment() {
 
     }
@@ -38,7 +36,7 @@ public class OfficersFragment extends Fragment {
         FragmentOfficersBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_officers, container,false);
         binding.setPageTitle(getString(R.string.menu_officers));
         binding.setLifecycleOwner(getActivity());
-        employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
+        EmployeeViewModel employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
         final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {
             @Override
             public void onClickCall(String mobile) {

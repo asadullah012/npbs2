@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:binding="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View"/>
@@ -26,6 +25,7 @@
             app:layout_constraintWidth_percent="0.2"
             android:src="@mipmap/ic_launcher_round"
             setProfilePhoto="@{employee.imageUrl}"
+            android:contentDescription="@{employee.name}"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             app:layout_constraintTop_toTopOf="parent"
@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="@{employee.mobile.length() == 0 ? View.GONE : View.VISIBLE}"
-            android:text="Call"
+            android:text="@string/text_call"
             android:onClick="@{()->clickListener.onClickCall(employee.mobile)}"
             app:layout_constraintTop_toBottomOf="@id/emailTextView"
             app:layout_constraintStart_toEndOf="@id/profilePhoto"
@@ -117,7 +117,7 @@
             android:visibility="@{employee.email.length() == 0 ? View.GONE : View.VISIBLE}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send Email"
+            android:text="@string/text_send_email"
             android:onClick="@{()->clickListener.onClickEmail(employee.email)}"
             app:layout_constraintTop_toBottomOf="@id/emailTextView"
             app:layout_constraintStart_toEndOf="@id/callBtn"

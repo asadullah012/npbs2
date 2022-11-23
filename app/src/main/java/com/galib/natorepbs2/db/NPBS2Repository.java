@@ -34,9 +34,7 @@ public class NPBS2Repository {
     }
 
     public void insertAchievementAll(List<Achievement> achievements){
-        NPBS2DB.databaseWriteExecutor.execute(() -> {
-            achievementDao.insertAll(achievements);
-        });
+        NPBS2DB.databaseWriteExecutor.execute(() -> achievementDao.insertAll(achievements));
     }
 
     public LiveData<List<Information>> getInformationByCategory(String category) {
@@ -55,16 +53,12 @@ public class NPBS2Repository {
     }
 
     public LiveData<Information> getMonth(){
-        LiveData<Information> information = informationDao.getInformationByCategory(Category.atAGlanceMonth);
-        return information;
+        return informationDao.getInformationByCategory(Category.atAGlanceMonth);
     }
 
-    public int insertInformations(List<Information> informationList) {
+    public void insertInformations(List<Information> informationList) {
         Log.d(TAG, "insertInformations: " + informationList.size());
-        NPBS2DB.databaseWriteExecutor.execute(() -> {
-            informationDao.insertInfos(informationList);
-        });
-        return getInformationCount();
+        NPBS2DB.databaseWriteExecutor.execute(() -> informationDao.insertInfos(informationList));
     }
 
     public int getInformationCount(){

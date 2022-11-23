@@ -1,7 +1,6 @@
 package com.galib.natorepbs2.sync;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;

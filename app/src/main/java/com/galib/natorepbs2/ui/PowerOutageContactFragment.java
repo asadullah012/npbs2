@@ -19,8 +19,6 @@ import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
 
 public class PowerOutageContactFragment extends Fragment {
 
-    private EmployeeViewModel employeeViewModel;
-
     public PowerOutageContactFragment() {
         // Required empty public constructor
     }
@@ -36,7 +34,7 @@ public class PowerOutageContactFragment extends Fragment {
         FragmentPowerOutageContactBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_power_outage_contact, container,false);
         binding.setPageTitle(getString(R.string.menu_power_outage_contact));
         binding.setLifecycleOwner(getActivity());
-        employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
+        EmployeeViewModel employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
         final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {
             @Override
             public void onClickCall(String mobile) {

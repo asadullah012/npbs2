@@ -9,7 +9,6 @@ import android.os.Bundle;
 
 import com.galib.natorepbs2.viewmodel.ComplainCentreViewModel;
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.sync.SyncComplainCentre;
 
 public class ComplainCentreActivity extends AppCompatActivity {
     ComplainCentreViewModel complainCentreViewModel;
@@ -22,8 +21,6 @@ public class ComplainCentreActivity extends AppCompatActivity {
         final ComplainCentreAdapter adapter = new ComplainCentreAdapter(this, new ComplainCentreAdapter.WordDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        complainCentreViewModel.getAllComplainCentre().observe(this, complainCentres -> {
-            adapter.submitList(complainCentres);
-        });
+        complainCentreViewModel.getAllComplainCentre().observe(this, adapter::submitList);
     }
 }
