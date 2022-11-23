@@ -18,10 +18,6 @@ public class SyncAtAGlance extends AsyncTask<Void, Void, Void> {
     public SyncAtAGlance(InformationViewModel informationViewModel){
         viewModel = informationViewModel;
     }
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
 
     @Override
     protected Void doInBackground(Void... voids) {

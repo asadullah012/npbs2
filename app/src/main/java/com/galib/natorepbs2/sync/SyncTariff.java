@@ -14,13 +14,9 @@ import java.io.IOException;
 
 public class SyncTariff extends AsyncTask<Void, Void, Void> {
     String data;
-    Context context;
+    private Context context;
     public SyncTariff(Context context){
         this.context = context;
-    }
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override

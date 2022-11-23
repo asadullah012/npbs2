@@ -30,7 +30,7 @@
             <TextView
                 android:id="@+id/consumerSMSSample"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:text="@string/sms_consumer_details"
                 android:textSize="16sp" />

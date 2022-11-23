@@ -19,8 +19,6 @@ import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
 
 public class BoardMemberFragment extends Fragment {
 
-    private EmployeeViewModel employeeViewModel;
-
     public BoardMemberFragment() {
         // Required empty public constructor
     }
@@ -36,7 +34,7 @@ public class BoardMemberFragment extends Fragment {
         FragmentBoardMemberBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_board_member, container,false);
         binding.setPageTitle(getString(R.string.menu_samity_board));
         binding.setLifecycleOwner(getActivity());
-        employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
+        EmployeeViewModel employeeViewModel = new ViewModelProvider(getActivity()).get(EmployeeViewModel.class);
         final ContactListAdapter adapter = new ContactListAdapter(new ContactListAdapter.OfficerDiff(), new ContactListAdapter.ClickListener() {
             @Override
             public void onClickCall(String mobile) {

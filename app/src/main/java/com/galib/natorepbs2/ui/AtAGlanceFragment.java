@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.view.ViewGroup;
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.constants.Category;
 import com.galib.natorepbs2.databinding.FragmentAtAGlanceBinding;
-import com.galib.natorepbs2.sync.SyncAtAGlance;
 import com.galib.natorepbs2.viewmodel.InformationViewModel;
 
 public class AtAGlanceFragment extends Fragment {
@@ -39,9 +36,7 @@ public class AtAGlanceFragment extends Fragment {
         informationViewModel = new ViewModelProvider(getActivity()).get(InformationViewModel.class);
         final AtAGlanceAdapter adapter = new AtAGlanceAdapter(new AtAGlanceAdapter.WordDiff());
         informationViewModel.getInformationByCategory(Category.atAGlance).observe(getViewLifecycleOwner(), adapter::submitList);
-        informationViewModel.getMonth().observe(getViewLifecycleOwner(), information -> {
-            binding.setMonth(information.getTitle());
-        });
+        informationViewModel.getMonth().observe(getViewLifecycleOwner(), information -> binding.setMonth(information.getTitle()));
         binding.setAdapter(adapter);
         return binding.getRoot();
     }

@@ -19,10 +19,6 @@ public class SyncComplainCentre extends AsyncTask<Void, Void, Void> {
     public SyncComplainCentre(ComplainCentreViewModel complainCentreViewModel){
         viewModel = complainCentreViewModel;
     }
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
 
     @Override
     protected Void doInBackground(Void... voids) {

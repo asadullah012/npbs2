@@ -20,10 +20,6 @@ public class SyncAchievement extends AsyncTask<Void, Void, Void> {
     public SyncAchievement(AchievementViewModel achievementViewModel){
         viewModel = achievementViewModel;
     }
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
 
     @Override
     protected Void doInBackground(Void... voids) {

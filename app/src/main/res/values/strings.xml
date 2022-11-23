@@ -81,6 +81,9 @@
     <string name="menu_awareness">বিদ্যুৎ ব্যবহার সংক্রান্ত সচেতনতা</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="call_text">Call</string>
+    <string name="text_call">Call</string>
+    <string name="webview_title">Web View</string>
+    <string name="open_in_browser">Open in Browser</string>
+    <string name="text_send_email">Send Email</string>
 
 </resources>
