@@ -1,5 +1,7 @@
 package com.galib.natorepbs2.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.databinding.FragmentSocialMediaBinding;
+import com.galib.natorepbs2.utils.Utility;
 
 public class SocialMediaFragment extends Fragment {
 
@@ -38,10 +41,9 @@ public class SocialMediaFragment extends Fragment {
     public void onClick(View v){
         //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         int id = v.getId();
-        if (id == R.id.breb_btn) {
-
-        } else if (id == R.id.natore_pbs2_btn) {
-
+        if (id == R.id.facebook_btn) {
+            String uri = Utility.getFacebookPageURL(getActivity().getApplicationContext());
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
         }
     }
 }

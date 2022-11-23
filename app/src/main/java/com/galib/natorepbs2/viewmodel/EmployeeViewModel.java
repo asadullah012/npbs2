@@ -72,7 +72,6 @@ public class EmployeeViewModel extends AndroidViewModel {
                 employeeList.add(new Employee(i, tableData[i][1], tableData[i][2], tableData[i][3],
                         office, tableData[i][4], tableData[i][5],null, Category.JUNIOR_OFFICER));
         }
-        Log.d(TAG, "insertJuniorOfficerFromTable: " + employeeList);
         mRepository.insertEmployeeList(employeeList);
     }
 
@@ -93,11 +92,11 @@ public class EmployeeViewModel extends AndroidViewModel {
         List<Employee> employeeList = new ArrayList<>();
         for(int i =0; i<tableData.length; i++){
             if(tableData[i] == null) continue;
-            Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
+//            Log.d(TAG, "insertPowerOutageContactFromTable: " + Utility.arrayToString(tableData[i]));
             employeeList.add(new Employee(i, null, tableData[i][1], tableData[i][2],
                     null, null, tableData[i][3], null,Category.POWER_OUTAGE_CONTACT));
         }
-        Log.d(TAG, "insertBoardMembersFromTable: " + headerText + " " + footerText);
+//        Log.d(TAG, "insertPowerOutageContactFromTable: " + headerText + " " + footerText);
         mRepository.insertEmployeeList(employeeList);
         mRepository.insertInformation(new Information(0, getApplication().getString(R.string.menu_power_outage_contact), headerText, Category.powerOutageContactHeader));
         mRepository.insertInformation(new Information(0, getApplication().getString(R.string.menu_power_outage_contact), footerText, Category.powerOutageContactFooter));

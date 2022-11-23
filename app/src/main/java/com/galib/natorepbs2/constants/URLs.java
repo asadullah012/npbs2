@@ -11,8 +11,8 @@ public class URLs {
     public static final String TARIFF = "/page/বিদ্যুতের-মূল্যহার";
     public static final String BREB = "http://www.reb.gov.bd/";
     public static final String NATORE_PBS_2 = "http://pbs2.natore.gov.bd/";
-    public static String FACEBOOK = "";
-    public static String FACEBOOK_APP_ID = "";
+    public static String FACEBOOK = "https://facebook.com/natorepbstwo";
+    public static String FACEBOOK_APP_ID = "100068895832922";
     public static String DIGITAL_PHONEBOOK_APP_ID = "";
     public static String PLAY_STORE_PREFIX = "https://play.google.com/store/apps/details?id=";
 }
