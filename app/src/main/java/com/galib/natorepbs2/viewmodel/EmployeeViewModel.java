@@ -1,13 +1,11 @@
 package com.galib.natorepbs2.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.constants.Category;
 import com.galib.natorepbs2.db.Employee;
 import com.galib.natorepbs2.db.Information;

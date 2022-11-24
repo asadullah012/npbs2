@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.databinding.FragmentBoardMemberBinding;
+import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel;
 
 public class BoardMemberFragment extends Fragment {
