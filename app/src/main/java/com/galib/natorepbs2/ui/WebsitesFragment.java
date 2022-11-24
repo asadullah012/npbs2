@@ -41,10 +41,10 @@ public class WebsitesFragment extends Fragment {
         //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         int id = v.getId();
         if (id == R.id.breb_btn) {
-            WebsitesFragmentDirections.ActionWebsitesFragmentToWebViewFragment action = WebsitesFragmentDirections.actionWebsitesFragmentToWebViewFragment(getString(R.string.menu_breb), URLs.BREB, null);
+            WebsitesFragmentDirections.ActionWebsitesFragmentToWebViewFragment action = WebsitesFragmentDirections.actionWebsitesFragmentToWebViewFragment(getString(R.string.menu_breb), URLs.BREB, null, null);
             Navigation.findNavController(v).navigate(action);
         } else if (id == R.id.natore_pbs2_btn) {
-            WebsitesFragmentDirections.ActionWebsitesFragmentToWebViewFragment action = WebsitesFragmentDirections.actionWebsitesFragmentToWebViewFragment(getString(R.string.menu_natore_pbs2), URLs.NATORE_PBS_2, null);
+            WebsitesFragmentDirections.ActionWebsitesFragmentToWebViewFragment action = WebsitesFragmentDirections.actionWebsitesFragmentToWebViewFragment(getString(R.string.menu_natore_pbs2), URLs.NATORE_PBS_2, null, null);
             Navigation.findNavController(v).navigate(action);
         }
     }

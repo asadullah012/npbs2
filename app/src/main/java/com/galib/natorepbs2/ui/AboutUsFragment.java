@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.utils.Utility;
 import com.galib.natorepbs2.databinding.FragmentAboutUsBinding;
+import com.galib.natorepbs2.utils.Utility;
 
 public class AboutUsFragment extends Fragment {
     public AboutUsFragment() {

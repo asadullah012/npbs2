@@ -4,12 +4,14 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
+import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.databinding.FragmentOpinionComplainBinding;
 
 public class OpinionComplainFragment extends Fragment {
@@ -39,10 +41,12 @@ public class OpinionComplainFragment extends Fragment {
     public void onClick(View v){
         //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         int id = v.getId();
-        if (id == R.id.breb_btn) {
-
-        } else if (id == R.id.natore_pbs2_btn) {
-
+        if (id == R.id.grs_btn) {
+            OpinionComplainFragmentDirections.ActionOpinionComplainFragmentToWebViewFragment action = OpinionComplainFragmentDirections.actionOpinionComplainFragmentToWebViewFragment(getString(R.string.menu_grs), URLs.GRS, null, null);
+            Navigation.findNavController(v).navigate(action);
+        } else if (id == R.id.complain_google_form_btn) {
+            OpinionComplainFragmentDirections.ActionOpinionComplainFragmentToWebViewFragment action = OpinionComplainFragmentDirections.actionOpinionComplainFragmentToWebViewFragment(getString(R.string.menu_complain_google_form), URLs.COMPLAIN_GOOGLE_FORM, null, null);
+            Navigation.findNavController(v).navigate(action);
         }
     }
 }

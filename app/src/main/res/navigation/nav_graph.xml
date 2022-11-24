@@ -161,6 +161,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_electricityBillFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/billFromHomeFragment"
@@ -189,7 +192,11 @@
         android:id="@+id/opinionComplainFragment"
         android:name="com.galib.natorepbs2.ui.OpinionComplainFragment"
         android:label="fragment_opinion_complain"
-        tools:layout="@layout/fragment_opinion_complain" />
+        tools:layout="@layout/fragment_opinion_complain" >
+        <action
+            android:id="@+id/action_opinionComplainFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/noticeTenderFragment"
         android:name="com.galib.natorepbs2.ui.NoticeTenderFragment"
@@ -224,6 +231,10 @@
             app:nullable="true" />
         <argument
             android:name="html"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="selector"
             app:argType="string"
             app:nullable="true" />
     </fragment>

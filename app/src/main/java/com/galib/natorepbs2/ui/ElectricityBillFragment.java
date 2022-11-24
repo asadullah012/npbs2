@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
+import com.galib.natorepbs2.constants.Selectors;
+import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.databinding.FragmentElectricityBillBinding;
 
 public class ElectricityBillFragment extends Fragment {
@@ -43,6 +45,9 @@ public class ElectricityBillFragment extends Fragment {
         int id = v.getId();
         if (id == R.id.bill_from_home_btn) {
             Navigation.findNavController(v).navigate(R.id.action_electricityBillFragment_to_billFromHomeFragment);
+        } else if(id == R.id.electricity_tarriff_btn){
+            ElectricityBillFragmentDirections.ActionElectricityBillFragmentToWebViewFragment action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToWebViewFragment(getString(R.string.menu_electricity_tariff), URLs.BASE + URLs.TARIFF, null, Selectors.TARIFF);
+            Navigation.findNavController(v).navigate(action);
         }
     }
 }
