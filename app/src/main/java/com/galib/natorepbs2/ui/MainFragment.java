@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.databinding.FragmentMainBinding;
+import com.galib.natorepbs2.databinding.FragmentMainV2Binding;
 
 public class MainFragment extends Fragment {
 
@@ -27,7 +28,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentMainBinding binding =  DataBindingUtil.inflate(inflater,R.layout.fragment_main, container,false);
+        FragmentMainV2Binding binding =  DataBindingUtil.inflate(inflater,R.layout.fragment_main_v2, container,false);
         binding.setTitle(getString(R.string.title));
         binding.setAbout(getString(R.string.menu_about_us));
         binding.setService(getString(R.string.menu_our_services));

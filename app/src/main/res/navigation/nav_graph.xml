@@ -149,7 +149,11 @@
     <fragment
         android:id="@+id/electricityConnectionFragment"
         android:name="com.galib.natorepbs2.ui.ElectricityConnectionFragment"
-        android:label="ElectricityConnectionFragment" />
+        android:label="ElectricityConnectionFragment" >
+        <action
+            android:id="@+id/action_electricityConnectionFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/electricityBillFragment"
         android:name="com.galib.natorepbs2.ui.ElectricityBillFragment"
