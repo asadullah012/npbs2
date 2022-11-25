@@ -13,6 +13,8 @@ public class URLs {
     public static final String NATORE_PBS_2 = "http://pbs2.natore.gov.bd/";
     public static final String COMPLAIN_GOOGLE_FORM = "https://docs.google.com/forms/d/1wrjpi4k-hUlaLPtW19x9PeliJaKdroBQt3ryYHJ9Ahw/viewform";
     public static final String GRS = "https://www.grs.gov.bd/";
+    public static final String CONNECTOION_DOMESTIC = "http://www.rebpbs.com/";
+    public static final String CONNECTION_INDUSTRY = "http://industry.rebpbs.com/";
     public static String FACEBOOK = "https://facebook.com/natorepbstwo";
     public static String FACEBOOK_APP_ID = "100068895832922";
     public static String DIGITAL_PHONEBOOK_APP_ID = "reb.ebook.contackbook";

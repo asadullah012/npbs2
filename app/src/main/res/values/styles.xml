@@ -4,8 +4,11 @@
     <style name="menu_button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/menu_height</item>
+        <item name="android:elevation">10dp</item>
         <item name="android:background">@drawable/home_item_bg</item>
         <item name="android:layout_margin">@dimen/menu_margin</item>
+        <item name="android:padding">@dimen/menu_margin</item>
+        <item name="android:translationZ">10dp</item>
         <item name="android:textSize">@dimen/menu_title_text_size</item>
         <item name="android:textAlignment">center</item>
     </style>
@@ -28,5 +31,8 @@
         <item name="android:ellipsize">end</item>
         <item name="android:textStyle">bold</item>
     </style>
-
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="@style/Theme.NatorePBS2">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0.1sp</item>
+    </style>
 </resources>
