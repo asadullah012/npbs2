@@ -15,6 +15,7 @@ public class URLs {
     public static final String GRS = "https://www.grs.gov.bd/";
     public static final String CONNECTOION_DOMESTIC = "http://www.rebpbs.com/";
     public static final String CONNECTION_INDUSTRY = "http://industry.rebpbs.com/";
+    public static final String CITIZEN_CHARTER = "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//637/b26/6a1/637b266a1f1a3579521120.pdf";
     public static String FACEBOOK = "https://facebook.com/natorepbstwo";
     public static String FACEBOOK_APP_ID = "100068895832922";
     public static String DIGITAL_PHONEBOOK_APP_ID = "reb.ebook.contackbook";
