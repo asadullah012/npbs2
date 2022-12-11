@@ -23,11 +23,12 @@ public class AchievementViewModel extends AndroidViewModel {
         return mRepository.getAllAchievement();
     }
 
-    public void insertFromArray(String[][] trtd) {
+    public void insertFromArray(List<List<String>> trtd) {
         List<Achievement> achievements = new ArrayList<>();
-        for(int i =0; i<trtd.length; i++){
+        for(int i =0; i<trtd.size(); i++){
             if(i == 1) continue;
-            achievements.add(new Achievement(trtd[i][0], trtd[i][1], trtd[i][2], trtd[i][3], trtd[i][4], i));
+            achievements.add(new Achievement(trtd.get(i).get(0), trtd.get(i).get(1),
+                    trtd.get(i).get(2), trtd.get(i).get(3), trtd.get(i).get(4), i));
         }
         mRepository.insertAchievementAll(achievements);
     }
