@@ -36,7 +36,13 @@ public class SyncPowerOutageContact extends AsyncTask<Void, Void, Void> {
                     Elements tds = trs.get(i).select("td");
                     tableData[i] = new String[tds.size()];
                     for (int j = 0; j < tds.size(); j++) {
-                        tableData[i][j] = tds.get(j).text();
+                        if(j == 1)
+                            if(tds.get(j).select("img").first() != null)
+                                tableData[i][j] = tds.get(j).select("img").first().absUrl("src");
+                            else
+                                tableData[i][j] = tds.get(j).text();
+                        else
+                            tableData[i][j] = tds.get(j).text();
                     }
                 }
             }

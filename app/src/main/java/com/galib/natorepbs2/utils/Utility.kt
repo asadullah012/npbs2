@@ -110,16 +110,6 @@ class Utility {
             }
         }
 
-        fun arrayToString(arr: Array<String?>?): String? {
-            if (arr == null) return null
-            val sb = StringBuilder()
-            for (s in arr) {
-                sb.append(s)
-                sb.append(' ')
-            }
-            return sb.toString()
-        }
-
         suspend fun fetchHtml(url: String, selector:String): String? {
             return GlobalScope.async(Dispatchers.IO) {
                 var document: Document? = null
@@ -134,6 +124,17 @@ class Utility {
                 }
                 return@async html
             }.await()
+        }
+
+        @JvmStatic
+        fun arrayToString(arr: Array<String>): String? {
+            if (arr == null) return null
+            val sb = StringBuilder()
+            for (s in arr) {
+                sb.append(s)
+                sb.append(' ')
+            }
+            return sb.toString()
         }
     }
 }

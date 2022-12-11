@@ -1,6 +1,7 @@
 package com.galib.natorepbs2.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -10,6 +11,7 @@ import com.galib.natorepbs2.constants.Category;
 import com.galib.natorepbs2.db.Employee;
 import com.galib.natorepbs2.db.Information;
 import com.galib.natorepbs2.db.NPBS2Repository;
+import com.galib.natorepbs2.utils.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,9 +92,9 @@ public class EmployeeViewModel extends AndroidViewModel {
         List<Employee> employeeList = new ArrayList<>();
         for(int i =0; i<tableData.length; i++){
             if(tableData[i] == null) continue;
-//            Log.d(TAG, "insertPowerOutageContactFromTable: " + Utility.arrayToString(tableData[i]));
-            employeeList.add(new Employee(i, null, tableData[i][1], tableData[i][2],
-                    null, null, tableData[i][3], null,Category.POWER_OUTAGE_CONTACT));
+            Log.d(TAG, "insertPowerOutageContactFromTable: " + Utility.arrayToString(tableData[i]));
+            employeeList.add(new Employee(i, tableData[i][1], tableData[i][2],
+                    tableData[i][3], null, null, tableData[i][4], null,Category.POWER_OUTAGE_CONTACT));
         }
 //        Log.d(TAG, "insertPowerOutageContactFromTable: " + headerText + " " + footerText);
         mRepository.insertEmployeeList(employeeList);
