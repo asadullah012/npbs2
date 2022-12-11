@@ -1,21 +1,20 @@
 package com.galib.natorepbs2.utils
 
-import android.content.Intent
-import com.galib.natorepbs2.ui.WebActivity
-import android.content.pm.PackageManager
-import com.galib.natorepbs2.constants.URLs
 import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
-import com.galib.natorepbs2.constants.Selectors
+import com.galib.natorepbs2.constants.URLs
+import com.galib.natorepbs2.ui.WebActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.IOException
-import java.lang.StringBuilder
+import java.text.SimpleDateFormat
 import java.util.*
 
 class Utility {
@@ -57,9 +56,16 @@ class Utility {
         fun bnDigitToEnDigit(bnString: String): String {
             val sb = StringBuilder()
             for (c in bnString.toCharArray()) {
-                if (c >= '০' && c <= '৯') sb.append(c - '০') else sb.append(c)
+                if (c in '০'..'৯') sb.append(c - '০') else sb.append(c)
             }
             return sb.toString()
+        }
+
+        @JvmStatic
+        fun dateStringToEpoch(dateTime: String, format: String): Long {
+            val df = SimpleDateFormat(format)
+            val date: Date = df.parse(dateTime)
+            return date.time
         }
 
         @JvmStatic
