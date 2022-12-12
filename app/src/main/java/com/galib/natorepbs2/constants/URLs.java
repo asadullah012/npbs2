@@ -2,6 +2,7 @@ package com.galib.natorepbs2.constants;
 
 public class URLs {
     public static final String BASE = "http://pbs2.natore.gov.bd/bn/site";
+    public static final String AT_A_GLANCE = "/page/7XSs-এক-নজরে";
     public static final String COMPLAIN_CENTRE = "/news/Kxzl-অভিযোগ-কেন্দ্রের-মোবাইল-নম্বর";
     public static final String ACHIEVEMENTS = "/page/7te7-আমাদের-অর্জন";
     public static final String OFFICER_LIST = "/view/officer_list";

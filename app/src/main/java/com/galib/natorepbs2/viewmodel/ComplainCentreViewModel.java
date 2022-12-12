@@ -23,11 +23,15 @@ public class ComplainCentreViewModel extends AndroidViewModel {
         return mRepository.getAllComplainCentre();
     }
 
-    public void insertFromTable(String[][] trtd){
+    public void insertFromTable(List<List<String>> trtd){
         List<ComplainCentre> complainCentreList = new ArrayList<>();
-        for(int i =1; i<trtd.length; i++){
-            complainCentreList.add(new ComplainCentre(Integer.parseInt(trtd[i][0]), trtd[i][1], trtd[i][2]));
+        for(int i =1; i<trtd.size(); i++){
+            complainCentreList.add(new ComplainCentre(Integer.parseInt(trtd.get(i).get(0)), trtd.get(i).get(1), trtd.get(i).get(2)));
         }
         mRepository.insertAllComplainCentre(complainCentreList);
+    }
+
+    public void deleteAll() {
+        mRepository.deleteAllComplainCentre();
     }
 }

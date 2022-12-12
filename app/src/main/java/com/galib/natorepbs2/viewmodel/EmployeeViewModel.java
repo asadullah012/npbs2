@@ -39,38 +39,36 @@ public class EmployeeViewModel extends AndroidViewModel {
         return mRepository.getBoardMemberList();
     }
 
-    public void insertOfficersFromTable(String[][] tableData){
+    public void insertOfficersFromTable(List<List<String>> tableData){
         if(tableData == null) return;
         List<Employee> officersList = new ArrayList<>();
-        for(int i =0; i<tableData.length; i++){
-            if(tableData[i] == null) continue;
-            String s[] = tableData[i][2].split(", ");
+        for(int i =0; i<tableData.size(); i++){
+            String s[] = tableData.get(i).get(2).split(", ");
             String designation = s[0], office;
             if(s.length == 1)
                 office = "সদর দপ্তর";
             else
                 office = s[1];
-            officersList.add(new Employee(i, tableData[i][0], tableData[i][1], designation, office,
-                    tableData[i][4], tableData[i][5], tableData[i][6], Category.OFFICERS));
+            officersList.add(new Employee(i, tableData.get(i).get(0), tableData.get(i).get(1), designation, office,
+                    tableData.get(i).get(4), tableData.get(i).get(5), tableData.get(i).get(6), Category.OFFICERS));
             //Log.d(TAG, "insertFromTable: " + i + " " + tableData[i][0] + " " + tableData[i][1] + " " + designation + " " + office + " " + tableData[i][4] + " " + tableData[i][5] + " " + tableData[i][6] + " " + Category.OFFICERS);
         }
         mRepository.insertEmployeeList(officersList);
     }
 
-    public void insertJuniorOfficerFromTable(String[][] tableData) {
+    public void insertJuniorOfficerFromTable(List<List<String>> tableData) {
         if(tableData == null) return;
         List<Employee> employeeList = new ArrayList<>();
         String office = null;
-        for(int i =0; i<tableData.length; i++){
-            if(tableData[i] == null) continue;
+        for(int i =0; i<tableData.size(); i++){
             //Log.d(TAG, "insertJuniorOfficerFromTable: " + Utility.arrayToString(tableData[i]));
-            if(tableData[i].length == 1){
-                office = tableData[i][0];
+            if(tableData.get(i).size() == 1){
+                office = tableData.get(i).get(0);
                 i++; // ignore header row
             }
             else
-                employeeList.add(new Employee(i, tableData[i][1], tableData[i][2], tableData[i][3],
-                        office, tableData[i][4], tableData[i][5],null, Category.JUNIOR_OFFICER));
+                employeeList.add(new Employee(i, tableData.get(i).get(1), tableData.get(i).get(2), tableData.get(i).get(3),
+                        office, tableData.get(i).get(4), tableData.get(i).get(5),null, Category.JUNIOR_OFFICER));
         }
         mRepository.insertEmployeeList(employeeList);
     }

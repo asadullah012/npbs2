@@ -37,6 +37,10 @@ public class NPBS2Repository {
         NPBS2DB.databaseWriteExecutor.execute(() -> achievementDao.insertAll(achievements));
     }
 
+    public void deleteAllAchievements(){
+        NPBS2DB.databaseWriteExecutor.execute(() -> achievementDao.deleteAll());
+    }
+
     public LiveData<List<Information>> getInformationByCategory(String category) {
         return informationDao.getInformationsByCategory(category);
     }
@@ -82,6 +86,10 @@ public class NPBS2Repository {
 
     public LiveData<List<ComplainCentre>> getAllComplainCentre(){
         return complainCentreDao.getAll();
+    }
+
+    public void deleteAllComplainCentre(){
+        NPBS2DB.databaseWriteExecutor.execute(()->complainCentreDao.deleteAll());
     }
 
     //Employee

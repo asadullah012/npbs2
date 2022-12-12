@@ -12,11 +12,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SyncAchievement extends AsyncTask<Void, Void, Void> {
 
     AchievementViewModel viewModel;
-    String[][] trtd;
+    List<List<String>> trtd;
     public SyncAchievement(AchievementViewModel achievementViewModel){
         viewModel = achievementViewModel;
     }
@@ -31,13 +33,14 @@ public class SyncAchievement extends AsyncTask<Void, Void, Void> {
 
             for (Element table : tables) {
                 Elements trs = table.select("tr");
-                trtd = new String[trs.size()][];
+                trtd = new ArrayList<>();
                 for (int i = 0; i < trs.size(); i++) {
                     Elements tds = trs.get(i).select("td");
-                    trtd[i] = new String[tds.size()];
+                    List<String> row = new ArrayList<>();
                     for (int j = 0; j < tds.size(); j++) {
-                        trtd[i][j] = tds.get(j).text();
+                        row.add(tds.get(j).text());
                     }
+                    trtd.add(row);
                 }
             }
         } catch (IOException e) {
@@ -51,6 +54,6 @@ public class SyncAchievement extends AsyncTask<Void, Void, Void> {
         super.onPostExecute(unused);
         //viewModel.deleteAllByCategory(Category.atAGlance);
         if(trtd == null) return;
-        //viewModel.insertFromArray(trtd);
+        viewModel.insertFromArray(trtd);
     }
 }
