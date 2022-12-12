@@ -32,4 +32,8 @@ public class AchievementViewModel extends AndroidViewModel {
         }
         mRepository.insertAchievementAll(achievements);
     }
+
+    public void deleteAllAchievements() {
+        mRepository.deleteAllAchievements();
+    }
 }

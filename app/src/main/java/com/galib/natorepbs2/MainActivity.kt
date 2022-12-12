@@ -36,11 +36,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
             var result = Sync.getLastUpdateTime()
             if(result != 0L){
                 val prevVal = getLastUpdateTimeFromPref()
-                Log.d(TAG, "syncIfRequired: prev value- " + prevVal + " cur value- " + result)
+                Log.d(TAG, "syncIfRequired: prev value- $prevVal cur value- $result")
                 if(prevVal < result){
                     setLastUpdateTimeToPref(result)
-                    sync()
+
                 }
+                sync()
             } else{
                 Log.d(TAG, "syncIfRequired: unable to get last updated time")
             }
@@ -63,18 +64,24 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
     fun syncUsingCoroutine() {
         Log.d(TAG, "sync: sync started")
         launch(Dispatchers.IO) {
-            achievementViewModel.insertFromArray(Sync.syncAchievement() as List<MutableList<String>>?)
+            Sync.syncAtAGlance(informationViewModel)
+            Sync.syncAchievement(achievementViewModel)
+            Sync.syncComplainCentre(complainCentreViewModel)
+            Sync.syncOfficerList(employeeViewModel)
+            Sync.syncJuniorOfficers(employeeViewModel)
+//            Sync.syncBoardMember(employeeViewModel)
+//            Sync.syncPowerOutageContact(employeeViewModel)
         }
     }
 
     fun sync(){
-        SyncAtAGlance(ViewModelProvider(this)[InformationViewModel::class.java]).execute()
-        SyncAchievement(ViewModelProvider(this)[AchievementViewModel::class.java]).execute()
-        SyncComplainCentre(ViewModelProvider(this)[ComplainCentreViewModel::class.java]).execute()
-        SyncOfficerList(ViewModelProvider(this).get(EmployeeViewModel::class.java)).execute()
-        SyncJuniorOfficers(ViewModelProvider(this).get(EmployeeViewModel::class.java)).execute()
-        SyncBoardMember(ViewModelProvider(this).get(EmployeeViewModel::class.java)).execute()
-        SyncPowerOutageContact(ViewModelProvider(this).get(EmployeeViewModel::class.java)).execute()
+        SyncAtAGlance(informationViewModel).execute()
+        SyncAchievement(achievementViewModel).execute()
+        SyncComplainCentre(complainCentreViewModel).execute()
+        SyncOfficerList(employeeViewModel).execute()
+        SyncJuniorOfficers(employeeViewModel).execute()
+        SyncBoardMember(employeeViewModel).execute()
+        SyncPowerOutageContact(employeeViewModel).execute()
     }
 
     override fun onDestroy() {

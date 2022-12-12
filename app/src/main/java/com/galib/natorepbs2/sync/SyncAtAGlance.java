@@ -2,6 +2,9 @@ package com.galib.natorepbs2.sync;
 
 import android.os.AsyncTask;
 
+import com.galib.natorepbs2.constants.Category;
+import com.galib.natorepbs2.constants.Selectors;
+import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.viewmodel.InformationViewModel;
 
 import org.jsoup.Jsoup;
@@ -10,10 +13,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class SyncAtAGlance extends AsyncTask<Void, Void, Void> {
-    String url = "http://pbs2.natore.gov.bd/bn/site/page/7XSs-%E0%A6%8F%E0%A6%95-%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%87";
     InformationViewModel viewModel;
-    String[][] trtd;
+    List<List<String>> trtd;
     String month = null;
     public SyncAtAGlance(InformationViewModel informationViewModel){
         viewModel = informationViewModel;
@@ -23,19 +28,20 @@ public class SyncAtAGlance extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         try {
             //Connect to the website
-            Document document = Jsoup.connect(url).get();
-            month = document.select("#left > div.page.details > div > div > div.html_text.body > div > p:nth-child(2)").text();
-            Elements tables = document.select("#left > div.page.details > div > div > div.html_text.body > div > table");
+            Document document = Jsoup.connect(URLs.BASE + URLs.AT_A_GLANCE).get();
+            month = document.select(Selectors.AT_A_GLANCE_MONTH).text();
+            Elements tables = document.select(Selectors.AT_A_GLANCE);
 
             for (Element table : tables) {
                 Elements trs = table.select("tr");
-                trtd = new String[trs.size()][];
+                trtd = new ArrayList<>();
                 for (int i = 0; i < trs.size(); i++) {
                     Elements tds = trs.get(i).select("td");
-                    trtd[i] = new String[tds.size()];
+                    List<String> tdList = new ArrayList<>();
                     for (int j = 0; j < tds.size(); j++) {
-                        trtd[i][j] = tds.get(j).text();
+                        tdList.add(tds.get(j).text());
                     }
+                    trtd.add(tdList);
                 }
             }
         } catch (IOException e) {

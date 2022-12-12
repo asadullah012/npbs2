@@ -2,6 +2,7 @@ package com.galib.natorepbs2.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -17,4 +18,7 @@ public interface ComplainCentreDao {
 
     @Query("SELECT * FROM complain_center_table ORDER BY priority ASC")
     LiveData<List<ComplainCentre>> getAll();
+
+    @Query("DELETE FROM complain_center_table")
+    void deleteAll();
 }

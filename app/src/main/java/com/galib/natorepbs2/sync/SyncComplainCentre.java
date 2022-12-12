@@ -12,10 +12,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SyncComplainCentre extends AsyncTask<Void, Void, Void> {
     ComplainCentreViewModel viewModel;
-    String[][] trtd;
+    List<List<String>> trtd;
     public SyncComplainCentre(ComplainCentreViewModel complainCentreViewModel){
         viewModel = complainCentreViewModel;
     }
@@ -30,13 +32,14 @@ public class SyncComplainCentre extends AsyncTask<Void, Void, Void> {
 
             for (Element table : tables) {
                 Elements trs = table.select("tr");
-                trtd = new String[trs.size()][];
+                trtd = new ArrayList<>();
                 for (int i = 0; i < trs.size(); i++) {
                     Elements tds = trs.get(i).select("td");
-                    trtd[i] = new String[tds.size()];
+                    List<String> tdList = new ArrayList<>();
                     for (int j = 0; j < tds.size(); j++) {
-                        trtd[i][j] = tds.get(j).text();
+                        tdList.add(tds.get(j).text());
                     }
+                    trtd.add(tdList);
                 }
             }
         } catch (IOException e) {
@@ -49,7 +52,6 @@ public class SyncComplainCentre extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void unused) {
         super.onPostExecute(unused);
         if(trtd == null) return;
-        //viewModel.deleteAllByCategory(Category.atAGlance);
         viewModel.insertFromTable(trtd);
     }
 }

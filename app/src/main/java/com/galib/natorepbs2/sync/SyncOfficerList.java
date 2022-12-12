@@ -12,9 +12,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SyncOfficerList extends AsyncTask<Void, Void, Void> {
-    String tableData[][] = null;
+    List<List<String>> tableData = null;
     EmployeeViewModel employeeViewModel;
     public SyncOfficerList(EmployeeViewModel viewModel){
         employeeViewModel = viewModel;
@@ -28,19 +30,21 @@ public class SyncOfficerList extends AsyncTask<Void, Void, Void> {
             Elements tables = document.select(Selectors.OFFICERS_LIST);
             for (Element table : tables) {
                 Elements trs = table.select("tr");
-                tableData = new String[trs.size()][];
+                tableData = new ArrayList<>();
                 for (int i = 1; i < trs.size(); i++) {
                     Elements tds = trs.get(i).select("td");
-                    tableData[i] = new String[tds.size()];
+                    List<String> tdList = new ArrayList<>();
                     //Log.d("SyncOfficerList", "th: " + tds.select("th").html());
 
                     for (int j = 0; j < tds.size(); j++) {
                         if(j == 0)
-                            tableData[i][j] = tds.get(j).select("img").first().absUrl("src");
+                            tdList.add(tds.get(j).select("img").first().absUrl("src"));
                         else
-                            tableData[i][j] = tds.get(j).text();
+                            tdList.add(tds.get(j).text());
                         //Log.d("SyncOfficerList", "doInBackground: " + tableData[i][j] );
                     }
+                    if(tdList.size() > 0)
+                        tableData.add(tdList);
                 }
             }
         } catch (IOException e) {
