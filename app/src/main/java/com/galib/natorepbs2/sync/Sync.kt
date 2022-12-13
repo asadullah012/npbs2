@@ -3,6 +3,7 @@ package com.galib.natorepbs2.sync
 import android.util.Log
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
+import com.galib.natorepbs2.db.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.AchievementViewModel
 import com.galib.natorepbs2.viewmodel.ComplainCentreViewModel
@@ -243,6 +244,51 @@ class Sync {
                 Log.e(TAG, "syncBoardMember: unable to get board member data")
             }
         }
-    }
 
+        fun syncOfficeData(){
+            val data = ArrayList<OfficeInformation>()
+            var i = 0
+            for(url in URLs.ZONAL_OFFICES){
+                try {
+                    val document = Jsoup.connect(URLs.BASE + url).get()
+                    val name = document.select(Selectors.OFFICES["name"]).text()
+                    val address = document.select(Selectors.OFFICES["address"]).text()
+                    val mobileText = document.select(Selectors.OFFICES["mobile"]).text()
+                    val part = mobileText.split(":")
+                    var mobile = ""
+                    if(part.size > 1)
+                        mobile = part[1].trim()
+                    val email = document.select(Selectors.OFFICES["email"]).text()
+                    val gMapURL = document.select(Selectors.OFFICES["gMapURL"]).text()
+                    data.add(OfficeInformation(name,address,mobile,email,gMapURL, i++))
+                    Log.d(TAG, "syncOfficeData: $name $address $mobile $email $gMapURL")
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+            for(url in URLs.SUB_ZONAL_OFFICES){
+                try {
+                    val document = Jsoup.connect(URLs.BASE + url).get()
+                    val name = document.select(Selectors.OFFICES["name"]).text()
+                    val address = document.select(Selectors.OFFICES["address"]).text()
+                    val mobileText = document.select(Selectors.OFFICES["mobile"]).text()
+                    val part = mobileText.split(":")
+                    var mobile = ""
+                    if(part.size > 1)
+                        mobile = part[1].trim()
+                    val email = document.select(Selectors.OFFICES["email"]).text()
+                    val gMapURL = document.select(Selectors.OFFICES["gMapURL"]).text()
+                    data.add(OfficeInformation(name,address,mobile,email,gMapURL, i++))
+                    Log.d(TAG, "syncOfficeData: $name $address $mobile $email $gMapURL")
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+            if(data.size > 0) {
+                Log.d(TAG, "syncOfficeData: " + data.size)
+            } else{
+                Log.e(TAG, "syncOfficeData: unable to get office data")
+            }
+        }
+    }
 }

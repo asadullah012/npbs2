@@ -2,9 +2,9 @@ package com.galib.natorepbs2.sync;
 
 import android.os.AsyncTask;
 
-import com.galib.natorepbs2.viewmodel.ComplainCentreViewModel;
 import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;
+import com.galib.natorepbs2.viewmodel.ComplainCentreViewModel;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

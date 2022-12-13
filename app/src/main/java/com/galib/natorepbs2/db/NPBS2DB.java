@@ -9,13 +9,14 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Information.class, Achievement.class, ComplainCentre.class, Employee.class}, version = 9, exportSchema = false)
+@Database(entities = {Information.class, Achievement.class, ComplainCentre.class, Employee.class, OfficeInformation.class}, version = 10, exportSchema = false)
 public abstract class NPBS2DB extends RoomDatabase {
 
     public abstract InformationDao informationDao();
     public abstract AchievementDao achievementDao();
     public abstract ComplainCentreDao complainCentreDao();
     public abstract EmployeeDao employeeDao();
+    public abstract OfficeInformationDao officeInformationDao();
 
     private static volatile NPBS2DB INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
