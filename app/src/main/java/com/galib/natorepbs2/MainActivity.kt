@@ -3,6 +3,9 @@ package com.galib.natorepbs2
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.galib.natorepbs2.sync.*
@@ -15,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
+
 
 class MainActivity : AppCompatActivity(), CoroutineScope{
     private val TAG = "MainActivity"
@@ -31,9 +35,25 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
         syncIfRequired()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.force_sync -> {
+                Toast.makeText(applicationContext, "Force sync selected", Toast.LENGTH_LONG).show()
+                syncUsingCoroutine()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun syncIfRequired() {
         job = launch(Dispatchers.IO) {
-            var result = Sync.getLastUpdateTime()
+            val result = Sync.getLastUpdateTime()
             if(result != 0L){
                 val prevVal = getLastUpdateTimeFromPref()
                 Log.d(TAG, "syncIfRequired: prev value- $prevVal cur value- $result")
@@ -61,7 +81,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
         return sharedPref.getLong(getString(R.string.last_update_time), 0L)
     }
 
-    fun syncUsingCoroutine() {
+    private fun syncUsingCoroutine() {
         Log.d(TAG, "sync: sync started")
         launch(Dispatchers.IO) {
             Sync.syncAtAGlance(informationViewModel)
