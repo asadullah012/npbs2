@@ -12,10 +12,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SyncBoardMember extends AsyncTask<Void, Void, Void> {
     private final EmployeeViewModel employeeViewModel;
-    String tableData[][] = null;
+    List<List<String>> tableData = null;
 
     public SyncBoardMember(EmployeeViewModel employeeViewModel){
         this.employeeViewModel = employeeViewModel;
@@ -29,13 +31,15 @@ public class SyncBoardMember extends AsyncTask<Void, Void, Void> {
             Elements tables = document.select(Selectors.BOARD_MEMBER);
             for (Element table : tables) {
                 Elements trs = table.select("tr");
-                tableData = new String[trs.size()][];
+                tableData = new ArrayList<>();
                 for (int i = 1; i < trs.size(); i++) {
                     Elements tds = trs.get(i).select("td");
-                    tableData[i] = new String[tds.size()];
+                    List<String> tdList = new ArrayList<>();
                     for (int j = 0; j < tds.size(); j++) {
-                        tableData[i][j] = tds.get(j).text();
+                        tdList.add(tds.get(j).text());
                     }
+                    if(tdList.size() > 0)
+                        tableData.add(tdList);
                 }
             }
         } catch (IOException e){

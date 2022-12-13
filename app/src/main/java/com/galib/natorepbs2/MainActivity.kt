@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
                     setLastUpdateTimeToPref(result)
 
                 }
-                sync()
+                syncUsingCoroutine()
             } else{
                 Log.d(TAG, "syncIfRequired: unable to get last updated time")
             }
@@ -69,20 +69,20 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
             Sync.syncComplainCentre(complainCentreViewModel)
             Sync.syncOfficerList(employeeViewModel)
             Sync.syncJuniorOfficers(employeeViewModel)
-//            Sync.syncBoardMember(employeeViewModel)
-//            Sync.syncPowerOutageContact(employeeViewModel)
+            Sync.syncBoardMember(employeeViewModel)
+            Sync.syncPowerOutageContact(employeeViewModel)
         }
     }
 
-    fun sync(){
-        SyncAtAGlance(informationViewModel).execute()
-        SyncAchievement(achievementViewModel).execute()
-        SyncComplainCentre(complainCentreViewModel).execute()
-        SyncOfficerList(employeeViewModel).execute()
-        SyncJuniorOfficers(employeeViewModel).execute()
-        SyncBoardMember(employeeViewModel).execute()
-        SyncPowerOutageContact(employeeViewModel).execute()
-    }
+//    fun sync(){
+//        SyncAtAGlance(informationViewModel).execute()
+//        SyncAchievement(achievementViewModel).execute()
+//        SyncComplainCentre(complainCentreViewModel).execute()
+//        SyncOfficerList(employeeViewModel).execute()
+//        SyncJuniorOfficers(employeeViewModel).execute()
+//        SyncBoardMember(employeeViewModel).execute()
+//        SyncPowerOutageContact(employeeViewModel).execute()
+//    }
 
     override fun onDestroy() {
         super.onDestroy()

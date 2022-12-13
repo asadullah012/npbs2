@@ -73,26 +73,24 @@ public class EmployeeViewModel extends AndroidViewModel {
         mRepository.insertEmployeeList(employeeList);
     }
 
-    public void insertBoardMembersFromTable(String[][] tableData) {
+    public void insertBoardMembersFromTable(List<List<String>> tableData) {
         if(tableData == null) return;
         List<Employee> employeeList = new ArrayList<>();
-        for(int i =0; i<tableData.length; i++){
-            if(tableData[i] == null) continue;
+        for(int i =0; i<tableData.size(); i++){
             //Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
-            employeeList.add(new Employee(i, null, tableData[i][1], tableData[i][2],
-                    tableData[i][3], null, tableData[i][4], null,Category.BOARD_MEMBER));
+            employeeList.add(new Employee(i, null, tableData.get(i).get(1), tableData.get(i).get(2),
+                    tableData.get(i).get(3), null, tableData.get(i).get(4), null,Category.BOARD_MEMBER));
         }
         mRepository.insertEmployeeList(employeeList);
     }
 
-    public void insertPowerOutageContactFromTable(String[][] tableData, String headerText, String footerText) {
+    public void insertPowerOutageContactFromTable(List<List<String>> tableData, String headerText, String footerText) {
         if(tableData == null) return;
         List<Employee> employeeList = new ArrayList<>();
-        for(int i =0; i<tableData.length; i++){
-            if(tableData[i] == null) continue;
-            Log.d(TAG, "insertPowerOutageContactFromTable: " + Utility.arrayToString(tableData[i]));
-            employeeList.add(new Employee(i, tableData[i][1], tableData[i][2],
-                    tableData[i][3], null, null, tableData[i][4], null,Category.POWER_OUTAGE_CONTACT));
+        for(int i =0; i<tableData.size(); i++){
+            //Log.d(TAG, "insertPowerOutageContactFromTable: " + Utility.arrayToString(tableData[i]));
+            employeeList.add(new Employee(i, tableData.get(i).get(1), tableData.get(i).get(2),
+                    tableData.get(i).get(3), null, null, tableData.get(i).get(4), null,Category.POWER_OUTAGE_CONTACT));
         }
 //        Log.d(TAG, "insertPowerOutageContactFromTable: " + headerText + " " + footerText);
         mRepository.insertEmployeeList(employeeList);
