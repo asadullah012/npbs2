@@ -86,5 +86,6 @@
     <string name="open_in_browser">Open in Browser</string>
     <string name="text_send_email">Send Email</string>
     <string name="last_update_time">last_update_time</string>
+    <string name="force_sync">Force Sync</string>
 
 </resources>
