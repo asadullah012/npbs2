@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
             Sync.syncJuniorOfficers(employeeViewModel)
             Sync.syncBoardMember(employeeViewModel)
             Sync.syncPowerOutageContact(employeeViewModel)
+            Sync.syncOfficeData()
         }
     }
 

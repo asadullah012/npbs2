@@ -16,6 +16,7 @@ public class NPBS2Repository {
     private AchievementDao achievementDao;
     private ComplainCentreDao complainCentreDao;
     private EmployeeDao employeeDao;
+    private OfficeInformationDao officeInformationDao;
     private static final String TAG = NPBS2Repository.class.getName();
     public NPBS2Repository(Application application) {
         NPBS2DB db = NPBS2DB.getDatabase(application);
@@ -23,6 +24,7 @@ public class NPBS2Repository {
         achievementDao = db.achievementDao();
         complainCentreDao = db.complainCentreDao();
         employeeDao = db.employeeDao();
+        officeInformationDao = db.officeInformationDao();
     }
 
     public LiveData<List<Achievement>> getAllAchievement() {
@@ -123,5 +125,13 @@ public class NPBS2Repository {
 
     public LiveData<Employee> getOfficeHead() {
         return employeeDao.getOfficeHead(Category.OFFICERS);
+    }
+
+    public void insertAllOfficeInfo(List<OfficeInformation> officeInformationList){
+        NPBS2DB.databaseWriteExecutor.execute(()->officeInformationDao.insertAll(officeInformationList));
+    }
+
+    public LiveData<List<OfficeInformation>> getAllOfficeInformation(){
+        return officeInformationDao.getAllOffice();
     }
 }

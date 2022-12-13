@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
-import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.databinding.FragmentOurServicesBinding;
 
 public class OurServicesFragment extends Fragment {

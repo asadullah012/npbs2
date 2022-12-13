@@ -2,7 +2,6 @@ package com.galib.natorepbs2.sync;
 
 import android.os.AsyncTask;
 
-import com.galib.natorepbs2.constants.Category;
 import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.viewmodel.InformationViewModel;
