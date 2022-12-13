@@ -12,10 +12,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SyncPowerOutageContact extends AsyncTask<Void, Void, Void> {
     private EmployeeViewModel employeeViewModel;
-    private String[][] tableData = null;
+    private List<List<String>> tableData = null;
     private String headerText = null;
     private String footerText = null;
 
@@ -31,19 +33,21 @@ public class SyncPowerOutageContact extends AsyncTask<Void, Void, Void> {
             Elements tables = document.select(Selectors.POWER_OUTAGE_CONTACT);
             for (Element table : tables) {
                 Elements trs = table.select("tr");
-                tableData = new String[trs.size()][];
+                tableData = new ArrayList<>();
                 for (int i = 1; i < trs.size(); i++) {
                     Elements tds = trs.get(i).select("td");
-                    tableData[i] = new String[tds.size()];
+                    List<String> tdList = new ArrayList<>();
                     for (int j = 0; j < tds.size(); j++) {
                         if(j == 1)
                             if(tds.get(j).select("img").first() != null)
-                                tableData[i][j] = tds.get(j).select("img").first().absUrl("src");
+                                tdList.add(tds.get(j).select("img").first().absUrl("src"));
                             else
-                                tableData[i][j] = tds.get(j).text();
+                                tdList.add(tds.get(j).text());
                         else
-                            tableData[i][j] = tds.get(j).text();
+                            tdList.add(tds.get(j).text());
                     }
+                    if(tdList.size() > 0)
+                        tableData.add(tdList);
                 }
             }
         } catch (IOException e){

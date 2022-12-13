@@ -183,11 +183,65 @@ class Sync {
         }
 
         fun syncBoardMember(employeeViewModel: EmployeeViewModel) {
-            TODO("Not yet implemented")
+            val data = ArrayList<ArrayList<String>>()
+            try {
+                val document = Jsoup.connect(URLs.BASE + URLs.BOARD_MEMBER).get()
+                val tables = document.select(Selectors.BOARD_MEMBER)
+                for (table in tables) {
+                    val trs = table.select("tr")
+                    for (i in 1 until trs.size) {
+                        val tds = trs[i].select("td")
+                        val tdList = ArrayList<String>()
+                        for (j in tds.indices) {
+                            tdList.add(tds[j].text())
+                        }
+                        if (tdList.size > 0) data.add(tdList)
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            if(data.size > 0) {
+                Log.d(TAG, "syncBoardMember: " + data.size)
+                employeeViewModel.insertBoardMembersFromTable(data as List<MutableList<String>>)
+            } else{
+                Log.e(TAG, "syncBoardMember: unable to get board member data")
+            }
         }
 
         fun syncPowerOutageContact(employeeViewModel: EmployeeViewModel) {
-            TODO("Not yet implemented")
+            val data = ArrayList<ArrayList<String>>()
+            var headerText = ""
+            var footerText = ""
+            try {
+                val document = Jsoup.connect(URLs.BASE + URLs.POWER_OUTAGE_CONTACT).get()
+                headerText = document.select(Selectors.POWER_OUTAGE_CONTACT_HEADER).text()
+                footerText = document.select(Selectors.POWER_OUTAGE_CONTACT_FOOTER).text()
+                val tables = document.select(Selectors.POWER_OUTAGE_CONTACT)
+                for (table in tables) {
+                    val trs = table.select("tr")
+                    for (i in 1 until trs.size) {
+                        val tds = trs[i].select("td")
+                        val tdList = ArrayList<String>()
+                        for (j in tds.indices) {
+                            if (j == 1) if (tds[j].select("img").first() != null) tdList.add(
+                                tds[j].select("img").first()!!.absUrl("src")
+                            ) else tdList.add(tds[j].text()) else tdList.add(
+                                tds[j].text()
+                            )
+                        }
+                        if (tdList.size > 0) data.add(tdList)
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            if(data.size > 0) {
+                Log.d(TAG, "syncBoardMember: " + data.size)
+                employeeViewModel.insertPowerOutageContactFromTable(data as List<MutableList<String>>, headerText, footerText)
+            } else{
+                Log.e(TAG, "syncBoardMember: unable to get board member data")
+            }
         }
     }
 
