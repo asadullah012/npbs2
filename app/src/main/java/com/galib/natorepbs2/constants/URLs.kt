@@ -26,4 +26,5 @@ object URLs {
    const val PLAY_STORE_PREFIX = "https://play.google.com/store/apps/details?id="
    val ZONAL_OFFICES = arrayOf("/page/qHTA-চারঘাট-জোনাল-অফিস", "/page/4Yl0-গুরুদাসপুর-জোনাল-অফিস", "/page/VDOD-লালপুর-জোনাল-অফিস", "/page/YJzZ-বাঘা-জোনাল-অফিস")
    val SUB_ZONAL_OFFICES = arrayOf("/page/ksib-লক্ষিকোল-সাব-জোনাল-অফিস", "/page/GCYi-দয়ারামপুর-সাব-জোনাল-অফিস")
+   const val TENDER = "/view/revenue_model_tender"
 }
