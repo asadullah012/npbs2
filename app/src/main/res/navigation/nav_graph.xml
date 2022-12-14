@@ -208,7 +208,15 @@
         android:id="@+id/noticeTenderFragment"
         android:name="com.galib.natorepbs2.ui.NoticeTenderFragment"
         android:label="fragment_notice_tender"
-        tools:layout="@layout/fragment_notice_tender" />
+        tools:layout="@layout/fragment_notice_tender" >
+        <action
+            android:id="@+id/action_noticeTenderFragment_to_tenderInformationFragment"
+            app:destination="@id/tenderInformationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/communicationFragment"
         android:name="com.galib.natorepbs2.ui.CommunicationFragment"
@@ -250,6 +258,11 @@
         android:name="com.galib.natorepbs2.ui.PDFViewerFragment"
         android:label="fragment_p_d_f_viewer"
         tools:layout="@layout/fragment_p_d_f_viewer" />
+
+    <fragment
+        android:id="@+id/tenderInformationFragment"
+        android:name="com.galib.natorepbs2.ui.TenderInformationFragment"
+        android:label="TenderInformationFragment" />
 
 
 </navigation>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,10 +43,8 @@ public class NoticeTenderFragment extends Fragment {
     public void onClick(View v){
         //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         int id = v.getId();
-        if (id == R.id.breb_btn) {
-
-        } else if (id == R.id.natore_pbs2_btn) {
-
+        if (id == R.id.tender_btn) {
+            Navigation.findNavController(v).navigate(R.id.action_noticeTenderFragment_to_tenderInformationFragment);
         }
     }
 }

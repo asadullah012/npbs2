@@ -9,10 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.galib.natorepbs2.sync.*
-import com.galib.natorepbs2.viewmodel.AchievementViewModel
-import com.galib.natorepbs2.viewmodel.ComplainCentreViewModel
-import com.galib.natorepbs2.viewmodel.EmployeeViewModel
-import com.galib.natorepbs2.viewmodel.InformationViewModel
+import com.galib.natorepbs2.viewmodel.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,6 +25,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
     private val achievementViewModel by lazy { ViewModelProvider(this)[AchievementViewModel::class.java] }
     private val informationViewModel by lazy { ViewModelProvider(this)[InformationViewModel::class.java] }
     private val complainCentreViewModel by lazy { ViewModelProvider(this)[ComplainCentreViewModel::class.java] }
+    private val tenderInformationViewModel  by lazy { ViewModelProvider(this)[TenderInformationViewModel::class.java] }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,6 +90,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
             Sync.syncBoardMember(employeeViewModel)
             Sync.syncPowerOutageContact(employeeViewModel)
             Sync.syncOfficeData()
+            Sync.syncTenderData(tenderInformationViewModel)
         }
     }
 
