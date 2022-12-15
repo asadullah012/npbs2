@@ -43,7 +43,7 @@ public class ContactListAdapter extends ListAdapter<Employee, ContactListAdapter
 
     @Override
     public void onBindViewHolder(@NonNull EmployeeViewHolder holder, int position) {
-        holder.bind(getItem(position), onClickListener);
+            holder.bind(getItem(position), onClickListener);
     }
 
 

@@ -1,13 +1,19 @@
 package com.galib.natorepbs2.sync
 
+import android.content.Context
+import android.content.res.AssetManager
 import android.util.Log
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.db.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.*
+import org.json.JSONArray
+import org.json.JSONObject
 import org.jsoup.Jsoup
 import java.io.IOException
+import java.io.InputStream
+
 
 class Sync {
     companion object{
@@ -242,47 +248,37 @@ class Sync {
             }
         }
 
-        fun syncOfficeData(){
-            val data = ArrayList<OfficeInformation>()
-            var i = 0
-            for(url in URLs.ZONAL_OFFICES){
-                try {
-                    val document = Jsoup.connect(URLs.BASE + url).get()
-                    val name = document.select(Selectors.OFFICES["name"]).text()
-                    val address = document.select(Selectors.OFFICES["address"]).text()
-                    val mobileText = document.select(Selectors.OFFICES["mobile"]).text()
-                    val part = mobileText.split(":")
-                    var mobile = ""
-                    if(part.size > 1)
-                        mobile = part[1].trim()
-                    val email = document.select(Selectors.OFFICES["email"]).text()
-                    val gMapURL = document.select(Selectors.OFFICES["gMapURL"]).text()
-                    data.add(OfficeInformation(name,address,mobile,email,gMapURL, i++))
-                    Log.d(TAG, "syncOfficeData: $name $address $mobile $email $gMapURL")
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
+        fun syncOfficeData(officeInformationViewModel: OfficeInformationViewModel, assets: AssetManager){
+            var json: String? = null
+            try {
+                val inputStream: InputStream = assets.open("init_data.json")
+                val size: Int = inputStream.available()
+                val buffer = ByteArray(size)
+                inputStream.read(buffer)
+                inputStream.close()
+                json = buffer.toString(Charsets.UTF_8)
+            } catch (ex: IOException) {
+                ex.printStackTrace()
             }
-            for(url in URLs.SUB_ZONAL_OFFICES){
-                try {
-                    val document = Jsoup.connect(URLs.BASE + url).get()
-                    val name = document.select(Selectors.OFFICES["name"]).text()
-                    val address = document.select(Selectors.OFFICES["address"]).text()
-                    val mobileText = document.select(Selectors.OFFICES["mobile"]).text()
-                    val part = mobileText.split(":")
-                    var mobile = ""
-                    if(part.size > 1)
-                        mobile = part[1].trim()
-                    val email = document.select(Selectors.OFFICES["email"]).text()
-                    val gMapURL = document.select(Selectors.OFFICES["gMapURL"]).text()
-                    data.add(OfficeInformation(name,address,mobile,email,gMapURL, i++))
-                    Log.d(TAG, "syncOfficeData: $name $address $mobile $email $gMapURL")
-                } catch (e: IOException) {
-                    e.printStackTrace()
+            var data = ArrayList<OfficeInformation>()
+            if(json != null){
+                val jsonRootObject = JSONObject(json)
+                val jsonArray: JSONArray = jsonRootObject.optJSONArray("officeInformation")
+
+                for (i in 0 until jsonArray.length()) {
+                    val jsonObject = jsonArray.getJSONObject(i)
+                    data.add(OfficeInformation(jsonObject.optString("name").toString(),
+                        jsonObject.optString("address").toString(),
+                        jsonObject.optString("mobile").toString(),
+                        jsonObject.optString("telephone").toString(),
+                        jsonObject.optString("email").toString(),
+                        jsonObject.optString("google_map_url").toString(),
+                        i))
                 }
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncOfficeData: " + data.size)
+                officeInformationViewModel.insertAllOfficeInformation(data)
             } else{
                 Log.e(TAG, "syncOfficeData: unable to get office data")
             }

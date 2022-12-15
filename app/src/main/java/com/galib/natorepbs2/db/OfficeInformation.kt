@@ -10,6 +10,7 @@ data class OfficeInformation (
     @ColumnInfo(name = "name") val name :String,
     @ColumnInfo(name = "address") val address :String,
     @ColumnInfo(name = "mobile") val mobile :String,
+    @ColumnInfo(name = "telephone") val telephone :String,
     @ColumnInfo(name = "email") val email :String,
     @ColumnInfo(name = "google_map_url") val googleMapURL :String,
     @ColumnInfo(name = "priority") val priority :Int

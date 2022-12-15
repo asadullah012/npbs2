@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.db.TenderInformation
 
-class TenderInformationAdapter() : RecyclerView.Adapter<TenderInformationAdapter.TenderInformationViewHolder?>() {
+class TenderInformationAdapter : RecyclerView.Adapter<TenderInformationAdapter.TenderInformationViewHolder?>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TenderInformationViewHolder {
         return TenderInformationViewHolder.create(parent)
     }

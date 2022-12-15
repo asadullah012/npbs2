@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'androidx.navigation.safeargs'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -35,7 +36,7 @@ android {
 
 dependencies {
     implementation "androidx.core:core-ktx:$rootProject.coreVersion"
-
+    kapt "com.android.databinding:compiler:3.1.4"
     implementation "org.jsoup:jsoup:$rootProject.jsoupVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
@@ -44,6 +45,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.webkit:webkit:1.6.0-beta01'
     implementation 'com.squareup.picasso:picasso:2.8'
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
@@ -64,4 +67,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
+}
+
+kapt {
+    generateStubs = true
 }

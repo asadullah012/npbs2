@@ -105,6 +105,9 @@
         <action
             android:id="@+id/action_aboutUsFragment_to_officeHeadFragment"
             app:destination="@id/officeHeadFragment" />
+        <action
+            android:id="@+id/action_aboutUsFragment_to_officesFragment"
+            app:destination="@id/officesFragment" />
     </fragment>
     <fragment
         android:id="@+id/atAGlanceFragment"
@@ -280,6 +283,10 @@
             android:id="@+id/action_tenderInformationFragment_to_PDFViewerFragment"
             app:destination="@id/PDFViewerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/officesFragment"
+        android:name="com.galib.natorepbs2.ui.OfficesFragment"
+        android:label="OfficesFragment" />
 
 
 </navigation>

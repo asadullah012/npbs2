@@ -87,5 +87,6 @@
     <string name="text_send_email">Send Email</string>
     <string name="last_update_time">last_update_time</string>
     <string name="force_sync">Force Sync</string>
+    <string name="show_in_map">Google Map</string>
 
 </resources>

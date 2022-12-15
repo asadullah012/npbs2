@@ -1,0 +1,11 @@
+{
+  "officeInformation" : [
+    {"name": "সদর দপ্তর", "address": "ডাকঘর: হারোয়া, পোষ্ট কোডঃ ৬৪৩০, উপজেলা: বড়াইগ্রাম, জেলা: নাটোর", "mobile": "+8801769401631", "telephone" : "০৭৭২৩-৫৬০৯৩", "email": "natorepbs2hq@yahoo.com", "google_map_url" : "", "type" : 0},
+    {"name": "চারঘাট জোনাল অফিস", "address": "চারঘাট, রাজশাহী", "mobile": "+8801769401639", "telephone" : "+880772356036", "email": "natorepbs2charzo@yahoo.com", "google_map_url" : "https://goo.gl/maps/W6ZWnJfmhtDuUNHTA", "type" : 1},
+    {"name": "গুরুদাসপুর জোনাল অফিস", "address": "গুরুদাসপুর, নাটোর", "mobile": "+8801769401635", "telephone" : "+880772474028", "email": "natorepbs2guruzo@yahoo.com", "google_map_url" : "https://goo.gl/maps/jMtpa3VvYq3bNMSF8", "type" : 1},
+    {"name": "লালপুর জোনাল অফিস", "address": "লালপুর, নাটোর", "mobile": "+8801769401633", "telephone" : "+880772575116", "email": "natorepbs2lalpur@yahoo.com", "google_map_url" : "https://goo.gl/maps/iFgqqga2s7Hrun8M8", "type" : 1},
+    {"name": "বাঘা জোনাল অফিস", "address": "বাঘা, রাজশাহী", "mobile": "+8801769401640", "telephone" : "+880723356083", "email": "natorepbs2bagha@gmail.com", "google_map_url" : "https://goo.gl/maps/qFTi9e7jPvgomt2H7", "type" : 1},
+    {"name": "লক্ষিকোল সাব জোনাল অফিস", "address": "বড়াইগ্রাম, নাটোর", "mobile": "+8801769401636", "telephone" : "", "email": "natorepbs2laxmi@yahoo.com", "google_map_url" : "https://goo.gl/maps/gHHyy3PqT1uMBXNt9", "type" : 2},
+    {"name": "দয়ারামপুর সাব জোনাল অফিস", "address": "দয়ারামপুর, বাগাতিপাড়া, নাটোর", "mobile": "+8801769402058", "telephone" : "", "email": "natorepbs2dzo@gmail.com", "google_map_url" : "https://goo.gl/maps/oPikurAFimKFpp819", "type" : 2}
+  ]
+}
