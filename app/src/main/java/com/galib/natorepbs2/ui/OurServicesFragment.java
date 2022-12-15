@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
+import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.databinding.FragmentOurServicesBinding;
 
 public class OurServicesFragment extends Fragment {
@@ -44,7 +45,9 @@ public class OurServicesFragment extends Fragment {
         } else if (id == R.id.electricity_bill_btn) {
             Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_electricityBillFragment);
         } else if (id == R.id.citizen_charter_btn) {
-            Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_PDFViewerFragment);
+            //Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_PDFViewerFragment);
+            OurServicesFragmentDirections.ActionOurServicesFragmentToPDFViewerFragment action = OurServicesFragmentDirections.actionOurServicesFragmentToPDFViewerFragment(getString(R.string.menu_citizen_charter), URLs.CITIZEN_CHARTER, getString(R.string.menu_citizen_charter));
+            Navigation.findNavController(v).navigate(action);
         }
     }
 }

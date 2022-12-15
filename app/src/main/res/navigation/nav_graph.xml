@@ -257,12 +257,29 @@
         android:id="@+id/PDFViewerFragment"
         android:name="com.galib.natorepbs2.ui.PDFViewerFragment"
         android:label="fragment_p_d_f_viewer"
-        tools:layout="@layout/fragment_p_d_f_viewer" />
+        tools:layout="@layout/fragment_p_d_f_viewer" >
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fileName"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/tenderInformationFragment"
         android:name="com.galib.natorepbs2.ui.TenderInformationFragment"
-        android:label="TenderInformationFragment" />
+        android:label="TenderInformationFragment" >
+        <action
+            android:id="@+id/action_tenderInformationFragment_to_PDFViewerFragment"
+            app:destination="@id/PDFViewerFragment" />
+    </fragment>
 
 
 </navigation>

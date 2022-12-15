@@ -1,14 +1,13 @@
 package com.galib.natorepbs2.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.db.TenderInformation
@@ -37,21 +36,23 @@ class TenderInformationAdapter() : RecyclerView.Adapter<TenderInformationAdapter
         private val titleText: TextView
         private val dateText: TextView
         private val pdfShow:ImageView
-//        private val pdfText: TextView
 
         init {
             serialText = itemView.findViewById(R.id.serialTextView)
             titleText = itemView.findViewById(R.id.titleTextView)
             dateText = itemView.findViewById(R.id.dateTextView)
             pdfShow = itemView.findViewById(R.id.pdfShowButton)
-//            pdfText = itemView.findViewById(R.id.pdfUrlTextView)
         }
 
         fun bind(serial: Int, title: String?, url:String?, date: String?, pdfUrl: String?) {
             serialText.text = serial.toString()
             titleText.text = title
             dateText.text = date
-            pdfShow.setOnClickListener { Log.d("TAG", "bind: pdf button clicked $pdfUrl") }
+            pdfShow.setOnClickListener {
+                val action =
+                    TenderInformationFragmentDirections.actionTenderInformationFragmentToPDFViewerFragment( title, pdfUrl, title + date)
+                findNavController(itemView).navigate(action)
+            }
         }
 
         companion object {
