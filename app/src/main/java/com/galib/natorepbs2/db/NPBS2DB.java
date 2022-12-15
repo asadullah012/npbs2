@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Information.class, Achievement.class, ComplainCentre.class, Employee.class, OfficeInformation.class, TenderInformation.class}, version = 12, exportSchema = false)
+@Database(entities = {Information.class, Achievement.class, ComplainCentre.class, Employee.class, OfficeInformation.class, TenderInformation.class}, version = 13, exportSchema = false)
 public abstract class NPBS2DB extends RoomDatabase {
 
     public abstract InformationDao informationDao();
