@@ -48,6 +48,8 @@ public class ElectricityBillFragment extends Fragment {
         } else if(id == R.id.electricity_tarriff_btn){
             ElectricityBillFragmentDirections.ActionElectricityBillFragmentToWebViewFragment action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToWebViewFragment(getString(R.string.menu_electricity_tariff), URLs.BASE + URLs.TARIFF, null, Selectors.TARIFF);
             Navigation.findNavController(v).navigate(action);
+        } else if (id == R.id.sms_electricity_bill_btn){
+            Navigation.findNavController(v).navigate(R.id.action_electricityBillFragment_to_billMessageFragment);
         }
     }
 }

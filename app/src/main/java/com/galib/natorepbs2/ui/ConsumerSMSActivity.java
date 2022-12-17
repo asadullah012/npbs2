@@ -16,7 +16,7 @@ public class ConsumerSMSActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.consumerSMSSample)).setText(
                 getResources().getString(R.string.sms_consumer_details)
                 + "\n\t" + getResources().getString(R.string.sms_application_1)
-                + "\n\t\t" + getResources().getString(R.string.sms_application_complete_sample)
+                + "\n\t\t" + getResources().getString(R.string.sms_new_connection_complete_sample)
                 + "\n\t\t" + getResources().getString(R.string.sms_application_deposite_sample)
                 + "\n\t" + getResources().getString(R.string.sms_application_2)
                 + "\n\t\t" + getResources().getString(R.string.sms_bill_sample)
