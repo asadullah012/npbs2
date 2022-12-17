@@ -21,4 +21,5 @@ object Selectors {
     const val TENDER = "#left > div.revenuemodeltender.list > div.table-responsive.chbappy1 > table"
     const val ELECTRICITY_CONNECTION_RULES = "#left > div.page.details > div > div > div.html_text.body"
     const val SERVICE_LIST = "#left > div.officeprocessmap.details > div:nth-child(3) > div > div.text.body > div.value > div"
+    const val COMMUNICATION_POST = "#left > div.page.details > div > div > div.html_text.body"
 }

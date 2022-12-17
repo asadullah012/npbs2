@@ -96,7 +96,4 @@
     <string name="force_sync">Force Sync</string>
     <string name="show_in_map">Google Map</string>
     <string name="menu_service_list">কী সেবা কীভাবে পাবেন</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>

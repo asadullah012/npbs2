@@ -233,7 +233,11 @@
         android:id="@+id/communicationFragment"
         android:name="com.galib.natorepbs2.ui.CommunicationFragment"
         android:label="fragment_communication"
-        tools:layout="@layout/fragment_communication" />
+        tools:layout="@layout/fragment_communication" >
+        <action
+            android:id="@+id/action_communicationFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/awarenessFragment"
         android:name="com.galib.natorepbs2.ui.AwarenessFragment"
