@@ -27,4 +27,5 @@ object URLs {
    val ZONAL_OFFICES = arrayOf("/page/qHTA-চারঘাট-জোনাল-অফিস", "/page/4Yl0-গুরুদাসপুর-জোনাল-অফিস", "/page/VDOD-লালপুর-জোনাল-অফিস", "/page/YJzZ-বাঘা-জোনাল-অফিস")
    val SUB_ZONAL_OFFICES = arrayOf("/page/ksib-লক্ষিকোল-সাব-জোনাল-অফিস", "/page/GCYi-দয়ারামপুর-সাব-জোনাল-অফিস")
    const val TENDER = "/view/revenue_model_tender"
+   const val ELECTRICITY_CONNECTION_RULES = "/page/tw5y-বিদ্যুৎ-সংযোগের-নিয়মাবলী"
 }

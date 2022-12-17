@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
+import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.databinding.FragmentElectricityConnectionBinding;
 
@@ -43,7 +44,9 @@ public class ElectricityConnectionFragment extends Fragment {
         //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         int id = v.getId();
         if (id == R.id.electricity_connection_rules_btn) {
-
+            ElectricityConnectionFragmentDirections.ActionElectricityConnectionFragmentToWebViewFragment action
+                    = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_electricity_connection_rules), URLs.BASE + URLs.ELECTRICITY_CONNECTION_RULES, null, Selectors.ELECTRICITY_CONNECTION_RULES);
+            Navigation.findNavController(v).navigate(action);
         } else if(id == R.id.connection_domestic_btn){
             ElectricityConnectionFragmentDirections.ActionElectricityConnectionFragmentToWebViewFragment action
                     = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic), URLs.CONNECTOION_DOMESTIC, null, null);
