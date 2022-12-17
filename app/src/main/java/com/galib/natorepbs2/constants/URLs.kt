@@ -29,4 +29,5 @@ object URLs {
    const val TENDER = "/view/revenue_model_tender"
    const val ELECTRICITY_CONNECTION_RULES = "/page/tw5y-বিদ্যুৎ-সংযোগের-নিয়মাবলী"
    const val SERVICE_LIST = "/office_process_map/uIWT-কী-সেবা-কীভাবে-পাবেন।"
+   const val COMMUNICATION_POST = "/page/rxkY-ডাক-যোগাযোগ"
 }
