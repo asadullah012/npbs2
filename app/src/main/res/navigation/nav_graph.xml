@@ -151,6 +151,9 @@
         <action
             android:id="@+id/action_ourServicesFragment_to_PDFViewerFragment"
             app:destination="@id/PDFViewerFragment" />
+        <action
+            android:id="@+id/action_ourServicesFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/electricityConnectionFragment"

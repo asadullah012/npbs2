@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
+import com.galib.natorepbs2.constants.Selectors;
 import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.databinding.FragmentOurServicesBinding;
 
@@ -32,6 +33,7 @@ public class OurServicesFragment extends Fragment {
         binding.setPageTitle(getString(R.string.menu_our_services));
         binding.setElectricityConnection(getString(R.string.menu_electricity_connection));
         binding.setElectricityBill(getString(R.string.menu_electricity_bill));
+        binding.setServiceList(getString(R.string.menu_service_list));
         binding.setCitizenCharter(getString(R.string.menu_citizen_charter));
         binding.setFragment(this);
         binding.setLifecycleOwner(getActivity());
@@ -44,6 +46,10 @@ public class OurServicesFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_electricityConnectionFragment);
         } else if (id == R.id.electricity_bill_btn) {
             Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_electricityBillFragment);
+        } else if (id == R.id.serviceListBtn) {
+            OurServicesFragmentDirections.ActionOurServicesFragmentToWebViewFragment action
+                    = OurServicesFragmentDirections.actionOurServicesFragmentToWebViewFragment(getString(R.string.menu_service_list), URLs.BASE+URLs.SERVICE_LIST, null, Selectors.SERVICE_LIST);
+            Navigation.findNavController(v).navigate(action);
         } else if (id == R.id.citizen_charter_btn) {
             //Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_PDFViewerFragment);
             OurServicesFragmentDirections.ActionOurServicesFragmentToPDFViewerFragment action = OurServicesFragmentDirections.actionOurServicesFragmentToPDFViewerFragment(getString(R.string.menu_citizen_charter), URLs.CITIZEN_CHARTER, getString(R.string.menu_citizen_charter));
