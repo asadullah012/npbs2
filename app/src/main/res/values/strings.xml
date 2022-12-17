@@ -4,11 +4,19 @@
 
     <string name="sms_consumer">গ্রাহককে সেবা সংক্রান্ত এসএমএস প্রদান</string>
     <string name="sms_consumer_details">গ্রাহককে সেবা সংক্রান্ত যে সব এসএমএস প্রদান করা হয়:</string>
-    <string name="sms_bill_sample">হিঃ XXX/XXXX অক্টোবর বিল XX টাকা। DD/MM/YY মধ্যে পরিশোধ করুন। পবিস</string>
     <string name="sms_application_1">১. নতুন সংযোগ সংক্রান্ত সকল তথ্য</string>
     <string name="sms_application_2">২. প্রতি মাসের বিদ্যুৎ বিল সংক্রান্ত তথ্য</string>
-    <string name="sms_application_complete_sample">হাউজ ওয়্যারিং সম্পন্ন করার জন্যঃ\n\t\tSuccess.Your Tracking ID:XXXXXXXXXXXXXXX and Pin Code:XXXXXXXX.Complete House Wiring and Confirm Through Online.Palli Bidyut</string>
-    <string name="sms_application_deposite_sample">আবেদনের ফি জমা দেবার জন্যঃ\n\t\tSuccess.Tracking ID:XXXXXXXXXXXXXXX,Ref/Bill No:XXXXXXXX.Please deposit TK.965(App. Fee:115,CD:800,Mem. Fee:50)within 2 working days.Palli Bidyut</string>
+
+    <string name="sms_new_connection_complete_title">অনলাইন আবেদন সম্পন্ন সংক্রান্ত এসএমএসঃ</string>
+    <string name="sms_new_connection_complete_desc">অনলাইন আবেদন ঠিকভাবে সম্পন্ন হলে ট্র্যাকিং নং ও পিনকোড সহ ওয়্যারিং সম্পন্ন করে কনফার্ম করার জন্য একটি এসএমএস পাঠানো হয়। এই এসএমএসের একটি নমুনা হল- </string>
+    <string name="sms_new_connection_complete_sample">Success.Your Tracking ID:XXXXXXXXXXXXXXX and Pin Code:XXXXXXXX.Complete House Wiring and Confirm Through Online.Palli Bidyut</string>
+    <string name="sms_application_deposite_title">জামানতসহ আবেদন ফি জমা সংক্রান্ত এসএমএসঃ</string>
+    <string name="sms_application_deposite_desc">ওয়্যারিং সম্পন্ন করে কনফার্ম করা হলে ওয়্যারিং পরিদর্শক আবেদনকৃত সংযোগ পরিদর্শন করে রিপোর্ট করেন। অফিস আবেদনটি সরেজমিন বিবেচনা করে সংযোগ দেয়া সম্ভব হলে গ্রাহকের কাছে জামানতের টাকাসহ আবেদন ফি জমা দেবার জন্য এসএমএস পাঠানো হয়। এসএমএসে ট্র্যাকিং নং, রকেটে টাকা জমা দেবার রেফারেন্স নং সহ টাকার পরিমাণ উল্লেখ থাকে। একটি নমুনা এসএমএস হলো-</string>
+    <string name="sms_application_deposite_sample">Success.Tracking ID:XXXXXXXXXXXXXXX,Ref/Bill No:XXXXXXXX.Please deposit TK.965(App. Fee:115,CD:800,Mem. Fee:50)within 2 working days.Palli Bidyut</string>
+
+    <string name="sms_bill_title">বিদ্যুৎ বিল সংক্রান্ত এসএমএস প্রদান</string>
+    <string name="sms_bill_desc">প্রতি মাসে গ্রাহককে তার বিদ্যুুৎ বিল পরিশোধের সর্বশেষ তারিখসহ প্রেরণ করা হয়। একটি নমুনা এসএমএস হলো-</string>
+    <string name="sms_bill_sample">হিঃ XXX/XXXX অক্টোবর বিল XX টাকা। DD/MM/YY মধ্যে পরিশোধ করুন। পবিস</string>
 
     <string name="nothi">নথি | অফিস ব্যবস্থাপনা</string>
     <string name="nothi_url">https://nothi.gov.bd/</string>
@@ -40,7 +48,7 @@
     <string name="menu_electricity_connection_rules">বিদ্যুৎ সংযোগের নিয়মাবলী</string>
     <string name="menu_connection_industry">শিল্প সংযোগ</string>
     <string name="menu_connection_domestic">আবাসিক সংযোগ</string>
-    <string name="menu_sms_connection">সংযোগ সংক্রান্ত এসএমএস</string>
+    <string name="menu_sms_connection">নতুন সংযোগ সংক্রান্ত এসএমএস</string>
 
     <string name="menu_electricity_bill">বিদ্যুৎ বিল</string>
     <string name="menu_electricity_tariff">বিদ্যুতের মূল্যহার</string>
@@ -79,8 +87,7 @@
     <string name="menu_communication_map">যোগাযোগ ম্যাপ</string>
 
     <string name="menu_awareness">বিদ্যুৎ ব্যবহার সংক্রান্ত সচেতনতা</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="text_call">Call</string>
     <string name="web_view_title">Web View</string>
     <string name="open_in_browser">Open in Browser</string>
@@ -89,5 +96,7 @@
     <string name="force_sync">Force Sync</string>
     <string name="show_in_map">Google Map</string>
     <string name="menu_service_list">কী সেবা কীভাবে পাবেন</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

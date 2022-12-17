@@ -162,6 +162,9 @@
         <action
             android:id="@+id/action_electricityConnectionFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_electricityConnectionFragment_to_connectionMessageFragment"
+            app:destination="@id/connectionMessageFragment" />
     </fragment>
     <fragment
         android:id="@+id/electricityBillFragment"
@@ -177,6 +180,9 @@
         <action
             android:id="@+id/action_electricityBillFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_electricityBillFragment_to_billMessageFragment"
+            app:destination="@id/billMessageFragment" />
     </fragment>
     <fragment
         android:id="@+id/billFromHomeFragment"
@@ -290,6 +296,14 @@
         android:id="@+id/officesFragment"
         android:name="com.galib.natorepbs2.ui.OfficesFragment"
         android:label="OfficesFragment" />
+    <fragment
+        android:id="@+id/connectionMessageFragment"
+        android:name="com.galib.natorepbs2.ui.ConnectionMessageFragment"
+        android:label="ConnectionMessageFragment" />
+    <fragment
+        android:id="@+id/billMessageFragment"
+        android:name="com.galib.natorepbs2.ui.BillMessageFragment"
+        android:label="BillMessageFragment" />
 
 
 </navigation>
