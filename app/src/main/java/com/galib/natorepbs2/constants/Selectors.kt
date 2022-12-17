@@ -19,4 +19,5 @@ object Selectors {
                          "email" to "#left > div.page.details > div > div > div.html_text.body > div > div > p:nth-child(5) > span > span > a",
                          "gMapURL" to "#left > div.page.details > div > div > div.html_text.body > div > div > p:nth-child(6) > span > span > a")
     const val TENDER = "#left > div.revenuemodeltender.list > div.table-responsive.chbappy1 > table"
+    const val ELECTRICITY_CONNECTION_RULES = "#left > div.page.details > div > div > div.html_text.body"
 }
