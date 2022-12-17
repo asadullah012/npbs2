@@ -92,6 +92,22 @@ class Utility {
         }
 
         @JvmStatic
+        fun openMap(context: Context, url: String){
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            intent.setPackage("com.google.android.apps.maps")
+            try {
+                context.startActivity(intent)
+            } catch (ex: ActivityNotFoundException) {
+                try {
+                    val unrestrictedIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    context.startActivity(unrestrictedIntent)
+                } catch (innerEx: ActivityNotFoundException) {
+                    Log.d(TAG, "openMap: " + innerEx.localizedMessage)
+                }
+            }
+        }
+
+        @JvmStatic
         fun openPlayStore(context: Context, appId: String) {
             val marketUri = Uri.parse("market://details?id=$appId")
             val playStoreIntent = Intent(Intent.ACTION_VIEW, marketUri)

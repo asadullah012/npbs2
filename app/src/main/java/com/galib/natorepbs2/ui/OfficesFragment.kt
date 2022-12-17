@@ -15,6 +15,7 @@ import com.galib.natorepbs2.db.Employee
 import com.galib.natorepbs2.db.OfficeInformation
 import com.galib.natorepbs2.ui.ContactListAdapter.ClickListener
 import com.galib.natorepbs2.ui.OfficesAdapter.OfficeInfoOnClickListener
+import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.utils.Utility.Companion.bnDigitToEnDigit
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel
 import com.galib.natorepbs2.viewmodel.OfficeInformationViewModel
@@ -41,7 +42,7 @@ class OfficesFragment : Fragment() {
             }
 
             override fun onClickMap(mapUrl: String?) {
-
+                Utility.openMap(context!!, mapUrl!!)
             }
 
         })
