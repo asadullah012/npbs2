@@ -7,6 +7,7 @@
         <variable name="page_title" type="String" />
         <variable name="electricity_connection" type="String" />
         <variable name="electricity_bill" type="String" />
+        <variable name="service_list" type="String" />
         <variable name="citizen_charter" type="String" />
         <variable name="fragment" type="com.galib.natorepbs2.ui.OurServicesFragment" />
     </data>
@@ -58,11 +59,19 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/serviceListBtn"
+                    style="@style/menu_button"
+                    android:onClick="@{(v)-> fragment.onClick(v)}"
+                    android:text="@{service_list}"
+                    app:layout_constraintTop_toBottomOf="@+id/electricity_bill_btn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/citizen_charter_btn"
                     style="@style/menu_button"
                     android:onClick="@{(v)-> fragment.onClick(v)}"
                     android:text="@{citizen_charter}"
-                    app:layout_constraintTop_toBottomOf="@+id/electricity_bill_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/serviceListBtn"
                     app:layout_constraintStart_toStartOf="parent" />
 
 
