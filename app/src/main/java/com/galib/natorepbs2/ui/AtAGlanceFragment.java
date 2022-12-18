@@ -34,7 +34,7 @@ public class AtAGlanceFragment extends Fragment {
         binding.setPageTitle(getString(R.string.menu_at_a_glance));
         binding.setLifecycleOwner(getActivity());
         informationViewModel = new ViewModelProvider(getActivity()).get(InformationViewModel.class);
-        final AtAGlanceAdapter adapter = new AtAGlanceAdapter(new AtAGlanceAdapter.WordDiff());
+        final InformationAdapter adapter = new InformationAdapter(new InformationAdapter.WordDiff());
         informationViewModel.getInformationByCategory(Category.atAGlance).observe(getViewLifecycleOwner(), adapter::submitList);
         informationViewModel.getMonth().observe(getViewLifecycleOwner(), information -> binding.setMonth(information.getTitle()));
         binding.setAdapter(adapter);

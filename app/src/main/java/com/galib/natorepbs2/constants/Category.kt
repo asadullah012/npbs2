@@ -1,6 +1,7 @@
 package com.galib.natorepbs2.constants
 
 object Category {
+    const val bank = "bank"
     const val atAGlance = "ataglance"
     const val visionMission = "visionmission"
     const val atAGlanceMonth = "atAGlanceMonth"

@@ -50,6 +50,8 @@ public class ElectricityBillFragment extends Fragment {
             Navigation.findNavController(v).navigate(action);
         } else if (id == R.id.sms_electricity_bill_btn){
             Navigation.findNavController(v).navigate(R.id.action_electricityBillFragment_to_billMessageFragment);
+        } else if(id == R.id.bill_collection_bank_btn){
+            Navigation.findNavController(v).navigate(R.id.action_electricityBillFragment_to_bankInformationFragment);
         }
     }
 }

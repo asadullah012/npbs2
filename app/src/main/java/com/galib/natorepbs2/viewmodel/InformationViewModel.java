@@ -32,12 +32,16 @@ public class InformationViewModel extends AndroidViewModel {
         return  mRepository.getMonth();
     }
 
-    public void insertFromArray(List<List<String>> trtd) {
+    public void insertFromAtAGlance(List<List<String>> trtd) {
         List<Information> informationList = new ArrayList<>();
         for(int i =1; i<trtd.size(); i++){
             informationList.add(new Information(Integer.parseInt(trtd.get(i).get(0)), trtd.get(i).get(1), trtd.get(i).get(2), Category.atAGlance));
         }
         mRepository.insertInformations(informationList);
+    }
+
+    public void insertAll(List<Information> data){
+        mRepository.insertInformations(data);
     }
 
     public void deleteAllByCategory(String atAGlance) {

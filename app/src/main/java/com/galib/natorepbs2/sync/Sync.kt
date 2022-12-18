@@ -1,10 +1,11 @@
 package com.galib.natorepbs2.sync
 
-import android.content.Context
 import android.content.res.AssetManager
 import android.util.Log
+import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
+import com.galib.natorepbs2.db.Information
 import com.galib.natorepbs2.db.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.*
@@ -87,7 +88,7 @@ class Sync {
             if(data.size > 0){
                 Log.d(TAG, "syncAtAGlance: " + data.size)
                 //informationViewModel.deleteAllByCategory(Category.atAGlance)
-                informationViewModel.insertFromArray(data as List<MutableList<String>>?)
+                informationViewModel.insertFromAtAGlance(data as List<MutableList<String>>?)
                 informationViewModel.setMonth(month)
             } else{
                 Log.e(TAG, "syncAtAGlance: unable to get data from website")
@@ -132,7 +133,6 @@ class Sync {
                     for (i in 1 until trs.size) {
                         val tds = trs[i].select("td")
                         val tdList = ArrayList<String>()
-                        //Log.d("SyncOfficerList", "th: " + tds.select("th").html());
                         for (j in tds.indices) {
                             if (j == 0)
                                 tdList.add( tds[j].select("img").first()!!.absUrl("src"))
@@ -323,6 +323,36 @@ class Sync {
                 tenderInformationViewModel.insertAllTender(data)
             } else{
                 Log.e(TAG, "syncTenderData: unable to get tender data")
+            }
+        }
+
+        fun syncBankInformation(informationViewModel: InformationViewModel, assets: AssetManager){
+            var json: String? = null
+            try {
+                val inputStream: InputStream = assets.open("init_data.json")
+                val size: Int = inputStream.available()
+                val buffer = ByteArray(size)
+                inputStream.read(buffer)
+                inputStream.close()
+                json = buffer.toString(Charsets.UTF_8)
+            } catch (ex: IOException) {
+                ex.printStackTrace()
+            }
+            var data = ArrayList<Information>()
+            if(json != null){
+                val jsonRootObject = JSONObject(json)
+                val jsonArray: JSONArray = jsonRootObject.optJSONArray("bankInformation")
+
+                for (i in 0 until jsonArray.length()) {
+                    val jsonObject = jsonArray.getJSONObject(i)
+                    data.add(Information(i+1, jsonObject.getString("name"), jsonObject.getString("branch"), Category.bank))
+                }
+            }
+            if(data.size > 0) {
+                Log.d(TAG, "syncBankInformation: " + data.size)
+                informationViewModel.insertAll(data)
+            } else{
+                Log.e(TAG, "syncBankInformation: unable to get bank information")
             }
         }
     }
