@@ -183,6 +183,9 @@
         <action
             android:id="@+id/action_electricityBillFragment_to_billMessageFragment"
             app:destination="@id/billMessageFragment" />
+        <action
+            android:id="@+id/action_electricityBillFragment_to_bankInformationFragment"
+            app:destination="@id/bankInformationFragment" />
     </fragment>
     <fragment
         android:id="@+id/billFromHomeFragment"
@@ -308,6 +311,10 @@
         android:id="@+id/billMessageFragment"
         android:name="com.galib.natorepbs2.ui.BillMessageFragment"
         android:label="BillMessageFragment" />
+    <fragment
+        android:id="@+id/bankInformationFragment"
+        android:name="com.galib.natorepbs2.ui.BankInformationFragment"
+        android:label="BankInformationFragment" />
 
 
 </navigation>

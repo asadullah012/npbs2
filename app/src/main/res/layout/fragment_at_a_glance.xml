@@ -9,7 +9,7 @@
             type="String" />
         <variable
             name="adapter"
-            type="com.galib.natorepbs2.ui.AtAGlanceAdapter" />
+            type="com.galib.natorepbs2.ui.InformationAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

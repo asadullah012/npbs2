@@ -92,18 +92,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
             Sync.syncPowerOutageContact(employeeViewModel)
             Sync.syncOfficeData(officeInfoViewModel, assets)
             Sync.syncTenderData(tenderInformationViewModel)
+            Sync.syncBankInformation(informationViewModel, assets)
         }
     }
-
-//    fun sync(){
-//        SyncAtAGlance(informationViewModel).execute()
-//        SyncAchievement(achievementViewModel).execute()
-//        SyncComplainCentre(complainCentreViewModel).execute()
-//        SyncOfficerList(employeeViewModel).execute()
-//        SyncJuniorOfficers(employeeViewModel).execute()
-//        SyncBoardMember(employeeViewModel).execute()
-//        SyncPowerOutageContact(employeeViewModel).execute()
-//    }
 
     override fun onDestroy() {
         super.onDestroy()

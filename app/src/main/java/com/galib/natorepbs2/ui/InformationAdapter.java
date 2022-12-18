@@ -14,15 +14,15 @@ import com.galib.natorepbs2.BR;
 import com.galib.natorepbs2.R;
 import com.galib.natorepbs2.db.Information;
 
-public class AtAGlanceAdapter extends ListAdapter<Information, AtAGlanceAdapter.InformationViewHolder> {
+public class InformationAdapter extends ListAdapter<Information, InformationAdapter.InformationViewHolder> {
 
-    public AtAGlanceAdapter(@NonNull DiffUtil.ItemCallback<Information> diffCallback) {
+    public InformationAdapter(@NonNull DiffUtil.ItemCallback<Information> diffCallback) {
         super(diffCallback);
     }
 
     @Override
     public int getItemViewType(int position) {
-        return R.layout.item_ataglance;
+        return R.layout.item_information;
     }
 
     @Override
