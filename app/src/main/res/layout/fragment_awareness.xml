@@ -29,7 +29,7 @@
             app:layout_constraintHeight_percent="0.8"
             app:fillColor="#FFFFFFFF"
             app:pageColor="#00000000"
-            app:radius="6dp"
+            app:radius="2dp"
             app:slideInterval="3000"
             app:strokeColor="#FF777777"
             app:strokeWidth="1dp"

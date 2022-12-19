@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
             Sync.syncOfficeData(officeInfoViewModel, assets)
             Sync.syncTenderData(tenderInformationViewModel)
             Sync.syncBankInformation(informationViewModel, assets)
+            Sync.syncBanners(applicationContext)
         }
     }
 

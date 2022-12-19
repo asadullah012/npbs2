@@ -1,5 +1,6 @@
 package com.galib.natorepbs2.sync
 
+import android.content.Context
 import android.content.res.AssetManager
 import android.util.Log
 import com.galib.natorepbs2.constants.Category
@@ -9,9 +10,17 @@ import com.galib.natorepbs2.db.Information
 import com.galib.natorepbs2.db.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.ResponseBody
+import okio.Buffer
+import okio.BufferedSink
+import okio.Okio
 import org.json.JSONArray
 import org.json.JSONObject
 import org.jsoup.Jsoup
+import java.io.File
 import java.io.IOException
 import java.io.InputStream
 
@@ -353,6 +362,39 @@ class Sync {
                 informationViewModel.insertAll(data)
             } else{
                 Log.e(TAG, "syncBankInformation: unable to get bank information")
+            }
+        }
+
+        fun syncBanners(context: Context) {
+            val dirPath: String = context.filesDir.absolutePath + File.separator + "banners"
+            val bannerDir = File(dirPath)
+            if (!bannerDir.exists()) bannerDir.mkdirs()
+            for((i, url) in URLs.BANNERS.withIndex()){
+                val file = File(bannerDir, "Banners$i.jpg")
+                if(file.exists()) continue
+                try {
+                    val client = OkHttpClient()
+                    val request = Request.Builder().url(url).build()
+                    val response: Response = client.newCall(request).execute()
+                    val body: ResponseBody? = response.body()
+                    val source = body!!.source()
+
+                    val sink: BufferedSink = Okio.buffer(Okio.sink(file))
+                    val sinkBuffer: Buffer = sink.buffer()
+
+                    val bufferSize: Long = 8 * 1024
+                    var bytesRead: Long = source.read(sinkBuffer, bufferSize)
+                    while (bytesRead != -1L) {
+                        sink.emit()
+                        bytesRead = source.read(sinkBuffer, bufferSize)
+                    }
+                    sink.flush()
+                    sink.close()
+                    source.close()
+                    Log.d(TAG, "syncBanners: downloading ${file.absolutePath}")
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
         }
     }

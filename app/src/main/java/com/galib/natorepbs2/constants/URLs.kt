@@ -30,4 +30,10 @@ object URLs {
    const val ELECTRICITY_CONNECTION_RULES = "/page/tw5y-বিদ্যুৎ-সংযোগের-নিয়মাবলী"
    const val SERVICE_LIST = "/office_process_map/uIWT-কী-সেবা-কীভাবে-পাবেন।"
    const val COMMUNICATION_POST = "/page/rxkY-ডাক-যোগাযোগ"
+   val BANNERS = arrayOf("http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//61f/767/125/61f767125c16e884482056.jpg",
+                        "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//619/0cf/e2a/6190cfe2abfd4364612602.jpg",
+                        "http://file-rajshahi.portal.gov.bd/files/www.pbs2.natore.gov.bd/top_banner/643175b5_37e1_4fff_b515_ce9e0090f3a5/bbbfd4f9dc774b6d351e4d3111dcf8ad.jpg",
+                        "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//61a/10c/0e7/61a10c0e77fc68920653231.jpeg",
+                        "http://file-rajshahi.portal.gov.bd/files/www.pbs2.natore.gov.bd/top_banner/6add8cb0_b27c_4d08_8763_03e8aa225127/15f4c1abf4334540bf6482ddd3ab30e5.jpg",
+                        "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//61a/106/b7a/61a106b7ab4c1183563578.jpg")
 }
