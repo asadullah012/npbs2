@@ -18,7 +18,6 @@
         android:padding="10dp"
         android:background="@drawable/item_background">
 
-
         <TextView
             android:id="@+id/nameTextView"
             android:layout_width="0dp"
@@ -80,37 +79,49 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mobileTextView" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/callBtn"
-            style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_call"
+            android:background="@drawable/button_round_bg"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:visibility="@{office.mobile.length() == 0 ? View.GONE : View.VISIBLE}"
-            android:text="@string/text_call"
             android:onClick="@{()->clickListener.onClickCall(office.mobile)}"
             app:layout_constraintTop_toBottomOf="@id/emailTextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/emailBtn"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/emailBtn"
-            style="@style/Widget.AppCompat.Button.Small"
-            android:visibility="@{office.email.length() == 0 ? View.GONE : View.VISIBLE}"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_send_email"
+            android:layout_height="36dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_email"
+            android:background="@drawable/button_round_bg"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:visibility="@{office.email.length() == 0 ? View.GONE : View.VISIBLE}"
             android:onClick="@{()->clickListener.onClickEmail(office.email)}"
             app:layout_constraintTop_toBottomOf="@id/emailTextView"
             app:layout_constraintStart_toEndOf="@id/callBtn"
             app:layout_constraintEnd_toStartOf="@id/mapButton" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/mapButton"
-            style="@style/Widget.AppCompat.Button.Small"
-            android:visibility="@{office.googleMapURL.length() == 0 ? View.GONE : View.VISIBLE}"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/show_in_map"
+            android:layout_height="36dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_map"
+            android:background="@drawable/button_round_bg"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:visibility="@{office.googleMapURL.length() == 0 ? View.GONE : View.VISIBLE}"
             android:onClick="@{()->clickListener.onClickMap(office.googleMapURL)}"
             app:layout_constraintTop_toBottomOf="@id/emailTextView"
             app:layout_constraintStart_toEndOf="@id/emailBtn"
