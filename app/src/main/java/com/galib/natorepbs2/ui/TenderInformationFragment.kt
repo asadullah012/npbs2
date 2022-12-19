@@ -21,7 +21,7 @@ class TenderInformationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentTenderInformationBinding>(inflater, R.layout.fragment_tender_information, container, false)
-        binding.pageTitle = getString(R.string.menu_at_a_glance)
+        binding.pageTitle = getString(R.string.menu_tender)
         binding.lifecycleOwner = activity
         val adapter = TenderInformationAdapter()
         tenderInformationViewModel.getAllTender()?.observe(viewLifecycleOwner) { list: List<NoticeInformation?> ->
