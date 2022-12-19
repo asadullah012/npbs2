@@ -21,14 +21,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/officeListRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintHeight_percent="0.85"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
