@@ -1,20 +1,28 @@
 package com.galib.natorepbs2.ui
 
-import androidx.recyclerview.widget.DiffUtil
-import com.galib.natorepbs2.db.Employee
-import com.galib.natorepbs2.ui.ContactListAdapter.ClickListener
-import com.galib.natorepbs2.ui.ContactListAdapter.EmployeeViewHolder
-import com.galib.natorepbs2.R
-import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.databinding.ViewDataBinding
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.BR
+import com.galib.natorepbs2.R
+import com.galib.natorepbs2.db.Employee
+import com.galib.natorepbs2.ui.ContactListAdapter.EmployeeViewHolder
 import com.squareup.picasso.Picasso
+
+@BindingAdapter("setProfilePhoto")
+fun setProfilePhoto(imageView: ImageView?, imageUrl: String?) {
+    Picasso.get()
+        .load(if (imageUrl == null || imageUrl.length == 0) null else imageUrl)
+        .placeholder(R.mipmap.ic_launcher_round)
+        .error(R.mipmap.ic_launcher_round)
+        .into(imageView)
+}
 
 class ContactListAdapter(
     diffCallback: DiffUtil.ItemCallback<Employee?>,
@@ -47,17 +55,6 @@ class ContactListAdapter(
             binding.setVariable(BR.employee, employee)
             binding.setVariable(BR.clickListener, clickListener)
             binding.executePendingBindings()
-        }
-
-        companion object {
-            @BindingAdapter("setProfilePhoto")
-            fun setProfilePhoto(imageView: ImageView?, imageUrl: String?) {
-                Picasso.get()
-                    .load(if (imageUrl == null || imageUrl.length == 0) null else imageUrl)
-                    .placeholder(R.mipmap.ic_launcher_round)
-                    .error(R.mipmap.ic_launcher_round)
-                    .into(imageView)
-            }
         }
     }
 
