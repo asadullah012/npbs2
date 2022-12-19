@@ -22,4 +22,7 @@ interface NoticeInformationDao {
 
     @Query("SELECT * FROM notice_information_table WHERE type = :type ORDER BY priority ASC")
     fun getAllNoticeByCategory(type: String): LiveData<List<NoticeInformation>>
+
+    @Query("DELETE FROM notice_information_table WHERE type = :type")
+    fun deleteAllByCategory(type: String)
 }

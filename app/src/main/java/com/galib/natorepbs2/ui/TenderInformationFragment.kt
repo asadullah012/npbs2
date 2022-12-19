@@ -1,6 +1,7 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class TenderInformationFragment : Fragment() {
         binding.lifecycleOwner = activity
         val adapter = TenderInformationAdapter()
         tenderInformationViewModel.getAllTender()?.observe(viewLifecycleOwner) { list: List<NoticeInformation?> ->
+            Log.d("TenderInformation", "onCreateView: submit list ${list.size}")
             adapter.differ.submitList(list)
         }
         binding.adapter = adapter
