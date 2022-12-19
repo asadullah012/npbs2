@@ -14,16 +14,16 @@ class NoticeInformationViewModel(application: Application) :AndroidViewModel(app
         mRepository = NPBS2Repository(application)
     }
 
-    fun getAllNotice() : LiveData<MutableList<NoticeInformation>>? {
+    fun getAllNotice() : LiveData<List<NoticeInformation>>? {
         return mRepository.getAllNoticeByCategory(Category.NOTICE)
     }
 
-    fun getAllTender() : LiveData<MutableList<NoticeInformation>>? {
+    fun getAllTender() : LiveData<List<NoticeInformation>>? {
         return mRepository.getAllNoticeByCategory(Category.TENDER)
     }
 
-
     fun insertAllTender(data: ArrayList<ArrayList<String>>){
+        mRepository.deleteAllNoticeByType(Category.TENDER)
         val tenderList = ArrayList<NoticeInformation>()
         for((i, d) in data.withIndex()){
 //            Log.d(TAG, "insertAllTender: $i $d")
@@ -33,6 +33,7 @@ class NoticeInformationViewModel(application: Application) :AndroidViewModel(app
     }
 
     fun insertAllNotice(data: ArrayList<ArrayList<String>>) {
+        mRepository.deleteAllNoticeByType(Category.NOTICE)
         val noticeList = ArrayList<NoticeInformation>()
         for((i, d) in data.withIndex()){
 //            Log.d(TAG, "insertAllTender: $i $d")

@@ -13,7 +13,7 @@ class OfficeInformationViewModel(application: Application) : AndroidViewModel(ap
         mRepository = NPBS2Repository(application)
     }
 
-    fun getAllOfficeInfo() : LiveData<MutableList<OfficeInformation>>? {
+    fun getAllOfficeInfo() : LiveData<List<OfficeInformation>>? {
         return mRepository.allOfficeInformation
     }
 
