@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
     private val informationViewModel by lazy { ViewModelProvider(this)[InformationViewModel::class.java] }
     private val complainCentreViewModel by lazy { ViewModelProvider(this)[ComplainCentreViewModel::class.java] }
     private val officeInfoViewModel  by lazy { ViewModelProvider(this)[OfficeInformationViewModel::class.java] }
-    private val tenderInformationViewModel  by lazy { ViewModelProvider(this)[TenderInformationViewModel::class.java] }
+    private val tenderInformationViewModel  by lazy { ViewModelProvider(this)[NoticeInformationViewModel::class.java] }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

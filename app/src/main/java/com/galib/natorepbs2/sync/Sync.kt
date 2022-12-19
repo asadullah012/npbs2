@@ -284,7 +284,7 @@ class Sync {
             }
         }
 
-        fun syncTenderData(tenderInformationViewModel: TenderInformationViewModel){
+        fun syncTenderData(tenderInformationViewModel: NoticeInformationViewModel){
             val data = ArrayList<ArrayList<String>>()
             for(i in 1..10){
                 try {
