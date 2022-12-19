@@ -53,6 +53,7 @@ class TenderInformationAdapter : RecyclerView.Adapter<TenderInformationAdapter.T
                     TenderInformationFragmentDirections.actionTenderInformationFragmentToPDFViewerFragment( title, pdfUrl, title + date)
                 findNavController(itemView).navigate(action)
             }
+            pdfShow.visibility = if(pdfUrl == null || pdfUrl.isEmpty())  View.INVISIBLE else View.VISIBLE
         }
 
         companion object {

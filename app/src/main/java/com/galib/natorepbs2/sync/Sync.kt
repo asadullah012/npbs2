@@ -300,7 +300,7 @@ class Sync {
                     var url = URLs.BASE + URLs.TENDER
                     if(i > 1)
                         url = "$url?page=$i"
-                    val document = Jsoup.connect(url).timeout(3 * 1000).get()
+                    val document = Jsoup.connect(url).timeout(5 * 1000).get()
                     val tables = document.select(Selectors.TENDER)
                     for (table in tables) {
                         val trs = table.select("tr")
@@ -332,6 +332,48 @@ class Sync {
                 tenderInformationViewModel.insertAllTender(data)
             } else{
                 Log.e(TAG, "syncTenderData: unable to get tender data")
+            }
+        }
+
+        fun syncNoticeData(noticeInformationViewModel: NoticeInformationViewModel){
+            val data = ArrayList<ArrayList<String>>()
+            for(i in 1..10){
+                try {
+                    var url = URLs.BASE + URLs.NOTICE
+                    if(i > 1)
+                        url = "$url?page=$i"
+                    val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                    val tables = document.select(Selectors.NOTICE)
+                    for (table in tables) {
+                        val trs = table.select("tr")
+                        for (i in 1 until trs.size) {
+                            val tds = trs[i].select("td")
+                            val tdList = ArrayList<String>()
+                            tdList.add(tds[0].text())
+                            if(tds.size > 0 && tds[0].select("a").first() != null){
+                                tdList.add(tds[0].select("a").first()!!.absUrl("href"))
+                            } else {
+                                tdList.add("")
+                            }
+                            tdList.add(tds[1].text())
+                            if(tds.size > 2 && tds[2].select("a").first() != null)
+                                tdList.add(tds[2].select("a").first()!!.attr("href"))
+                            else
+                                tdList.add("")
+
+                            if (tdList.size > 0) data.add(tdList)
+                        }
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    break
+                }
+            }
+            if(data.size > 0) {
+                Log.d(TAG, "syncNoticeData: " + data.size)
+                noticeInformationViewModel.insertAllNotice(data)
+            } else{
+                Log.e(TAG, "syncNoticeData: unable to get notice data")
             }
         }
 

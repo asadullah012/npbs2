@@ -31,4 +31,13 @@ class NoticeInformationViewModel(application: Application) :AndroidViewModel(app
         }
         mRepository.insertAllNotice(tenderList)
     }
+
+    fun insertAllNotice(data: ArrayList<ArrayList<String>>) {
+        val noticeList = ArrayList<NoticeInformation>()
+        for((i, d) in data.withIndex()){
+//            Log.d(TAG, "insertAllTender: $i $d")
+            noticeList.add(NoticeInformation(i, d[0], d[1], d[2], d[3], Category.NOTICE))
+        }
+        mRepository.insertAllNotice(noticeList)
+    }
 }

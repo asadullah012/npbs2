@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
             Sync.syncPowerOutageContact(employeeViewModel)
             Sync.syncOfficeData(officeInfoViewModel, assets)
             Sync.syncTenderData(tenderInformationViewModel)
+            Sync.syncNoticeData(tenderInformationViewModel)
             Sync.syncBankInformation(informationViewModel, assets)
             Sync.syncBanners(applicationContext)
         }
