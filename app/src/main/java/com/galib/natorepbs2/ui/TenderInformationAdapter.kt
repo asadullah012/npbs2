@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.db.TenderInformation
+import com.galib.natorepbs2.db.NoticeInformation
 
 class TenderInformationAdapter : RecyclerView.Adapter<TenderInformationAdapter.TenderInformationViewHolder?>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TenderInformationViewHolder {
@@ -63,12 +63,12 @@ class TenderInformationAdapter : RecyclerView.Adapter<TenderInformationAdapter.T
             }
         }
     }
-    private val differCallback = object : DiffUtil.ItemCallback<TenderInformation>(){
-        override fun areItemsTheSame(oldItem: TenderInformation, newItem: TenderInformation): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<NoticeInformation>(){
+        override fun areItemsTheSame(oldItem: NoticeInformation, newItem: NoticeInformation): Boolean {
             return  oldItem.priority == newItem.priority
         }
 
-        override fun areContentsTheSame(oldItem: TenderInformation, newItem: TenderInformation): Boolean {
+        override fun areContentsTheSame(oldItem: NoticeInformation, newItem: NoticeInformation): Boolean {
             return oldItem == newItem
         }
 

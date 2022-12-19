@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentTenderInformationBinding
-import com.galib.natorepbs2.db.TenderInformation
-import com.galib.natorepbs2.viewmodel.TenderInformationViewModel
+import com.galib.natorepbs2.db.NoticeInformation
+import com.galib.natorepbs2.viewmodel.NoticeInformationViewModel
 
 class TenderInformationFragment : Fragment() {
 
-    private val tenderInformationViewModel  by lazy { ViewModelProvider(this)[TenderInformationViewModel::class.java] }
+    private val tenderInformationViewModel  by lazy { ViewModelProvider(this)[NoticeInformationViewModel::class.java] }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +24,7 @@ class TenderInformationFragment : Fragment() {
         binding.pageTitle = getString(R.string.menu_at_a_glance)
         binding.lifecycleOwner = activity
         val adapter = TenderInformationAdapter()
-        tenderInformationViewModel.getAllTender()?.observe(viewLifecycleOwner) { list: List<TenderInformation?> ->
+        tenderInformationViewModel.getAllTender()?.observe(viewLifecycleOwner) { list: List<NoticeInformation?> ->
             adapter.differ.submitList(list)
         }
         binding.adapter = adapter
