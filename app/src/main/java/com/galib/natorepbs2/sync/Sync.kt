@@ -329,7 +329,7 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncTenderData: " + data.size)
-                tenderInformationViewModel.insertAllTender(data)
+                tenderInformationViewModel.insertAllByCategory(data, Category.TENDER)
             } else{
                 Log.e(TAG, "syncTenderData: unable to get tender data")
             }
@@ -371,9 +371,87 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncNoticeData: " + data.size)
-                noticeInformationViewModel.insertAllNotice(data)
+                noticeInformationViewModel.insertAllByCategory(data, Category.NOTICE)
             } else{
                 Log.e(TAG, "syncNoticeData: unable to get notice data")
+            }
+        }
+
+        fun syncNewsData(noticeInformationViewModel: NoticeInformationViewModel){
+            val data = ArrayList<ArrayList<String>>()
+            for(i in 1..10){
+                try {
+                    var url = URLs.BASE + URLs.NEWS
+                    if(i > 1)
+                        url = "$url?page=$i"
+                    val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                    val tables = document.select(Selectors.NEWS)
+                    for (table in tables) {
+                        val trs = table.select("tr")
+                        for (i in 1 until trs.size) {
+                            val tds = trs[i].select("td")
+                            val tdList = ArrayList<String>()
+                            tdList.add(tds[0].text())
+                            if(tds.size > 0 && tds[0].select("a").first() != null){
+                                tdList.add(tds[0].select("a").first()!!.absUrl("href"))
+                            } else {
+                                tdList.add("")
+                            }
+                            tdList.add(tds[1].text())
+
+                            if (tdList.size > 0) data.add(tdList)
+                        }
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    break
+                }
+            }
+            if(data.size > 0) {
+                Log.d(TAG, "syncNewsData: " + data.size)
+                noticeInformationViewModel.insertAllByCategory(data, Category.NEWS)
+            } else{
+                Log.e(TAG, "syncNewsData: unable to get news data")
+            }
+        }
+
+        fun syncJobData(noticeInformationViewModel: NoticeInformationViewModel){
+            val data = ArrayList<ArrayList<String>>()
+            try {
+                var url = URLs.BASE + URLs.JOB
+                val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                val tables = document.select(Selectors.JOB)
+                for (table in tables) {
+                    val trs = table.select("tr")
+                    for (i in 1 until trs.size) {
+                        val tds = trs[i].select("td")
+                        val tdList = ArrayList<String>()
+                        tdList.add(tds[0].text())
+                        if(tds.size > 0 && tds[0].select("a").first() != null){
+                            tdList.add(tds[0].select("a").first()!!.absUrl("href"))
+                        } else {
+                            tdList.add("")
+                        }
+                        tdList.add(tds[1].text())
+                        if(tds.size > 2 && tds[2].select("a").first() != null){
+                            tdList.add(tds[2].select("a").first()!!.absUrl("href"))
+                        } else {
+                            tdList.add("")
+                        }
+
+                        if (tdList.size > 0) data.add(tdList)
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+
+            }
+
+            if(data.size > 0) {
+                Log.d(TAG, "syncJobData: " + data.size)
+                noticeInformationViewModel.insertAllByCategory(data, Category.JOB)
+            } else{
+                Log.e(TAG, "syncJobData: unable to get job data")
             }
         }
 

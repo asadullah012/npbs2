@@ -18,25 +18,27 @@ class NoticeInformationViewModel(private val mRepository: NPBS2Repository) : Vie
         return mRepository.getAllNoticeByCategory(Category.TENDER).asLiveData()
     }
 
-    fun insertAllTender(data: ArrayList<ArrayList<String>>) = viewModelScope.launch{
-        mRepository.deleteAllNoticeByType(Category.TENDER)
+    fun getAllNews() : LiveData<List<NoticeInformation>>? {
+        return mRepository.getAllNoticeByCategory(Category.NEWS).asLiveData()
+    }
+
+    fun getAllJob() : LiveData<List<NoticeInformation>>? {
+        return mRepository.getAllNoticeByCategory(Category.JOB).asLiveData()
+    }
+
+    fun insertAllByCategory(data: ArrayList<ArrayList<String>>, category:String) = viewModelScope.launch{
+        mRepository.deleteAllNoticeByType(category)
         val tenderList = ArrayList<NoticeInformation>()
         for((i, d) in data.withIndex()){
 //            Log.d(TAG, "insertAllTender: $i $d")
-            tenderList.add(NoticeInformation(i, d[0], d[1], d[2], d[3], Category.TENDER))
+            if(d.size > 3)
+                tenderList.add(NoticeInformation(i, d[0], d[1], d[2], d[3], category))
+            else
+                tenderList.add(NoticeInformation(i, d[0], d[1], d[2], "", category))
         }
         mRepository.insertAllNotice(tenderList)
     }
 
-    fun insertAllNotice(data: ArrayList<ArrayList<String>>) = viewModelScope.launch{
-        mRepository.deleteAllNoticeByType(Category.NOTICE)
-        val noticeList = ArrayList<NoticeInformation>()
-        for((i, d) in data.withIndex()){
-//            Log.d(TAG, "insertAllTender: $i $d")
-            noticeList.add(NoticeInformation(i, d[0], d[1], d[2], d[3], Category.NOTICE))
-        }
-        mRepository.insertAllNotice(noticeList)
-    }
 }
 
 class NoticeViewModelFactory(private val repository: NPBS2Repository) : ViewModelProvider.Factory {

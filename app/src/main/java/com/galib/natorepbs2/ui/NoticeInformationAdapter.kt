@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.db.NoticeInformation
 
-class TenderInformationAdapter : RecyclerView.Adapter<TenderInformationAdapter.TenderInformationViewHolder?>() {
+class NoticeInformationAdapter : RecyclerView.Adapter<NoticeInformationAdapter.TenderInformationViewHolder?>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TenderInformationViewHolder {
         return TenderInformationViewHolder.create(parent)
     }
@@ -44,13 +44,18 @@ class TenderInformationAdapter : RecyclerView.Adapter<TenderInformationAdapter.T
             pdfShow = itemView.findViewById(R.id.pdfShowButton)
         }
 
-        fun bind(serial: Int, title: String?, url:String?, date: String?, pdfUrl: String?) {
-            serialText.text = serial.toString()
+        fun bind(serial: Int, title: String, url:String?, date: String?, pdfUrl: String?) {
+            serialText.text = (serial+1).toString()
             titleText.text = title
             dateText.text = date
+
+            titleText.setOnClickListener {
+                val action = NoticeInformationFragmentDirections.actionNoticeInformationFragmentToWebViewFragment(title, url, null, null)
+                findNavController(itemView).navigate(action)
+            }
             pdfShow.setOnClickListener {
                 val action =
-                    TenderInformationFragmentDirections.actionTenderInformationFragmentToPDFViewerFragment( title, pdfUrl, title + date)
+                    NoticeInformationFragmentDirections.actionNoticeInformationFragmentToPDFViewerFragment( title, pdfUrl, title + date)
                 findNavController(itemView).navigate(action)
             }
             pdfShow.visibility = if(pdfUrl == null || pdfUrl.isEmpty())  View.INVISIBLE else View.VISIBLE

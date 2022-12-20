@@ -28,6 +28,8 @@ object URLs {
    val SUB_ZONAL_OFFICES = arrayOf("/page/ksib-লক্ষিকোল-সাব-জোনাল-অফিস", "/page/GCYi-দয়ারামপুর-সাব-জোনাল-অফিস")
    const val TENDER = "/view/revenue_model_tender"
    const val NOTICE = "/view/notices"
+   const val NEWS = "/view/news"
+   const val JOB = "/page/নিয়োগ-বিজ্ঞপ্তি"
    const val ELECTRICITY_CONNECTION_RULES = "/page/tw5y-বিদ্যুৎ-সংযোগের-নিয়মাবলী"
    const val SERVICE_LIST = "/office_process_map/uIWT-কী-সেবা-কীভাবে-পাবেন।"
    const val COMMUNICATION_POST = "/page/rxkY-ডাক-যোগাযোগ"

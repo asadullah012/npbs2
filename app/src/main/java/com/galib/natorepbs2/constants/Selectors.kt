@@ -20,6 +20,8 @@ object Selectors {
                          "gMapURL" to "#left > div.page.details > div > div > div.html_text.body > div > div > p:nth-child(6) > span > span > a")
     const val TENDER = "#left > div.revenuemodeltender.list > div.table-responsive.chbappy1 > table"
     const val NOTICE = "#left > div.notices.list > div.table-responsive.chbappy1 > table"
+    const val NEWS = "#left > div.news.list > div.table-responsive.chbappy1 > table"
+    const val JOB = "#left > div.page.details > div > div > div.html_text.body > div > table"
     const val ELECTRICITY_CONNECTION_RULES = "#left > div.page.details > div > div > div.html_text.body"
     const val SERVICE_LIST = "#left > div.officeprocessmap.details > div:nth-child(3) > div > div.text.body > div.value > div"
     const val COMMUNICATION_POST = "#left > div.page.details > div > div > div.html_text.body"

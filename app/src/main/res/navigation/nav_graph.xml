@@ -225,12 +225,8 @@
         android:label="fragment_notice_tender"
         tools:layout="@layout/fragment_notice_tender" >
         <action
-            android:id="@+id/action_noticeTenderFragment_to_tenderInformationFragment"
-            app:destination="@id/tenderInformationFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            android:id="@+id/action_noticeTenderFragment_to_noticeInformationFragment"
+            app:destination="@id/noticeInformationFragment" />
     </fragment>
     <fragment
         android:id="@+id/communicationFragment"
@@ -292,14 +288,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/tenderInformationFragment"
-        android:name="com.galib.natorepbs2.ui.TenderInformationFragment"
-        android:label="TenderInformationFragment" >
-        <action
-            android:id="@+id/action_tenderInformationFragment_to_PDFViewerFragment"
-            app:destination="@id/PDFViewerFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/officesFragment"
         android:name="com.galib.natorepbs2.ui.OfficesFragment"
         android:label="OfficesFragment" />
@@ -315,6 +303,20 @@
         android:id="@+id/bankInformationFragment"
         android:name="com.galib.natorepbs2.ui.BankInformationFragment"
         android:label="BankInformationFragment" />
+    <fragment
+        android:id="@+id/noticeInformationFragment"
+        android:name="com.galib.natorepbs2.ui.NoticeInformationFragment"
+        android:label="NoticeInformationFragment" >
+        <action
+            android:id="@+id/action_noticeInformationFragment_to_PDFViewerFragment"
+            app:destination="@id/PDFViewerFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_noticeInformationFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
 
 
 </navigation>
