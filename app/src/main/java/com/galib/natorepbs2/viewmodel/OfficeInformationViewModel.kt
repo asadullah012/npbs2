@@ -1,20 +1,17 @@
 package com.galib.natorepbs2.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.db.OfficeInformation
+import kotlinx.coroutines.launch
 
 class OfficeInformationViewModel(private val mRepository: NPBS2Repository) : ViewModel() {
 
-    private val TAG = "OfficeInfoViewModel"
-
-    fun getAllOfficeInfo() : LiveData<List<OfficeInformation>>? {
-        return mRepository.allOfficeInformation
+    fun getAllOfficeInfo() : LiveData<List<OfficeInformation>> {
+        return mRepository.allOfficeInformation.asLiveData()
     }
 
-    fun insertAllOfficeInformation(data: ArrayList<OfficeInformation>){
+    fun insertAllOfficeInformation(data: ArrayList<OfficeInformation>)= viewModelScope.launch{
         mRepository.insertAllOfficeInfo(data)
     }
 }

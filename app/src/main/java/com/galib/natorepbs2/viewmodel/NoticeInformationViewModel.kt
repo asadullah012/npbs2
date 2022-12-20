@@ -1,6 +1,5 @@
 package com.galib.natorepbs2.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.*
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
@@ -8,21 +7,20 @@ import com.galib.natorepbs2.db.NoticeInformation
 import kotlinx.coroutines.launch
 
 class NoticeInformationViewModel(private val mRepository: NPBS2Repository) : ViewModel() {
-    private val TAG = "NoticeInfoViewModel"
 
-    fun getAllNotice() : LiveData<List<NoticeInformation>>? {
+    fun getAllNotice() : LiveData<List<NoticeInformation>> {
         return mRepository.getAllNoticeByCategory(Category.NOTICE).asLiveData()
     }
 
-    fun getAllTender() : LiveData<List<NoticeInformation>>? {
+    fun getAllTender() : LiveData<List<NoticeInformation>> {
         return mRepository.getAllNoticeByCategory(Category.TENDER).asLiveData()
     }
 
-    fun getAllNews() : LiveData<List<NoticeInformation>>? {
+    fun getAllNews() : LiveData<List<NoticeInformation>> {
         return mRepository.getAllNoticeByCategory(Category.NEWS).asLiveData()
     }
 
-    fun getAllJob() : LiveData<List<NoticeInformation>>? {
+    fun getAllJob() : LiveData<List<NoticeInformation>> {
         return mRepository.getAllNoticeByCategory(Category.JOB).asLiveData()
     }
 

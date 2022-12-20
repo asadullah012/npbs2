@@ -1,25 +1,24 @@
 package com.galib.natorepbs2.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.galib.natorepbs2.db.ComplainCentre
 import com.galib.natorepbs2.db.NPBS2Repository
+import kotlinx.coroutines.launch
 
 class ComplainCentreViewModel(private val mRepository: NPBS2Repository) : ViewModel() {
 
     val allComplainCentre: LiveData<List<ComplainCentre>>
-        get() = mRepository.allComplainCentre
+        get() = mRepository.allComplainCentre.asLiveData()
 
-    fun insertFromTable(trtd: List<List<String>>) {
-        val complainCentreList: MutableList<ComplainCentre?> = ArrayList()
+    fun insertFromTable(trtd: List<List<String>>) = viewModelScope.launch{
+        val complainCentreList: MutableList<ComplainCentre> = ArrayList()
         for (i in 1 until trtd.size) {
             complainCentreList.add(ComplainCentre(trtd[i][0].toInt(), trtd[i][1], trtd[i][2]))
         }
         mRepository.insertAllComplainCentre(complainCentreList)
     }
 
-    fun deleteAll() {
+    fun deleteAll() = viewModelScope.launch{
         mRepository.deleteAllComplainCentre()
     }
 }

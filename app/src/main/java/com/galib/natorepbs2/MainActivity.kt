@@ -72,9 +72,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
                 Log.d(TAG, "syncIfRequired: prev value- $prevVal cur value- $result")
                 if(prevVal < result){
                     setLastUpdateTimeToPref(result)
-
+                    syncUsingCoroutine()
                 }
-                syncUsingCoroutine()
             } else{
                 Log.d(TAG, "syncIfRequired: unable to get last updated time")
             }

@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
 import com.galib.natorepbs2.constants.URLs
-import com.galib.natorepbs2.ui.WebActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -23,15 +22,6 @@ class Utility {
         @JvmStatic
         fun openActivity(context: Context, cls: Class<*>?) {
             val intent = Intent(context, cls)
-            context.startActivity(intent)
-        }
-
-        @JvmStatic
-        fun openWebActivity(context: Context, title: String?, url: String?, html: String?) {
-            val intent = Intent(context, WebActivity::class.java)
-            intent.putExtra("TITLE", title)
-            intent.putExtra("URL", url)
-            intent.putExtra("HTML", html)
             context.startActivity(intent)
         }
 

@@ -18,7 +18,7 @@ class ComplainCentreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complain_centre)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = ComplainCentreAdapter(this, ComplainCentreAdapter.WordDiff())
+        val adapter = ComplainCentreAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         complainCentreViewModel.allComplainCentre.observe(this) { list ->

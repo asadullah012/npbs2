@@ -9,7 +9,7 @@ import java.util.concurrent.Executors
 
 @Database(
     entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class],
-    version = 18,
+    version = 19,
     exportSchema = false
 )
 abstract class NPBS2DB : RoomDatabase() {
