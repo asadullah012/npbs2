@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.galib.natorepbs2.R;
+import com.galib.natorepbs2.constants.URLs;
 import com.galib.natorepbs2.databinding.FragmentNoticeTenderBinding;
 
 
@@ -44,7 +45,17 @@ public class NoticeTenderFragment extends Fragment {
         //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         int id = v.getId();
         if (id == R.id.tender_btn) {
-            Navigation.findNavController(v).navigate(R.id.action_noticeTenderFragment_to_tenderInformationFragment);
+            NoticeTenderFragmentDirections.ActionNoticeTenderFragmentToNoticeInformationFragment action = NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(getString(R.string.menu_tender));
+            Navigation.findNavController(v).navigate(action);
+        } else if(id == R.id.notice_btn){
+            NoticeTenderFragmentDirections.ActionNoticeTenderFragmentToNoticeInformationFragment action = NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(getString(R.string.menu_notice));
+            Navigation.findNavController(v).navigate(action);
+        } else if(id == R.id.news_btn){
+            NoticeTenderFragmentDirections.ActionNoticeTenderFragmentToNoticeInformationFragment action = NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(getString(R.string.menu_news));
+            Navigation.findNavController(v).navigate(action);
+        } else if(id == R.id.job_btn){
+            NoticeTenderFragmentDirections.ActionNoticeTenderFragmentToNoticeInformationFragment action = NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(getString(R.string.menu_job));
+            Navigation.findNavController(v).navigate(action);
         }
     }
 }

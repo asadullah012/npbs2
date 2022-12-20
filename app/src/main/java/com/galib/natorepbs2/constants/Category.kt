@@ -1,6 +1,8 @@
 package com.galib.natorepbs2.constants
 
 object Category {
+    const val JOB = "JOB"
+    const val NEWS = "NEWS"
     const val NOTICE = "NOTICE"
     const val TENDER = "TENDER"
     const val bank = "bank"

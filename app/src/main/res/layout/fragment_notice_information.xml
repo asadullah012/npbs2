@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable name="page_title" type="String" />
         <variable
             name="adapter"
-            type="com.galib.natorepbs2.ui.TenderInformationAdapter" />
+            type="com.galib.natorepbs2.ui.NoticeInformationAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

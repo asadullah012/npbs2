@@ -107,6 +107,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
             Sync.syncOfficeData(officeInfoViewModel, assets)
             Sync.syncTenderData(tenderInformationViewModel)
             Sync.syncNoticeData(tenderInformationViewModel)
+            Sync.syncNewsData(tenderInformationViewModel)
+            Sync.syncJobData(tenderInformationViewModel)
             Sync.syncBankInformation(informationViewModel, assets)
             Sync.syncBanners(applicationContext)
         }
