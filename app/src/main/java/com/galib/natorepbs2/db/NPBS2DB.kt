@@ -22,23 +22,23 @@ abstract class NPBS2DB : RoomDatabase() {
 
     companion object {
         @Volatile
-        private lateinit var INSTANCE: NPBS2DB
+        private var INSTANCE: NPBS2DB? = null
+
         private const val NUMBER_OF_THREADS = 4
         val databaseWriteExecutor: ExecutorService = Executors.newFixedThreadPool(NUMBER_OF_THREADS)
+
         fun getDatabase(context: Context): NPBS2DB {
-            if (INSTANCE == null) {
-                synchronized(NPBS2DB::class.java) {
-                    if (INSTANCE == null) {
-                        INSTANCE = Room.databaseBuilder(
-                            context.applicationContext,
-                            NPBS2DB::class.java, "npbs2_database"
-                        )
-                            .fallbackToDestructiveMigration()
-                            .build()
-                    }
-                }
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    NPBS2DB::class.java,
+                    "npbs2_database"
+                ).fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = instance
+                // return instance
+                instance
             }
-            return INSTANCE
         }
     }
 }

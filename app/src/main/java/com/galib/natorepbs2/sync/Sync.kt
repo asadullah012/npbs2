@@ -97,7 +97,7 @@ class Sync {
             if(data.size > 0){
                 Log.d(TAG, "syncAtAGlance: " + data.size)
                 //informationViewModel.deleteAllByCategory(Category.atAGlance)
-                informationViewModel.insertFromAtAGlance(data as List<MutableList<String>>?)
+                informationViewModel.insertFromAtAGlance(data as List<MutableList<String>>)
                 informationViewModel.setMonth(month)
             } else{
                 Log.e(TAG, "syncAtAGlance: unable to get data from website")
