@@ -1,35 +1,31 @@
 package com.galib.natorepbs2.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import com.galib.natorepbs2.db.NPBS2Repository
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.galib.natorepbs2.NPBS2Application
+import androidx.lifecycle.*
 import com.galib.natorepbs2.db.Achievement
-import java.util.ArrayList
+import com.galib.natorepbs2.db.NPBS2Repository
+import kotlinx.coroutines.launch
 
 class AchievementViewModel(private val mRepository: NPBS2Repository) : ViewModel() {
 
     val allAchievement: LiveData<List<Achievement>>
-        get() = mRepository.allAchievement
+        get() = mRepository.allAchievement.asLiveData()
 
-    fun insertFromArray(trtd: List<List<String?>>) {
-        val achievements: MutableList<Achievement?> = ArrayList()
+    fun insertFromArray(trtd: List<List<String?>>) = viewModelScope.launch{
+        mRepository.deleteAllAchievements()
+        val achievements: MutableList<Achievement> = ArrayList()
         for (i in trtd.indices) {
             if (i == 1) continue
             achievements.add(
                 Achievement(
-                    trtd[i][0], trtd[i][1],
-                    trtd[i][2], trtd[i][3], trtd[i][4], i
+                    trtd[i][0]!!, trtd[i][1]!!,
+                    trtd[i][2]!!, trtd[i][3]!!, trtd[i][4]!!, i
                 )
             )
         }
         mRepository.insertAchievementAll(achievements)
     }
 
-    fun deleteAllAchievements() {
+    fun deleteAllAchievements() = viewModelScope.launch{
         mRepository.deleteAllAchievements()
     }
 }

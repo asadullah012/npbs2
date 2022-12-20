@@ -2,10 +2,8 @@ package com.galib.natorepbs2.db
 
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.galib.natorepbs2.constants.Category
 import kotlinx.coroutines.flow.Flow
-import java.util.concurrent.atomic.AtomicInteger
 
 class NPBS2Repository(db: NPBS2DB) {
     private val informationDao: InformationDao
@@ -24,96 +22,96 @@ class NPBS2Repository(db: NPBS2DB) {
         noticeInformationDao = db.noticeInformationDao()
     }
 
-    val allAchievement: LiveData<List<Achievement>>
+    val allAchievement: Flow<List<Achievement>>
         get() = achievementDao.all
 
-    fun insertAchievement(achievement: Achievement?) {
+    @WorkerThread
+    suspend fun insertAchievement(achievement: Achievement) {
         achievementDao.insert(achievement)
     }
 
-    fun insertAchievementAll(achievements: List<Achievement?>?) {
-        NPBS2DB.databaseWriteExecutor.execute { achievementDao.insertAll(achievements) }
+    @WorkerThread
+    suspend fun insertAchievementAll(achievements: List<Achievement>) {
+        achievementDao.insertAll(achievements)
     }
 
-    fun deleteAllAchievements() {
-        NPBS2DB.databaseWriteExecutor.execute { achievementDao.deleteAll() }
+    @WorkerThread
+    suspend fun deleteAllAchievements() {
+        achievementDao.deleteAll()
     }
 
-    fun getInformationByCategory(category: String?): LiveData<List<Information>> {
+    fun getInformationByCategory(category: String?): Flow<List<Information>> {
         return informationDao.getInformationsByCategory(category)
     }
 
-    fun insertInformation(information: Information) {
-        NPBS2DB.databaseWriteExecutor.execute {
+    @WorkerThread
+    suspend fun insertInformation(information: Information) {
             Log.d(TAG, "insertInformation: " + information.category + " " + information.description)
             informationDao.insert(information)
-        }
     }
 
-    fun setMonth(month: String?) {
+    @WorkerThread
+    suspend fun setMonth(month: String) {
         insertInformation(Information(0, month, "", Category.atAGlanceMonth))
     }
 
-    val month: LiveData<Information>
+    val month: Flow<Information>
         get() = informationDao.getInformationByCategory(Category.atAGlanceMonth)
 
-    fun insertInformations(informationList: List<Information?>) {
-        Log.d(TAG, "insertInformations: " + informationList.size)
-        NPBS2DB.databaseWriteExecutor.execute { informationDao.insertInfos(informationList) }
+    @WorkerThread
+    suspend fun insertInformations(informationList: List<Information>) {
+        informationDao.insertInfos(informationList)
+    }
+    
+    fun deleteAllByCategory(category: String) {
+        informationDao.deleteAllByCategory(category)
     }
 
-    val informationCount: Int
-        get() {
-            val count = AtomicInteger()
-            NPBS2DB.databaseWriteExecutor.execute { count.set(informationDao.count) }
-            Log.d(TAG, "getInformationCount: $count")
-            return count.toInt()
-        }
-
-    fun deleteAllByCategory(category: String?) {
-        NPBS2DB.databaseWriteExecutor.execute { informationDao.deleteAllByCategory(category) }
+    @WorkerThread
+    suspend fun insertComplainCentre(complainCentre: ComplainCentre) {
+        complainCentreDao.insert(complainCentre)
     }
 
-    fun insertComplainCentre(complainCentre: ComplainCentre?) {
-        NPBS2DB.databaseWriteExecutor.execute { complainCentreDao.insert(complainCentre) }
+    @WorkerThread
+    suspend fun insertAllComplainCentre(complainCentreList: List<ComplainCentre>) {
+        complainCentreDao.insertAll(complainCentreList)
     }
 
-    fun insertAllComplainCentre(complainCentreList: List<ComplainCentre?>?) {
-        NPBS2DB.databaseWriteExecutor.execute { complainCentreDao.insertAll(complainCentreList) }
-    }
+    val allComplainCentre: Flow<List<ComplainCentre>>
+        get() = complainCentreDao.allComplainCentre
 
-    val allComplainCentre: LiveData<List<ComplainCentre>>
-        get() = complainCentreDao.all
-
-    fun deleteAllComplainCentre() {
-        NPBS2DB.databaseWriteExecutor.execute { complainCentreDao.deleteAll() }
+    @WorkerThread
+    suspend fun deleteAllComplainCentre() {
+        complainCentreDao.deleteAll()
     }
 
     //Employee
-    fun insertEmployeeList(employeeList: List<Employee?>?) {
-        NPBS2DB.databaseWriteExecutor.execute { employeeDao.insertList(employeeList) }
+    @WorkerThread
+    suspend fun insertEmployeeList(employeeList: List<Employee>) {
+        employeeDao.insertList(employeeList)
     }
 
-    val officerList: LiveData<List<Employee>>
+    val officerList: Flow<List<Employee>>
         get() = employeeDao.getAllByType(Category.OFFICERS)
-    val juniorOfficerList: LiveData<List<Employee>>
+    val juniorOfficerList: Flow<List<Employee>>
         get() = employeeDao.getAllByType(Category.JUNIOR_OFFICER)
-    val boardMemberList: LiveData<List<Employee>>
+    val boardMemberList: Flow<List<Employee>>
         get() = employeeDao.getAllByType(Category.BOARD_MEMBER)
-    val powerOutageContactList: LiveData<List<Employee>>
+    val powerOutageContactList: Flow<List<Employee>>
         get() = employeeDao.getAllByType(Category.POWER_OUTAGE_CONTACT)
-    val powerOutageHeaderText: LiveData<Information>
+    val powerOutageHeaderText: Flow<Information>
         get() = informationDao.getInformationByCategory(Category.powerOutageContactHeader)
-    val powerOutageFooterText: LiveData<Information>
+    val powerOutageFooterText: Flow<Information>
         get() = informationDao.getInformationByCategory(Category.powerOutageContactFooter)
-    val officeHead: LiveData<Employee>
+    val officeHead: Flow<Employee>
         get() = employeeDao.getOfficeHead(Category.OFFICERS)
 
-    fun insertAllOfficeInfo(officeInformationList: List<OfficeInformation>) {
-        NPBS2DB.databaseWriteExecutor.execute { officeInformationDao.insertAll(officeInformationList) }
+    @WorkerThread
+    suspend fun insertAllOfficeInfo(officeInformationList: List<OfficeInformation>) {
+        officeInformationDao.insertAll(officeInformationList)
     }
 
-    val allOfficeInformation: LiveData<List<OfficeInformation>>
+    val allOfficeInformation: Flow<List<OfficeInformation>>
         get() = officeInformationDao.getAllOffice()
 
     @WorkerThread

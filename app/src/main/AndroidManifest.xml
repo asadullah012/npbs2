@@ -34,12 +34,6 @@
             android:name=".ui.ComplainCentreActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ConsumerSMSActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.WebActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

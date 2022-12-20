@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.databinding.FragmentAtAGlanceBinding
 import com.galib.natorepbs2.db.Information
-import com.galib.natorepbs2.viewmodel.*
+import com.galib.natorepbs2.viewmodel.InformationViewModel
+import com.galib.natorepbs2.viewmodel.InformationViewModelFactory
 
 class AtAGlanceFragment : Fragment() {
     private val informationViewModel: InformationViewModel by viewModels {
@@ -23,7 +22,7 @@ class AtAGlanceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentAtAGlanceBinding>(
             inflater,
             R.layout.fragment_at_a_glance,
@@ -32,11 +31,11 @@ class AtAGlanceFragment : Fragment() {
         )
         binding.pageTitle = getString(R.string.menu_at_a_glance)
         binding.lifecycleOwner = activity
-        val adapter = InformationAdapter(InformationAdapter.WordDiff())
-        informationViewModel!!.getInformationByCategory(Category.atAGlance).observe(
+        val adapter = InformationAdapter()
+        informationViewModel.getInformationByCategory(Category.atAGlance).observe(
             viewLifecycleOwner
         ) { list: List<Information?> -> adapter.submitList(list) }
-        informationViewModel!!.month.observe(viewLifecycleOwner) { information: Information ->
+        informationViewModel.month.observe(viewLifecycleOwner) { information: Information ->
             binding.month = information.title
         }
         binding.adapter = adapter

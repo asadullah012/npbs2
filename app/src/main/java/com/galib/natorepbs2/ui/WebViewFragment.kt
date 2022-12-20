@@ -1,5 +1,6 @@
 package com.galib.natorepbs2.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
@@ -17,11 +18,13 @@ import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.utils.Utility
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class WebViewFragment : Fragment() {
-    val args: WebViewFragmentArgs by navArgs()
+class WebViewFragment : Fragment(), CoroutineScope {
+    private var job: Job = Job()
+    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
+    private val args: WebViewFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,13 +35,13 @@ class WebViewFragment : Fragment() {
         val mWebView = root.findViewById<WebView>(R.id.webView)
         val button = root.findViewById<Button>(R.id.openInBrowserButton)
         configureWebView(mWebView)
-        var url: String? = args.url
-        var html: String? = args.html
-        var title: String? = args.pageTitle
-        var selector: String? = args.selector
+        val url: String? = args.url
+        val html: String? = args.html
+        val title: String = args.pageTitle
+        val selector: String? = args.selector
 
         titleTextView.text = title
-        GlobalScope.launch {
+        launch(Dispatchers.IO) {
             loadData(mWebView, url, html, selector)
         }
         if(url != null) {
@@ -51,9 +54,9 @@ class WebViewFragment : Fragment() {
         return root
     }
 
-    suspend fun loadData(mWebView:WebView, url:String?, html:String?, selector:String?){
+    private suspend fun loadData(mWebView:WebView, url:String?, html:String?, selector:String?){
         if (selector != null && url != null) {
-            var data = Utility.fetchHtml(url, selector)
+            val data = Utility.fetchHtml(url, selector)
             mWebView.post {
                 if (data != null)
                     mWebView.loadData(data, "text/html; charset=utf-8", "UTF-8")
@@ -67,6 +70,7 @@ class WebViewFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun configureWebView(mWebView: WebView) {
         val webSettings = mWebView.settings
         webSettings.javaScriptEnabled = true

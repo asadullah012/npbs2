@@ -251,7 +251,9 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncBoardMember: " + data.size)
-                employeeViewModel.insertPowerOutageContactFromTable(data as List<MutableList<String>>, headerText, footerText)
+                employeeViewModel.insertPowerOutageContactFromTable(
+                    data as List<MutableList<String>>
+                )
             } else{
                 Log.e(TAG, "syncBoardMember: unable to get board member data")
             }
