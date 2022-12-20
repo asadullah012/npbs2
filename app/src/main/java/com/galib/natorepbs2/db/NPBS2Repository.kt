@@ -1,12 +1,13 @@
 package com.galib.natorepbs2.db
 
-import android.app.Application
 import android.util.Log
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.galib.natorepbs2.constants.Category
+import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.atomic.AtomicInteger
 
-class NPBS2Repository(application: Application) {
+class NPBS2Repository(db: NPBS2DB) {
     private val informationDao: InformationDao
     private val achievementDao: AchievementDao
     private val complainCentreDao: ComplainCentreDao
@@ -15,7 +16,6 @@ class NPBS2Repository(application: Application) {
     private val noticeInformationDao: NoticeInformationDao
 
     init {
-        val db = NPBS2DB.getDatabase(application)
         informationDao = db.informationDao()
         achievementDao = db.achievementDao()
         complainCentreDao = db.complainCentreDao()
@@ -116,17 +116,17 @@ class NPBS2Repository(application: Application) {
     val allOfficeInformation: LiveData<List<OfficeInformation>>
         get() = officeInformationDao.getAllOffice()
 
-    fun insertAllNotice(noticeInformationList: List<NoticeInformation>) {
-        NPBS2DB.databaseWriteExecutor.execute { noticeInformationDao.insertAll(noticeInformationList) }
+    @WorkerThread
+    suspend fun insertAllNotice(noticeInformationList: List<NoticeInformation>) {
+        noticeInformationDao.insertAll(noticeInformationList)
     }
 
-    fun deleteAllNoticeByType(type: String) {
-        NPBS2DB.databaseWriteExecutor.execute {
-            noticeInformationDao.deleteAllByCategory(type)
-        }
+    @WorkerThread
+    suspend fun deleteAllNoticeByType(type: String) {
+        noticeInformationDao.deleteAllByCategory(type)
     }
 
-    fun getAllNoticeByCategory(category: String): LiveData<List<NoticeInformation>> {
+    fun getAllNoticeByCategory(category: String): Flow<List<NoticeInformation>> {
         return noticeInformationDao.getAllNoticeByCategory(category)
     }
 

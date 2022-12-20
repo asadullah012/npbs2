@@ -25,9 +25,8 @@ fun setProfilePhoto(imageView: ImageView?, imageUrl: String?) {
 }
 
 class ContactListAdapter(
-    diffCallback: DiffUtil.ItemCallback<Employee?>,
     var onClickListener: ClickListener
-) : ListAdapter<Employee?, EmployeeViewHolder>(diffCallback) {
+) : ListAdapter<Employee, EmployeeViewHolder>(OfficerDiff()) {
     interface ClickListener {
         fun onClickCall(mobile: String?)
         fun onClickEmail(email: String?)
@@ -58,7 +57,7 @@ class ContactListAdapter(
         }
     }
 
-    internal class OfficerDiff : DiffUtil.ItemCallback<Employee>() {
+    class OfficerDiff : DiffUtil.ItemCallback<Employee>() {
         override fun areItemsTheSame(oldItem: Employee, newItem: Employee): Boolean {
             return oldItem === newItem
         }

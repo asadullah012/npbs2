@@ -6,9 +6,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.galib.natorepbs2.sync.*
+import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.viewmodel.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,13 +21,27 @@ class MainActivity : AppCompatActivity(), CoroutineScope{
     private val TAG = "MainActivity"
     private var job: Job = Job()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
-    private val employeeViewModel by lazy { ViewModelProvider(this)[EmployeeViewModel::class.java] }
-    private val achievementViewModel by lazy { ViewModelProvider(this)[AchievementViewModel::class.java] }
-    private val informationViewModel by lazy { ViewModelProvider(this)[InformationViewModel::class.java] }
-    private val complainCentreViewModel by lazy { ViewModelProvider(this)[ComplainCentreViewModel::class.java] }
-    private val officeInfoViewModel  by lazy { ViewModelProvider(this)[OfficeInformationViewModel::class.java] }
-    private val tenderInformationViewModel  by lazy { ViewModelProvider(this)[NoticeInformationViewModel::class.java] }
 
+    private val employeeViewModel: EmployeeViewModel by viewModels {
+        EmployeeViewModelFactory((application as NPBS2Application).repository)
+    }
+    private val achievementViewModel: AchievementViewModel by viewModels {
+        AchievementViewModelFactory((application as NPBS2Application).repository)
+    }
+
+    private val informationViewModel: InformationViewModel by viewModels {
+        InformationViewModelFactory((application as NPBS2Application).repository)
+    }
+
+    private val complainCentreViewModel: ComplainCentreViewModel by viewModels {
+        ComplainCentreViewModelFactory((application as NPBS2Application).repository)
+    }
+    private val officeInfoViewModel: OfficeInformationViewModel by viewModels {
+        OfficeViewModelFactory((application as NPBS2Application).repository)
+    }
+    private val tenderInformationViewModel: NoticeInformationViewModel by viewModels {
+        NoticeViewModelFactory((application as NPBS2Application).repository)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
