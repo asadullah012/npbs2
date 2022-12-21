@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoticeInformationDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(noticeInformation: NoticeInformation)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
