@@ -519,5 +519,39 @@ class Sync {
                 }
             }
         }
+
+        fun syncOtherOfficerList(employeeViewModel: EmployeeViewModel) {
+            val data = ArrayList<ArrayList<String>>()
+            try {
+                val url = "http://police.natore.gov.bd/bn/site" + URLs.OFFICER_LIST
+                val document = Jsoup.connect(url).get()
+                val tables = document.select(Selectors.OFFICERS_LIST)
+                for (table in tables) {
+                    val trs = table.select("tr")
+                    for (i in 1 until trs.size) {
+                        val tds = trs[i].select("td")
+                        val tdList = ArrayList<String>()
+                        for (j in tds.indices) {
+                            if (j == 0)
+                                if(tds[j].select("img").first() != null && !tds[j].select("img").first()!!.absUrl("src").equals(url))
+                                    tdList.add( tds[j].select("img").first()!!.absUrl("src"))
+                                else tdList.add("")
+                            else
+                                tdList.add(tds[j].text())
+                        }
+                        if (tdList.size > 0)
+                            data.add(tdList)
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            if(data.size > 0) {
+                Log.d(TAG, "syncOfficerList: $data")
+                //employeeViewModel.insertOfficersFromTable(data as List<MutableList<String>>)
+            } else{
+                Log.e(TAG, "syncOfficerList: unable to get officer data")
+            }
+        }
     }
 }
