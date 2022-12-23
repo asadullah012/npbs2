@@ -14,7 +14,7 @@ class ConnectionMessageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentConnectionMessageBinding>(inflater, R.layout.fragment_connection_message, container, false)
         binding.pageTitle = getString(R.string.menu_sms_connection)
         binding.smsNewConnectionCompleteTitle = getString(R.string.sms_new_connection_complete_title)

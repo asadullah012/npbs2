@@ -19,19 +19,19 @@ import com.galib.natorepbs2.viewmodel.EmployeeViewModel
 import com.galib.natorepbs2.viewmodel.EmployeeViewModelFactory
 
 class OfficeHeadFragment : Fragment() {
-    var officeHead: LiveData<Employee>? = null
+    private var officeHead: LiveData<Employee>? = null
     private val employeeViewModel: EmployeeViewModel by viewModels {
         EmployeeViewModelFactory((activity?.application as NPBS2Application).repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        officeHead = employeeViewModel!!.officeHead
+        officeHead = employeeViewModel.officeHead
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentOfficeHeadBinding>(
             inflater,
             R.layout.fragment_office_head,

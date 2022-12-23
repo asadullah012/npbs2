@@ -20,7 +20,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding =
             DataBindingUtil.inflate<FragmentMainV2Binding>(inflater, R.layout.fragment_main_v2, container, false)
         binding.title = getString(R.string.title)
@@ -42,10 +42,10 @@ class MainFragment : Fragment() {
     }
 
     private fun setBannerImages(carouselView: CarouselView){
-        var sampleImages = getBannerImages()
+        val sampleImages = getBannerImages()
         lateinit var imageListener: ImageListener
         if(sampleImages == null || sampleImages.isEmpty()){
-            carouselView.pageCount = 1;
+            carouselView.pageCount = 1
             imageListener = object : ImageListener {
                 override fun setImageForPosition(position: Int, imageView: ImageView) {
                     imageView.setImageResource(R.drawable.npbs2)
@@ -69,7 +69,7 @@ class MainFragment : Fragment() {
         val dirPath: String = requireContext().filesDir.absolutePath + File.separator + "banners"
         val bannerDir = File(dirPath)
         if (!bannerDir.exists()) return null
-        var bannerImages= ArrayList<String>()
+        val bannerImages= ArrayList<String>()
         for(file in bannerDir.listFiles()){
             bannerImages.add(file.absolutePath)
         }

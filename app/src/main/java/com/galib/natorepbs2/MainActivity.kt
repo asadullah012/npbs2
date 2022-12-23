@@ -62,12 +62,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         navigationView.setNavigationItemSelectedListener(this)
         updateMenu(navigationView)
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+        drawerLayout = findViewById(R.id.drawer_layout)
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun updateMenu(navigationView: NavigationView) {
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.d(TAG, "onOptionsItemSelected: ${item.title}")
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+            return true
         }
         return when (item.itemId) {
             R.id.force_sync -> {
@@ -133,7 +133,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
 
     private fun syncUsingCoroutine() {
         Log.d(TAG, "sync: sync started")
-        launch(Dispatchers.IO) {
+        if(job.isActive){
+            Log.e(TAG, "sync: sync is running")
+            return
+        }
+        job = launch(Dispatchers.IO) {
             Sync.syncAtAGlance(informationViewModel)
             Sync.syncAchievement(achievementViewModel)
             Sync.syncComplainCentre(complainCentreViewModel)
@@ -161,7 +165,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         Log.d(TAG, "onNavigationItemSelected: ${item.title}")
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        val fragment = navHostFragment.childFragmentManager.fragments[0];
+        val fragment = navHostFragment.childFragmentManager.fragments[0]
         if(item.title == getString(R.string.menu_awareness) && fragment !is AwarenessFragment) {
             navController.navigate(R.id.awarenessFragment)
         } else if(item.title == getString(R.string.menu_officers) && fragment !is OfficersFragment){
