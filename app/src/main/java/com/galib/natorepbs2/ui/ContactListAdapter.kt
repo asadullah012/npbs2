@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso
 @BindingAdapter("setProfilePhoto")
 fun setProfilePhoto(imageView: ImageView?, imageUrl: String?) {
     Picasso.get()
-        .load(if (imageUrl == null || imageUrl.length == 0) null else imageUrl)
+        .load(if (imageUrl == null || imageUrl.isEmpty()) null else imageUrl)
         .placeholder(R.mipmap.ic_launcher_round)
         .error(R.mipmap.ic_launcher_round)
         .into(imageView)

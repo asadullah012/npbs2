@@ -108,6 +108,28 @@
         <action
             android:id="@+id/action_aboutUsFragment_to_officesFragment"
             app:destination="@id/officesFragment" />
+
+        <action
+            android:id="@+id/action_aboutUsFragment_to_achievementFragment"
+            app:destination="@id/achievementFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_aboutUsFragment_to_visionMissionFragment"
+            app:destination="@id/visionMissionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_aboutUsFragment_to_complainCentreFragment"
+            app:destination="@id/complainCentreFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/atAGlanceFragment"
@@ -317,6 +339,20 @@
             android:id="@+id/action_noticeInformationFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/complainCentreFragment"
+        android:name="com.galib.natorepbs2.ui.ComplainCentreFragment"
+        android:label="ComplainCentreFragment" />
+    <fragment
+        android:id="@+id/achievementFragment"
+        android:name="com.galib.natorepbs2.ui.AchievementFragment"
+        android:label="fragment_achievement"
+        tools:layout="@layout/fragment_achievement" />
+    <fragment
+        android:id="@+id/visionMissionFragment"
+        android:name="com.galib.natorepbs2.ui.VisionMissionFragment"
+        android:label="fragment_vision_mission"
+        tools:layout="@layout/fragment_vision_mission" />
 
 
 </navigation>

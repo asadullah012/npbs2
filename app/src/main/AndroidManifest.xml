@@ -25,17 +25,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.AchievementActivity"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".ui.VisionMissionActivity"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".ui.ComplainCentreActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="false">
         </activity>
