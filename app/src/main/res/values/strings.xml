@@ -38,7 +38,7 @@
     <string name="menu_office_head">অফিস প্রধান</string>
     <string name="menu_officers">নির্বাহী কর্মকর্তাগণ</string>
     <string name="menu_junior_officers">জুনিয়র কর্মকর্তাগণ</string>
-    <string name="menu_offices">জোনাল অফিস ও সাব-জোনাল অফিস</string>=
+    <string name="menu_offices">অফিস সমূহ</string>
     <string name="menu_complain_centres">অভিযোগ কেন্দ্রের মোবাইল নং</string>
     <string name="menu_power_outage_contact">বিদ্যুৎ বিভ্রাটে জরুরী যোগাযোগ</string>
 
@@ -96,6 +96,9 @@
     <string name="force_sync">Force Sync</string>
     <string name="show_in_map">Google Map</string>
     <string name="menu_service_list">কী সেবা কীভাবে পাবেন</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about_app">About Apps</string>
+    <string name="menu_favorites">Favorites</string>
 </resources>
