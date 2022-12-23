@@ -1,14 +1,11 @@
 package com.galib.natorepbs2.viewmodel
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
-import com.galib.natorepbs2.db.NPBS2Repository
-import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.Information
+import com.galib.natorepbs2.db.NPBS2Repository
 import kotlinx.coroutines.launch
-import java.util.ArrayList
 
 class InformationViewModel(private val mRepository: NPBS2Repository) : ViewModel() {
 

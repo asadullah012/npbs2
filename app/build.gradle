@@ -67,7 +67,7 @@ dependencies {
     // UI
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
     kapt "com.android.databinding:compiler:$rootProject.bindingVersion"
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
 

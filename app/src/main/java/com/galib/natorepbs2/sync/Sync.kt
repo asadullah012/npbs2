@@ -271,7 +271,7 @@ class Sync {
             } catch (ex: IOException) {
                 ex.printStackTrace()
             }
-            var data = ArrayList<OfficeInformation>()
+            val data = ArrayList<OfficeInformation>()
             if(json != null){
                 val jsonRootObject = JSONObject(json)
                 val jsonArray: JSONArray = jsonRootObject.optJSONArray("officeInformation")
@@ -420,7 +420,7 @@ class Sync {
         fun syncJobData(noticeInformationViewModel: NoticeInformationViewModel){
             val data = ArrayList<ArrayList<String>>()
             try {
-                var url = URLs.BASE + URLs.JOB
+                val url = URLs.BASE + URLs.JOB
                 val document = Jsoup.connect(url).timeout(5 * 1000).get()
                 val tables = document.select(Selectors.JOB)
                 for (table in tables) {
@@ -469,7 +469,7 @@ class Sync {
             } catch (ex: IOException) {
                 ex.printStackTrace()
             }
-            var data = ArrayList<Information>()
+            val data = ArrayList<Information>()
             if(json != null){
                 val jsonRootObject = JSONObject(json)
                 val jsonArray: JSONArray = jsonRootObject.optJSONArray("bankInformation")

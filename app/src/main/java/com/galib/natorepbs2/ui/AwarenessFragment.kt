@@ -13,14 +13,13 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.carouselview.CarouselView
 import com.galib.natorepbs2.carouselview.ImageListener
 import com.galib.natorepbs2.databinding.FragmentAwarenessBinding
-import kotlin.math.max
 
 
 class AwarenessFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentAwarenessBinding>(
             inflater,
             R.layout.fragment_awareness,
@@ -31,7 +30,7 @@ class AwarenessFragment : Fragment() {
         binding.fragment = this
         binding.lifecycleOwner = activity
         val carouselView = binding.root.findViewById<CarouselView>(R.id.carouselView)
-        var sampleImages = arrayOf(R.drawable.awareness1, R.drawable.awareness2, R.drawable.awareness3)
+        val sampleImages = arrayOf(R.drawable.awareness1, R.drawable.awareness2, R.drawable.awareness3)
         carouselView.pageCount = sampleImages.size
         val imageListener = object : ImageListener {
             override fun setImageForPosition(position: Int, imageView: ImageView) {
