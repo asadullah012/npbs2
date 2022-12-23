@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentAboutUsBinding
-import com.galib.natorepbs2.utils.Utility.Companion.openActivity
 
 class AboutUsFragment : Fragment() {
     override fun onCreateView(
@@ -46,13 +45,13 @@ class AboutUsFragment : Fragment() {
                 findNavController(v).navigate(R.id.action_aboutUsFragment_to_atAGlanceFragment)
             }
             R.id.visionMissionBtn -> {
-                openActivity(requireContext(), VisionMissionActivity::class.java)
+                findNavController(v).navigate(R.id.action_aboutUsFragment_to_visionMissionFragment)
             }
             R.id.achievementBtn -> {
-                openActivity(requireContext(), AchievementActivity::class.java)
+                findNavController(v).navigate(R.id.action_aboutUsFragment_to_achievementFragment)
             }
             R.id.complainCentreBtn -> {
-                openActivity(requireContext(), ComplainCentreActivity::class.java)
+                findNavController(v).navigate(R.id.action_aboutUsFragment_to_complainCentreFragment)
             }
             R.id.officersListBtn -> {
                 findNavController(v).navigate(R.id.action_aboutUsFragment_to_officersFragment)
