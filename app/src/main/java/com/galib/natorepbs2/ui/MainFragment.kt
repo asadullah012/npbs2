@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
@@ -46,15 +47,19 @@ class MainFragment : Fragment() {
         if(sampleImages == null || sampleImages.isEmpty()){
             carouselView.pageCount = 1;
             imageListener = object : ImageListener {
-                override fun setImageForPosition(position: Int, imageView: ImageView?) {
-                    imageView!!.setImageResource(R.drawable.npbs2)
+                override fun setImageForPosition(position: Int, imageView: ImageView) {
+                    imageView.setImageResource(R.drawable.npbs2)
                 }
             }
         } else{
             carouselView.pageCount = sampleImages.size
             imageListener = object : ImageListener {
-                override fun setImageForPosition(position: Int, imageView: ImageView?) {
-                    imageView!!.setImageBitmap(BitmapFactory.decodeFile(sampleImages[position]))
+                override fun setImageForPosition(position: Int, imageView: ImageView) {
+//                    imageView.setImageBitmap(BitmapFactory.decodeFile(sampleImages[position]))
+                    val src = BitmapFactory.decodeFile(sampleImages[position])
+                    val dr = RoundedBitmapDrawableFactory.create(resources, src)
+                    dr.cornerRadius = src.height/10.0F
+                    imageView.setImageDrawable(dr)
                 }
             }
         }

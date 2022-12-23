@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -29,7 +30,7 @@ class ComplainCentreAdapter(var context: Context) : ListAdapter<ComplainCentre, 
         RecyclerView.ViewHolder(itemView) {
         private val complainCentreName: TextView
         private val complainCentreMobile: TextView
-        private val callButton: Button
+        private val callButton: ImageView
 
         init {
             complainCentreName = itemView.findViewById(R.id.name)

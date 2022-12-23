@@ -29,16 +29,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageView
         android:id="@+id/callButton"
-        android:minHeight="48dip"
-        android:minWidth="48dip"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/call_button_bg"
-        android:text="@string/text_call"
-        android:textSize="12sp"
+        android:layout_height="48dp"
+        android:padding="5dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_call"
+        android:background="@drawable/button_round_bg"
+        android:contentDescription="@{employee.name}"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
