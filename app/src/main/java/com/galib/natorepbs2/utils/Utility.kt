@@ -53,9 +53,15 @@ class Utility {
 
         @JvmStatic
         fun dateStringToEpoch(dateTime: String, format: String): Long {
-            val df = SimpleDateFormat(format)
-            val date: Date = df.parse(dateTime)
-            return date.time
+            try {
+                val df = SimpleDateFormat(format)
+                val date: Date = df.parse(dateTime)
+                return date.time
+            } catch (e : IllegalArgumentException){
+                Log.e(TAG, "dateStringToEpoch: $dateTime $format")
+                e.printStackTrace()
+            }
+            return 0L
         }
 
         @JvmStatic

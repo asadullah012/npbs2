@@ -26,6 +26,7 @@ import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity(), CoroutineScope,
     NavigationView.OnNavigationItemSelectedListener {
+    private var syncJob: Job? = null
     private lateinit var drawerLayout:DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private val TAG = "MainActivity"
@@ -94,8 +95,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         }
         return when (item.itemId) {
             R.id.force_sync -> {
-                Toast.makeText(applicationContext, "Force sync selected", Toast.LENGTH_LONG).show()
-                syncUsingCoroutine()
+                if(syncJob == null || !syncJob!!.isActive)
+                    Toast.makeText(applicationContext, "Force sync selected", Toast.LENGTH_LONG).show()
+                else
+                    Toast.makeText(applicationContext, "Sync is already running", Toast.LENGTH_LONG).show()
+                syncUsingCoroutine(System.currentTimeMillis())
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -103,14 +107,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     }
 
     private fun syncIfRequired() {
-        job = launch(Dispatchers.IO) {
+        launch(Dispatchers.IO) {
             val result = Sync.getLastUpdateTime()
             if(result != 0L){
                 val prevVal = getLastUpdateTimeFromPref()
                 Log.d(TAG, "syncIfRequired: prev value- $prevVal cur value- $result")
                 if(prevVal < result){
-                    setLastUpdateTimeToPref(result)
-                    syncUsingCoroutine()
+                    syncUsingCoroutine(result)
                 }
             } else{
                 Log.d(TAG, "syncIfRequired: unable to get last updated time")
@@ -131,13 +134,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         return sharedPref.getLong(getString(R.string.last_update_time), 0L)
     }
 
-    private fun syncUsingCoroutine() {
-        Log.d(TAG, "sync: sync started")
-        if(job.isActive){
+    private fun syncUsingCoroutine(updatedOn: Long) {
+        if(syncJob != null && syncJob!!.isActive){
             Log.e(TAG, "sync: sync is running")
             return
         }
-        job = launch(Dispatchers.IO) {
+        Log.d(TAG, "sync: sync started")
+        syncJob = launch(Dispatchers.IO) {
             Sync.syncAtAGlance(informationViewModel)
             Sync.syncAchievement(achievementViewModel)
             Sync.syncComplainCentre(complainCentreViewModel)
@@ -154,6 +157,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             Sync.syncBanners(applicationContext)
             Sync.syncOtherOfficerList(employeeViewModel)
         }
+        setLastUpdateTimeToPref(updatedOn)
     }
 
     override fun onDestroy() {

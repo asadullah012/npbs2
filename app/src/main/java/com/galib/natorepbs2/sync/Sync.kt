@@ -35,7 +35,7 @@ class Sync {
                 val document = Jsoup.connect("http://pbs2.natore.gov.bd/").get()
                 val element = document.select(Selectors.LAST_UPDATE_TIME).first()
                 if (element != null) {
-                    lastUpdateTime = Utility.dateStringToEpoch(Utility.bnDigitToEnDigit(element.text()), "YYYY-MM-DD HH:mm:ss")
+                    lastUpdateTime = Utility.dateStringToEpoch(Utility.bnDigitToEnDigit(element.text()), "yyyy-MM-DD HH:mm:ss")
                     Log.d(TAG, "getLastUpdateTime: " + element.text() + " " + lastUpdateTime)
                 }
             } catch (e: IOException) {
