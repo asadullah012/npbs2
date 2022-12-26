@@ -117,7 +117,7 @@
             android:layout_height="36dp"
             android:padding="5dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/ic_map"
+            android:src="@drawable/ic_location_on"
             android:background="@drawable/button_round_bg"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
