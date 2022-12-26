@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable
             name="employee"
-            type="com.galib.natorepbs2.db.Employee" />
+            type="com.galib.natorepbs2.models.Employee" />
         <variable
             name="clickListener"
             type="com.galib.natorepbs2.ui.ContactListAdapter.ClickListener" />

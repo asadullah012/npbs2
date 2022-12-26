@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.BR
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.db.Information
+import com.galib.natorepbs2.models.Information
 import com.galib.natorepbs2.ui.InformationAdapter.InformationViewHolder
 
 class InformationAdapter : ListAdapter<Information, InformationViewHolder>(InformationDiff()) {

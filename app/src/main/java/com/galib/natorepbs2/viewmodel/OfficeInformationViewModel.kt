@@ -2,7 +2,7 @@ package com.galib.natorepbs2.viewmodel
 
 import androidx.lifecycle.*
 import com.galib.natorepbs2.db.NPBS2Repository
-import com.galib.natorepbs2.db.OfficeInformation
+import com.galib.natorepbs2.models.OfficeInformation
 import kotlinx.coroutines.launch
 
 class OfficeInformationViewModel(private val mRepository: NPBS2Repository) : ViewModel() {

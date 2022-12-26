@@ -1,7 +1,7 @@
 package com.galib.natorepbs2.viewmodel
 
 import androidx.lifecycle.*
-import com.galib.natorepbs2.db.ComplainCentre
+import com.galib.natorepbs2.models.ComplainCentre
 import com.galib.natorepbs2.db.NPBS2Repository
 import kotlinx.coroutines.launch
 

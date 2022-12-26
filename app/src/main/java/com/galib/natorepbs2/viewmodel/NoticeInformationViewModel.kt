@@ -3,7 +3,7 @@ package com.galib.natorepbs2.viewmodel
 import androidx.lifecycle.*
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
-import com.galib.natorepbs2.db.NoticeInformation
+import com.galib.natorepbs2.models.NoticeInformation
 import kotlinx.coroutines.launch
 
 class NoticeInformationViewModel(private val mRepository: NPBS2Repository) : ViewModel() {

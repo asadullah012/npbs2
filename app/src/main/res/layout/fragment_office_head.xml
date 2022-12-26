@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View"/>
         <variable name="page_title" type="String" />
-        <variable name="employee" type="com.galib.natorepbs2.db.Employee" />
+        <variable name="employee" type="com.galib.natorepbs2.models.Employee" />
         <variable name="fragment" type="com.galib.natorepbs2.ui.OfficeHeadFragment" />
     </data>
 
