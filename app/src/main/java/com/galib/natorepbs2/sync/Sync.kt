@@ -205,8 +205,13 @@ class Sync {
                     for (i in 1 until trs.size) {
                         val tds = trs[i].select("td")
                         val tdList = ArrayList<String>()
-                        for (j in tds.indices) {
-                            tdList.add(tds[j].text())
+                        for (j in 1 until tds.size) {
+                            if (j == 1)
+                                if (tds[j].select("img").first() != null)
+                                    tdList.add(tds[j].select("img").first()!!.absUrl("src"))
+                                else tdList.add(tds[j].text())
+                            else
+                                tdList.add(tds[j].text())
                         }
                         if (tdList.size > 0) data.add(tdList)
                     }

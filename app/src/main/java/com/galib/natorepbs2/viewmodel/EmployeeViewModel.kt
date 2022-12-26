@@ -29,6 +29,7 @@ class EmployeeViewModel(private val mRepository: NPBS2Repository) : ViewModel() 
             )
             //Log.d(TAG, "insertFromTable: " + i + " " + tableData[i][0] + " " + tableData[i][1] + " " + designation + " " + office + " " + tableData[i][4] + " " + tableData[i][5] + " " + tableData[i][6] + " " + Category.OFFICERS);
         }
+        mRepository.deleteEmployeeByType(Category.OFFICERS)
         mRepository.insertEmployeeList(officersList)
     }
 
@@ -49,6 +50,7 @@ class EmployeeViewModel(private val mRepository: NPBS2Repository) : ViewModel() 
             )
             i++
         }
+        mRepository.deleteEmployeeByType(Category.JUNIOR_OFFICER)
         mRepository.insertEmployeeList(employeeList)
     }
 
@@ -58,11 +60,12 @@ class EmployeeViewModel(private val mRepository: NPBS2Repository) : ViewModel() 
             //Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
             employeeList.add(
                 Employee(
-                    i, "", tableData[i][1], tableData[i][2],
+                    i, tableData[i][0], tableData[i][1], tableData[i][2],
                     tableData[i][3], "", tableData[i][4], "", Category.BOARD_MEMBER
                 )
             )
         }
+        mRepository.deleteEmployeeByType(Category.BOARD_MEMBER)
         mRepository.insertEmployeeList(employeeList)
     }
 
@@ -75,6 +78,7 @@ class EmployeeViewModel(private val mRepository: NPBS2Repository) : ViewModel() 
                     "", "", tableData[i][4], "", Category.POWER_OUTAGE_CONTACT)
             )
         }
+        mRepository.deleteEmployeeByType(Category.POWER_OUTAGE_CONTACT)
         mRepository.insertEmployeeList(employeeList)
     }
 

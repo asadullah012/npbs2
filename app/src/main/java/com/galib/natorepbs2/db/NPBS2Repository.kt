@@ -91,6 +91,10 @@ class NPBS2Repository(db: NPBS2DB) {
         employeeDao.insertList(employeeList)
     }
 
+    suspend fun deleteEmployeeByType(type: Int){
+        employeeDao.deleteByCategory(type)
+    }
+
     val officerList: Flow<List<Employee>>
         get() = employeeDao.getAllByType(Category.OFFICERS)
     val juniorOfficerList: Flow<List<Employee>>

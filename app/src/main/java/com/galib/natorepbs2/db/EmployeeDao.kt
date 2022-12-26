@@ -22,4 +22,7 @@ interface EmployeeDao {
 
     @Query("SELECT * FROM employee_table where type = :type ORDER BY priority LIMIT 1")
     fun getOfficeHead(type: Int): Flow<Employee>
+
+    @Query("DELETE FROM employee_table where type = :type")
+    suspend fun deleteByCategory(type: Int)
 }
