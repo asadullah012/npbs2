@@ -33,18 +33,5 @@ object URLs {
    const val ELECTRICITY_CONNECTION_RULES = "/page/tw5y-বিদ্যুৎ-সংযোগের-নিয়মাবলী"
    const val SERVICE_LIST = "/office_process_map/uIWT-কী-সেবা-কীভাবে-পাবেন।"
    const val COMMUNICATION_POST = "/page/rxkY-ডাক-যোগাযোগ"
-   val BANNERS = arrayOf("http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//61f/767/125/61f767125c16e884482056.jpg",
-                        "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//619/0cf/e2a/6190cfe2abfd4364612602.jpg",
-                        "http://file-rajshahi.portal.gov.bd/files/www.pbs2.natore.gov.bd/top_banner/643175b5_37e1_4fff_b515_ce9e0090f3a5/bbbfd4f9dc774b6d351e4d3111dcf8ad.jpg",
-                        "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//61a/10c/0e7/61a10c0e77fc68920653231.jpeg",
-                        "http://file-rajshahi.portal.gov.bd/files/www.pbs2.natore.gov.bd/top_banner/6add8cb0_b27c_4d08_8763_03e8aa225127/15f4c1abf4334540bf6482ddd3ab30e5.jpg",
-                        "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//61a/106/b7a/61a106b7ab4c1183563578.jpg")
-
-   val OTHER_ORG = arrayOf("http://www.natore.gov.bd/","http://reb.rajshahidiv.gov.bd","http://reb.natore.gov.bd","http://pbs1.natore.gov.bd","http://police.natore.gov.bd","http://pdb.natore.gov.bd","http://prison.natore.gov.bd","http://fireservice.natore.gov.bd","http://ansarvdp.natore.gov.bd","http://dnc.natore.gov.bd","http://cs.natore.gov.bd","http://ec.natore.gov.bd","http://brta.natore.gov.bd","http://rhd.natore.gov.bd","http://pwd.natore.gov.bd","http://ec.natore.gov.bd","http://brta.natore.gov.bd","http://rhd.natore.gov.bd","http://pwd.natore.gov.bd")
-
-//   Fire Service Kalikapur:
-//   https://www.google.com/search?q=fire%20service%20kalikapur%20baraigram%20natore&rlz=1C1UEAD_enBD1007BD1007&oq=fire+service+kalikapur+baraigram+natore&aqs=chrome..69i57j33i160l3.41927j0j4&sourceid=chrome&ie=UTF-8&tbs=lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:4&tbm=lcl&sxsrf=ALiCzsYGQarTucWkn1QbFhB6kL4P2BEsGw:1671607838092&rflfq=1&num=10&rldimm=9248944827180891146&lqi=CidmaXJlIHNlcnZpY2Uga2FsaWthcHVyIGJhcmFpZ3JhbSBuYXRvcmUiA4gBAUi9p6uQw66AgAhaMxAAEAEYABgBGAIiJ2ZpcmUgc2VydmljZSBrYWxpa2FwdXIgYmFyYWlncmFtIG5hdG9yZZIBDGZpcmVfc3RhdGlvbqoBFBABKhAiDGZpcmUgc2VydmljZSgA&ved=2ahUKEwizk5K7mIr8AhXMTmwGHahEClEQvS56BAgJEAE&sa=X&rlst=f#rlfi=hd:;si:9248944827180891146,l,CidmaXJlIHNlcnZpY2Uga2FsaWthcHVyIGJhcmFpZ3JhbSBuYXRvcmUiA4gBAUi9p6uQw66AgAhaMxAAEAEYABgBGAIiJ2ZpcmUgc2VydmljZSBrYWxpa2FwdXIgYmFyYWlncmFtIG5hdG9yZZIBDGZpcmVfc3RhdGlvbqoBFBABKhAiDGZpcmUgc2VydmljZSgA;mv:[[24.6449826,89.2599578],[24.0909611,88.9545433]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!2m1!1e3!3sIAE,lf:1,lf_ui:4
-//   12.	ডাক্তারের তালিকা
-//   http://www.natore.gov.bd/bn/site/page/pk9w-%E0%A6%A1%E0%A6%BE%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0-%E0%A6%A4%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%95%E0%A6%BE
-
+   const val BANNERS = "/view/top_banner"
 }
