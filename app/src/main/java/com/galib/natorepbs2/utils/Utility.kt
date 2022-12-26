@@ -10,8 +10,16 @@ import com.galib.natorepbs2.constants.URLs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.ResponseBody
+import okio.Buffer
+import okio.BufferedSink
+import okio.Okio
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -55,8 +63,8 @@ class Utility {
         fun dateStringToEpoch(dateTime: String, format: String): Long {
             try {
                 val df = SimpleDateFormat(format)
-                val date: Date = df.parse(dateTime)
-                return date.time
+                val date: Date? = df.parse(dateTime)
+                return date?.time ?: 0L
             } catch (e : IllegalArgumentException){
                 Log.e(TAG, "dateStringToEpoch: $dateTime $format")
                 e.printStackTrace()
@@ -145,7 +153,7 @@ class Utility {
         }
 
         @JvmStatic
-        fun arrayToString(arr: Array<String>): String? {
+        fun arrayToString(arr: Array<String>?): String? {
             if (arr == null) return null
             val sb = StringBuilder()
             for (s in arr) {
@@ -153,6 +161,35 @@ class Utility {
                 sb.append(' ')
             }
             return sb.toString()
+        }
+
+        fun downloadAndSave(bannerUrl: String, name: String, bannerDir: File) {
+            val file = File(bannerDir, name)
+            if(file.exists()) return
+            try {
+                val client = OkHttpClient()
+                val request = Request.Builder().url(bannerUrl).build()
+                val response: Response = client.newCall(request).execute()
+                val body: ResponseBody? = response.body()
+                val source = body!!.source()
+
+                val sink: BufferedSink = Okio.buffer(Okio.sink(file))
+                val sinkBuffer: Buffer = sink.buffer()
+
+                val bufferSize: Long = 8 * 1024
+                var bytesRead: Long = source.read(sinkBuffer, bufferSize)
+                while (bytesRead != -1L) {
+                    sink.emit()
+                    bytesRead = source.read(sinkBuffer, bufferSize)
+                }
+                sink.flush()
+                sink.close()
+                source.close()
+                Log.d(TAG, "Downloading... ${file.absolutePath}")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
         }
     }
 }

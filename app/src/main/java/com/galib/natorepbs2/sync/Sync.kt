@@ -10,13 +10,6 @@ import com.galib.natorepbs2.db.Information
 import com.galib.natorepbs2.db.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.*
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.ResponseBody
-import okio.Buffer
-import okio.BufferedSink
-import okio.Okio
 import org.json.JSONArray
 import org.json.JSONObject
 import org.jsoup.Jsoup
@@ -279,17 +272,18 @@ class Sync {
             val data = ArrayList<OfficeInformation>()
             if(json != null){
                 val jsonRootObject = JSONObject(json)
-                val jsonArray: JSONArray = jsonRootObject.optJSONArray("officeInformation")
-
-                for (i in 0 until jsonArray.length()) {
-                    val jsonObject = jsonArray.getJSONObject(i)
-                    data.add(OfficeInformation(jsonObject.optString("name").toString(),
-                        jsonObject.optString("address").toString(),
-                        jsonObject.optString("mobile").toString(),
-                        jsonObject.optString("telephone").toString(),
-                        jsonObject.optString("email").toString(),
-                        jsonObject.optString("google_map_url").toString(),
-                        i))
+                val jsonArray: JSONArray? = jsonRootObject.optJSONArray("officeInformation")
+                if(jsonArray != null){
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        data.add(OfficeInformation(jsonObject.optString("name").toString(),
+                            jsonObject.optString("address").toString(),
+                            jsonObject.optString("mobile").toString(),
+                            jsonObject.optString("telephone").toString(),
+                            jsonObject.optString("email").toString(),
+                            jsonObject.optString("google_map_url").toString(),
+                            i))
+                    }
                 }
             }
             if(data.size > 0) {
@@ -302,11 +296,11 @@ class Sync {
 
         fun syncTenderData(tenderInformationViewModel: NoticeInformationViewModel){
             val data = ArrayList<ArrayList<String>>()
-            for(i in 1..10){
+            for(page in 1..10){
                 try {
                     var url = URLs.BASE + URLs.TENDER
-                    if(i > 1)
-                        url = "$url?page=$i"
+                    if(page > 1)
+                        url = "$url?page=$page"
                     val document = Jsoup.connect(url).timeout(5 * 1000).get()
                     val tables = document.select(Selectors.TENDER)
                     for (table in tables) {
@@ -344,11 +338,11 @@ class Sync {
 
         fun syncNoticeData(noticeInformationViewModel: NoticeInformationViewModel){
             val data = ArrayList<ArrayList<String>>()
-            for(i in 1..10){
+            for(page in 1..10){
                 try {
                     var url = URLs.BASE + URLs.NOTICE
-                    if(i > 1)
-                        url = "$url?page=$i"
+                    if(page > 1)
+                        url = "$url?page=$page"
                     val document = Jsoup.connect(url).timeout(5 * 1000).get()
                     val tables = document.select(Selectors.NOTICE)
                     for (table in tables) {
@@ -386,11 +380,11 @@ class Sync {
 
         fun syncNewsData(noticeInformationViewModel: NoticeInformationViewModel){
             val data = ArrayList<ArrayList<String>>()
-            for(i in 1..10){
+            for(page in 1..10){
                 try {
                     var url = URLs.BASE + URLs.NEWS
-                    if(i > 1)
-                        url = "$url?page=$i"
+                    if(page > 1)
+                        url = "$url?page=$page"
                     val document = Jsoup.connect(url).timeout(5 * 1000).get()
                     val tables = document.select(Selectors.NEWS)
                     for (table in tables) {
@@ -477,11 +471,12 @@ class Sync {
             val data = ArrayList<Information>()
             if(json != null){
                 val jsonRootObject = JSONObject(json)
-                val jsonArray: JSONArray = jsonRootObject.optJSONArray("bankInformation")
-
-                for (i in 0 until jsonArray.length()) {
-                    val jsonObject = jsonArray.getJSONObject(i)
-                    data.add(Information(i+1, jsonObject.getString("name"), jsonObject.getString("branch"), Category.bank))
+                val jsonArray: JSONArray? = jsonRootObject.optJSONArray("bankInformation")
+                if(jsonArray != null) {
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        data.add(Information(i + 1, jsonObject.getString("name"), jsonObject.getString("branch"), Category.bank))
+                    }
                 }
             }
             if(data.size > 0) {
@@ -496,32 +491,28 @@ class Sync {
             val dirPath: String = context.filesDir.absolutePath + File.separator + "banners"
             val bannerDir = File(dirPath)
             if (!bannerDir.exists()) bannerDir.mkdirs()
-            for((i, url) in URLs.BANNERS.withIndex()){
-                val file = File(bannerDir, "Banners$i.jpg")
-                if(file.exists()) continue
-                try {
-                    val client = OkHttpClient()
-                    val request = Request.Builder().url(url).build()
-                    val response: Response = client.newCall(request).execute()
-                    val body: ResponseBody? = response.body()
-                    val source = body!!.source()
-
-                    val sink: BufferedSink = Okio.buffer(Okio.sink(file))
-                    val sinkBuffer: Buffer = sink.buffer()
-
-                    val bufferSize: Long = 8 * 1024
-                    var bytesRead: Long = source.read(sinkBuffer, bufferSize)
-                    while (bytesRead != -1L) {
-                        sink.emit()
-                        bytesRead = source.read(sinkBuffer, bufferSize)
+            try {
+                val url = URLs.BASE + URLs.BANNERS
+                val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                val tables = document.select(Selectors.BANNERS)
+                for (table in tables) {
+                    val trs = table.select("tr")
+                    for (i in 0 until trs.size) {
+                        val tds = trs[i].select("td")
+                        var bannerUrl: String? = null
+                        var name:String? = null
+                        if(tds.size > 1 && tds[0].select("img").first() != null){
+                            bannerUrl = tds[0].select("img").first()?.absUrl("src")
+                            name = tds[1].select("a").first()?.text()
+                            if(name == null || name.isEmpty()) name = "banner$i"
+                            name = "$name.jpg"
+                        }
+                        if(bannerUrl != null && name != null)
+                            Utility.downloadAndSave(bannerUrl, name, bannerDir)
                     }
-                    sink.flush()
-                    sink.close()
-                    source.close()
-                    Log.d(TAG, "syncBanners: downloading ${file.absolutePath}")
-                } catch (e: IOException) {
-                    e.printStackTrace()
                 }
+            } catch (e : IOException){
+                e.printStackTrace()
             }
         }
 
@@ -552,7 +543,7 @@ class Sync {
                 e.printStackTrace()
             }
             if(data.size > 0) {
-                Log.d(TAG, "syncOfficerList: $data")
+                //Log.d(TAG, "syncOfficerList: $data")
                 //employeeViewModel.insertOfficersFromTable(data as List<MutableList<String>>)
             } else{
                 Log.e(TAG, "syncOfficerList: unable to get officer data")
