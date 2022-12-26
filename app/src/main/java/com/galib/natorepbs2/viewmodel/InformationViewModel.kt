@@ -3,7 +3,7 @@ package com.galib.natorepbs2.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.galib.natorepbs2.constants.Category
-import com.galib.natorepbs2.db.Information
+import com.galib.natorepbs2.models.Information
 import com.galib.natorepbs2.db.NPBS2Repository
 import kotlinx.coroutines.launch
 

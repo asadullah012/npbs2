@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentOfficersBinding
-import com.galib.natorepbs2.db.Employee
+import com.galib.natorepbs2.models.Employee
 import com.galib.natorepbs2.ui.ContactListAdapter.ClickListener
 import com.galib.natorepbs2.utils.Utility.Companion.bnDigitToEnDigit
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel

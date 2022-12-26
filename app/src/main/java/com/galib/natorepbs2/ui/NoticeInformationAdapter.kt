@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.db.NoticeInformation
+import com.galib.natorepbs2.models.NoticeInformation
 
 class NoticeInformationAdapter : RecyclerView.Adapter<NoticeInformationAdapter.TenderInformationViewHolder?>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TenderInformationViewHolder {

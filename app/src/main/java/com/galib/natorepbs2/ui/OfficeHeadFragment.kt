@@ -13,7 +13,7 @@ import androidx.lifecycle.LiveData
 import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentOfficeHeadBinding
-import com.galib.natorepbs2.db.Employee
+import com.galib.natorepbs2.models.Employee
 import com.galib.natorepbs2.utils.Utility.Companion.bnDigitToEnDigit
 import com.galib.natorepbs2.viewmodel.EmployeeViewModel
 import com.galib.natorepbs2.viewmodel.EmployeeViewModelFactory

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="information"
-            type="com.galib.natorepbs2.db.Information" />
+            type="com.galib.natorepbs2.models.Information" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package com.galib.natorepbs2.db
+package com.galib.natorepbs2.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

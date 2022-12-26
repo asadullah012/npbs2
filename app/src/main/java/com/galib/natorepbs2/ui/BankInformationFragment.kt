@@ -11,7 +11,7 @@ import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.databinding.FragmentBankInformationBinding
-import com.galib.natorepbs2.db.Information
+import com.galib.natorepbs2.models.Information
 import com.galib.natorepbs2.viewmodel.InformationViewModel
 import com.galib.natorepbs2.viewmodel.InformationViewModelFactory
 

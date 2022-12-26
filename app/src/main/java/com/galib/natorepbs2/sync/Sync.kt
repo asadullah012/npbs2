@@ -6,8 +6,8 @@ import android.util.Log
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
-import com.galib.natorepbs2.db.Information
-import com.galib.natorepbs2.db.OfficeInformation
+import com.galib.natorepbs2.models.Information
+import com.galib.natorepbs2.models.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.*
 import org.json.JSONArray
@@ -276,13 +276,15 @@ class Sync {
                 if(jsonArray != null){
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
-                        data.add(OfficeInformation(jsonObject.optString("name").toString(),
+                        data.add(
+                            OfficeInformation(jsonObject.optString("name").toString(),
                             jsonObject.optString("address").toString(),
                             jsonObject.optString("mobile").toString(),
                             jsonObject.optString("telephone").toString(),
                             jsonObject.optString("email").toString(),
                             jsonObject.optString("google_map_url").toString(),
-                            i))
+                            i)
+                        )
                     }
                 }
             }

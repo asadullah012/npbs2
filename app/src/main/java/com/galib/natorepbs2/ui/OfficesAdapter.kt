@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.BR
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.db.OfficeInformation
+import com.galib.natorepbs2.models.OfficeInformation
 
 class OfficesAdapter(onClickListener: OfficeInfoOnClickListener) : RecyclerView.Adapter<OfficesAdapter.OfficeInformationViewHolder?>() {
     var onClickListener : OfficeInfoOnClickListener
