@@ -47,7 +47,7 @@ class InformationViewModel(private val mRepository: NPBS2Repository) : ViewModel
         mRepository.insertInformation(Information(1, s[0]!!, s[1]!!, Category.visionMission))
     }
 
-    fun getInstructionByType(type: String?): MutableList<Instruction>? {
+    fun getInstructionByType(type: Int): MutableList<Instruction>? {
         return mRepository.getInstructionByType(type)
     }
 }

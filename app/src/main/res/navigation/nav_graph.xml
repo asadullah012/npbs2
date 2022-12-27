@@ -366,8 +366,7 @@
             app:argType="string" />
         <argument
             android:name="billType"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="integer" />
     </fragment>
 
 
