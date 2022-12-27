@@ -2,7 +2,6 @@ package com.galib.natorepbs2.ui
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import androidx.navigation.Navigation.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.carouselview.CarouselView
 import com.galib.natorepbs2.carouselview.ImageListener
-import com.galib.natorepbs2.databinding.FragmentMainV2Binding
+import com.galib.natorepbs2.databinding.FragmentMainBinding
 import java.io.File
 
 class MainFragment : Fragment(), MenuOnClickListener {
@@ -23,62 +22,16 @@ class MainFragment : Fragment(), MenuOnClickListener {
         savedInstanceState: Bundle?
     ): View {
         val binding =
-            DataBindingUtil.inflate<FragmentMainV2Binding>(inflater, R.layout.fragment_main_v2, container, false)
+            DataBindingUtil.inflate<FragmentMainBinding>(inflater, R.layout.fragment_main, container, false)
         binding.title = getString(R.string.title)
-        binding.about = getString(R.string.menu_about_us)
-        binding.service = getString(R.string.menu_our_services)
-        binding.awareness = getString(R.string.menu_awareness)
-        binding.communication = getString(R.string.menu_communication)
-        binding.opinionComplain = getString(R.string.menu_opinion_complain)
-        binding.relatedApps = getString(R.string.menu_related_apps)
-        binding.socialMedia = getString(R.string.menu_social_media)
-        binding.website = getString(R.string.menu_websites)
-        binding.noticeTender = getString(R.string.menu_notice_tender)
         binding.bannerContentDescription = getString(R.string.banner_content_description)
-        val list : MutableList<String> = ArrayList()
-        list.add(getString(R.string.menu_about_us))
-        list.add(getString(R.string.menu_our_services))
-        val menuAdpater = MenuAdapter(this)
-        menuAdpater.submitList(list)
-        binding.adapter = menuAdpater
-        binding.lifecycleOwner = activity
-        binding.fragment = this
+        binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
+
         val carouselView = binding.root.findViewById<CarouselView>(R.id.bannerCarousel)
         setBannerImages(carouselView)
-        return binding.root
-    }
 
-    fun onClick(v: View) {
-        when (v.id) {
-            R.id.aboutUsBtn -> {
-                findNavController(v).navigate(R.id.action_main_to_aboutUsFragment)
-                //            Navigation.createNavigateOnClickListener(R.id.action_main_to_aboutUsFragment, null);
-            }
-            R.id.serviceBtn -> {
-                findNavController(v).navigate(R.id.action_main_to_ourServicesFragment)
-            }
-            R.id.websiteBtn -> {
-                findNavController(v).navigate(R.id.action_main_to_websitesFragment)
-            }
-            R.id.social_media_btn -> {
-                findNavController(v).navigate(R.id.action_main_to_socialMediaFragment)
-            }
-            R.id.opinion_complain_btn -> {
-                findNavController(v).navigate(R.id.action_main_to_opinionComplainFragment)
-            }
-            R.id.related_apps_btn -> {
-                findNavController(v).navigate(R.id.action_main_to_relatedAppsFragment)
-            }
-            R.id.notice_tender_btn -> {
-                findNavController(v).navigate(R.id.action_main_to_noticeTenderFragment)
-            }
-            R.id.communication_btn -> {
-                findNavController(v).navigate(R.id.action_main_to_communicationFragment)
-            }
-            R.id.awareness_btn -> {
-                findNavController(v).navigate(R.id.action_main_to_awarenessFragment)
-            }
-        }
+        binding.lifecycleOwner = activity
+        return binding.root
     }
 
     private fun setBannerImages(carouselView: CarouselView){
@@ -105,6 +58,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
         }
         carouselView.setImageListener(imageListener)
     }
+
     private fun getBannerImages(): ArrayList<String>? {
         val dirPath: String = requireContext().filesDir.absolutePath + File.separator + "banners"
         val bannerDir = File(dirPath)
@@ -118,7 +72,31 @@ class MainFragment : Fragment(), MenuOnClickListener {
         return bannerImages
     }
 
-    override fun menuOnClick(menuText: String) {
-        Log.d("MainFragment", "menuOnClick: $menuText")
+    private fun getMenuList(): MutableList<String> {
+        val list : MutableList<String> = ArrayList()
+        list.add(getString(R.string.menu_about_us))
+        list.add(getString(R.string.menu_our_services))
+        list.add(getString(R.string.menu_websites))
+        list.add(getString(R.string.menu_social_media))
+        list.add(getString(R.string.menu_related_apps))
+        list.add(getString(R.string.menu_opinion_complain))
+        list.add(getString(R.string.menu_notice_tender))
+        list.add(getString(R.string.menu_communication))
+        list.add(getString(R.string.menu_awareness))
+        return list
+    }
+
+    override fun menuOnClick(v: View, menuText: String) {
+        when (menuText) {
+            getString(R.string.menu_about_us) -> findNavController(v).navigate(R.id.action_main_to_aboutUsFragment)
+            getString(R.string.menu_our_services) -> findNavController(v).navigate(R.id.action_main_to_ourServicesFragment)
+            getString(R.string.menu_websites) -> findNavController(v).navigate(R.id.action_main_to_websitesFragment)
+            getString(R.string.menu_social_media) -> findNavController(v).navigate(R.id.action_main_to_socialMediaFragment)
+            getString(R.string.menu_opinion_complain) -> findNavController(v).navigate(R.id.action_main_to_opinionComplainFragment)
+            getString(R.string.menu_related_apps) -> findNavController(v).navigate(R.id.action_main_to_relatedAppsFragment)
+            getString(R.string.menu_notice_tender) -> findNavController(v).navigate(R.id.action_main_to_noticeTenderFragment)
+            getString(R.string.menu_communication) -> findNavController(v).navigate(R.id.action_main_to_communicationFragment)
+            getString(R.string.menu_awareness) -> findNavController(v).navigate(R.id.action_main_to_awarenessFragment)
+        }
     }
 }

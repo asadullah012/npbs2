@@ -5,17 +5,7 @@
 
     <data>
         <variable name="page_title" type="String" />
-        <variable name="at_a_glance" type="String" />
-        <variable name="vision_mission" type="String" />
-        <variable name="achievement" type="String" />
-        <variable name="complain_centre" type="String" />
-        <variable name="office_head" type="String" />
-        <variable name="officer_list" type="String" />
-        <variable name="junior_officer_list" type="String" />
-        <variable name="samity_board" type="String" />
-        <variable name="office_list" type="String" />
-        <variable name="power_outage_contact" type="String" />
-        <variable name="fragment" type="com.galib.natorepbs2.ui.AboutUsFragment" />
+        <variable name="adapter" type="com.galib.natorepbs2.ui.MenuAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,91 +34,21 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="5dp"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/atAGlanceBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{at_a_glance}"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/visionMissionBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{vision_mission}"
-                    app:layout_constraintTop_toBottomOf="@id/atAGlanceBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/achievementBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{achievement}"
-                    app:layout_constraintTop_toBottomOf="@id/visionMissionBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/boardMemberBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{samity_board}"
-                    app:layout_constraintTop_toBottomOf="@id/achievementBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/officeHeadBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{office_head}"
-                    app:layout_constraintTop_toBottomOf="@id/boardMemberBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/officersListBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{officer_list}"
-                    app:layout_constraintTop_toBottomOf="@id/officeHeadBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/juniorOfficerBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{junior_officer_list}"
-                    app:layout_constraintTop_toBottomOf="@id/officersListBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/officeListBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{office_list}"
-                    app:layout_constraintTop_toBottomOf="@id/juniorOfficerBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/complainCentreBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{complain_centre}"
-                    app:layout_constraintTop_toBottomOf="@id/officeListBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/powerOutageContactBtn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{power_outage_contact}"
-                    app:layout_constraintTop_toBottomOf="@id/complainCentreBtn"
-                    app:layout_constraintStart_toStartOf="parent" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{adapter}"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

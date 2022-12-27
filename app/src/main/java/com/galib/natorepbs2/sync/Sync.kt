@@ -493,6 +493,7 @@ class Sync {
             val dirPath: String = context.filesDir.absolutePath + File.separator + "banners"
             val bannerDir = File(dirPath)
             if (!bannerDir.exists()) bannerDir.mkdirs()
+
             try {
                 val url = URLs.BASE + URLs.BANNERS
                 val document = Jsoup.connect(url).timeout(5 * 1000).get()
