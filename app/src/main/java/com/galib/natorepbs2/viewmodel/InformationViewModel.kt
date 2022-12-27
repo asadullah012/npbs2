@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.models.Information
 import com.galib.natorepbs2.db.NPBS2Repository
+import com.galib.natorepbs2.models.Instruction
 import kotlinx.coroutines.launch
 
 class InformationViewModel(private val mRepository: NPBS2Repository) : ViewModel() {
@@ -44,6 +45,10 @@ class InformationViewModel(private val mRepository: NPBS2Repository) : ViewModel
         mRepository.insertInformation(Information(0, s[0]!!, s[1]!!, Category.visionMission))
         s = mission.split(": ").toTypedArray()
         mRepository.insertInformation(Information(1, s[0]!!, s[1]!!, Category.visionMission))
+    }
+
+    fun getInstructionByType(type: String?): MutableList<Instruction>? {
+        return mRepository.getInstructionByType(type)
     }
 }
 
