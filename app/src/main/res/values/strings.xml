@@ -101,4 +101,10 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_about_app">About Apps</string>
     <string name="menu_favorites">Favorites</string>
+    <string name="menu_bill_rocket_app">রকেট অ্যাপ</string>
+    <string name="menu_bill_rocket_USSD">রকেট USSD</string>
+    <string name="menu_bill_gpay_app">GPay অ্যাপ</string>
+    <string name="menu_bill_gpay_USSD">GPay USSD</string>
+    <string name="menu_bill_upay_app">UPay অ্যাপ</string>
+    <string name="menu_bill_ucash_USSD">UCash USSD</string>
 </resources>
