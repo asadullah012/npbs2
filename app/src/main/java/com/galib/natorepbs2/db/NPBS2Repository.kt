@@ -133,6 +133,33 @@ class NPBS2Repository(db: NPBS2DB) {
         return noticeInformationDao.getAllNoticeByCategory(category)
     }
 
+    fun getInstructionByType(type: String?): MutableList<Instruction>? {
+        val list : MutableList<Instruction> = ArrayList()
+        if(type.equals(Category.BKASH_APP)){
+            list.add(Instruction("bKash App/1.PNG", "1. বিকাশ অ্যাপের হোম স্ক্রিন থেকে পে বিল সিলেক্ট করুন"))
+            list.add(Instruction("bKash App/2.PNG", "2. বিদ্যুৎ ট্যাপ করে Palli Bidyut (Postpaid) সিলেক্ট করুন"))
+            list.add(Instruction("bKash App/3.PNG", "3. বিলের সময়সীমা এবং এসএমএস একাউন্ট নাম্বার দিন। পরবর্তী বিল পেমেন্টের জন্য একাউন্টটি সেভ করে রাখতে পারেন"))
+            list.add(Instruction("bKash App/4.PNG", "4. বিলের মাস ও বছর দিয়ে পরের স্ক্রিনে যেতে ট্যাপ করুন"))
+            list.add(Instruction("bKash App/5.PNG", "5. আপনার বিকাশ একাউন্টের পিন নাম্বার দিন"))
+            list.add(Instruction("bKash App/6.PNG", "6. ’পে বিল’ সম্পন্ন করতে স্ক্রিনের নিচের অংশ ট্যাপ করে ধরে রাখুন"))
+            list.add(Instruction("bKash App/7.PNG", "7. ‘পে বিল’ সম্পন্ন হলে কনফার্মেশন পাবেন"))
+            list.add(Instruction("bKash App/8.PNG", "8. অ্যাপে দেখে নিতে পারেন বিলের ডিজিটাল রিসিট"))
+        } else if(type.equals(Category.BKASH_USSD)){
+            list.add(Instruction("bKash USSD/1.PNG", "1. 247# ডায়াল করুন"))
+            list.add(Instruction("bKash USSD/2.PNG", "2. পে বিল সিলেক্ট করতে ৬ চাপুন"))
+            list.add(Instruction("bKash USSD/3.PNG", "3. ইলেক্ট্রিসিটি (পোস্টপেইড) সিলেক্ট করতে ২ চাপুন"))
+            list.add(Instruction("bKash USSD/4.PNG", "4. পল্লী বিদ্যুৎ (পোস্টপেইড) সিলেক্ট করতে ১ চাপুন"))
+            list.add(Instruction("bKash USSD/5.PNG", "5. মেক পেমেন্ট সিলেক্ট করতে ২ চাপুন"))
+            list.add(Instruction("bKash USSD/6.PNG", "6. একাউন্ট নাম্বার সিলেক্ট করতে ১ চাপুন"))
+            list.add(Instruction("bKash USSD/7.PNG", "7. পল্লী বিদ্যুৎ বিলে উল্লিখিত এসএমএস একাউন্ট নাম্বারটি দিন"))
+            list.add(Instruction("bKash USSD/8.PNG", "8. বিলের মাস এবং বছর দিন"))
+            list.add(Instruction("bKash USSD/9.PNG", "9. পল্লী বিদ্যুৎ বিলে উল্লিখিত বিল এমাউন্টটি দিন"))
+            list.add(Instruction("bKash USSD/10.PNG", "10. পে বিলের সামারি দেখে পিন নাম্বারটি দিন"))
+            list.add(Instruction("bKash USSD/11.PNG", "11. কনফার্মেশন মেসেজ ও বিল পেমেন্ট মেসেজ পাবেন"))
+        }
+        return list
+    }
+
     companion object {
         private val TAG = NPBS2Repository::class.java.name
     }

@@ -212,7 +212,11 @@
     <fragment
         android:id="@+id/billFromHomeFragment"
         android:name="com.galib.natorepbs2.ui.BillFromHomeFragment"
-        android:label="BillFromHomeFragment" />
+        android:label="BillFromHomeFragment" >
+        <action
+            android:id="@+id/action_billFromHomeFragment_to_billInstructionsFragment"
+            app:destination="@id/billInstructionsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/websitesFragment"
         android:name="com.galib.natorepbs2.ui.WebsitesFragment"
@@ -353,6 +357,18 @@
         android:name="com.galib.natorepbs2.ui.VisionMissionFragment"
         android:label="fragment_vision_mission"
         tools:layout="@layout/fragment_vision_mission" />
+    <fragment
+        android:id="@+id/billInstructionsFragment"
+        android:name="com.galib.natorepbs2.ui.BillInstructionsFragment"
+        android:label="BillInstructionsFragment" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="billType"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 
 </navigation>

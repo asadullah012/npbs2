@@ -17,4 +17,6 @@ object Category {
     const val POWER_OUTAGE_CONTACT = 3
     const val ZONAL_OFFICE = 1
     const val SUB_ZONAL_OFFICE = 2
+    const val BKASH_APP = "bKashApp"
+    const val BKASH_USSD = "bKashUSSD"
 }
