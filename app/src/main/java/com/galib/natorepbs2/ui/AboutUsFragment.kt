@@ -10,7 +10,7 @@ import androidx.navigation.Navigation.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentAboutUsBinding
 
-class AboutUsFragment : Fragment() {
+class AboutUsFragment : Fragment(), MenuOnClickListener  {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,55 +22,38 @@ class AboutUsFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_about_us)
-        binding.achievement = getString(R.string.menu_our_achievements)
-        binding.atAGlance = getString(R.string.menu_at_a_glance)
-        binding.visionMission = getString(R.string.menu_vision_mission)
-        binding.complainCentre = getString(R.string.menu_complain_centres)
-        binding.officerList = getString(R.string.menu_officers)
-        binding.juniorOfficerList = getString(R.string.menu_junior_officers)
-        binding.samityBoard = getString(R.string.menu_samity_board)
-        binding.officerList = getString(R.string.menu_officers)
-        binding.officeHead = getString(R.string.menu_office_head)
-        binding.officeList = getString(R.string.menu_offices)
-        binding.powerOutageContact = getString(R.string.menu_power_outage_contact)
-        binding.fragment = this
+        binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
         binding.lifecycleOwner = activity
         return binding.root
     }
 
-    fun onClick(v: View) {
-        //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
-        when (v.id) {
-            R.id.atAGlanceBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_atAGlanceFragment)
-            }
-            R.id.visionMissionBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_visionMissionFragment)
-            }
-            R.id.achievementBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_achievementFragment)
-            }
-            R.id.complainCentreBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_complainCentreFragment)
-            }
-            R.id.officersListBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_officersFragment)
-            }
-            R.id.juniorOfficerBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_juniorOfficerFragment)
-            }
-            R.id.boardMemberBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_boardMemberFragment)
-            }
-            R.id.powerOutageContactBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_powerOutageContactFragment)
-            }
-            R.id.officeHeadBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_officeHeadFragment)
-            }
-            R.id.officeListBtn -> {
-                findNavController(v).navigate(R.id.action_aboutUsFragment_to_officesFragment)
-            }
+    private fun getMenuList(): MutableList<String> {
+        val list : MutableList<String> = ArrayList()
+        list.add(getString(R.string.menu_at_a_glance))
+        list.add(getString(R.string.menu_vision_mission))
+        list.add(getString(R.string.menu_our_achievements))
+        list.add(getString(R.string.menu_samity_board))
+        list.add(getString(R.string.menu_office_head))
+        list.add(getString(R.string.menu_officers))
+        list.add(getString(R.string.menu_junior_officers))
+        list.add(getString(R.string.menu_offices))
+        list.add(getString(R.string.menu_complain_centres))
+        list.add(getString(R.string.menu_power_outage_contact))
+        return list
+    }
+
+    override fun menuOnClick(v: View, menuText: String) {
+        when (menuText) {
+            getString(R.string.menu_at_a_glance) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_atAGlanceFragment)
+            getString(R.string.menu_vision_mission) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_visionMissionFragment)
+            getString(R.string.menu_our_achievements) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_achievementFragment)
+            getString(R.string.menu_samity_board) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_boardMemberFragment)
+            getString(R.string.menu_office_head) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_officeHeadFragment)
+            getString(R.string.menu_officers) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_officersFragment)
+            getString(R.string.menu_junior_officers) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_juniorOfficerFragment)
+            getString(R.string.menu_offices) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_officesFragment)
+            getString(R.string.menu_complain_centres) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_complainCentreFragment)
+            getString(R.string.menu_power_outage_contact) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_powerOutageContactFragment)
         }
     }
 }

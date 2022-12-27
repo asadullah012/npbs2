@@ -1,60 +1,45 @@
 package com.galib.natorepbs2.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
 
 interface MenuOnClickListener {
-    fun menuOnClick(menuText : String)
+    fun menuOnClick(v: View, menuText : String)
 }
 
-class MenuAdapter(val listener: MenuOnClickListener) : ListAdapter<String, MenuAdapter.MenuViewHolder>(StringDiffCallback()) {
+class MenuAdapter(val context:Context, val listener: MenuOnClickListener, private val dataSet:MutableList<String>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
-        return MenuViewHolder.create(parent)
+        val v = LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false)
+        return MenuViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-        val current = getItem(position)
-        holder.bind(current, listener)
+        holder.button.text = dataSet[position]
+        holder.button.setOnClickListener { listener.menuOnClick(holder.button, dataSet[position]) }
     }
 
-    class StringDiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
-        }
-
+    override fun getItemCount(): Int {
+        return dataSet.size
     }
 
-    class MenuViewHolder private constructor(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        private val menuBtn: AppCompatButton
+    fun remove(position: Int) {
+        dataSet.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
-        init {
-            menuBtn = itemView.findViewById(R.id.menu_btn)
-        }
+    fun add(text: String, position: Int) {
+        dataSet.add(position, text)
+        notifyItemInserted(position)
+    }
 
-        fun bind(title: String, listener: MenuOnClickListener) {
-            menuBtn.text = title
-            menuBtn.setOnClickListener {
-                listener.menuOnClick(title)
-            }
-        }
+    class MenuViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        var button: AppCompatButton = itemView.findViewById<View>(R.id.menu_btn) as AppCompatButton
 
-        companion object {
-            fun create(parent: ViewGroup): MenuViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_menu, parent, false)
-                return MenuViewHolder(view)
-            }
-        }
     }
 }
