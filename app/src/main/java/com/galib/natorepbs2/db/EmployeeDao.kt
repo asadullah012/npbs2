@@ -26,4 +26,7 @@ interface EmployeeDao {
 
     @Query("DELETE FROM employee_table where type = :type")
     suspend fun deleteByCategory(type: Int)
+
+    @Query("SELECT * FROM employee_table where type = :type and office = :office ORDER BY priority")
+    fun getOfficerListByOffice(office: String, type:Int): Flow<List<Employee>>
 }

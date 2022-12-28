@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
 
 interface MenuOnClickListener {
-    fun menuOnClick(v: View, menuText : String)
+    fun menuOnClick(menuText : String)
 }
 
 class MenuAdapter(val context:Context, val listener: MenuOnClickListener, private val dataSet:MutableList<String>) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
@@ -21,7 +21,7 @@ class MenuAdapter(val context:Context, val listener: MenuOnClickListener, privat
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         holder.button.text = dataSet[position]
-        holder.button.setOnClickListener { listener.menuOnClick(holder.button, dataSet[position]) }
+        holder.button.setOnClickListener { listener.menuOnClick(dataSet[position]) }
     }
 
     override fun getItemCount(): Int {
@@ -40,6 +40,5 @@ class MenuAdapter(val context:Context, val listener: MenuOnClickListener, privat
 
     class MenuViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var button: AppCompatButton = itemView.findViewById<View>(R.id.menu_btn) as AppCompatButton
-
     }
 }

@@ -3,9 +3,12 @@ package com.galib.natorepbs2.sync
 import android.content.Context
 import android.content.res.AssetManager
 import android.util.Log
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
+import com.galib.natorepbs2.models.Employee
 import com.galib.natorepbs2.models.Information
 import com.galib.natorepbs2.models.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
@@ -459,17 +462,7 @@ class Sync {
         }
 
         fun syncBankInformation(informationViewModel: InformationViewModel, assets: AssetManager){
-            var json: String? = null
-            try {
-                val inputStream: InputStream = assets.open("init_data.json")
-                val size: Int = inputStream.available()
-                val buffer = ByteArray(size)
-                inputStream.read(buffer)
-                inputStream.close()
-                json = buffer.toString(Charsets.UTF_8)
-            } catch (ex: IOException) {
-                ex.printStackTrace()
-            }
+            var json: String? = Utility.getJsonFromAssets("init_data.json", assets)
             val data = ArrayList<Information>()
             if(json != null){
                 val jsonRootObject = JSONObject(json)
@@ -519,11 +512,27 @@ class Sync {
             }
         }
 
-        fun syncOtherOfficerList(employeeViewModel: EmployeeViewModel) {
-            val data = ArrayList<ArrayList<String>>()
+        fun syncOtherOfficeInformation(employeeViewModel: EmployeeViewModel, assets: AssetManager) {
+            var json: String? = Utility.getJsonFromAssets("init_data.json", assets)
+            val data = ArrayList<Information>()
+            if(json != null){
+                val jsonRootObject = JSONObject(json)
+                val jsonArray: JSONArray? = jsonRootObject.optJSONArray("otherOffices")
+                if(jsonArray != null) {
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        syncOfficerListFromURL(jsonObject.getString("name"), jsonObject.getString("url"), employeeViewModel)
+                    }
+                }
+            }
+        }
+
+        fun syncOfficerListFromURL(officeName:String, url: String, employeeViewModel: EmployeeViewModel){
+            val absoluteUrl = "$url/bn/site${URLs.OFFICER_LIST}"
+            Log.d(TAG, "syncOfficerListFromURL: $officeName, $absoluteUrl")
+            val data = ArrayList<Employee>()
             try {
-                val url = "http://police.natore.gov.bd/bn/site" + URLs.OFFICER_LIST
-                val document = Jsoup.connect(url).get()
+                val document = Jsoup.connect(absoluteUrl).get()
                 val tables = document.select(Selectors.OFFICERS_LIST)
                 for (table in tables) {
                     val trs = table.select("tr")
@@ -532,24 +541,60 @@ class Sync {
                         val tdList = ArrayList<String>()
                         for (j in tds.indices) {
                             if (j == 0)
-                                if(tds[j].select("img").first() != null && !tds[j].select("img").first()!!.absUrl("src").equals(url))
-                                    tdList.add( tds[j].select("img").first()!!.absUrl("src"))
-                                else tdList.add("")
+                                tdList.add( tds[j].select("img").first()!!.absUrl("src"))
                             else
                                 tdList.add(tds[j].text())
                         }
                         if (tdList.size > 0)
-                            data.add(tdList)
+                            data.add(Employee(i, tdList[0], tdList[1], tdList[2], officeName, tdList[4], tdList[5], tdList[6], Category.OTHER_OFFICES))
                     }
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
             }
             if(data.size > 0) {
-                //Log.d(TAG, "syncOfficerList: $data")
-                //employeeViewModel.insertOfficersFromTable(data as List<MutableList<String>>)
+                Log.d(TAG, "syncOfficerListFromURL: $officeName, ${data.size}")
+                employeeViewModel.insertEmployeeList(data)
             } else{
                 Log.e(TAG, "syncOfficerList: unable to get officer data")
+            }
+        }
+
+        fun syncBREBContacts(employeeViewModel:EmployeeViewModel){
+            val url = "https://reb.portal.gov.bd/site/view/officer_list/-"
+            val data = ArrayList<Employee>()
+            try {
+                val document = Jsoup.connect(url).get()
+                val tables = document.select("#with-pic > table")
+                for (table in tables) {
+                    val trs = table.select("tr")
+                    for (i in 0 until trs.size) {
+                        var imageUrl:String? = trs[i].select("td:nth-child(2) > img").first()?.absUrl("src")
+                        var name: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(2)").first()?.text()
+                        var designation: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(2) > td:nth-child(2)").first()?.text()
+                        var office: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2)").first()?.text()
+                        var email: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(4) > td:nth-child(2) > a").first()?.text()
+                        var mobile: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(2)").first()?.text()
+                        var phone: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td:nth-child(2)").first()?.text()
+                        if(imageUrl == null) imageUrl = ""
+                        if(mobile == null && phone != null) mobile = phone
+                        if(phone == null) phone = ""
+                        if(email == null) email = ""
+                        if(name != null && designation != null && office != null && mobile != null && mobile.isNotEmpty()){
+                            data.add(Employee(i, imageUrl, name, designation, office, email, mobile, phone, Category.REB))
+//                            Log.d(TAG, "syncBREBContacts: $imageUrl $name $designation $office $email $mobile $phone")
+//                            Log.d(TAG, "syncBREBContacts: ${data.last()}")
+                        }
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            if(data.size > 0) {
+                Log.d(TAG, "syncBREBContacts: ${data.size}")
+                employeeViewModel.insertEmployeeList(data)
+            } else{
+                Log.e(TAG, "syncBREBContacts: unable to get breb contacts")
             }
         }
     }

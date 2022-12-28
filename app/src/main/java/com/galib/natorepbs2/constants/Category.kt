@@ -15,6 +15,8 @@ object Category {
     const val JUNIOR_OFFICER = 1
     const val BOARD_MEMBER = 2
     const val POWER_OUTAGE_CONTACT = 3
+    const val OTHER_OFFICES = 4
+    const val REB = 5
     const val ZONAL_OFFICE = 1
     const val SUB_ZONAL_OFFICE = 2
     const val BKASH_APP = 0
