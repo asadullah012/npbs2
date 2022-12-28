@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentOtherOfficeContactsBinding
-import com.galib.natorepbs2.models.Information
-import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.utils.Utility
 import org.json.JSONArray
 import org.json.JSONObject

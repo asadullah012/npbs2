@@ -18,6 +18,7 @@ import okhttp3.ResponseBody
 import okio.Buffer
 import okio.BufferedSink
 import okio.Okio
+import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
@@ -25,6 +26,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class Utility {
     companion object{
@@ -208,5 +210,56 @@ class Utility {
             }
             return json
         }
+
+        fun getConsumerClass() : List<String>{
+            val list : MutableList<String> = ArrayList()
+            list.add("এলটি-এ: আবাসিক")
+            list.add("এলটি-বি: সেচ/কৃষিকাজে ব্যবহৃত পাম্প")
+            list.add("এলটি-সি ১: ক্ষুদ্র শিল্প")
+            list.add("এলটি-সি ২: নির্মাণ")
+            list.add("এলটি-ডি ১: শিক্ষা, ধর্মীয় ও দাতব্য প্রতিষ্ঠান এবং হাসপাতাল")
+            list.add("এলটি-ডি ২: রাস্তার বাতি ও পানির পাম্প")
+            list.add("এলটি-ডি ৩: ব্যাটারি চার্জিং স্টেশন")
+            list.add("এলটি-ই: বানিজ্যিক ও অফিস")
+            list.add("এলটি-টি: অস্থায়ী")
+            list.add("এমটি-১: আবাসিক")
+            list.add("এমটি-২: বানিজ্যিক ও অফিস")
+            list.add("এমটি-৩: শিল্প")
+            list.add("এমটি-৪: নির্মাণ")
+            list.add("এমটি-৫: সাধারণ")
+            list.add("এমটি-৬: অস্থায়ী")
+            list.add("এমটি-৭: ব্যাটারি চার্জিং স্টেশন")
+            list.add("এমটি-৮: সেচ/কৃষিকাজে ব্যবহৃত পাম্প")
+            list.add("এইচটি -১: সাধারণ")
+            list.add("এইচটি-২: বানিজ্যিক ও অফিস")
+            list.add("এইচটি-৩: শিল্প")
+            list.add("এইচটি-৪: নির্মাণ")
+            list.add("ইএইচটি -১: সাধারণ (২০ মে.ও. থেকে অনূর্ধ্ব ১৪০ মে.ও.)")
+            list.add("ইএইচটি -২: সাধারণ (১৪০ মে.ও. এর উর্ধ্বে)")
+            return list
+        }
+
+        fun calculateElectricityBill(tariff:String, unit:Int, contractLoad:Double ){
+
+        }
+
+        fun getTariffHtml(assetManager: AssetManager): String? {
+            val json = getJsonFromAssets("init_data.json", assetManager) ?: return null
+            val jsonRootObject = JSONObject(json)
+            return jsonRootObject.getString("electricity_tariff")
+        }
+
+        fun getConnectionRulesHtml(assetManager: AssetManager): String? {
+            val json = getJsonFromAssets("init_data.json", assetManager) ?: return null
+            val jsonRootObject = JSONObject(json)
+            return jsonRootObject.getString("electricity_connection_rules")
+        }
+
+        fun getHowToGetServiceHtml(assetManager: AssetManager): String? {
+            val json = getJsonFromAssets("init_data.json", assetManager) ?: return null
+            val jsonRootObject = JSONObject(json)
+            return jsonRootObject.getString("how_to_get_service")
+        }
+
     }
 }

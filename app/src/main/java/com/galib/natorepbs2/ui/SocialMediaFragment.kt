@@ -32,7 +32,6 @@ class SocialMediaFragment : Fragment() {
     }
 
     fun onClick(v: View) {
-        //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         when (v.id) {
             R.id.facebook_btn -> {
                 val uri = getFacebookPageURL(requireActivity().applicationContext)

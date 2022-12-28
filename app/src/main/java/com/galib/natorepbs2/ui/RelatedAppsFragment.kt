@@ -32,7 +32,6 @@ class RelatedAppsFragment : Fragment() {
     }
 
     fun onClick(v: View) {
-        //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         when (v.id) {
             R.id.digital_phonebook_btn -> {
                 openPlayStore(requireContext(), URLs.DIGITAL_PHONEBOOK_APP_ID)
