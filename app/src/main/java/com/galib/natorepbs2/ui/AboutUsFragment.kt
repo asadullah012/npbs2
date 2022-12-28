@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentAboutUsBinding
 
@@ -42,18 +42,18 @@ class AboutUsFragment : Fragment(), MenuOnClickListener  {
         return list
     }
 
-    override fun menuOnClick(v: View, menuText: String) {
+    override fun menuOnClick(menuText: String) {
         when (menuText) {
-            getString(R.string.menu_at_a_glance) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_atAGlanceFragment)
-            getString(R.string.menu_vision_mission) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_visionMissionFragment)
-            getString(R.string.menu_our_achievements) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_achievementFragment)
-            getString(R.string.menu_samity_board) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_boardMemberFragment)
-            getString(R.string.menu_office_head) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_officeHeadFragment)
-            getString(R.string.menu_officers) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_officersFragment)
-            getString(R.string.menu_junior_officers) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_juniorOfficerFragment)
-            getString(R.string.menu_offices) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_officesFragment)
-            getString(R.string.menu_complain_centres) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_complainCentreFragment)
-            getString(R.string.menu_power_outage_contact) -> findNavController(v).navigate(R.id.action_aboutUsFragment_to_powerOutageContactFragment)
+            getString(R.string.menu_at_a_glance) -> findNavController().navigate(R.id.action_aboutUsFragment_to_atAGlanceFragment)
+            getString(R.string.menu_vision_mission) -> findNavController().navigate(R.id.action_aboutUsFragment_to_visionMissionFragment)
+            getString(R.string.menu_our_achievements) -> findNavController().navigate(R.id.action_aboutUsFragment_to_achievementFragment)
+            getString(R.string.menu_samity_board) -> findNavController().navigate(R.id.action_aboutUsFragment_to_boardMemberFragment)
+            getString(R.string.menu_office_head) -> findNavController().navigate(R.id.action_aboutUsFragment_to_officeHeadFragment)
+            getString(R.string.menu_officers) -> findNavController().navigate(R.id.action_aboutUsFragment_to_officersFragment)
+            getString(R.string.menu_junior_officers) -> findNavController().navigate(R.id.action_aboutUsFragment_to_juniorOfficerFragment)
+            getString(R.string.menu_offices) -> findNavController().navigate(R.id.action_aboutUsFragment_to_officesFragment)
+            getString(R.string.menu_complain_centres) -> findNavController().navigate(R.id.action_aboutUsFragment_to_complainCentreFragment)
+            getString(R.string.menu_power_outage_contact) -> findNavController().navigate(R.id.action_aboutUsFragment_to_powerOutageContactFragment)
         }
     }
 }

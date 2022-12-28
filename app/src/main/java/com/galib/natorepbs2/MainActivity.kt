@@ -155,7 +155,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             Sync.syncJobData(tenderInformationViewModel)
             Sync.syncBankInformation(informationViewModel, assets)
             Sync.syncBanners(applicationContext)
-            Sync.syncOtherOfficerList(employeeViewModel)
+            Sync.syncOtherOfficeInformation(employeeViewModel, assets)
+            Sync.syncBREBContacts(employeeViewModel)
         }
         setLastUpdateTimeToPref(updatedOn)
     }

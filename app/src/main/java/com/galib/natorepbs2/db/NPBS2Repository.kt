@@ -116,6 +116,16 @@ class NPBS2Repository(db: NPBS2DB) {
         officeInformationDao.insertAll(officeInformationList)
     }
 
+    fun getOfficerListByOffice(office: String): Flow<List<Employee>> {
+        if(office == "বাংলাদেশ পল্লী বিদ্যুতায়ন বোর্ড")
+            return employeeDao.getAllByType(Category.REB)
+        return employeeDao.getOfficerListByOffice(office, Category.OTHER_OFFICES)
+    }
+
+    fun getOfficerListREB():  Flow<List<Employee>> {
+        return employeeDao.getAllByType(Category.OTHER_OFFICES)
+    }
+
     val allOfficeInformation: Flow<List<OfficeInformation>>
         get() = officeInformationDao.getAllOffice()
 

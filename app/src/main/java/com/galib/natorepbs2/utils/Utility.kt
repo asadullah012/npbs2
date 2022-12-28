@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.AssetManager
 import android.net.Uri
 import android.util.Log
 import com.galib.natorepbs2.constants.URLs
@@ -21,6 +22,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
 import java.io.IOException
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -190,6 +192,21 @@ class Utility {
                 e.printStackTrace()
             }
 
+        }
+
+        fun getJsonFromAssets(filename:String, assetManager: AssetManager): String?{
+            var json: String? = null
+            try {
+                val inputStream: InputStream = assetManager.open(filename)
+                val size: Int = inputStream.available()
+                val buffer = ByteArray(size)
+                inputStream.read(buffer)
+                inputStream.close()
+                json = buffer.toString(Charsets.UTF_8)
+            } catch (ex: IOException) {
+                ex.printStackTrace()
+            }
+            return json
         }
     }
 }

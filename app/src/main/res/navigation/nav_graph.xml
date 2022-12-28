@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_main_to_awarenessFragment"
             app:destination="@id/awarenessFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_otherOfficeContactsFragment"
+            app:destination="@id/otherOfficeContactsFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -367,6 +370,22 @@
         <argument
             android:name="billType"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactListFragment"
+        android:name="com.galib.natorepbs2.ui.ContactListFragment"
+        android:label="ContactListFragment" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/otherOfficeContactsFragment"
+        android:name="com.galib.natorepbs2.ui.OtherOfficeContactsFragment"
+        android:label="OtherOfficeContactsFragment" >
+        <action
+            android:id="@+id/action_otherOfficeContactsFragment_to_contactListFragment"
+            app:destination="@id/contactListFragment" />
     </fragment>
 
 

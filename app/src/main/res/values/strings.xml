@@ -107,4 +107,7 @@
     <string name="menu_bill_gpay_USSD">GPay USSD</string>
     <string name="menu_bill_upay_app">UPay অ্যাপ</string>
     <string name="menu_bill_ucash_USSD">UCash USSD</string>
+    <string name="menu_other_official_contacts">অন্যান্য সরকারি অফিসের কর্মকতাসমূহ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -15,6 +15,10 @@ class EmployeeViewModel(private val mRepository: NPBS2Repository) : ViewModel() 
     val boardMemberList: LiveData<List<Employee>>
         get() = mRepository.boardMemberList.asLiveData()
 
+    fun getOfficerListByOffice(office : String): LiveData<List<Employee>>{
+        return mRepository.getOfficerListByOffice(office).asLiveData()
+    }
+
     fun insertOfficersFromTable(tableData: List<List<String>>) = viewModelScope.launch{
         val officersList: MutableList<Employee> = ArrayList()
         for (i in tableData.indices) {
@@ -31,6 +35,10 @@ class EmployeeViewModel(private val mRepository: NPBS2Repository) : ViewModel() 
         }
         mRepository.deleteEmployeeByType(Category.OFFICERS)
         mRepository.insertEmployeeList(officersList)
+    }
+
+    fun insertEmployeeList( employeeList: List<Employee>)= viewModelScope.launch{
+        mRepository.insertEmployeeList(employeeList)
     }
 
     fun insertJuniorOfficerFromTable(tableData: List<List<String>>) = viewModelScope.launch{
