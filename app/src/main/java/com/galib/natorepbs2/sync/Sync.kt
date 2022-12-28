@@ -3,8 +3,6 @@ package com.galib.natorepbs2.sync
 import android.content.Context
 import android.content.res.AssetManager
 import android.util.Log
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs

@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentOurServicesBinding
+import com.galib.natorepbs2.utils.Utility
 
 class OurServicesFragment : Fragment() {
 
@@ -35,31 +35,27 @@ class OurServicesFragment : Fragment() {
     }
 
     fun onClick(v: View) {
-        //Navigation.findNavController(v).navigate(R.id.action_main_to_aboutUsFragment);
         when (v.id) {
             R.id.electricity_connection_btn -> {
-                findNavController(v).navigate(R.id.action_ourServicesFragment_to_electricityConnectionFragment)
+                findNavController().navigate(R.id.action_ourServicesFragment_to_electricityConnectionFragment)
             }
             R.id.electricity_bill_btn -> {
-                findNavController(v).navigate(R.id.action_ourServicesFragment_to_electricityBillFragment)
+                findNavController().navigate(R.id.action_ourServicesFragment_to_electricityBillFragment)
             }
             R.id.serviceListBtn -> {
                 val action = OurServicesFragmentDirections.actionOurServicesFragmentToWebViewFragment(
                     getString(R.string.menu_service_list),
-                    URLs.BASE + URLs.SERVICE_LIST,
-                    null,
-                    Selectors.SERVICE_LIST
+                    null, Utility.getHowToGetServiceHtml(requireContext().assets), null
                 )
-                findNavController(v).navigate(action)
+                findNavController().navigate(action)
             }
             R.id.citizen_charter_btn -> {
-                //Navigation.findNavController(v).navigate(R.id.action_ourServicesFragment_to_PDFViewerFragment);
                 val action = OurServicesFragmentDirections.actionOurServicesFragmentToPDFViewerFragment(
                     getString(R.string.menu_citizen_charter),
                     URLs.CITIZEN_CHARTER,
                     getString(R.string.menu_citizen_charter)
                 )
-                findNavController(v).navigate(action)
+                findNavController().navigate(action)
             }
         }
     }
