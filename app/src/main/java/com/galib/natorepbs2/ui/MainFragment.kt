@@ -10,13 +10,24 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.carouselview.CarouselView
 import com.galib.natorepbs2.carouselview.ImageListener
 import com.galib.natorepbs2.databinding.FragmentMainBinding
-import java.io.File
+import com.galib.natorepbs2.sync.Sync
+import com.galib.natorepbs2.utils.Utility
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class MainFragment : Fragment(), MenuOnClickListener {
+
+class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
+    private var job: Job = Job()
+    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,28 +62,21 @@ class MainFragment : Fragment(), MenuOnClickListener {
             carouselView.pageCount = sampleImages.size
             imageListener = object : ImageListener {
                 override fun setImageForPosition(position: Int, imageView: ImageView) {
-//                    imageView.setImageBitmap(BitmapFactory.decodeFile(sampleImages[position]))
-                    val src = BitmapFactory.decodeFile(sampleImages[position])
-                    val dr = RoundedBitmapDrawableFactory.create(resources, src)
-                    dr.cornerRadius = src.height/10.0F
-                    imageView.setImageDrawable(dr)
+                    Utility.loadImageInPicasso(sampleImages, position,imageView, resources)
                 }
             }
         }
         carouselView.setImageListener(imageListener)
     }
 
-    private fun getBannerImages(): ArrayList<String>? {
-        val dirPath: String = requireContext().filesDir.absolutePath + File.separator + "banners"
-        val bannerDir = File(dirPath)
-        if (!bannerDir.exists()) return null
-        val bannerImages= ArrayList<String>()
-        if(bannerDir.listFiles() != null){
-            for(file in bannerDir.listFiles()!!){
-                bannerImages.add(file.absolutePath)
+    private fun getBannerImages(): List<String>? {
+        val apps : NPBS2Application = activity?.application as NPBS2Application
+        if(apps.repository.getBannerUrls().isEmpty())
+            launch(Dispatchers.IO){
+                Sync.syncBanners(apps)
             }
-        }
-        return bannerImages
+
+        return apps.repository.getBannerUrls()
     }
 
     private fun getMenuList(): MutableList<String> {

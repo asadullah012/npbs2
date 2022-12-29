@@ -3,6 +3,7 @@ package com.galib.natorepbs2.sync
 import android.content.Context
 import android.content.res.AssetManager
 import android.util.Log
+import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
@@ -480,11 +481,8 @@ class Sync {
             }
         }
 
-        fun syncBanners(context: Context) {
-            val dirPath: String = context.filesDir.absolutePath + File.separator + "banners"
-            val bannerDir = File(dirPath)
-            if (!bannerDir.exists()) bannerDir.mkdirs()
-
+        fun syncBanners(application: NPBS2Application) {
+            val list:MutableList<String> = ArrayList()
             try {
                 val url = URLs.BASE + URLs.BANNERS
                 val document = Jsoup.connect(url).timeout(5 * 1000).get()
@@ -502,9 +500,10 @@ class Sync {
                             name = "$name.jpg"
                         }
                         if(bannerUrl != null && name != null)
-                            Utility.downloadAndSave(bannerUrl, name, bannerDir)
+                            list.add(bannerUrl)
                     }
                 }
+                application.repository.setBannerUrls(list)
             } catch (e : IOException){
                 e.printStackTrace()
             }

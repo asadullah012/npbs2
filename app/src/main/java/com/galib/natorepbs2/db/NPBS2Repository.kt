@@ -13,7 +13,7 @@ class NPBS2Repository(db: NPBS2DB) {
     private val employeeDao: EmployeeDao
     private val officeInformationDao: OfficeInformationDao
     private val noticeInformationDao: NoticeInformationDao
-
+    private val bannerUrls : MutableList<String>
     init {
         informationDao = db.informationDao()
         achievementDao = db.achievementDao()
@@ -21,6 +21,7 @@ class NPBS2Repository(db: NPBS2DB) {
         employeeDao = db.employeeDao()
         officeInformationDao = db.officeInformationDao()
         noticeInformationDao = db.noticeInformationDao()
+        bannerUrls = ArrayList()
     }
 
     val allAchievement: Flow<List<Achievement>>
@@ -141,6 +142,15 @@ class NPBS2Repository(db: NPBS2DB) {
 
     fun getAllNoticeByCategory(category: String): Flow<List<NoticeInformation>> {
         return noticeInformationDao.getAllNoticeByCategory(category)
+    }
+
+    fun getBannerUrls(): List<String> {
+        return bannerUrls
+    }
+
+    fun setBannerUrls(list : List<String>){
+        bannerUrls.clear()
+        bannerUrls.addAll(list)
     }
 
     fun getInstructionByType(type: Int): MutableList<Instruction>? {

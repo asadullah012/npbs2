@@ -5,9 +5,7 @@
 
     <data>
         <variable name="page_title" type="String" />
-        <variable name="website_breb" type="String" />
-        <variable name="website_natore_pbs2" type="String" />
-        <variable name="fragment" type="com.galib.natorepbs2.ui.WebsitesFragment" />
+        <variable name="adapter" type="com.galib.natorepbs2.ui.MenuAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,25 +34,21 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="5dp"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/breb_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{website_breb}"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/natore_pbs2_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{website_natore_pbs2}"
-                    app:layout_constraintTop_toBottomOf="@+id/breb_btn"
-                    app:layout_constraintStart_toStartOf="parent" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{adapter}"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
