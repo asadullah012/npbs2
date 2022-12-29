@@ -10,8 +10,13 @@ import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentWebsitesBinding
+import com.galib.natorepbs2.utils.Utility
+import org.json.JSONArray
+import org.json.JSONObject
 
-class WebsitesFragment : Fragment() {
+class WebsitesFragment : Fragment(), MenuOnClickListener  {
+    val list : MutableList<String> = ArrayList()
+    val urlList : MutableList<String> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,23 +29,37 @@ class WebsitesFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_websites)
-        binding.websiteBreb = getString(R.string.menu_breb)
-        binding.websiteNatorePbs2 = getString(R.string.menu_natore_pbs2)
-        binding.fragment = this
+        getMenuList()
+        binding.adapter = MenuAdapter(requireContext(),this, list)
         binding.lifecycleOwner = activity
         return binding.root
     }
+    private fun getMenuList(): MutableList<String> {
+        val json = Utility.getJsonFromAssets("init_data.json", requireContext().assets)
+        if(json != null){
+            val jsonRootObject = JSONObject(json)
+            val jsonArray: JSONArray? = jsonRootObject.optJSONArray("pbs")
+            if(jsonArray != null) {
+                for (i in 0 until jsonArray.length()) {
+                    list.add(jsonArray.getJSONObject(i).getString("name"))
+                    urlList.add(jsonArray.getJSONObject(i).getString("url"))
+                }
+            }
+        }
+        return list
+    }
 
-    fun onClick(v: View) {
-        when (v.id) {
-            R.id.breb_btn -> {
-                val action = WebsitesFragmentDirections.actionWebsitesFragmentToWebViewFragment(getString(R.string.menu_breb), URLs.BREB, null, null)
-                findNavController().navigate(action)
+    override fun menuOnClick(menuText: String) {
+        var url:String? = null
+        for(i in 0 until list.size){
+            if(list[i] == menuText) {
+                url = urlList[i]
             }
-            R.id.natore_pbs2_btn -> {
-                val action = WebsitesFragmentDirections.actionWebsitesFragmentToWebViewFragment(getString(R.string.menu_natore_pbs2), URLs.NATORE_PBS_2, null, null)
-                findNavController().navigate(action)
-            }
+        }
+        if(url != null){
+            val action = WebsitesFragmentDirections.actionWebsitesFragmentToWebViewFragment(menuText, url, null, null)
+            findNavController().navigate(action)
+
         }
     }
 }

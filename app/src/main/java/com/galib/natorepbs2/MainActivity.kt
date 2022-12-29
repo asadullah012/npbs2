@@ -154,7 +154,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             Sync.syncNewsData(tenderInformationViewModel)
             Sync.syncJobData(tenderInformationViewModel)
             Sync.syncBankInformation(informationViewModel, assets)
-            Sync.syncBanners(applicationContext)
             Sync.syncOtherOfficeInformation(employeeViewModel, assets)
             Sync.syncBREBContacts(employeeViewModel)
         }

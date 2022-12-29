@@ -5,9 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
+import android.content.res.Resources
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.util.Log
+import android.widget.ImageView
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.galib.natorepbs2.constants.URLs
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -38,19 +44,19 @@ class Utility {
         }
 
         @JvmStatic
-        fun getFacebookPageURL(context: Context): String {
+        fun getFacebookPageURL(context: Context, url:String): String {
             val packageManager = context.packageManager
             return try {
                 val appInfo = packageManager.getPackageInfo("com.facebook.katana", 0)
                 Log.d("NPBS2", "fb" + appInfo.versionCode)
                 if (appInfo.versionCode >= 3002850) {
-                    "fb://facewebmodal/f?href=" + URLs.FACEBOOK
+                    "fb://facewebmodal/f?href=" + url
                 } else {
-                    "fb://page/" + URLs.FACEBOOK_APP_ID
+                    url
                 }
             } catch (e: PackageManager.NameNotFoundException) {
                 Log.d("NPBS2", "fb app not found " + e.localizedMessage)
-                URLs.FACEBOOK //normal web url
+                url //normal web url
             }
         }
 
@@ -259,6 +265,23 @@ class Utility {
             val json = getJsonFromAssets("init_data.json", assetManager) ?: return null
             val jsonRootObject = JSONObject(json)
             return jsonRootObject.getString("how_to_get_service")
+        }
+
+        fun loadImageInPicasso(sampleImages: List<String>, position: Int, imageView:ImageView, resources:Resources) {
+            Picasso.get()
+                .load(if (sampleImages[position] == null || sampleImages[position].isEmpty()) null else sampleImages[position])
+                .into(imageView,  object: Callback {
+                    override fun onSuccess() {
+                        val src = (imageView.drawable as BitmapDrawable).bitmap
+                        val dr = RoundedBitmapDrawableFactory.create(resources, src)
+                        dr.cornerRadius = src.height/10.0F
+                        imageView.setImageDrawable(dr)
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        e?.printStackTrace()
+                    }
+                })
         }
 
     }
