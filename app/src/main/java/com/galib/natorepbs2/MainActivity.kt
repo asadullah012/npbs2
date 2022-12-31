@@ -1,15 +1,21 @@
 package com.galib.natorepbs2
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import com.galib.natorepbs2.sync.Sync
@@ -28,8 +34,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     NavigationView.OnNavigationItemSelectedListener {
     private var syncJob: Job? = null
     private lateinit var drawerLayout:DrawerLayout
-    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-    private val TAG = "MainActivity"
     private var job: Job = Job()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
 
@@ -56,6 +60,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         syncIfRequired()
 
@@ -64,20 +69,42 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         updateMenu(navigationView)
 
         drawerLayout = findViewById(R.id.drawer_layout)
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
+        val drawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+        drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val callback = onBackPressedDispatcher.addCallback(this, false) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+
+        drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerOpened(drawerView: View) {
+                callback.isEnabled = true
+            }
+            override fun onDrawerClosed(drawerView: View) {
+                callback.isEnabled = false
+            }
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) = Unit
+            override fun onDrawerStateChanged(newState: Int) = Unit
+        })
+
+       supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    fun closeDrawerIfOpen(){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+
+        }
     }
 
     private fun updateMenu(navigationView: NavigationView) {
         val menu = navigationView.menu
-
         val subMenuFavorites = menu.addSubMenu(R.string.menu_favorites)
         subMenuFavorites.add(R.string.menu_awareness)
         subMenuFavorites.add(R.string.menu_officers)
-        val subMenu = menu.addSubMenu(R.string.menu_settings)
+        val subMenu = menu.addSubMenu(R.string.menu_others)
         subMenu.add(R.string.menu_settings)
         subMenu.add(R.string.menu_about_app)
         navigationView.invalidate()
@@ -90,10 +117,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.d(TAG, "onOptionsItemSelected: ${item.title}")
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true
-        }
         return when (item.itemId) {
+            android.R.id.home -> {
+                drawerLayout.openDrawer(GravityCompat.START)
+                true
+            }
             R.id.force_sync -> {
                 if(syncJob == null || !syncJob!!.isActive)
                     Toast.makeText(applicationContext, "Force sync selected", Toast.LENGTH_LONG).show()
@@ -175,8 +203,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         } else if(item.title == getString(R.string.menu_officers) && fragment !is OfficersFragment){
             navController.navigate(R.id.officersFragment)
         }
-        drawerLayout.closeDrawers()
+        item.isChecked = true
+        drawerLayout.close()
         return true
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 
 }
