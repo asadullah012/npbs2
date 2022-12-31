@@ -11,7 +11,7 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentRelatedAppsBinding
 
-class RelatedAppsFragment : Fragment() {
+class RelatedAppsFragment : Fragment(), MenuOnClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,21 +24,22 @@ class RelatedAppsFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_related_apps)
-        binding.digitalPhonebook = getString(R.string.menu_digital_phonebook)
-        binding.nothi = getString(R.string.menu_nothi)
-        binding.fragment = this
+        binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
         binding.lifecycleOwner = activity
         return binding.root
     }
 
-    fun onClick(v: View) {
-        when (v.id) {
-            R.id.digital_phonebook_btn -> {
-                openPlayStore(requireContext(), URLs.DIGITAL_PHONEBOOK_APP_ID)
-            }
-            R.id.nothi_btn -> {
-                openPlayStore(requireContext(), URLs.NOTHI_APP_ID)
-            }
+    private fun getMenuList(): MutableList<String> {
+        val list : MutableList<String> = ArrayList()
+        list.add(getString(R.string.menu_digital_phonebook))
+        list.add(getString(R.string.menu_nothi))
+        return list
+    }
+
+    override fun menuOnClick(menuText: String) {
+        when(menuText){
+            getString(R.string.menu_digital_phonebook) -> openPlayStore(requireContext(), URLs.DIGITAL_PHONEBOOK_APP_ID)
+            getString(R.string.menu_nothi) -> openPlayStore(requireContext(), URLs.NOTHI_APP_ID)
         }
     }
 }

@@ -108,4 +108,5 @@
     <string name="menu_bill_upay_app">UPay অ্যাপ</string>
     <string name="menu_bill_ucash_USSD">UCash USSD</string>
     <string name="menu_other_official_contacts">অন্যান্য সরকারি অফিসের কর্মকর্তাগণ</string>
+    <string name="menu_connection_domestic_new">অনলাইন বিদ্যুৎ সংযোগ\n(রাজশাহী পবিস এবং যশোর পবিস-১ এর জন্য)</string>
 </resources>

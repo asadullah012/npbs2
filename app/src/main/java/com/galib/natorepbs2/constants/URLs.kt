@@ -15,14 +15,12 @@ object URLs {
    const val COMPLAIN_GOOGLE_FORM =
       "https://docs.google.com/forms/d/1wrjpi4k-hUlaLPtW19x9PeliJaKdroBQt3ryYHJ9Ahw/viewform"
    const val GRS = "https://www.grs.gov.bd/"
-   const val CONNECTOION_DOMESTIC = "http://www.rebpbs.com/"
+   const val CONNECTION_DOMESTIC = "http://www.rebpbs.com/"
    const val CONNECTION_INDUSTRY = "http://industry.rebpbs.com/"
    const val CITIZEN_CHARTER =
       "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//637/b26/6a1/637b266a1f1a3579521120.pdf"
    const val FACEBOOK = "https://facebook.com/natorepbstwo"
    const val FACEBOOK_APP_ID = "100068895832922"
-   const val DIGITAL_PHONEBOOK_APP_ID = "reb.ebook.contackbook"
-   const val NOTHI_APP_ID = "com.tappware.nothipro"
    const val PLAY_STORE_PREFIX = "https://play.google.com/store/apps/details?id="
    val ZONAL_OFFICES = arrayOf("/page/qHTA-চারঘাট-জোনাল-অফিস", "/page/4Yl0-গুরুদাসপুর-জোনাল-অফিস", "/page/VDOD-লালপুর-জোনাল-অফিস", "/page/YJzZ-বাঘা-জোনাল-অফিস")
    val SUB_ZONAL_OFFICES = arrayOf("/page/ksib-লক্ষিকোল-সাব-জোনাল-অফিস", "/page/GCYi-দয়ারামপুর-সাব-জোনাল-অফিস")
@@ -34,4 +32,9 @@ object URLs {
    const val SERVICE_LIST = "/office_process_map/uIWT-কী-সেবা-কীভাবে-পাবেন।"
    const val COMMUNICATION_POST = "/page/rxkY-ডাক-যোগাযোগ"
    const val BANNERS = "/view/top_banner"
+   const val CONNECTION_DOMESTIC_NEW = "https://newconnection.rebpbs.com"
+
+   const val DIGITAL_PHONEBOOK_APP_ID = "reb.ebook.contackbook"
+   const val NOTHI_APP_ID = "com.tappware.nothipro"
+
 }

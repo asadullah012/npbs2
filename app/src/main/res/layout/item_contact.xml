@@ -11,125 +11,132 @@
             name="clickListener"
             type="com.galib.natorepbs2.ui.ContactListAdapter.ClickListener" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:background="@drawable/item_background">
+        style="@style/Widget.App.CardView"
+        app:cardPreventCornerOverlap="false">
 
-        <ImageView
-            android:id="@+id/profilePhoto"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.2"
-            android:src="@mipmap/ic_launcher_round"
-            setProfilePhoto="@{employee.imageUrl}"
-            android:contentDescription="@{employee.name}"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.65"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:ellipsize="end"
-            android:singleLine="false"
-            android:text="@{employee.name}"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/profilePhoto"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/profilePhoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.2"
+                android:src="@mipmap/ic_launcher_round"
+                setProfilePhoto="@{employee.imageUrl}"
+                android:contentDescription="@{employee.name}"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/designationTextView"
-            android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.65"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:ellipsize="end"
-            android:singleLine="false"
-            android:text="@{employee.designation}"
-            app:layout_constraintStart_toEndOf="@id/profilePhoto"
-            app:layout_constraintTop_toBottomOf="@id/nameTextView" />
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.65"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:singleLine="false"
+                android:text="@{employee.name}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/officeTextView"
-            android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.65"
-            android:ellipsize="end"
-            android:singleLine="false"
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:text="@{employee.office}"
-            android:visibility="@{employee.office == null || employee.office.length() == 0 ? View.GONE : View.VISIBLE}"
-            app:layout_constraintStart_toEndOf="@id/profilePhoto"
-            app:layout_constraintTop_toBottomOf="@id/designationTextView" />
+            <TextView
+                android:id="@+id/designationTextView"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.65"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:singleLine="false"
+                android:text="@{employee.designation}"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toBottomOf="@id/nameTextView" />
 
-        <TextView
-            android:id="@+id/mobileTextView"
-            android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.65"
-            android:ellipsize="end"
-            android:singleLine="false"
-            android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:text="@{employee.mobile}"
-            app:layout_constraintStart_toEndOf="@id/profilePhoto"
-            app:layout_constraintTop_toBottomOf="@id/officeTextView" />
+            <TextView
+                android:id="@+id/officeTextView"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.65"
+                android:ellipsize="end"
+                android:singleLine="false"
+                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@{employee.office}"
+                android:visibility="@{employee.office == null || employee.office.length() == 0 ? View.GONE : View.VISIBLE}"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toBottomOf="@id/designationTextView" />
 
-        <TextView
-            android:id="@+id/emailTextView"
-            android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.65"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:ellipsize="end"
-            android:singleLine="false"
-            android:text="@{employee.email}"
-            android:visibility="@{employee.email == null || employee.email.length() == 0 ? View.GONE : View.VISIBLE}"
-            android:textStyle="italic"
-            app:layout_constraintStart_toEndOf="@id/profilePhoto"
-            app:layout_constraintTop_toBottomOf="@id/mobileTextView" />
+            <TextView
+                android:id="@+id/mobileTextView"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.65"
+                android:ellipsize="end"
+                android:singleLine="false"
+                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@{employee.mobile}"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toBottomOf="@id/officeTextView" />
 
-        <ImageView
-            android:id="@+id/callBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:padding="5dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_call"
-            android:background="@drawable/button_round_bg"
-            android:contentDescription="@{employee.name}"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:onClick="@{()->clickListener.onClickCall(employee.mobile)}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/emailBtn"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.65"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:singleLine="false"
+                android:text="@{employee.email}"
+                android:visibility="@{employee.email == null || employee.email.length() == 0 ? View.GONE : View.VISIBLE}"
+                android:textStyle="italic"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toBottomOf="@id/mobileTextView" />
 
-        <ImageView
-            android:id="@+id/emailBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:padding="5dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_email"
-            android:background="@drawable/button_round_bg"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:visibility="@{employee.email.length() == 0 ? View.GONE : View.VISIBLE}"
-            android:onClick="@{()->clickListener.onClickEmail(employee.email)}"
-            app:layout_constraintTop_toBottomOf="@id/callBtn"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <ImageView
+                android:id="@+id/callBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:padding="5dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_call"
+                android:background="@drawable/button_round_bg"
+                android:contentDescription="@{employee.name}"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:onClick="@{()->clickListener.onClickCall(employee.mobile)}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/emailBtn"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/emailBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:padding="5dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_email"
+                android:background="@drawable/button_round_bg"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:visibility="@{employee.email.length() == 0 ? View.GONE : View.VISIBLE}"
+                android:onClick="@{()->clickListener.onClickEmail(employee.email)}"
+                app:layout_constraintTop_toBottomOf="@id/callBtn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 </layout>

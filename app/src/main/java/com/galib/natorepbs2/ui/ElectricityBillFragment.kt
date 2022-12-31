@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentElectricityBillBinding
 import com.galib.natorepbs2.utils.Utility
 
-class ElectricityBillFragment : Fragment() {
+class ElectricityBillFragment : Fragment(),MenuOnClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,36 +25,31 @@ class ElectricityBillFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_electricity_bill)
-        binding.billCollectionBank = getString(R.string.menu_bill_collection_bank)
-        binding.billFromHome = getString(R.string.menu_bill_from_home)
-        binding.electricityTariff = getString(R.string.menu_electricity_tariff)
-        binding.billCalculator = getString(R.string.menu_electricity_bill_calculator)
-        binding.smsBill = getString(R.string.menu_sms_electricity_bill)
-        binding.fragment = this
+        binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
         binding.lifecycleOwner = activity
         return binding.root
     }
 
-    fun onClick(v: View) {
-        when (v.id) {
-            R.id.bill_from_home_btn -> {
-                findNavController().navigate(R.id.action_electricityBillFragment_to_billFromHomeFragment)
-            }
-            R.id.electricity_tarriff_btn -> {
-                val html = Utility.getTariffHtml(requireContext().assets)
-                val action =
-                    ElectricityBillFragmentDirections.actionElectricityBillFragmentToWebViewFragment(
-                        getString(R.string.menu_electricity_tariff),
-                        null, html, null)
-                findNavController().navigate(action)
-            }
-            R.id.sms_electricity_bill_btn -> {
-                findNavController().navigate(R.id.action_electricityBillFragment_to_billMessageFragment)
-            }
-            R.id.bill_collection_bank_btn -> {
-                findNavController().navigate(R.id.action_electricityBillFragment_to_bankInformationFragment)
-            }
-            R.id.bill_calculator_btn -> findNavController().navigate(R.id.action_electricityBillFragment_to_billCalculatorFragment)
+    fun getMenuList():MutableList<String>{
+        val list : MutableList<String> = ArrayList()
+        list.add(getString(R.string.menu_bill_collection_bank))
+        list.add(getString(R.string.menu_bill_from_home))
+        list.add(getString(R.string.menu_electricity_tariff))
+        list.add(getString(R.string.menu_electricity_bill_calculator))
+        list.add(getString(R.string.menu_sms_electricity_bill))
+        return list
+    }
+
+    override fun menuOnClick(menuText: String) {
+        var action: NavDirections? = null
+        when(menuText){
+            getString(R.string.menu_bill_collection_bank) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBankInformationFragment()
+            getString(R.string.menu_bill_from_home) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillFromHomeFragment()
+            getString(R.string.menu_electricity_tariff) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToWebViewFragment(getString(R.string.menu_electricity_tariff), null, Utility.getTariffHtml(requireContext().assets), null)
+            getString(R.string.menu_electricity_bill_calculator) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillCalculatorFragment()
+            getString(R.string.menu_sms_electricity_bill) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillMessageFragment()
         }
+        if(action != null)
+            findNavController().navigate(action)
     }
 }
