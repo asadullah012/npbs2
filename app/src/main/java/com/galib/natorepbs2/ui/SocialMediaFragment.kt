@@ -30,9 +30,11 @@ class SocialMediaFragment : Fragment(), MenuOnClickListener {
             container,
             false
         )
-        binding.pageTitle = getString(R.string.menu_social_media) + "\n" + "(ফেসবুক পেজ)"
+        binding.pageTitle = getString(R.string.menu_social_media)
         getMenuList()
-        binding.adapter = MenuAdapter(requireContext(),this, list)
+        val adapter = MenuAdapter(requireContext(),this, list)
+        adapter.setIcon(R.drawable.ic_facebook)
+        binding.adapter = adapter
         binding.lifecycleOwner = activity
         return binding.root
     }

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentNoticeTenderBinding
 
-class NoticeTenderFragment : Fragment() {
+class NoticeTenderFragment : Fragment(), MenuOnClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,45 +23,21 @@ class NoticeTenderFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_notice_tender)
-        binding.notice = getString(R.string.menu_notice)
-        binding.tender = getString(R.string.menu_tender)
-        binding.news = getString(R.string.menu_news)
-        binding.job = getString(R.string.menu_job)
-        binding.fragment = this
+        binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
         binding.lifecycleOwner = activity
         return binding.root
     }
 
-    fun onClick(v: View) {
-        when (v.id) {
-            R.id.tender_btn -> {
-                val action =
-                    NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(
-                        getString(R.string.menu_tender)
-                    )
-                findNavController().navigate(action)
-            }
-            R.id.notice_btn -> {
-                val action =
-                    NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(
-                        getString(R.string.menu_notice)
-                    )
-                findNavController().navigate(action)
-            }
-            R.id.news_btn -> {
-                val action =
-                    NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(
-                        getString(R.string.menu_news)
-                    )
-                findNavController().navigate(action)
-            }
-            R.id.job_btn -> {
-                val action =
-                    NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(
-                        getString(R.string.menu_job)
-                    )
-                findNavController().navigate(action)
-            }
-        }
+    private fun getMenuList(): MutableList<String> {
+        val list : MutableList<String> = ArrayList()
+        list.add(getString(R.string.menu_notice))
+        list.add(getString(R.string.menu_tender))
+        list.add(getString(R.string.menu_news))
+        list.add(getString(R.string.menu_job))
+        return list
+    }
+
+    override fun menuOnClick(menuText: String) {
+        findNavController().navigate(NoticeTenderFragmentDirections.actionNoticeTenderFragmentToNoticeInformationFragment(menuText))
     }
 }
