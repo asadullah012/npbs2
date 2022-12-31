@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
 
@@ -21,7 +23,7 @@ class MenuAdapter(val context:Context, val listener: MenuOnClickListener, privat
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         holder.button.text = dataSet[position]
-        holder.button.setOnClickListener { listener.menuOnClick(dataSet[position]) }
+        holder.card.setOnClickListener { listener.menuOnClick(dataSet[position]) }
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +41,7 @@ class MenuAdapter(val context:Context, val listener: MenuOnClickListener, privat
     }
 
     class MenuViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var button: AppCompatButton = itemView.findViewById<View>(R.id.menu_btn) as AppCompatButton
+        var button: TextView = itemView.findViewById(R.id.menu_title)
+        var card: CardView = itemView.findViewById(R.id.cardMenu)
     }
 }
