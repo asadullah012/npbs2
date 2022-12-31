@@ -7,16 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ImageView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.customui.TouchImageView
-import com.galib.natorepbs2.carouselview.CarouselView
-import com.galib.natorepbs2.carouselview.ImageClickListener
-import com.galib.natorepbs2.carouselview.ImageListener
+import com.galib.natorepbs2.customui.carouselview.CarouselView
+import com.galib.natorepbs2.customui.touchimageview.TouchImageView
+import com.galib.natorepbs2.customui.carouselview.ImageClickListener
+import com.galib.natorepbs2.customui.carouselview.ImageListener
 import com.galib.natorepbs2.databinding.FragmentAwarenessBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -65,7 +64,7 @@ class AwarenessFragment : Fragment(), ImageClickListener {
                     val src = BitmapFactory.decodeResource(resources, sampleImages[position])
                     val ratio = src.height.toFloat()/src.width
                     val width = (displayMetrics.widthPixels*0.8).toInt()
-                    val height = (width * ratio).toInt()
+                    val height = (width * ratio).toInt() //TODO if height is to much big, it may cause overflow
                     val scaled = Bitmap.createScaledBitmap(src, width,height, true)
                     val dr = RoundedBitmapDrawableFactory.create(resources, scaled)
                     dr.cornerRadius = 20.0F

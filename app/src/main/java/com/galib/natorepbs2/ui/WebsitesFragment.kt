@@ -35,6 +35,8 @@ class WebsitesFragment : Fragment(), MenuOnClickListener  {
         return binding.root
     }
     private fun getMenuList(): MutableList<String> {
+        list.clear()
+        urlList.clear()
         val json = Utility.getJsonFromAssets("init_data.json", requireContext().assets)
         if(json != null){
             val jsonRootObject = JSONObject(json)

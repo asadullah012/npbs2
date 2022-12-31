@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.carouselview.CarouselView
-import com.galib.natorepbs2.carouselview.ImageListener
+import com.galib.natorepbs2.customui.carouselview.CarouselView
+import com.galib.natorepbs2.customui.carouselview.ImageListener
 import com.galib.natorepbs2.databinding.FragmentMainBinding
 import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.utils.Utility
@@ -83,11 +83,12 @@ class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
         val list : MutableList<String> = ArrayList()
         list.add(getString(R.string.menu_about_us))
         list.add(getString(R.string.menu_our_services))
+        list.add(getString(R.string.menu_electricity_bill))
         list.add(getString(R.string.menu_websites))
+        list.add(getString(R.string.menu_notice_tender))
         list.add(getString(R.string.menu_social_media))
         list.add(getString(R.string.menu_related_apps))
         list.add(getString(R.string.menu_opinion_complain))
-        list.add(getString(R.string.menu_notice_tender))
         list.add(getString(R.string.menu_communication))
         list.add(getString(R.string.menu_awareness))
         list.add(getString(R.string.menu_other_official_contacts))
@@ -98,6 +99,7 @@ class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
         when (menuText) {
             getString(R.string.menu_about_us) -> findNavController().navigate(R.id.action_main_to_aboutUsFragment)
             getString(R.string.menu_our_services) -> findNavController().navigate(R.id.action_main_to_ourServicesFragment)
+            getString(R.string.menu_electricity_bill) -> findNavController().navigate(R.id.action_mainFragment_to_electricityBillFragment)
             getString(R.string.menu_websites) -> findNavController().navigate(R.id.action_main_to_websitesFragment)
             getString(R.string.menu_social_media) -> findNavController().navigate(R.id.action_main_to_socialMediaFragment)
             getString(R.string.menu_opinion_complain) -> findNavController().navigate(R.id.action_main_to_opinionComplainFragment)

@@ -5,15 +5,7 @@
 
     <data>
         <variable name="page_title" type="String" />
-        <variable name="bkash_app" type="String" />
-        <variable name="bkash_ussd" type="String" />
-        <variable name="rocket_app" type="String" />
-        <variable name="rocket_ussd" type="String" />
-        <variable name="gpay_app" type="String" />
-        <variable name="gpay_ussd" type="String" />
-        <variable name="upay_app" type="String" />
-        <variable name="ucash_ussd" type="String" />
-        <variable name="fragment" type="com.galib.natorepbs2.ui.BillFromHomeFragment" />
+        <variable name="adapter" type="com.galib.natorepbs2.ui.MenuAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,83 +25,30 @@
             android:id="@+id/scrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.8"
             android:fillViewport="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView">
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="5dp"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bkash_app_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{bkash_app}"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{adapter}"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bkash_ussd_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{bkash_ussd}"
-                    app:layout_constraintTop_toBottomOf="@+id/bkash_app_btn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/rocket_app_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{rocket_app}"
-                    app:layout_constraintTop_toBottomOf="@+id/bkash_ussd_btn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/rocket_ussd_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{rocket_ussd}"
-                    app:layout_constraintTop_toBottomOf="@+id/rocket_app_btn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/gpay_app_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{gpay_app}"
-                    app:layout_constraintTop_toBottomOf="@+id/rocket_ussd_btn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/gpay_ussd_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{gpay_ussd}"
-                    app:layout_constraintTop_toBottomOf="@+id/gpay_app_btn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/upay_app_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{upay_app}"
-                    app:layout_constraintTop_toBottomOf="@+id/gpay_ussd_btn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/ucash_ussd_btn"
-                    style="@style/menu_button"
-                    android:onClick="@{(v)-> fragment.onClick(v)}"
-                    android:text="@{ucash_ussd}"
-                    app:layout_constraintTop_toBottomOf="@+id/upay_app_btn"
-                    app:layout_constraintStart_toStartOf="parent" />
-
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
