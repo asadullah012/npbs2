@@ -1,8 +1,8 @@
 package com.galib.natorepbs2.ui
 
 import android.app.Dialog
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +12,12 @@ import android.widget.ImageView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
+import com.galib.natorepbs2.customui.TouchImageView
 import com.galib.natorepbs2.carouselview.CarouselView
 import com.galib.natorepbs2.carouselview.ImageClickListener
 import com.galib.natorepbs2.carouselview.ImageListener
 import com.galib.natorepbs2.databinding.FragmentAwarenessBinding
-import com.galib.natorepbs2.utils.Utility
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -58,13 +57,17 @@ class AwarenessFragment : Fragment(), ImageClickListener {
         val displayMetrics = resources.displayMetrics
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.popup_image)
-        val imageView = dialog.findViewById<ImageView>(R.id.imageView)
+        val imageView = dialog.findViewById<TouchImageView>(R.id.imageView)
         Picasso.get()
             .load(sampleImages[position])
             .into(imageView,  object: Callback {
                 override fun onSuccess() {
                     val src = BitmapFactory.decodeResource(resources, sampleImages[position])
-                    val dr = RoundedBitmapDrawableFactory.create(resources, src)
+                    val ratio = src.height.toFloat()/src.width
+                    val width = (displayMetrics.widthPixels*0.8).toInt()
+                    val height = (width * ratio).toInt()
+                    val scaled = Bitmap.createScaledBitmap(src, width,height, true)
+                    val dr = RoundedBitmapDrawableFactory.create(resources, scaled)
                     dr.cornerRadius = 20.0F
                     imageView.setImageDrawable(dr)
                 }
@@ -73,9 +76,7 @@ class AwarenessFragment : Fragment(), ImageClickListener {
                     e?.printStackTrace()
                 }
             })
-        dialog.window?.setLayout((displayMetrics.widthPixels*0.9).toInt(),
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        dialog.show();
+        imageView.adjustViewBounds = true
+        dialog.show()
     }
 }
