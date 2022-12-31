@@ -17,6 +17,6 @@ class SScreenActivity : AppCompatActivity() {
         Executors.newSingleThreadScheduledExecutor().schedule({
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
-            finish() }, 2, TimeUnit.SECONDS)
+            finish() }, 1, TimeUnit.SECONDS)
     }
 }

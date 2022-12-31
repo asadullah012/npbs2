@@ -90,6 +90,17 @@
                     app:layout_constraintTop_toBottomOf="@id/designationTextView" />
 
                 <TextView
+                    android:id="@+id/phoneTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:text="@{`ফোন নং : ` + employee.phone}"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mobileTextView" />
+                <TextView
                     android:id="@+id/emailTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -98,7 +109,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mobileTextView" />
+                    app:layout_constraintTop_toBottomOf="@id/phoneTextView" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/callBtn"

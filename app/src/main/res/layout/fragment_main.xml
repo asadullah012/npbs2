@@ -43,7 +43,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <com.galib.natorepbs2.carouselview.CarouselView
+                    <com.galib.natorepbs2.customui.carouselview.CarouselView
                         android:id="@+id/bannerCarousel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

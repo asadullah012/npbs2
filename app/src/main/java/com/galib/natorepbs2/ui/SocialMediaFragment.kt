@@ -30,7 +30,7 @@ class SocialMediaFragment : Fragment(), MenuOnClickListener {
             container,
             false
         )
-        binding.pageTitle = getString(R.string.menu_social_media)
+        binding.pageTitle = getString(R.string.menu_social_media) + "\n" + "(ফেসবুক পেজ)"
         getMenuList()
         binding.adapter = MenuAdapter(requireContext(),this, list)
         binding.lifecycleOwner = activity
@@ -38,13 +38,15 @@ class SocialMediaFragment : Fragment(), MenuOnClickListener {
     }
 
     private fun getMenuList(): MutableList<String> {
+        list.clear()
+        urlList.clear()
         val json = Utility.getJsonFromAssets("init_data.json", requireContext().assets)
         if(json != null){
             val jsonRootObject = JSONObject(json)
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("pbsFacebook")
             if(jsonArray != null) {
                 for (i in 0 until jsonArray.length()) {
-                    list.add(jsonArray.getJSONObject(i).getString("name") + " " + getString(R.string.menu_facebook_page))
+                    list.add(jsonArray.getJSONObject(i).getString("name") )
                     urlList.add(jsonArray.getJSONObject(i).getString("url"))
                 }
             }

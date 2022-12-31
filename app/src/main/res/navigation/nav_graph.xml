@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_mainFragment_to_otherOfficeContactsFragment"
             app:destination="@id/otherOfficeContactsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_electricityBillFragment"
+            app:destination="@id/electricityBillFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"

@@ -44,13 +44,13 @@
 
 
     <string name="menu_our_services">আমাদের সেবা</string>
-    <string name="menu_electricity_connection">বিদ্যুৎ সংযোগ</string>
+    <string name="menu_electricity_connection">বিদ্যুৎ সংযোগ সংক্রান্ত</string>
     <string name="menu_electricity_connection_rules">বিদ্যুৎ সংযোগের নিয়মাবলী</string>
     <string name="menu_connection_industry">শিল্প সংযোগ</string>
     <string name="menu_connection_domestic">আবাসিক সংযোগ</string>
     <string name="menu_sms_connection">নতুন সংযোগ সংক্রান্ত এসএমএস</string>
 
-    <string name="menu_electricity_bill">বিদ্যুৎ বিল</string>
+    <string name="menu_electricity_bill">বিদ্যুৎ বিল সংক্রান্ত</string>
     <string name="menu_electricity_tariff">বিদ্যুতের মূল্যহার</string>
     <string name="menu_sms_electricity_bill">বিদ্যুৎ বিল সংক্রান্ত এসএমএস</string>
     <string name="menu_bill_collection_bank">বিদ্যুৎ বিল আদায়কারী ব্যাংক ও শাখার নাম</string>
@@ -107,5 +107,5 @@
     <string name="menu_bill_gpay_USSD">GPay USSD</string>
     <string name="menu_bill_upay_app">UPay অ্যাপ</string>
     <string name="menu_bill_ucash_USSD">UCash USSD</string>
-    <string name="menu_other_official_contacts">অন্যান্য সরকারি অফিসের কর্মকতাসমূহ</string>
+    <string name="menu_other_official_contacts">অন্যান্য সরকারি অফিসের কর্মকর্তাগণ</string>
 </resources>

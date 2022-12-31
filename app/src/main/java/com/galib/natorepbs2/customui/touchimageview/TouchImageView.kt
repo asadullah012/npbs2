@@ -1,4 +1,4 @@
-package com.galib.natorepbs2.customui
+package com.galib.natorepbs2.customui.touchimageview
 
 import android.content.Context
 import android.content.res.Configuration
@@ -866,7 +866,9 @@ open class TouchImageView @JvmOverloads constructor(context: Context, attrs: Att
                         fixTrans()
                         last[curr.x] = curr.y
                     }
-                    MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> setState(ImageActionState.NONE)
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> setState(
+                        ImageActionState.NONE
+                    )
                 }
             }
 

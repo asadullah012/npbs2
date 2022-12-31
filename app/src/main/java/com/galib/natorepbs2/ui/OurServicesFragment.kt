@@ -1,5 +1,7 @@
 package com.galib.natorepbs2.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +13,10 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentOurServicesBinding
 import com.galib.natorepbs2.utils.Utility
+import org.json.JSONArray
+import org.json.JSONObject
 
-class OurServicesFragment : Fragment() {
+class OurServicesFragment : Fragment(), MenuOnClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,31 +29,29 @@ class OurServicesFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_our_services)
-        binding.electricityConnection = getString(R.string.menu_electricity_connection)
-        binding.electricityBill = getString(R.string.menu_electricity_bill)
-        binding.serviceList = getString(R.string.menu_service_list)
-        binding.citizenCharter = getString(R.string.menu_citizen_charter)
-        binding.fragment = this
+        binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
         binding.lifecycleOwner = activity
         return binding.root
     }
+    private fun getMenuList(): MutableList<String> {
+        val list : MutableList<String> = ArrayList()
+        list.add(getString(R.string.menu_electricity_connection))
+        list.add(getString(R.string.menu_service_list))
+        list.add(getString(R.string.menu_citizen_charter))
+        return list
+    }
 
-    fun onClick(v: View) {
-        when (v.id) {
-            R.id.electricity_connection_btn -> {
-                findNavController().navigate(R.id.action_ourServicesFragment_to_electricityConnectionFragment)
-            }
-            R.id.electricity_bill_btn -> {
-                findNavController().navigate(R.id.action_ourServicesFragment_to_electricityBillFragment)
-            }
-            R.id.serviceListBtn -> {
+    override fun menuOnClick(menuText: String) {
+        when (menuText){
+            getString(R.string.menu_electricity_connection) -> findNavController().navigate(R.id.action_ourServicesFragment_to_electricityConnectionFragment)
+            getString(R.string.menu_service_list) -> {
                 val action = OurServicesFragmentDirections.actionOurServicesFragmentToWebViewFragment(
                     getString(R.string.menu_service_list),
                     null, Utility.getHowToGetServiceHtml(requireContext().assets), null
                 )
                 findNavController().navigate(action)
             }
-            R.id.citizen_charter_btn -> {
+            getString(R.string.menu_citizen_charter) ->{
                 val action = OurServicesFragmentDirections.actionOurServicesFragmentToPDFViewerFragment(
                     getString(R.string.menu_citizen_charter),
                     URLs.CITIZEN_CHARTER,
@@ -59,4 +61,5 @@ class OurServicesFragment : Fragment() {
             }
         }
     }
+
 }

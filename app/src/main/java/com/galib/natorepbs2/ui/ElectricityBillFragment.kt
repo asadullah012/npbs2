@@ -24,11 +24,11 @@ class ElectricityBillFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_electricity_bill)
-        binding.electricityTariff = getString(R.string.menu_electricity_tariff)
-        binding.smsBill = getString(R.string.menu_sms_electricity_bill)
         binding.billCollectionBank = getString(R.string.menu_bill_collection_bank)
         binding.billFromHome = getString(R.string.menu_bill_from_home)
+        binding.electricityTariff = getString(R.string.menu_electricity_tariff)
         binding.billCalculator = getString(R.string.menu_electricity_bill_calculator)
+        binding.smsBill = getString(R.string.menu_sms_electricity_bill)
         binding.fragment = this
         binding.lifecycleOwner = activity
         return binding.root

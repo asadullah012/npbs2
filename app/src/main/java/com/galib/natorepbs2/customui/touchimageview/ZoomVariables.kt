@@ -1,4 +1,4 @@
-package com.galib.natorepbs2.customui
+package com.galib.natorepbs2.customui.touchimageview
 
 import android.widget.ImageView
 
