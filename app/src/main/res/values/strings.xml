@@ -54,7 +54,7 @@
     <string name="menu_electricity_tariff">বিদ্যুতের মূল্যহার</string>
     <string name="menu_sms_electricity_bill">বিদ্যুৎ বিল সংক্রান্ত এসএমএস</string>
     <string name="menu_bill_collection_bank">বিদ্যুৎ বিল আদায়কারী ব্যাংক ও শাখার নাম</string>
-    <string name="menu_bill_from_home">ঘরে বসে বিদ্যুৎ বিল প্রদান</string>
+    <string name="menu_bill_from_home">ঘরে বসে বিদ্যুৎ বিল প্রদান সংক্রান্ত</string>
     <string name="menu_bill_bkash">বিকাশ অ্যাপ</string>
     <string name="menu_bill_bKash_USSD">বিকাশ USSD</string>
     <string name="menu_electricity_bill_calculator">বিদ্যুৎ বিল ক্যালকুলেটর\n(এলটি-এ: আবাসিক সংযোগের ক্ষেত্রে)</string>
@@ -111,6 +111,4 @@
     <string name="menu_connection_domestic_new">অনলাইন বিদ্যুৎ সংযোগ\n(রাজশাহী পবিস এবং যশোর পবিস-১ এর জন্য)</string>
     <string name="menu_others">অন্যান্য</string>
     <string name="header_text">স্বাগতম, সম্মানিত গ্রাহক</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
