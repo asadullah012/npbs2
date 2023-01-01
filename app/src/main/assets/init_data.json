@@ -59,6 +59,13 @@
   "pbs": [
     {"name" : "বাংলাদেশ পল্লী বিদ্যুতায়ন বোর্ড", "url" : "http://www.reb.gov.bd/"},
     {"name" : "নাটোর পল্লী বিদ্যুৎ সমিতি-২", "url" : "http://pbs2.natore.gov.bd/"},
+    {"name" :  "নাটোর জেলা প্রশাসন", "url" :  "http://www.natore.gov.bd"},
+    {"name" :  "বড়াইগ্রাম উপজেলা প্রশাসন", "url" :  "http://www.baraigram.natore.gov.bd"},
+    {"name" :  "চারঘাট উপজেলা প্রশাসন", "url" :  "http://charghat.rajshahi.gov.bd"},
+    {"name" :  "গুরুদাসপুর উপজেলা প্রশাসন", "url" :  "http://gurudaspur.natore.gov.bd"},
+    {"name" :  "লালপুর উপজেলা প্রশাসন", "url" :  "http://lalpur.natore.gov.bd"},
+    {"name" :  "বাঘা উপজেলা প্রশাসন", "url" :  "http://bagha.rajshahi.gov.bd"},
+    {"name" :  "বাগাতিপাড়া উপজেলা প্রশাসন", "url" :  "http://bagatipara.natore.gov.bd"},
     {"name" : "নাটোর পল্লী বিদ্যুৎ সমিতি-১", "url" : "http://www.pbs1.natore.gov.bd/"},
     {"name" : "বাগেরহাট পল্লী বিদ্যুৎ সমিতি", "url" : "http://www.pbs.bagerhat.gov.bd/"},
     {"name" : "বরিশাল পল্লী বিদ্যুৎ সমিতি-১", "url" : "http://pbs1.barisal.gov.bd/"},
