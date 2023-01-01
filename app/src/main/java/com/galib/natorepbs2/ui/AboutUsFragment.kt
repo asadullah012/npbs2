@@ -36,7 +36,6 @@ class AboutUsFragment : Fragment(), MenuOnClickListener  {
         list.add(getString(R.string.menu_office_head))
         list.add(getString(R.string.menu_officers))
         list.add(getString(R.string.menu_junior_officers))
-        list.add(getString(R.string.menu_offices))
         list.add(getString(R.string.menu_complain_centres))
         list.add(getString(R.string.menu_power_outage_contact))
         return list
@@ -51,7 +50,6 @@ class AboutUsFragment : Fragment(), MenuOnClickListener  {
             getString(R.string.menu_office_head) -> findNavController().navigate(R.id.action_aboutUsFragment_to_officeHeadFragment)
             getString(R.string.menu_officers) -> findNavController().navigate(R.id.action_aboutUsFragment_to_officersFragment)
             getString(R.string.menu_junior_officers) -> findNavController().navigate(R.id.action_aboutUsFragment_to_juniorOfficerFragment)
-            getString(R.string.menu_offices) -> findNavController().navigate(R.id.action_aboutUsFragment_to_officesFragment)
             getString(R.string.menu_complain_centres) -> findNavController().navigate(R.id.action_aboutUsFragment_to_complainCentreFragment)
             getString(R.string.menu_power_outage_contact) -> findNavController().navigate(R.id.action_aboutUsFragment_to_powerOutageContactFragment)
         }

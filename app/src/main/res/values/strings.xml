@@ -38,7 +38,7 @@
     <string name="menu_office_head">অফিস প্রধান</string>
     <string name="menu_officers">নির্বাহী কর্মকর্তাগণ</string>
     <string name="menu_junior_officers">জুনিয়র কর্মকর্তাগণ</string>
-    <string name="menu_offices">অফিস সমূহ</string>
+    <string name="menu_offices">নাটোর পবিস-২ এর অফিস সমূহ</string>
     <string name="menu_complain_centres">অভিযোগ কেন্দ্রের মোবাইল নং</string>
     <string name="menu_power_outage_contact">বিদ্যুৎ বিভ্রাটে জরুরী যোগাযোগ</string>
 
@@ -57,7 +57,7 @@
     <string name="menu_bill_from_home">ঘরে বসে বিদ্যুৎ বিল প্রদান</string>
     <string name="menu_bill_bkash">বিকাশ অ্যাপ</string>
     <string name="menu_bill_bKash_USSD">বিকাশ USSD</string>
-    <string name="menu_electricity_bill_calculator">বিদ্যুৎ বিল ক্যালকুলেটর</string>
+    <string name="menu_electricity_bill_calculator">বিদ্যুৎ বিল ক্যালকুলেটর\n(এলটি-এ: আবাসিক সংযোগের ক্ষেত্রে)</string>
 
     <string name="menu_citizen_charter">সিটিজেন চার্টার</string>
 

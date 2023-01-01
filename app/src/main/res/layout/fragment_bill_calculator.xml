@@ -1,9 +1,634 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.BillCalculatorFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="pageTitle" type="String" />
+        <variable name="slab0Out" type="Float" />
+        <variable name="slab1Out" type="Float" />
+        <variable name="slab2Out" type="Float" />
+        <variable name="slab3Out" type="Float" />
+        <variable name="slab4Out" type="Float" />
+        <variable name="slab5Out" type="Float" />
+        <variable name="slab6Out" type="Float" />
+        <variable name="energyChargeOut" type="Integer" />
+        <variable name="nitBillOut" type="Integer" />
+        <variable name="demandChargeOut" type="Integer" />
+        <variable name="vatOut" type="Integer" />
+        <variable name="meterRentOut" type="Integer" />
+        <variable name="totalBillOut" type="Integer" />
+        <variable name="LPCOut" type="Integer" />
+        <variable name="totalBillWithLPCOut" type="Integer" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        tools:context=".ui.BillCalculatorFragment">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/page_title"
+            android:text="@{pageTitle}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/inputCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/KWHText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/demandText"
+                    android:text="মোট ব্যবহার(কি:ও:ঘ:)"
+                    android:textSize="16sp"
+                    android:layout_marginStart="10dp"/>
+                <EditText
+                    android:id="@+id/KWHInput"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:textAlignment="textEnd"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/demandInput"/>
+
+                <TextView
+                    android:id="@+id/demandText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/KWHText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="চুক্তিবদ্ধ লোড:"
+                    android:textSize="16sp"
+                    android:layout_marginStart="10dp"/>
+                <EditText
+                    android:id="@+id/demandInput"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:hint="0"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="textEnd"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/KWHInput" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/outputCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/inputCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/slab_lifeline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{slab0Out == 0F ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+                        <TextView
+                            android:id="@+id/slab_lifeline_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="লাইফ লাইনঃ (০-৫০ ইউনিট, ৩.৭৫ টাকা)"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/slab_lifeline_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="@{slab0Out.toString()}"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/slab_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{slab1Out == 0F ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/slab_lifeline">
+                        <TextView
+                            android:id="@+id/slab_1_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="প্রথম ধাপঃ (০-৭৫ ইউনিট, ৪.১৯ টাকা)"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/slab_1_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="@{slab1Out.toString()}"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/slab_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{slab2Out == 0F ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/slab_1">
+                        <TextView
+                            android:id="@+id/slab_2_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="দ্বিতীয় ধাপঃ (৭৬-২০০ ইউনিট, ৫.৭২ টাকা)"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/slab_2_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="@{slab2Out.toString()}"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/slab_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{slab3Out == 0F ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/slab_2">
+                        <TextView
+                            android:id="@+id/slab_3_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="তৃতীয় ধাপঃ (২০১-৩০০ ইউনিট, ৬.০০ টাকা)"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/slab_3_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="@{slab3Out.toString()}"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/slab_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{slab4Out == 0F ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/slab_3">
+                        <TextView
+                            android:id="@+id/slab_4_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="চতুর্থ ধাপঃ (৩০১-৪০০ ইউনিট, ৬.৩৪ টাকা)"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/slab_4_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="@{slab4Out.toString()}"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/slab_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{slab5Out == 0F ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/slab_4">
+                        <TextView
+                            android:id="@+id/slab_5_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="পঞ্চম ধাপঃ (৪০১-৬০০ ইউনিট, ৯.৯৪ টাকা)"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/slab_5_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="@{slab5Out.toString()}"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/slab_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{slab6Out == 0F ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/slab_5">
+                        <TextView
+                            android:id="@+id/slab_6_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="ষষ্ঠ ধাপঃ (৬০০ ইউনিট এর উর্ধ্বে, ১১.৪৬ টাকা)"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/slab_6_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="@{slab6Out.toString()}"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/energy_charge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/slab_6">
+                        <TextView
+                            android:id="@+id/energy_charge_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="এনার্জি/মিনিমাম চার্জ"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/energy_charge_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:textAlignment="textEnd"
+                            android:text="@{energyChargeOut.toString()}"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/demand_charge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/energy_charge">
+                        <TextView
+                            android:id="@+id/demand_charge_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="ডিমান্ড চার্জ"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/demand_charge_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:textAlignment="textEnd"
+                            android:text="@{demandChargeOut.toString()}"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/nit_bill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/demand_charge">
+                        <TextView
+                            android:id="@+id/nit_bill_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="নীট বিল"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/nit_bill_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:text="@{nitBillOut.toString()}"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/vat_bill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/nit_bill">
+                        <TextView
+                            android:id="@+id/vat_bill_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="ভ্যাট"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/vat_bill_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:text="@{vatOut.toString()}"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/meter_rent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/vat_bill">
+                        <TextView
+                            android:id="@+id/meter_rent_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="মিটার ভাড়া"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/meter_rent_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:text="@{meterRentOut.toString()}"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/total_bill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/meter_rent">
+                        <TextView
+                            android:id="@+id/total_bill_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="মোট বিল"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/total_bill_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:textAlignment="textEnd"
+                            android:text="@{totalBillOut.toString()}"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/l_p_c"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/total_bill">
+                        <TextView
+                            android:id="@+id/l_p_c_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="বিলম্ব মাশুলঃ নীট বিলের ৫%"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/l_p_c_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:textAlignment="textEnd"
+                            android:text="@{LPCOut.toString()}"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/total_bill_with_lpc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/l_p_c">
+                        <TextView
+                            android:id="@+id/total_bill_with_lpc_text"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:text="বিলম্ব মাশুলসহ সর্বমোট বিল"
+                            android:textSize="16sp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/total_bill_with_lpc_output"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="@{totalBillWithLPCOut.toString()}"
+                            android:textAlignment="textEnd"
+                            android:textSize="16sp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</FrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
