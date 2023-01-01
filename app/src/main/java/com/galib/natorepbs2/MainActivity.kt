@@ -87,16 +87,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) = Unit
             override fun onDrawerStateChanged(newState: Int) = Unit
         })
-
-       supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    fun closeDrawerIfOpen(){
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun updateMenu(navigationView: NavigationView) {

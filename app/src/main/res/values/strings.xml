@@ -68,7 +68,7 @@
     <string name="menu_social_media">সোস্যাল মিডিয়া</string>
     <string name="menu_facebook_page"> এর ফেসবুক পেজ</string>
 
-    <string name="menu_opinion_complain">বিদ্যুৎ বা অফিস সংক্রান্ত মতামত ও অভিযোগ প্রদান</string>
+    <string name="menu_opinion_complain">বিদ্যুৎ বা অফিস সংক্রান্ত মতামত ও অভিযোগ</string>
     <string name="menu_grs">অভিযোগ প্রতিকার ব্যবস্থা (GRS)</string>
     <string name="menu_complain_google_form">সরাসরি অফিসে অভিযোগ (Google Form)</string>
 
