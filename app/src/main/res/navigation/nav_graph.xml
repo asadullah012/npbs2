@@ -401,6 +401,16 @@
         android:name="com.galib.natorepbs2.ui.BillCalculatorFragment"
         android:label="fragment_bill_calculator"
         tools:layout="@layout/fragment_bill_calculator" />
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.galib.natorepbs2.ui.AboutAppFragment"
+        android:label="fragment_about_app"
+        tools:layout="@layout/fragment_about_app" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.galib.natorepbs2.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 
 </navigation>
