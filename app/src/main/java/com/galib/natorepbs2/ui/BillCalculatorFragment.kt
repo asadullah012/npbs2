@@ -116,7 +116,7 @@ class BillCalculatorFragment : Fragment() {
             slab6 = kwh * 11.46F
         }
         energyCharge = slabLifeline + slab1 + slab2 + slab3 + slab4 + slab5 + slab6
-        demandCharge = demand*30F
+        demandCharge = demand*30F * ( if(isExtraConsumption(KWH, demand)) 3 else 1 )
         nitBill = (energyCharge + demandCharge)
         vat = nitBill * 0.05F
         totalBill = nitBill + vat + meterRent
@@ -159,7 +159,14 @@ class BillCalculatorFragment : Fragment() {
         LPC = 0F
         totalBillWithLPC = 0F
     }
+
     fun round2Decimal(number: Float): Float{
         return (number * 100.0).roundToInt() / 100.0F
+    }
+
+    fun isExtraConsumption(kwh: Int, demand: Int) : Boolean{
+        if (demand > 10) return false
+        val consumptionLimit = arrayOf(162,281,421,562,648,778,907,1037,1166,1296)
+        return kwh > consumptionLimit[demand-1]
     }
 }

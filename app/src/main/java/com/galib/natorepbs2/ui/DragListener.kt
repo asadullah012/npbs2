@@ -1,7 +1,12 @@
 package com.galib.natorepbs2.ui
 
+import android.content.ClipDescription
+import android.graphics.Color
+import android.util.Log
 import android.view.DragEvent
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
 
@@ -9,6 +14,26 @@ class DragListener internal constructor(private val listener: CustomListener) : 
     private var isDropped = false
     override fun onDrag(v: View, event: DragEvent): Boolean {
         when (event.action) {
+            DragEvent.ACTION_DRAG_STARTED -> {
+                if (event.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    (v as? FrameLayout)?.setBackgroundColor(Color.BLUE)
+                    v.invalidate()
+                    true
+                } else {
+                    false
+                }
+            }
+            DragEvent.ACTION_DRAG_ENTERED -> {
+                (v as? FrameLayout)?.setBackgroundColor(Color.GREEN)
+                v.invalidate()
+                true
+            }
+            DragEvent.ACTION_DRAG_EXITED -> {
+                (v as? FrameLayout)?.setBackgroundColor(Color.BLUE)
+                v.invalidate()
+                true
+            }
+            DragEvent.ACTION_DRAG_LOCATION -> true
             DragEvent.ACTION_DROP -> {
                 isDropped = true
                 var positionTarget = -1
@@ -64,6 +89,16 @@ class DragListener internal constructor(private val listener: CustomListener) : 
                         }
                     }
                 }
+            }
+            DragEvent.ACTION_DRAG_ENDED -> {
+                (v as? FrameLayout)?.setBackgroundColor(Color.WHITE)
+                v.invalidate()
+                Log.d("DragDrop", "onDrag: ${event.result}")
+                true
+            }
+            else -> {
+                Log.e("DragDrop", "Unknown action type received by View.OnDragListener.")
+                false
             }
         }
         if (!isDropped && event.localState != null) {

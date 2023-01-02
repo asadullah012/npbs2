@@ -16,10 +16,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import com.galib.natorepbs2.sync.Sync
-import com.galib.natorepbs2.ui.AboutAppFragment
-import com.galib.natorepbs2.ui.AwarenessFragment
-import com.galib.natorepbs2.ui.OfficersFragment
-import com.galib.natorepbs2.ui.SettingsFragment
+import com.galib.natorepbs2.ui.*
 import com.galib.natorepbs2.viewmodel.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
@@ -94,6 +91,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         val subMenuFavorites = menu.addSubMenu(R.string.menu_favorites)
         subMenuFavorites.add(R.string.menu_awareness)
         subMenuFavorites.add(R.string.menu_officers)
+        subMenuFavorites.add(getString(R.string.complain_centre))
         val subMenu = menu.addSubMenu(R.string.menu_others)
         subMenu.add(R.string.menu_settings)
         subMenu.add(R.string.menu_about_app)
@@ -194,8 +192,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             navController.navigate(R.id.awarenessFragment)
         } else if(item.title == getString(R.string.menu_officers) && fragment !is OfficersFragment){
             navController.navigate(R.id.officersFragment)
-        } else if(item.title == getString(R.string.menu_settings) && fragment !is SettingsFragment){
-            navController.navigate(R.id.settingsFragment)
+        } else if(item.title == getString(R.string.complain_centre) && fragment !is ComplainCentreFragment){
+            navController.navigate(R.id.complainCentreFragment)
+//        } else if(item.title == getString(R.string.menu_settings) && fragment !is SettingsFragment){
+//            navController.navigate(R.id.settingsFragment)
         } else if(item.title == getString(R.string.menu_about_app) && fragment !is AboutAppFragment){
             navController.navigate(R.id.aboutAppFragment)
         }
