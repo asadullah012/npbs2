@@ -2,6 +2,7 @@ package com.galib.natorepbs2.db
 
 import android.util.Log
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.MutableLiveData
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.models.*
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +15,9 @@ class NPBS2Repository(db: NPBS2DB) {
     private val officeInformationDao: OfficeInformationDao
     private val noticeInformationDao: NoticeInformationDao
     private val bannerUrls : MutableList<String>
+    val favoriteMenuList : MutableLiveData<List<MyMenuItem>>
+    val availableMenuList : MutableLiveData<List<MyMenuItem>>
+
     init {
         informationDao = db.informationDao()
         achievementDao = db.achievementDao()
@@ -22,6 +26,10 @@ class NPBS2Repository(db: NPBS2DB) {
         officeInformationDao = db.officeInformationDao()
         noticeInformationDao = db.noticeInformationDao()
         bannerUrls = ArrayList()
+        favoriteMenuList = MutableLiveData()
+        favoriteMenuList.value = listOf(MyMenuItem("A", null), MyMenuItem("B", null), MyMenuItem("C", null), MyMenuItem("D", null))
+        availableMenuList = MutableLiveData()
+        availableMenuList.value = listOf(MyMenuItem("E", null), MyMenuItem("F", null), MyMenuItem("G", null), MyMenuItem("H", null))
     }
 
     val allAchievement: Flow<List<Achievement>>

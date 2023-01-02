@@ -25,8 +25,10 @@
     <string name="complain_centre">অভিযোগ কেন্দ্র যোগাযোগ</string>
     <string name="achievement_details">নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর অসাধারণ অর্জন\nবিগত ৩০বছর বনাম বর্তমান সরকারের ১৪ বছর</string>
     <string name="vision_mission">ভিশন ও মিশন</string>
-    <string name="vision">ভিশন (রূপকল্প): নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর আওতাধীন সকল জনগনকে গুনগত মানের বিদ্যুৎ সরবরাহের মাধ্যমে গ্রাহক সেবা নিশ্চিত করা।</string>
-    <string name="mission">মিশন (অভিলক্ষ্য): নতুন সংযোগের আবেদনের প্রেক্ষিতে স্বল্প সময়ের মধ্যে দ্রুত, সংযোগ প্রত্যাশী সকলকে বিদ্যুৎ সুবিধা পৌছে দেওয়া।</string>
+    <string name="vision_title">ভিশন (রূপকল্প)</string>
+    <string name="vision">নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর আওতাধীন সকল জনগনকে গুনগত মানের বিদ্যুৎ সরবরাহের মাধ্যমে গ্রাহক সেবা নিশ্চিত করা।</string>
+    <string name="mission_title">মিশন (অভিলক্ষ্য)</string>
+    <string name="mission">নতুন সংযোগের আবেদনের প্রেক্ষিতে স্বল্প সময়ের মধ্যে দ্রুত, সংযোগ প্রত্যাশী সকলকে বিদ্যুৎ সুবিধা পৌছে দেওয়া।</string>
     <string name="employee_list">কর্মকর্তাবৃন্দ</string>
     <string name="banner_content_description">নাটোর পল্লী বিদ্যুৎ সমিতি-২</string>
 
@@ -54,7 +56,7 @@
     <string name="menu_electricity_tariff">বিদ্যুতের মূল্যহার</string>
     <string name="menu_sms_electricity_bill">বিদ্যুৎ বিল সংক্রান্ত এসএমএস</string>
     <string name="menu_bill_collection_bank">বিদ্যুৎ বিল আদায়কারী ব্যাংক ও শাখার নাম</string>
-    <string name="menu_bill_from_home">ঘরে বসে বিদ্যুৎ বিল প্রদান সংক্রান্ত</string>
+    <string name="menu_bill_from_home">ঘরে বসে বিদ্যুৎ বিল প্রদান পদ্ধতি</string>
     <string name="menu_bill_bkash">বিকাশ অ্যাপ</string>
     <string name="menu_bill_bKash_USSD">বিকাশ USSD</string>
     <string name="menu_electricity_bill_calculator">বিদ্যুৎ বিল ক্যালকুলেটর\n(এলটি-এ: আবাসিক সংযোগের ক্ষেত্রে)</string>
@@ -113,4 +115,17 @@
     <string name="header_text">স্বাগতম, সম্মানিত গ্রাহক</string>
     <string name="about_app_description">নাটোর পল্লী বিদ্যুৎ সমিতি-২ ডিজিটাল সেবা অ্যাপটি একটি সেবামূলক অ্যাপ। এই অ্যাপটিতে নাটোর পল্লী বিদ্যুৎ সমিতি-২ সংক্রান্ত সকল তথ্য পাবেন।</string>
     <string name="about_app_developer">অ্যাপ ডেভেলপমেন্টঃ আইটি বিভাগ, নাটোর পল্লী বিদ্যুৎ সমিতি-২\nপৃষ্ঠপোষকতায়ঃ নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর সকল কর্মকর্তা/ কর্মচারীবৃন্দ</string>
+    <string name="menu_communication_call">কল করুন</string>
+    <array name="dummy_items">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>Ten</item>
+    </array>
 </resources>

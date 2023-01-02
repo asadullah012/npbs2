@@ -284,5 +284,12 @@ class Utility {
                 })
         }
 
+        fun makeCall(context: Context, mobile: String) {
+            val intent = Intent(
+                Intent.ACTION_DIAL, Uri.parse("tel:" + Utility.bnDigitToEnDigit(mobile))
+            )
+            context.startActivity(intent)
+        }
+
     }
 }
