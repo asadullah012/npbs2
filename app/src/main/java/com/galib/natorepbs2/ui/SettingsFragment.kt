@@ -1,16 +1,15 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.databinding.FragmentAboutUsBinding
 import com.galib.natorepbs2.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment()  {

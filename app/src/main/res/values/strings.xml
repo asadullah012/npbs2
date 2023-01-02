@@ -111,4 +111,6 @@
     <string name="menu_connection_domestic_new">অনলাইন বিদ্যুৎ সংযোগ\n(রাজশাহী পবিস এবং যশোর পবিস-১ এর জন্য)</string>
     <string name="menu_others">অন্যান্য</string>
     <string name="header_text">স্বাগতম, সম্মানিত গ্রাহক</string>
+    <string name="about_app_description">নাটোর পল্লী বিদ্যুৎ সমিতি-২ ডিজিটাল সেবা অ্যাপটি একটি সেবামূলক অ্যাপ। এই অ্যাপটিতে নাটোর পল্লী বিদ্যুৎ সমিতি-২ সংক্রান্ত সকল তথ্য পাবেন।</string>
+    <string name="about_app_developer">অ্যাপ ডেভেলপমেন্টঃ আইটি বিভাগ, নাটোর পল্লী বিদ্যুৎ সমিতি-২\nপৃষ্ঠপোষকতায়ঃ নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর সকল কর্মকর্তা/ কর্মচারীবৃন্দ</string>
 </resources>
