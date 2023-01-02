@@ -11,9 +11,10 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentCommunicationBinding
+import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.utils.Utility.Companion.openMap
 
-class CommunicationFragment : Fragment() {
+class CommunicationFragment : Fragment(), MenuOnClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,31 +28,24 @@ class CommunicationFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_communication)
-        binding.communicationPost = getString(R.string.menu_communication_post)
-        binding.communicationMap = getString(R.string.menu_communication_map)
-        binding.fragment = this
+        binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
         binding.lifecycleOwner = activity
         return binding.root
     }
 
-    fun onClick(v: View) {
-        val id = v.id
-        if (id == R.id.communication_post_btn) {
-            val action =
-                CommunicationFragmentDirections.actionCommunicationFragmentToWebViewFragment(
-                    getString(R.string.menu_communication_post),
-                    URLs.BASE + URLs.COMMUNICATION_POST,
-                    null,
-                    Selectors.COMMUNICATION_POST
-                )
-            findNavController().navigate(action)
-        } else if (id == R.id.communication_map_btn) {
-            openMap(
-                requireContext(),
-                "Natore+Palli+Bidyut+Samity-2,+Bonpara,+Natore",
-                24.295823,
-                89.0811235
-            )
+    fun getMenuList() : MutableList<String>{
+        val list : MutableList<String> = ArrayList()
+        list.add(getString(R.string.menu_communication_post))
+        list.add(getString(R.string.menu_communication_call))
+        list.add(getString(R.string.menu_communication_map))
+        return list
+    }
+
+    override fun menuOnClick(menuText: String) {
+        when (menuText) {
+            getString(R.string.menu_communication_post) -> findNavController().navigate(CommunicationFragmentDirections.actionCommunicationFragmentToWebViewFragment(getString(R.string.menu_communication_post), URLs.BASE + URLs.COMMUNICATION_POST, null, Selectors.COMMUNICATION_POST))
+            getString(R.string.menu_communication_map) -> openMap(requireContext(), "Natore+Palli+Bidyut+Samity-2,+Bonpara,+Natore", 24.295823, 89.0811235)
+            getString(R.string.menu_communication_call) -> Utility.makeCall(requireContext(), "01769-401631")
         }
     }
 }

@@ -194,8 +194,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             navController.navigate(R.id.officersFragment)
         } else if(item.title == getString(R.string.complain_centre) && fragment !is ComplainCentreFragment){
             navController.navigate(R.id.complainCentreFragment)
-//        } else if(item.title == getString(R.string.menu_settings) && fragment !is SettingsFragment){
-//            navController.navigate(R.id.settingsFragment)
+        } else if(item.title == getString(R.string.menu_settings) && fragment !is SettingsFragment){
+            navController.navigate(R.id.settingsFragment)
         } else if(item.title == getString(R.string.menu_about_app) && fragment !is AboutAppFragment){
             navController.navigate(R.id.aboutAppFragment)
         }
