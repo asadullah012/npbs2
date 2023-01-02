@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.galib.natorepbs2.models.*
+import java.util.concurrent.Executors
 
 @Database(
-    entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class],
-    version = 19,
+    entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class],
+    version = 20,
     exportSchema = false
 )
 abstract class NPBS2DB : RoomDatabase() {
@@ -18,6 +20,7 @@ abstract class NPBS2DB : RoomDatabase() {
     abstract fun employeeDao(): EmployeeDao
     abstract fun officeInformationDao(): OfficeInformationDao
     abstract fun noticeInformationDao(): NoticeInformationDao
+    abstract fun myMenuItemDao(): MyMenuItemDao
 
     companion object {
         @Volatile
@@ -30,7 +33,14 @@ abstract class NPBS2DB : RoomDatabase() {
                     NPBS2DB::class.java,
                     "npbs2_database"
                 )
-                    .createFromAsset("npbs2_database") //
+                    .createFromAsset("npbs2_database")
+//                    .addCallback(object : Callback() {
+//                        override fun onCreate(db: SupportSQLiteDatabase) {
+//                            super.onCreate(db)
+//                            Executors.newSingleThreadExecutor().execute {
+//                                getDatabase(context).myMenuItemDao().insertAll(MyMenuItem.populateData())
+//                            }
+//                        }})
                     .build()
                 INSTANCE = instance
                 // return instance

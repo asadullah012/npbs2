@@ -13,10 +13,10 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.models.MyMenuItem
 
 interface SettingsOnClickListener {
-    fun settingsOnClick(index : Int, isFavoriteAdapter: Boolean)
+    fun settingsOnClick(name : String, isFavoriteAdapter: Boolean)
 }
 
-class SettingsAdapter(val listener: SettingsOnClickListener, val isFavoriteAdapter: Boolean) : ListAdapter<MyMenuItem, SettingsAdapter.SettingsHolder>(MyMenuItemComparator()) {
+class SettingsAdapter(val listener: SettingsOnClickListener, private val isFavoriteAdapter: Boolean) : ListAdapter<MyMenuItem, SettingsAdapter.SettingsHolder>(MyMenuItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsHolder {
         return SettingsHolder.create(parent)
@@ -24,17 +24,17 @@ class SettingsAdapter(val listener: SettingsOnClickListener, val isFavoriteAdapt
 
     override fun onBindViewHolder(holder: SettingsHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current.name, position, listener, isFavoriteAdapter)
+        holder.bind(current.name, listener, isFavoriteAdapter)
     }
 
     class SettingsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.title)
         private val button: Button = itemView.findViewById(R.id.button)
 
-        fun bind(text: String?, index: Int, listener: SettingsOnClickListener, isFavoriteAdapter: Boolean) {
+        fun bind(text: String, listener: SettingsOnClickListener, isFavoriteAdapter: Boolean) {
             title.text = text
             button.setOnClickListener {
-                listener.settingsOnClick(index, isFavoriteAdapter)
+                listener.settingsOnClick(text, isFavoriteAdapter)
             }
         }
 
