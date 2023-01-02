@@ -14,9 +14,8 @@ class NPBS2Repository(db: NPBS2DB) {
     private val employeeDao: EmployeeDao
     private val officeInformationDao: OfficeInformationDao
     private val noticeInformationDao: NoticeInformationDao
+    private val myMenuItemDao: MyMenuItemDao
     private val bannerUrls : MutableList<String>
-    val favoriteMenuList : MutableLiveData<List<MyMenuItem>>
-    val availableMenuList : MutableLiveData<List<MyMenuItem>>
 
     init {
         informationDao = db.informationDao()
@@ -25,11 +24,8 @@ class NPBS2Repository(db: NPBS2DB) {
         employeeDao = db.employeeDao()
         officeInformationDao = db.officeInformationDao()
         noticeInformationDao = db.noticeInformationDao()
+        myMenuItemDao = db.myMenuItemDao()
         bannerUrls = ArrayList()
-        favoriteMenuList = MutableLiveData()
-        favoriteMenuList.value = listOf(MyMenuItem("A", null), MyMenuItem("B", null), MyMenuItem("C", null), MyMenuItem("D", null))
-        availableMenuList = MutableLiveData()
-        availableMenuList.value = listOf(MyMenuItem("E", null), MyMenuItem("F", null), MyMenuItem("G", null), MyMenuItem("H", null))
     }
 
     val allAchievement: Flow<List<Achievement>>
@@ -246,6 +242,27 @@ class NPBS2Repository(db: NPBS2DB) {
             }
         }
         return list
+    }
+
+    val favoriteMenu : Flow<List<MyMenuItem>>
+        get() = myMenuItemDao.favoriteMenu
+
+    val availableMenu : Flow<List<MyMenuItem>>
+        get() = myMenuItemDao.availableMenu
+
+    @WorkerThread
+    suspend fun insertAllMenu(myMenuItemList : List<MyMenuItem>){
+        myMenuItemDao.insertAll(myMenuItemList)
+    }
+
+    @WorkerThread
+    suspend fun updateMyMenu(name:String, isFavorite : Int){
+        myMenuItemDao.updateFavorite(name, isFavorite)
+    }
+
+    @WorkerThread
+    suspend fun deleteAllMyMenu(){
+        myMenuItemDao.deleteAll()
     }
 
     companion object {
