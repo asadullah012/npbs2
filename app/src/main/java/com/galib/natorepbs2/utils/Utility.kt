@@ -291,5 +291,11 @@ class Utility {
             context.startActivity(intent)
         }
 
+        fun getHtmlFromAsset(assets: AssetManager?, file_path: String, object_name: String): String? {
+            val json = assets?.let { getJsonFromAssets(file_path, it) } ?: return null
+            val jsonRootObject = JSONObject(json)
+            return jsonRootObject.getString(object_name)
+        }
+
     }
 }

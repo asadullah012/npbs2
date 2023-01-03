@@ -28,8 +28,8 @@ class SettingsFragment : Fragment(), SettingsOnClickListener  {
             false
         )
 
-        val favoriteMenuAdapter = SettingsAdapter(this, true)
-        val availableMenuAdapter = SettingsAdapter(this, false)
+        val favoriteMenuAdapter = SettingsAdapter(requireContext(),this, true)
+        val availableMenuAdapter = SettingsAdapter(requireContext(), this, false)
         binding.favoriteMenuAdapter = favoriteMenuAdapter
         binding.availableMenuAdapter = availableMenuAdapter
 
@@ -39,6 +39,10 @@ class SettingsFragment : Fragment(), SettingsOnClickListener  {
         settingsViewModel.availableMenu.observe(viewLifecycleOwner) { menuList ->
             menuList?.let { availableMenuAdapter.submitList(it) }
         }
+        binding.pageTitle = getString(R.string.menu_settings)
+        binding.choseFavoriteMenu = getString(R.string.menu_settings_choose_favorite_menu)
+        binding.favoriteMenu = getString(R.string.menu_settings_favorite_menu)
+        binding.availableMenu = getString(R.string.menu_settings_available_menu)
         binding.lifecycleOwner = this
         return binding.root
     }

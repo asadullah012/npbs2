@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.SubMenu
 import android.view.View
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -14,7 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.galib.natorepbs2.models.MyMenuItem
 import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.ui.*
 import com.galib.natorepbs2.viewmodel.*
@@ -53,12 +57,16 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     private val tenderInformationViewModel: NoticeInformationViewModel by viewModels {
         NoticeViewModelFactory((application as NPBS2Application).repository)
     }
+    private val settingsViewModel:SettingsViewModel by viewModels {
+        SettingsViewModelFactory((application as NPBS2Application).repository)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         syncIfRequired()
+        checkForMyMenuItems()
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
@@ -89,13 +97,23 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     private fun updateMenu(navigationView: NavigationView) {
         val menu = navigationView.menu
         val subMenuFavorites = menu.addSubMenu(R.string.menu_favorites)
-        subMenuFavorites.add(R.string.menu_awareness)
-        subMenuFavorites.add(R.string.menu_officers)
-        subMenuFavorites.add(getString(R.string.complain_centre))
+        updateSubMenus(subMenuFavorites)
         val subMenu = menu.addSubMenu(R.string.menu_others)
         subMenu.add(R.string.menu_settings)
         subMenu.add(R.string.menu_about_app)
         navigationView.invalidate()
+    }
+
+    private fun updateSubMenus(subMenuFavorites: SubMenu?) {
+        if(subMenuFavorites == null) return
+        settingsViewModel.favoriteMenu.observe(this) { menuList ->
+            menuList?.let {
+                subMenuFavorites.clear()
+                for(i in it){
+                    subMenuFavorites.add(i.name)
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -187,21 +205,57 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val fragment = navHostFragment.childFragmentManager.fragments[0]
-
-        if(item.title == getString(R.string.menu_awareness) && fragment !is AwarenessFragment) {
-            navController.navigate(R.id.awarenessFragment)
-        } else if(item.title == getString(R.string.menu_officers) && fragment !is OfficersFragment){
-            navController.navigate(R.id.officersFragment)
-        } else if(item.title == getString(R.string.complain_centre) && fragment !is ComplainCentreFragment){
-            navController.navigate(R.id.complainCentreFragment)
-        } else if(item.title == getString(R.string.menu_settings) && fragment !is SettingsFragment){
-            navController.navigate(R.id.settingsFragment)
-        } else if(item.title == getString(R.string.menu_about_app) && fragment !is AboutAppFragment){
-            navController.navigate(R.id.aboutAppFragment)
-        }
+        navigateToMenu(item.title.toString(), fragment, navController)
         item.isChecked = true
         drawerLayout.close()
         return true
+    }
+
+    private fun navigateToMenu(title: String, fragment:Fragment, navController:NavController) {
+        when {
+            title == getString(R.string.menu_home) && fragment !is MainFragment -> {
+                navController.navigate(R.id.mainFragment)
+            }
+            title == getString(R.string.menu_awareness) && fragment !is AwarenessFragment -> {
+                navController.navigate(R.id.awarenessFragment)
+            }
+            title == getString(R.string.menu_officers) && fragment !is OfficersFragment -> {
+                navController.navigate(R.id.officersFragment)
+            }
+            title == getString(R.string.menu_complain_centres) && fragment !is ComplainCentreFragment -> {
+                navController.navigate(R.id.complainCentreFragment)
+            }
+            title == getString(R.string.menu_bill_from_home) && fragment !is BillFromHomeFragment -> {
+                navController.navigate(R.id.billFromHomeFragment)
+            }
+            title == getString(R.string.menu_communication) && fragment !is CommunicationFragment -> {
+                navController.navigate(R.id.communicationFragment)
+            }
+            title == getString(R.string.menu_settings) && fragment !is SettingsFragment -> {
+                navController.navigate(R.id.settingsFragment)
+            }
+            title == getString(R.string.menu_about_app) && fragment !is AboutAppFragment -> {
+                navController.navigate(R.id.aboutAppFragment)
+            }
+        }
+    }
+
+    private fun checkForMyMenuItems() {
+        val menuList = listOf(
+            MyMenuItem(getString(R.string.menu_home), true),
+            MyMenuItem(getString(R.string.menu_officers), true),
+            MyMenuItem(getString(R.string.menu_complain_centres),true),
+            MyMenuItem(getString(R.string.menu_communication), true),
+            MyMenuItem(getString(R.string.menu_bill_from_home), false),
+            MyMenuItem(getString(R.string.menu_awareness),  true)
+        )
+
+        launch(Dispatchers.IO) {
+            val count = (settingsViewModel.favoriteMenu.value?.size ?: 0) + (settingsViewModel.availableMenu.value?.size ?: 0)
+            if(count != menuList.size){
+                settingsViewModel.addMenus(menuList)
+            }
+        }
     }
 
     companion object {

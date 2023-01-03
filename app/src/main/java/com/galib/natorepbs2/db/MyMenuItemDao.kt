@@ -13,7 +13,7 @@ interface MyMenuItemDao {
     suspend fun insert(myMenuItem: MyMenuItem)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(myMenuItemList: List<MyMenuItem>)
+    suspend fun insertAll(myMenuItemList: List<MyMenuItem>)
 
     @Query("DELETE FROM my_menu_table")
     suspend fun deleteAll()
@@ -21,9 +21,9 @@ interface MyMenuItemDao {
     @Query("UPDATE my_menu_table SET is_favorite = :isFavorite where name = :name")
     suspend fun updateFavorite(name : String, isFavorite: Int)
 
-    @get:Query("SELECT * FROM my_menu_table where is_favorite = 1 ORDER BY priority ASC")
+    @get:Query("SELECT * FROM my_menu_table where is_favorite = 1")
     val favoriteMenu: Flow<List<MyMenuItem>>
 
-    @get:Query("SELECT * FROM my_menu_table where is_favorite = 0 ORDER BY priority ASC")
+    @get:Query("SELECT * FROM my_menu_table where is_favorite = 0")
     val availableMenu: Flow<List<MyMenuItem>>
 }
