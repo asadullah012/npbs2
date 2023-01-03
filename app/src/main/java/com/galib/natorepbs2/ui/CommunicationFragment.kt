@@ -29,7 +29,7 @@ class CommunicationFragment : Fragment(), MenuOnClickListener {
         )
         binding.pageTitle = getString(R.string.menu_communication)
         binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -45,7 +45,7 @@ class CommunicationFragment : Fragment(), MenuOnClickListener {
         when (menuText) {
             getString(R.string.menu_communication_post) -> findNavController().navigate(CommunicationFragmentDirections.actionCommunicationFragmentToWebViewFragment(getString(R.string.menu_communication_post), null, Utility.getHtmlFromAsset(requireContext().assets, "init_data.json", "communication_post"), null))
             getString(R.string.menu_communication_map) -> openMap(requireContext(), "Natore+Palli+Bidyut+Samity-2,+Bonpara,+Natore", 24.295823, 89.0811235)
-            getString(R.string.menu_communication_call) -> Utility.makeCall(requireContext(), "01769-401631")
+            getString(R.string.menu_communication_call) -> Utility.makeCall(requireContext(), "01769-404040")
         }
     }
 }

@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentRelatedAppsBinding
+import com.galib.natorepbs2.utils.Utility
 
 class RelatedAppsFragment : Fragment(), MenuOnClickListener {
-
+    val appList: MutableList<String> = ArrayList()
+    val appIds:  MutableList<String> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,21 +27,33 @@ class RelatedAppsFragment : Fragment(), MenuOnClickListener {
         )
         binding.pageTitle = getString(R.string.menu_related_apps)
         binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     private fun getMenuList(): MutableList<String> {
-        val list : MutableList<String> = ArrayList()
-        list.add(getString(R.string.menu_digital_phonebook))
-        list.add(getString(R.string.menu_nothi))
-        return list
+        appList.add("পল্লীবিদ্যুৎ সেবা")
+        appIds.add("org.breb.pollibiddut")
+        appList.add("পল্লী বিদ্যুৎ ডিজিটাল ফোনবুক")
+        appIds.add("reb.ebook.contackbook")
+        appList.add("নাটোর জেলা পরিষদ")
+        appIds.add("com.mysoftheaven.natore")
+        appList.add("বিপিডিবি")
+        appIds.add("com.sarwar.bpdb")
+        appList.add("নথি | অফিস ব্যবস্থাপনা")
+        appIds.add("com.tappware.nothipro")
+        return appList
     }
 
     override fun menuOnClick(menuText: String) {
-        when(menuText){
-            getString(R.string.menu_digital_phonebook) -> openPlayStore(requireContext(), URLs.DIGITAL_PHONEBOOK_APP_ID)
-            getString(R.string.menu_nothi) -> openPlayStore(requireContext(), URLs.NOTHI_APP_ID)
+        var appId : String? = null
+        for(i in 0 until appList.size){
+            if(appList[i] == menuText) {
+                appId = appIds[i]
+                break
+            }
         }
+        if(appId != null)
+            openPlayStore(requireContext(), appId)
     }
 }

@@ -30,7 +30,7 @@ class AtAGlanceFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_at_a_glance)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         val adapter = InformationAdapter()
         informationViewModel.getInformationByCategory(Category.atAGlance).observe(
             viewLifecycleOwner

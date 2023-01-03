@@ -24,7 +24,7 @@ class NoticeTenderFragment : Fragment(), MenuOnClickListener {
         )
         binding.pageTitle = getString(R.string.menu_notice_tender)
         binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

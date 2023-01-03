@@ -35,7 +35,7 @@ class AwarenessFragment : Fragment(), ImageClickListener {
         )
         binding.pageTitle = getString(R.string.menu_awareness)
         binding.fragment = this
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         val carouselView = binding.root.findViewById<CarouselView>(R.id.carouselView)
         carouselView.pageCount = sampleImages.size
         carouselView.setImageClickListener(this)

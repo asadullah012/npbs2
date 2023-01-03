@@ -36,7 +36,7 @@ class ContactListFragment : Fragment() {
         )
 
         binding.pageTitle = args.title + "\n" + getString(R.string.menu_officers)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         val adapter = ContactListAdapter(object : ContactListAdapter.ClickListener {
             override fun onClickCall(mobile: String?) {
                 val intent = Intent(

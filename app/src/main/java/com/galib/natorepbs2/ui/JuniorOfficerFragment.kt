@@ -32,7 +32,7 @@ class JuniorOfficerFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_junior_officers)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val adapter = ContactListAdapter(object : ClickListener {
             override fun onClickCall(mobile: String?) {

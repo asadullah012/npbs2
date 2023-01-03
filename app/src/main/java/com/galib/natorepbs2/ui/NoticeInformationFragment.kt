@@ -1,6 +1,7 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentNoticeInformationBinding
 import com.galib.natorepbs2.viewmodel.NoticeInformationViewModel
 import com.galib.natorepbs2.viewmodel.NoticeViewModelFactory
+import java.lang.reflect.InvocationTargetException
 
 class NoticeInformationFragment : Fragment() {
     private val args: NoticeInformationFragmentArgs by navArgs()
@@ -25,10 +27,18 @@ class NoticeInformationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = DataBindingUtil.inflate<FragmentNoticeInformationBinding>(inflater, R.layout.fragment_notice_information, container, false)
-        binding.pageTitle = args.title
-        binding.lifecycleOwner = activity
+        var title : String? = null
+        try{
+            title = args.title
+        } catch (e: InvocationTargetException){
+            Log.e("NoticeInfoFragment", "onCreateView: ${e.localizedMessage}")
+        }
+        if(title == null)
+            title = arguments?.getString("title")
+        binding.pageTitle = title
+        binding.lifecycleOwner = viewLifecycleOwner
         val adapter = NoticeInformationAdapter()
-        when (args.title) {
+        when (title) {
             getString(R.string.menu_tender) -> {
                 noticeInformationViewModel.getAllTender().observe(viewLifecycleOwner) { allTender ->
                     allTender?.let { adapter.differ.submitList(it) }

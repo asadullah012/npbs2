@@ -33,8 +33,4 @@ object URLs {
    const val COMMUNICATION_POST = "/page/rxkY-ডাক-যোগাযোগ"
    const val BANNERS = "/view/top_banner"
    const val CONNECTION_DOMESTIC_NEW = "https://newconnection.rebpbs.com"
-
-   const val DIGITAL_PHONEBOOK_APP_ID = "reb.ebook.contackbook"
-   const val NOTHI_APP_ID = "com.tappware.nothipro"
-
 }
