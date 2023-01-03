@@ -1,6 +1,5 @@
 package com.galib.natorepbs2.sync
 
-import android.content.Context
 import android.content.res.AssetManager
 import android.util.Log
 import com.galib.natorepbs2.NPBS2Application
@@ -15,7 +14,6 @@ import com.galib.natorepbs2.viewmodel.*
 import org.json.JSONArray
 import org.json.JSONObject
 import org.jsoup.Jsoup
-import java.io.File
 import java.io.IOException
 import java.io.InputStream
 
@@ -224,12 +222,8 @@ class Sync {
 
         fun syncPowerOutageContact(employeeViewModel: EmployeeViewModel) {
             val data = ArrayList<ArrayList<String>>()
-            var headerText = ""
-            var footerText = ""
             try {
                 val document = Jsoup.connect(URLs.BASE + URLs.POWER_OUTAGE_CONTACT).get()
-                headerText = document.select(Selectors.POWER_OUTAGE_CONTACT_HEADER).text()
-                footerText = document.select(Selectors.POWER_OUTAGE_CONTACT_FOOTER).text()
                 val tables = document.select(Selectors.POWER_OUTAGE_CONTACT)
                 for (table in tables) {
                     val trs = table.select("tr")
@@ -461,7 +455,7 @@ class Sync {
         }
 
         fun syncBankInformation(informationViewModel: InformationViewModel, assets: AssetManager){
-            var json: String? = Utility.getJsonFromAssets("init_data.json", assets)
+            val json: String? = Utility.getJsonFromAssets("init_data.json", assets)
             val data = ArrayList<Information>()
             if(json != null){
                 val jsonRootObject = JSONObject(json)
@@ -492,14 +486,10 @@ class Sync {
                     for (i in 0 until trs.size) {
                         val tds = trs[i].select("td")
                         var bannerUrl: String? = null
-                        var name:String? = null
                         if(tds.size > 1 && tds[0].select("img").first() != null){
                             bannerUrl = tds[0].select("img").first()?.absUrl("src")
-                            name = tds[1].select("a").first()?.text()
-                            if(name == null || name.isEmpty()) name = "banner$i"
-                            name = "$name.jpg"
                         }
-                        if(bannerUrl != null && name != null)
+                        if(bannerUrl != null)
                             list.add(bannerUrl)
                     }
                 }
@@ -510,8 +500,7 @@ class Sync {
         }
 
         fun syncOtherOfficeInformation(employeeViewModel: EmployeeViewModel, assets: AssetManager) {
-            var json: String? = Utility.getJsonFromAssets("init_data.json", assets)
-            val data = ArrayList<Information>()
+            val json: String? = Utility.getJsonFromAssets("init_data.json", assets)
             if(json != null){
                 val jsonRootObject = JSONObject(json)
                 val jsonArray: JSONArray? = jsonRootObject.optJSONArray("otherOffices")
@@ -524,7 +513,7 @@ class Sync {
             }
         }
 
-        fun syncOfficerListFromURL(officeName:String, url: String, employeeViewModel: EmployeeViewModel){
+        private fun syncOfficerListFromURL(officeName:String, url: String, employeeViewModel: EmployeeViewModel){
             val absoluteUrl = "$url/bn/site${URLs.OFFICER_LIST}"
             Log.d(TAG, "syncOfficerListFromURL: $officeName, $absoluteUrl")
             val data = ArrayList<Employee>()

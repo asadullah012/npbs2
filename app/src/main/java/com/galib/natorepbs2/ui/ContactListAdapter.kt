@@ -25,7 +25,7 @@ fun setProfilePhoto(imageView: ImageView?, imageUrl: String?) {
 }
 
 class ContactListAdapter(
-    var onClickListener: ClickListener
+    private var onClickListener: ClickListener
 ) : ListAdapter<Employee, EmployeeViewHolder>(OfficerDiff()) {
     interface ClickListener {
         fun onClickCall(mobile: String?)

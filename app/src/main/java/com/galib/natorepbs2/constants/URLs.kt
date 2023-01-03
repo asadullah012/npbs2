@@ -9,9 +9,6 @@ object URLs {
    const val JUNIOR_OFFICER_LIST = "/page/জুনিয়র-কর্মকর্তাগণ"
    const val BOARD_MEMBER = "/page/sHFm-সমিতি-বোর্ড"
    const val POWER_OUTAGE_CONTACT = "/news/9oH1-“বিদ্যুৎ-বিভ্রাটে-জরুরী-যোগাযোগ”"
-   const val TARIFF = "/page/বিদ্যুতের-মূল্যহার"
-   const val BREB = "http://www.reb.gov.bd/"
-   const val NATORE_PBS_2 = "http://pbs2.natore.gov.bd/"
    const val COMPLAIN_GOOGLE_FORM =
       "https://docs.google.com/forms/d/1wrjpi4k-hUlaLPtW19x9PeliJaKdroBQt3ryYHJ9Ahw/viewform"
    const val GRS = "https://www.grs.gov.bd/"
@@ -22,15 +19,10 @@ object URLs {
    const val FACEBOOK = "https://facebook.com/natorepbstwo"
    const val FACEBOOK_APP_ID = "100068895832922"
    const val PLAY_STORE_PREFIX = "https://play.google.com/store/apps/details?id="
-   val ZONAL_OFFICES = arrayOf("/page/qHTA-চারঘাট-জোনাল-অফিস", "/page/4Yl0-গুরুদাসপুর-জোনাল-অফিস", "/page/VDOD-লালপুর-জোনাল-অফিস", "/page/YJzZ-বাঘা-জোনাল-অফিস")
-   val SUB_ZONAL_OFFICES = arrayOf("/page/ksib-লক্ষিকোল-সাব-জোনাল-অফিস", "/page/GCYi-দয়ারামপুর-সাব-জোনাল-অফিস")
    const val TENDER = "/view/revenue_model_tender"
    const val NOTICE = "/view/notices"
    const val NEWS = "/view/news"
    const val JOB = "/page/নিয়োগ-বিজ্ঞপ্তি"
-   const val ELECTRICITY_CONNECTION_RULES = "/page/tw5y-বিদ্যুৎ-সংযোগের-নিয়মাবলী"
-   const val SERVICE_LIST = "/office_process_map/uIWT-কী-সেবা-কীভাবে-পাবেন।"
-   const val COMMUNICATION_POST = "/page/rxkY-ডাক-যোগাযোগ"
    const val BANNERS = "/view/top_banner"
    const val CONNECTION_DOMESTIC_NEW = "https://newconnection.rebpbs.com"
 }

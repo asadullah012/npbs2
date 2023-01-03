@@ -32,16 +32,10 @@ import java.io.IOException
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Utility {
     companion object{
         private var TAG = Utility::class.java.name
-        @JvmStatic
-        fun openActivity(context: Context, cls: Class<*>?) {
-            val intent = Intent(context, cls)
-            context.startActivity(intent)
-        }
 
         @JvmStatic
         fun getFacebookPageURL(context: Context, url:String): String {
@@ -50,7 +44,7 @@ class Utility {
                 val appInfo = packageManager.getPackageInfo("com.facebook.katana", 0)
                 Log.d("NPBS2", "fb" + appInfo.versionCode)
                 if (appInfo.versionCode >= 3002850) {
-                    "fb://facewebmodal/f?href=" + url
+                    "fb://facewebmodal/f?href=$url"
                 } else {
                     url
                 }
@@ -72,7 +66,7 @@ class Utility {
         @JvmStatic
         fun dateStringToEpoch(dateTime: String, format: String): Long {
             try {
-                val df = SimpleDateFormat(format)
+                val df = SimpleDateFormat(format, Locale.ENGLISH)
                 val date: Date? = df.parse(dateTime)
                 return date?.time ?: 0L
             } catch (e : IllegalArgumentException){
@@ -162,17 +156,6 @@ class Utility {
             }.await()
         }
 
-        @JvmStatic
-        fun arrayToString(arr: Array<String>?): String? {
-            if (arr == null) return null
-            val sb = StringBuilder()
-            for (s in arr) {
-                sb.append(s)
-                sb.append(' ')
-            }
-            return sb.toString()
-        }
-
         fun downloadAndSave(bannerUrl: String, name: String, bannerDir: File) {
             val file = File(bannerDir, name)
             if(file.exists()) return
@@ -199,7 +182,6 @@ class Utility {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
         }
 
         fun getJsonFromAssets(filename:String, assetManager: AssetManager): String?{
@@ -245,10 +227,6 @@ class Utility {
             return list
         }
 
-        fun calculateElectricityBill(tariff:String, unit:Int, contractLoad:Double ){
-
-        }
-
         fun getTariffHtml(assetManager: AssetManager): String? {
             val json = getJsonFromAssets("init_data.json", assetManager) ?: return null
             val jsonRootObject = JSONObject(json)
@@ -286,7 +264,7 @@ class Utility {
 
         fun makeCall(context: Context, mobile: String) {
             val intent = Intent(
-                Intent.ACTION_DIAL, Uri.parse("tel:" + Utility.bnDigitToEnDigit(mobile))
+                Intent.ACTION_DIAL, Uri.parse("tel:" + bnDigitToEnDigit(mobile))
             )
             context.startActivity(intent)
         }

@@ -9,10 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MyMenuItemDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(myMenuItem: MyMenuItem)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(myMenuItemList: List<MyMenuItem>)
 
     @Query("DELETE FROM my_menu_table")

@@ -24,10 +24,6 @@ class AchievementViewModel(private val mRepository: NPBS2Repository) : ViewModel
         }
         mRepository.insertAchievementAll(achievements)
     }
-
-    fun deleteAllAchievements() = viewModelScope.launch{
-        mRepository.deleteAllAchievements()
-    }
 }
 
 class AchievementViewModelFactory(private val repository: NPBS2Repository) : ViewModelProvider.Factory {

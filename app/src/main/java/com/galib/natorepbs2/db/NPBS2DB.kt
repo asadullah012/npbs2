@@ -4,13 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.galib.natorepbs2.models.*
-import java.util.concurrent.Executors
 
 @Database(
     entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class],
-    version = 21,
+    version = 2,
     exportSchema = false
 )
 abstract class NPBS2DB : RoomDatabase() {
@@ -25,7 +23,6 @@ abstract class NPBS2DB : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: NPBS2DB? = null
-
         fun getDatabase(context: Context): NPBS2DB {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -33,7 +30,8 @@ abstract class NPBS2DB : RoomDatabase() {
                     NPBS2DB::class.java,
                     "npbs2_database"
                 )
-                    .createFromAsset("npbs2_database")
+                    .allowMainThreadQueries()
+                    .createFromAsset("database/npbs2_database")
                     .build()
                 INSTANCE = instance
                 // return instance

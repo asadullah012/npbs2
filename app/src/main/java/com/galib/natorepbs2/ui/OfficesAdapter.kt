@@ -12,7 +12,7 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.models.OfficeInformation
 
 class OfficesAdapter(onClickListener: OfficeInfoOnClickListener) : RecyclerView.Adapter<OfficesAdapter.OfficeInformationViewHolder?>() {
-    var onClickListener : OfficeInfoOnClickListener
+    private var onClickListener : OfficeInfoOnClickListener
     init {
         this.onClickListener= onClickListener
     }

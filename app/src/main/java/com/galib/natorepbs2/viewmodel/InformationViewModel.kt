@@ -40,13 +40,6 @@ class InformationViewModel(private val mRepository: NPBS2Repository) : ViewModel
         mRepository.deleteAllByCategory(Category.atAGlance)
     }
 
-    fun insertVisionMission(vision: String, mission: String) = viewModelScope.launch{
-        var s: Array<String?> = vision.split(": ").toTypedArray()
-        mRepository.insertInformation(Information(0, s[0]!!, s[1]!!, Category.visionMission))
-        s = mission.split(": ").toTypedArray()
-        mRepository.insertInformation(Information(1, s[0]!!, s[1]!!, Category.visionMission))
-    }
-
     fun getInstructionByType(type: Int): MutableList<Instruction>? {
         return mRepository.getInstructionByType(type)
     }

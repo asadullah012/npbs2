@@ -1,25 +1,23 @@
 package com.galib.natorepbs2.ui
 
-import com.galib.natorepbs2.utils.Utility.Companion.getFacebookPageURL
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import com.galib.natorepbs2.R
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentSocialMediaBinding
-import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.utils.Utility
+import com.galib.natorepbs2.utils.Utility.Companion.getFacebookPageURL
 import org.json.JSONArray
 import org.json.JSONObject
 
 class SocialMediaFragment : Fragment(), MenuOnClickListener {
     val list : MutableList<String> = ArrayList()
-    val urlList : MutableList<String> = ArrayList()
+    private val urlList : MutableList<String> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
