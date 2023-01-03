@@ -116,6 +116,10 @@
     <string name="about_app_description">নাটোর পল্লী বিদ্যুৎ সমিতি-২ ডিজিটাল সেবা অ্যাপটি একটি সেবামূলক অ্যাপ। এই অ্যাপটিতে নাটোর পল্লী বিদ্যুৎ সমিতি-২ সংক্রান্ত সকল তথ্য পাবেন।</string>
     <string name="about_app_developer">অ্যাপ ডেভেলপমেন্টঃ আইটি বিভাগ, নাটোর পল্লী বিদ্যুৎ সমিতি-২\nপৃষ্ঠপোষকতায়ঃ নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর সকল কর্মকর্তা/ কর্মচারীবৃন্দ</string>
     <string name="menu_communication_call">কল করুন</string>
+    <string name="menu_settings_favorite_menu">আপনার পছন্দের মেনু সমুহ</string>
+    <string name="menu_settings_choose_favorite_menu">আপনার পছন্দের মেনু সিলেক্ট করুন</string>
+    <string name="menu_settings_available_menu">যেসব মেনু পছন্দের মেন হিসেবে ব্যবহার করতে পারবেন</string>
+    <string name="menu_home">হোম</string>
     <array name="dummy_items">
         <item>One</item>
         <item>Two</item>

@@ -12,6 +12,10 @@ class SettingsViewModel(private val mRepository: NPBS2Repository) : ViewModel() 
     val availableMenu: LiveData<List<MyMenuItem>>
         get() = mRepository.availableMenu.asLiveData()
 
+    fun addMenus(allMenu: List<MyMenuItem>) = viewModelScope.launch {
+        deleteAllMyMenu()
+        mRepository.insertAllMenu(allMenu)
+    }
     fun addToFavoriteMenu(name:String) = viewModelScope.launch {
         mRepository.updateMyMenu(name, 1)
     }

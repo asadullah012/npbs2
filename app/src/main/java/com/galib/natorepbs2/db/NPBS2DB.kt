@@ -10,7 +10,7 @@ import java.util.concurrent.Executors
 
 @Database(
     entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class],
-    version = 20,
+    version = 21,
     exportSchema = false
 )
 abstract class NPBS2DB : RoomDatabase() {
@@ -34,13 +34,6 @@ abstract class NPBS2DB : RoomDatabase() {
                     "npbs2_database"
                 )
                     .createFromAsset("npbs2_database")
-//                    .addCallback(object : Callback() {
-//                        override fun onCreate(db: SupportSQLiteDatabase) {
-//                            super.onCreate(db)
-//                            Executors.newSingleThreadExecutor().execute {
-//                                getDatabase(context).myMenuItemDao().insertAll(MyMenuItem.populateData())
-//                            }
-//                        }})
                     .build()
                 INSTANCE = instance
                 // return instance
