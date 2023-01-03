@@ -19,7 +19,7 @@ class BillMessageFragment : Fragment() {
         binding.smsBillTitle = getString(R.string.sms_bill_title)
         binding.smsBillDesc = getString(R.string.sms_bill_desc)
         binding.smsBillSample = getString(R.string.sms_bill_sample)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 }

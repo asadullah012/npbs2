@@ -33,7 +33,7 @@ class PowerOutageContactFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_power_outage_contact)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val adapter = ContactListAdapter(object : ClickListener {
             override fun onClickCall(mobile: String?) {

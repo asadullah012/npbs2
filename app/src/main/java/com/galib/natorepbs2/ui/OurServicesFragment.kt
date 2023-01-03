@@ -30,7 +30,7 @@ class OurServicesFragment : Fragment(), MenuOnClickListener {
         )
         binding.pageTitle = getString(R.string.menu_our_services)
         binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
     private fun getMenuList(): MutableList<String> {

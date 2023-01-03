@@ -69,7 +69,7 @@ class BillCalculatorFragment : Fragment() {
             }
             updateBill()
         }
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

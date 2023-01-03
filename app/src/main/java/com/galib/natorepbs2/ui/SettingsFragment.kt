@@ -43,7 +43,7 @@ class SettingsFragment : Fragment(), SettingsOnClickListener  {
         binding.choseFavoriteMenu = getString(R.string.menu_settings_choose_favorite_menu)
         binding.favoriteMenu = getString(R.string.menu_settings_favorite_menu)
         binding.availableMenu = getString(R.string.menu_settings_available_menu)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

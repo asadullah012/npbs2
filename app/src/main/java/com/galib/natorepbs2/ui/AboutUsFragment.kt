@@ -23,7 +23,7 @@ class AboutUsFragment : Fragment(), MenuOnClickListener  {
         )
         binding.pageTitle = getString(R.string.menu_about_us)
         binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

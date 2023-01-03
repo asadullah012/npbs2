@@ -32,7 +32,7 @@ class BoardMemberFragment : Fragment() {
             false
         )
         binding.pageTitle = getString(R.string.menu_samity_board)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val adapter = ContactListAdapter(object : ClickListener {
             override fun onClickCall(mobile: String?) {

@@ -35,7 +35,7 @@ class SocialMediaFragment : Fragment(), MenuOnClickListener {
         val adapter = MenuAdapter(requireContext(),this, list)
         adapter.setIcon(R.drawable.ic_facebook)
         binding.adapter = adapter
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

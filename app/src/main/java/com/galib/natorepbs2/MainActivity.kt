@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -231,6 +232,16 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             title == getString(R.string.menu_communication) && fragment !is CommunicationFragment -> {
                 navController.navigate(R.id.communicationFragment)
             }
+            title == getString(R.string.menu_junior_officers) && fragment !is JuniorOfficerFragment -> {
+                navController.navigate(R.id.juniorOfficerFragment)
+            }
+            title == getString(R.string.menu_electricity_connection) && fragment !is ElectricityConnectionFragment -> {
+                navController.navigate(R.id.electricityConnectionFragment)
+            }
+            title == getString(R.string.menu_notice) && fragment !is NoticeInformationFragment -> {
+                val bundle = bundleOf("title" to getString(R.string.menu_notice))
+                navController.navigate(R.id.noticeInformationFragment, bundle)
+            }
             title == getString(R.string.menu_settings) && fragment !is SettingsFragment -> {
                 navController.navigate(R.id.settingsFragment)
             }
@@ -244,14 +255,18 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         val menuList = listOf(
             MyMenuItem(getString(R.string.menu_home), true),
             MyMenuItem(getString(R.string.menu_officers), true),
+            MyMenuItem(getString(R.string.menu_junior_officers), false),
             MyMenuItem(getString(R.string.menu_complain_centres),true),
-            MyMenuItem(getString(R.string.menu_communication), true),
             MyMenuItem(getString(R.string.menu_bill_from_home), false),
+            MyMenuItem(getString(R.string.menu_electricity_connection),true),
+            MyMenuItem(getString(R.string.menu_notice), true),
+            MyMenuItem(getString(R.string.menu_communication), true),
             MyMenuItem(getString(R.string.menu_awareness),  true)
         )
 
         launch(Dispatchers.IO) {
             val count = (settingsViewModel.favoriteMenu.value?.size ?: 0) + (settingsViewModel.availableMenu.value?.size ?: 0)
+            Log.d(TAG, "checkForMyMenuItems: $count ${menuList.size}")
             if(count != menuList.size){
                 settingsViewModel.addMenus(menuList)
             }

@@ -28,7 +28,7 @@ class OfficesFragment : Fragment() {
     ): View {
         val binding = DataBindingUtil.inflate<FragmentOfficesBinding>(inflater, R.layout.fragment_offices, container, false)
         binding.pageTitle = getString(R.string.menu_offices)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         val adapter = OfficesAdapter(object: OfficeInfoOnClickListener{
             override fun onClickCall(mobile: String?) {
                 val intent =

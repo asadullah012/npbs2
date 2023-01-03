@@ -25,7 +25,7 @@ class BillInstructionsFragment : Fragment() {
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentBillInstructionsBinding>(inflater, R.layout.fragment_bill_instructions, container, false)
         binding.pageTitle = args.title
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         val adapter = InstructionAdapter(requireContext())
         val type = args.billType
         adapter.submitList(informationViewModel.getInstructionByType(type))

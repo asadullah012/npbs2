@@ -23,7 +23,7 @@ class ConnectionMessageFragment : Fragment() {
         binding.smsApplicationDepositeTitle = getString(R.string.sms_application_deposite_title)
         binding.smsApplicationDepositeDesc = getString(R.string.sms_application_deposite_desc)
         binding.smsApplicationDepositeSample = getString(R.string.sms_application_deposite_sample)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

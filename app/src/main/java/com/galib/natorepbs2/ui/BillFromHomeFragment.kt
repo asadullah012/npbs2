@@ -26,7 +26,7 @@ class BillFromHomeFragment : Fragment(), MenuOnClickListener {
         )
         binding.pageTitle = getString(R.string.menu_bill_from_home)
         binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

@@ -41,7 +41,7 @@ class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
         val carouselView = binding.root.findViewById<CarouselView>(R.id.bannerCarousel)
         setBannerImages(carouselView)
 
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

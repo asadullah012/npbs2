@@ -26,7 +26,7 @@ class BankInformationFragment : Fragment() {
         val binding =
             DataBindingUtil.inflate<FragmentBankInformationBinding>(inflater, R.layout.fragment_bank_information, container, false)
         binding.pageTitle = getString(R.string.menu_bill_collection_bank)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         val adapter = InformationAdapter()
         informationViewModel.getInformationByCategory(Category.bank).observe(viewLifecycleOwner) { list: List<Information?> -> adapter.submitList(list) }
         binding.adapter = adapter

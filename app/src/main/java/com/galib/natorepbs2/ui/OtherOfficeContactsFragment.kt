@@ -28,7 +28,7 @@ class OtherOfficeContactsFragment : Fragment(), MenuOnClickListener {
         )
         binding.pageTitle = getString(R.string.menu_other_official_contacts)
         binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

@@ -23,7 +23,7 @@ class ComplainCentreFragment : Fragment() {
     ): View {
         val binding = DataBindingUtil.inflate<FragmentComplainCentreBinding>(inflater, R.layout.fragment_complain_centre, container, false)
         binding.pageTitle = getString(R.string.menu_complain_centres)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         val adapter = ComplainCentreAdapter(requireContext())
         complainCentreViewModel.allComplainCentre.observe(viewLifecycleOwner) { list -> adapter.submitList(list) }
         binding.adapter = adapter

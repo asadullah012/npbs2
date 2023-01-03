@@ -40,7 +40,7 @@ class OfficeHeadFragment : Fragment() {
         )
         binding.pageTitle = getString(R.string.menu_office_head)
         binding.fragment = this
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         officeHead!!.observe(viewLifecycleOwner) { employee: Employee? ->
             binding.employee = employee
             binding.executePendingBindings()

@@ -31,7 +31,7 @@ class WebsitesFragment : Fragment(), MenuOnClickListener  {
         binding.pageTitle = getString(R.string.menu_websites)
         getMenuList()
         binding.adapter = MenuAdapter(requireContext(),this, list)
-        binding.lifecycleOwner = activity
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
     private fun getMenuList(): MutableList<String> {
