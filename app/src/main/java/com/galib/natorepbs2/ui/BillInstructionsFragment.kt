@@ -22,7 +22,7 @@ class BillInstructionsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentBillInstructionsBinding>(inflater, R.layout.fragment_bill_instructions, container, false)
         binding.pageTitle = args.title
         binding.lifecycleOwner = viewLifecycleOwner

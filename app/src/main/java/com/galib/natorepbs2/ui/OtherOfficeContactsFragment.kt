@@ -18,7 +18,7 @@ class OtherOfficeContactsFragment : Fragment(), MenuOnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentOtherOfficeContactsBinding>(
             inflater,
@@ -35,7 +35,7 @@ class OtherOfficeContactsFragment : Fragment(), MenuOnClickListener {
     private fun getMenuList(): MutableList<String> {
         val list : MutableList<String> = ArrayList()
         list.add("বাংলাদেশ পল্লী বিদ্যুতায়ন বোর্ড")
-        var json: String? = Utility.getJsonFromAssets("init_data.json", requireContext().assets)
+        val json: String? = Utility.getJsonFromAssets("init_data.json", requireContext().assets)
         if(json != null){
             val jsonRootObject = JSONObject(json)
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("otherOffices")

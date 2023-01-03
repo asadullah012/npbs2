@@ -69,7 +69,7 @@ class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
         carouselView.setImageListener(imageListener)
     }
 
-    private fun getBannerImages(): List<String>? {
+    private fun getBannerImages(): List<String> {
         val apps : NPBS2Application = activity?.application as NPBS2Application
         if(apps.repository.getBannerUrls().isEmpty())
             launch(Dispatchers.IO){

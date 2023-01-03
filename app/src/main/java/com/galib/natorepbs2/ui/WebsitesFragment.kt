@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentWebsitesBinding
 import com.galib.natorepbs2.utils.Utility
 import org.json.JSONArray
@@ -16,7 +15,7 @@ import org.json.JSONObject
 
 class WebsitesFragment : Fragment(), MenuOnClickListener  {
     val list : MutableList<String> = ArrayList()
-    val urlList : MutableList<String> = ArrayList()
+    private val urlList : MutableList<String> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

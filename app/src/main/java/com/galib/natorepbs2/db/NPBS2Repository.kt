@@ -2,7 +2,6 @@ package com.galib.natorepbs2.db
 
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.MutableLiveData
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.models.*
 import kotlinx.coroutines.flow.Flow
@@ -30,11 +29,6 @@ class NPBS2Repository(db: NPBS2DB) {
 
     val allAchievement: Flow<List<Achievement>>
         get() = achievementDao.all
-
-    @WorkerThread
-    suspend fun insertAchievement(achievement: Achievement) {
-        achievementDao.insert(achievement)
-    }
 
     @WorkerThread
     suspend fun insertAchievementAll(achievements: List<Achievement>) {
@@ -74,11 +68,6 @@ class NPBS2Repository(db: NPBS2DB) {
     }
 
     @WorkerThread
-    suspend fun insertComplainCentre(complainCentre: ComplainCentre) {
-        complainCentreDao.insert(complainCentre)
-    }
-
-    @WorkerThread
     suspend fun insertAllComplainCentre(complainCentreList: List<ComplainCentre>) {
         complainCentreDao.insertAll(complainCentreList)
     }
@@ -109,10 +98,6 @@ class NPBS2Repository(db: NPBS2DB) {
         get() = employeeDao.getAllByType(Category.BOARD_MEMBER)
     val powerOutageContactList: Flow<List<Employee>>
         get() = employeeDao.getAllByType(Category.POWER_OUTAGE_CONTACT)
-    val powerOutageHeaderText: Flow<Information>
-        get() = informationDao.getInformationByCategory(Category.powerOutageContactHeader)
-    val powerOutageFooterText: Flow<Information>
-        get() = informationDao.getInformationByCategory(Category.powerOutageContactFooter)
     val officeHead: Flow<Employee>
         get() = employeeDao.getOfficeHead(Category.OFFICERS)
 
@@ -157,7 +142,7 @@ class NPBS2Repository(db: NPBS2DB) {
         bannerUrls.addAll(list)
     }
 
-    fun getInstructionByType(type: Int): MutableList<Instruction>? {
+    fun getInstructionByType(type: Int): MutableList<Instruction> {
         val list : MutableList<Instruction> = ArrayList()
         when (type) {
             Category.BKASH_APP -> {

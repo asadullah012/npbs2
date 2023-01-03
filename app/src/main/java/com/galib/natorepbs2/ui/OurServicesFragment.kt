@@ -1,7 +1,5 @@
 package com.galib.natorepbs2.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +11,6 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentOurServicesBinding
 import com.galib.natorepbs2.utils.Utility
-import org.json.JSONArray
-import org.json.JSONObject
 
 class OurServicesFragment : Fragment(), MenuOnClickListener {
 

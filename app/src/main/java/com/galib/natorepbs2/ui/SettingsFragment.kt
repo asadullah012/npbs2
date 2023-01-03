@@ -20,7 +20,7 @@ class SettingsFragment : Fragment(), SettingsOnClickListener  {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentSettingsBinding>(
             inflater,
             R.layout.fragment_settings,

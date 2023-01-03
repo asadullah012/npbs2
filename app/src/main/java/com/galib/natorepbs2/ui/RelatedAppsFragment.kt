@@ -1,6 +1,5 @@
 package com.galib.natorepbs2.ui
 
-import com.galib.natorepbs2.utils.Utility.Companion.openPlayStore
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentRelatedAppsBinding
-import com.galib.natorepbs2.utils.Utility
+import com.galib.natorepbs2.utils.Utility.Companion.openPlayStore
 
 class RelatedAppsFragment : Fragment(), MenuOnClickListener {
-    val appList: MutableList<String> = ArrayList()
-    val appIds:  MutableList<String> = ArrayList()
+    private val appList: MutableList<String> = ArrayList()
+    private val appIds:  MutableList<String> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

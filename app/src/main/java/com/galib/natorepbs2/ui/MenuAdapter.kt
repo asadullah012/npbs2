@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.R
@@ -26,7 +27,7 @@ class MenuAdapter(val context:Context, val listener: MenuOnClickListener, privat
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         holder.button.text = dataSet[position]
         if(drawableId != 0) {
-            holder.menuIcon.setImageDrawable(context.getDrawable(drawableId))
+            holder.menuIcon.setImageDrawable(AppCompatResources.getDrawable(context, drawableId))
             holder.menuIcon.visibility = View.VISIBLE
         }
         holder.card.setOnClickListener { listener.menuOnClick(dataSet[position]) }
@@ -38,16 +39,6 @@ class MenuAdapter(val context:Context, val listener: MenuOnClickListener, privat
 
     fun setIcon(drawableId:Int){
         this.drawableId = drawableId
-    }
-
-    fun remove(position: Int) {
-        dataSet.removeAt(position)
-        notifyItemRemoved(position)
-    }
-
-    fun add(text: String, position: Int) {
-        dataSet.add(position, text)
-        notifyItemInserted(position)
     }
 
     class MenuViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

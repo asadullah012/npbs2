@@ -15,28 +15,28 @@ import kotlin.math.ceil
 import kotlin.math.roundToInt
 
 class BillCalculatorFragment : Fragment() {
-    var slabLifeline = 0F
-    var slab1 = 0F
-    var slab2 = 0F
-    var slab3 = 0F
-    var slab4 = 0F
-    var slab5 = 0F
-    var slab6 = 0F
-    var energyCharge = 0F
-    var nitBill = 0F
-    var demandCharge = 30F
-    var vat = 0F
-    val meterRent = 10F
-    var totalBill = 0F
-    var LPC = 0F
-    var totalBillWithLPC = 0F
-    var KWH = 0
-    var demand = 1
+    private var slabLifeline = 0F
+    private var slab1 = 0F
+    private var slab2 = 0F
+    private var slab3 = 0F
+    private var slab4 = 0F
+    private var slab5 = 0F
+    private var slab6 = 0F
+    private var energyCharge = 0F
+    private var nitBill = 0F
+    private var demandCharge = 30F
+    private var vat = 0F
+    private val meterRent = 10F
+    private var totalBill = 0F
+    var lpc = 0F
+    private var totalBillWithLPC = 0F
+    var kWH = 0
+    private var demand = 1
     lateinit var binding: FragmentBillCalculatorBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
             inflater,
@@ -48,11 +48,11 @@ class BillCalculatorFragment : Fragment() {
         binding.root.findViewById<EditText>(R.id.KWHInput).doOnTextChanged { text, _, _, _ ->
             Log.d("Bill Calculator", "onCreateView: KWHInput $text")
             resetVariables()
-            try{
-                KWH = text.toString().toInt()
+            kWH = try{
+                text.toString().toInt()
             } catch (e: NumberFormatException ){
                 e.printStackTrace()
-                KWH = 0
+                0
             }
             updateBill()
         }
@@ -74,7 +74,7 @@ class BillCalculatorFragment : Fragment() {
     }
 
     private fun updateBill() {
-        var kwh = KWH
+        var kwh = kWH
         if(kwh <= 50){
             slabLifeline = kwh * 3.75F
         } else {
@@ -116,12 +116,12 @@ class BillCalculatorFragment : Fragment() {
             slab6 = kwh * 11.46F
         }
         energyCharge = slabLifeline + slab1 + slab2 + slab3 + slab4 + slab5 + slab6
-        demandCharge = demand*30F * ( if(isExtraConsumption(KWH, demand)) 3 else 1 )
+        demandCharge = demand*30F * ( if(isExtraConsumption(kWH, demand)) 3 else 1 )
         nitBill = (energyCharge + demandCharge)
         vat = nitBill * 0.05F
         totalBill = nitBill + vat + meterRent
-        LPC = vat
-        totalBillWithLPC = totalBill + LPC
+        lpc = vat
+        totalBillWithLPC = totalBill + lpc
         updateUI()
     }
 
@@ -139,7 +139,7 @@ class BillCalculatorFragment : Fragment() {
         binding.vatOut = vat.roundToInt()
         binding.meterRentOut = meterRent.roundToInt()
         binding.totalBillOut = totalBill.roundToInt()
-        binding.lpcOut = LPC.roundToInt()
+        binding.lpcOut = lpc.roundToInt()
         binding.totalBillWithLPCOut = totalBillWithLPC.roundToInt()
     }
 
@@ -156,15 +156,15 @@ class BillCalculatorFragment : Fragment() {
         demandCharge = 30F
         vat = 0F
         totalBill = 0F
-        LPC = 0F
+        lpc = 0F
         totalBillWithLPC = 0F
     }
 
-    fun round2Decimal(number: Float): Float{
+    private fun round2Decimal(number: Float): Float{
         return (number * 100.0).roundToInt() / 100.0F
     }
 
-    fun isExtraConsumption(kwh: Int, demand: Int) : Boolean{
+    private fun isExtraConsumption(kwh: Int, demand: Int) : Boolean{
         if (demand > 10) return false
         val consumptionLimit = arrayOf(162,281,421,562,648,778,907,1037,1166,1296)
         return kwh > consumptionLimit[demand-1]
