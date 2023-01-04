@@ -191,8 +191,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             Sync.syncBankInformation(informationViewModel, assets)
             Sync.syncOtherOfficeInformation(employeeViewModel, assets)
             Sync.syncBREBContacts(employeeViewModel)
+            setLastUpdateTimeToPref(updatedOn)
         }
-        setLastUpdateTimeToPref(updatedOn)
     }
 
     override fun onDestroy() {
