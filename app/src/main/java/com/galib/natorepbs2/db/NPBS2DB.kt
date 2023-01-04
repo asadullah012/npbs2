@@ -1,14 +1,17 @@
 package com.galib.natorepbs2.db
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.models.*
 
 @Database(
     entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 abstract class NPBS2DB : RoomDatabase() {
@@ -30,8 +33,8 @@ abstract class NPBS2DB : RoomDatabase() {
                     NPBS2DB::class.java,
                     "npbs2_database"
                 )
-                    .allowMainThreadQueries()
-                    .createFromAsset("database/npbs2_database")
+                    .createFromAsset("database/npbs2_database") // db file database version must be same as current db version
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 // return instance
@@ -40,3 +43,5 @@ abstract class NPBS2DB : RoomDatabase() {
         }
     }
 }
+
+
