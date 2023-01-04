@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.annotation.WorkerThread
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.models.*
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.runBlocking
 
 class NPBS2Repository(db: NPBS2DB) {
     private val informationDao: InformationDao
@@ -234,6 +236,14 @@ class NPBS2Repository(db: NPBS2DB) {
 
     val availableMenu : Flow<List<MyMenuItem>>
         get() = myMenuItemDao.availableMenu
+
+    fun getMyMenuCount(): Int = runBlocking {
+        val count = async {
+            myMenuItemDao.countMyMenuItem()
+        }
+        count.start()
+        count.await()
+    }
 
     @WorkerThread
     suspend fun insertAllMenu(myMenuItemList : List<MyMenuItem>){

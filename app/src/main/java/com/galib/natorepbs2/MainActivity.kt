@@ -17,8 +17,10 @@ import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.MyMenuItem
 import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.ui.*
@@ -27,6 +29,7 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     private lateinit var drawerLayout:DrawerLayout
     private var job: Job = Job()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
+    var repository: NPBS2Repository? = null
 
     private val employeeViewModel: EmployeeViewModel by viewModels {
         EmployeeViewModelFactory((application as NPBS2Application).repository)
@@ -44,11 +48,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     private val achievementViewModel: AchievementViewModel by viewModels {
         AchievementViewModelFactory((application as NPBS2Application).repository)
     }
-
     private val informationViewModel: InformationViewModel by viewModels {
         InformationViewModelFactory((application as NPBS2Application).repository)
     }
-
     private val complainCentreViewModel: ComplainCentreViewModel by viewModels {
         ComplainCentreViewModelFactory((application as NPBS2Application).repository)
     }
@@ -61,8 +63,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
     private val settingsViewModel:SettingsViewModel by viewModels {
         SettingsViewModelFactory((application as NPBS2Application).repository)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.repository = (application as NPBS2Application).repository
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -107,13 +111,17 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
 
     private fun updateSubMenus(subMenuFavorites: SubMenu?) {
         if(subMenuFavorites == null) return
-        settingsViewModel.favoriteMenu.observe(this) { menuList ->
-            menuList?.let {
-                subMenuFavorites.clear()
-                for(i in it){
-                    subMenuFavorites.add(i.name)
+        if(repository != null){
+            repository!!.favoriteMenu.asLiveData().observe(this) { menuList ->
+                menuList?.let {
+                    subMenuFavorites.clear()
+                    for(i in it){
+                        subMenuFavorites.add(i.name)
+                    }
                 }
             }
+        } else{
+            Log.e(TAG, "updateSubMenus: repository is null")
         }
     }
 
@@ -263,14 +271,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             MyMenuItem(getString(R.string.menu_communication), true),
             MyMenuItem(getString(R.string.menu_awareness),  true)
         )
-
-        launch(Dispatchers.IO) {
-            val count = (settingsViewModel.favoriteMenu.value?.size ?: 0) + (settingsViewModel.availableMenu.value?.size ?: 0)
-            Log.d(TAG, "checkForMyMenuItems: $count ${menuList.size}")
-            if(count != menuList.size){
-                settingsViewModel.addMenus(menuList)
-            }
+        val count = settingsViewModel.getMyMenuCount()
+        Log.d(TAG, "checkForMyMenuItems: $count ${menuList.size}")
+        if(count != menuList.size){
+            settingsViewModel.addMenus(menuList)
         }
+
     }
 
     companion object {

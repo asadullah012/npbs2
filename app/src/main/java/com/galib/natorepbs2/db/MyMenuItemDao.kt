@@ -1,5 +1,6 @@
 package com.galib.natorepbs2.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,6 +15,9 @@ interface MyMenuItemDao {
 
     @Query("DELETE FROM my_menu_table")
     suspend fun deleteAll()
+
+    @Query("SELECT COUNT(*) FROM my_menu_table")
+    suspend fun countMyMenuItem(): Int
 
     @Query("UPDATE my_menu_table SET is_favorite = :isFavorite where name = :name")
     suspend fun updateFavorite(name : String, isFavorite: Int)
