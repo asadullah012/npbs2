@@ -1,12 +1,10 @@
 package com.galib.natorepbs2.ui
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -16,7 +14,7 @@ import com.galib.natorepbs2.customui.carouselview.CarouselView
 import com.galib.natorepbs2.customui.carouselview.ImageListener
 import com.galib.natorepbs2.databinding.FragmentMainBinding
 import com.galib.natorepbs2.sync.Sync
-import com.galib.natorepbs2.utils.Utility
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -48,22 +46,25 @@ class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
     private fun setBannerImages(carouselView: CarouselView){
         val sampleImages = getBannerImages()
         lateinit var imageListener: ImageListener
-        if(sampleImages == null || sampleImages.isEmpty()){
+        if(sampleImages.isEmpty()){
             carouselView.pageCount = 1
             imageListener = object : ImageListener {
                 override fun setImageForPosition(position: Int, imageView: ImageView) {
-                    val src = BitmapFactory.decodeResource(resources, R.drawable.npbs2)
-                    val dr = RoundedBitmapDrawableFactory.create(resources, src)
-                    dr.cornerRadius = src.height/10.0F
-                    imageView.setImageDrawable(dr)
+//                    val src = BitmapFactory.decodeResource(resources, R.drawable.npbs2)
+//                    val dr = RoundedBitmapDrawableFactory.create(resources, src)
+//                    dr.cornerRadius = src.height/10.0F
+                    imageView.setImageDrawable(resources.getDrawable(R.drawable.npbs2, requireContext().theme))
                 }
             }
         } else {
             carouselView.pageCount = sampleImages.size
             imageListener = object : ImageListener {
                 override fun setImageForPosition(position: Int, imageView: ImageView) {
-                    Utility.loadImageInPicasso(sampleImages, position,imageView, resources)
-                }
+//                    Utility.loadImageInPicasso(sampleImages, position,imageView, resources)
+                        Picasso.get()
+                            .load(sampleImages[position])
+                            .into(imageView)
+                        }
             }
         }
         carouselView.setImageListener(imageListener)
