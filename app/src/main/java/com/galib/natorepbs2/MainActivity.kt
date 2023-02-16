@@ -29,7 +29,6 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
