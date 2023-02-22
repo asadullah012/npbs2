@@ -11,7 +11,10 @@ import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.URLs
+import com.galib.natorepbs2.models.Information
+import com.galib.natorepbs2.sync.Sync
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +27,9 @@ import okhttp3.ResponseBody
 import okio.Buffer
 import okio.BufferedSink
 import okio.Okio
+import org.json.JSONArray
 import org.json.JSONObject
+import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.File
@@ -182,6 +187,13 @@ class Utility {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+
+        fun downloadContent(){
+            val response: Connection.Response = Jsoup.connect("https://api.github.com/gists/15ef3b96f6850fb2cf653ad96b5a417f").ignoreContentType(true).execute()
+            val jsonRootObject = JSONObject(response.body())
+            val content = jsonRootObject.optJSONObject("files").optJSONObject("npbs2_init_data.json").getString("content")
+            Log.d(TAG, "downloadContent: $content")
         }
 
         fun getJsonFromAssets(filename:String, assetManager: AssetManager): String?{

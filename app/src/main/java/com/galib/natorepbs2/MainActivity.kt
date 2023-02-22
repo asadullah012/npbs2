@@ -24,6 +24,7 @@ import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.MyMenuItem
 import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.ui.*
+import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
@@ -71,7 +72,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         syncIfRequired()
         checkForMyMenuItems()
-
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
         updateMenu(navigationView)
@@ -183,6 +183,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         }
         Log.d(TAG, "sync: sync started")
         syncJob = launch(Dispatchers.IO) {
+            Utility.downloadContent()
             Sync.syncAtAGlance(informationViewModel)
             Sync.syncAchievement(achievementViewModel)
             Sync.syncComplainCentre(complainCentreViewModel)
