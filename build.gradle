@@ -20,7 +20,7 @@ task clean(type: Delete) {
 
 ext {
     coreVersion = '1.9.0'
-    appCompatVersion = '1.6.0'
+    appCompatVersion = '1.6.1'
     activityVersion = '1.6.1'
     bindingVersion = '3.1.4'
     googleMaterialVersion = '1.7.0'
@@ -29,10 +29,10 @@ ext {
     lifecycleVersion = '2.5.1'
     materialVersion = '1.8.0'
     roomVersion = '2.5.0'
-    jsoupVersion = '1.15.3'
+    jsoupVersion = '1.15.4'
     pdfViewerVersion = '3.2.0-beta.3'
     picassoVersion = '2.8'
-    webKitVersion = '1.7.0-alpha01'
+    webKitVersion = '1.7.0-alpha02'
     coroutines = '1.6.4'
     // testing
     junitVersion = '4.13.2'
