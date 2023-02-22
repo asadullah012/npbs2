@@ -54,7 +54,7 @@ class NPBS2Repository(db: NPBS2DB) {
 
     @WorkerThread
     suspend fun setMonth(month: String) {
-        insertInformation(Information(0, month, "", Category.atAGlanceMonth))
+        insertInformation(Information(0, Category.atAGlanceMonth, month, Category.atAGlanceMonth))
     }
 
     val month: Flow<Information>
