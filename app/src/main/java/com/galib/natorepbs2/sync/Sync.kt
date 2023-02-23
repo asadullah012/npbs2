@@ -31,7 +31,7 @@ class Sync {
                     lastUpdateTime = Utility.dateStringToEpoch(Utility.bnDigitToEnDigit(element.text()), "yyyy-MM-DD HH:mm:ss")
                     Log.d(TAG, "getLastUpdateTime: " + element.text() + " " + lastUpdateTime)
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 Log.e(TAG, e.message.toString())
             }
             return lastUpdateTime
@@ -53,7 +53,7 @@ class Sync {
                         data.add(tdList)
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0) {
@@ -84,7 +84,7 @@ class Sync {
                         data.add(tdList)
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0){
@@ -113,7 +113,7 @@ class Sync {
                         data.add(tdList)
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0) {
@@ -145,7 +145,7 @@ class Sync {
                             data.add(tdList)
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0) {
@@ -177,7 +177,7 @@ class Sync {
                         if (tdList.size > 0) data.add(tdList)
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0) {
@@ -209,7 +209,7 @@ class Sync {
                         if (tdList.size > 0) data.add(tdList)
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0) {
@@ -240,7 +240,7 @@ class Sync {
                         if (tdList.size > 0) data.add(tdList)
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0) {
@@ -262,7 +262,7 @@ class Sync {
                 inputStream.read(buffer)
                 inputStream.close()
                 json = buffer.toString(Charsets.UTF_8)
-            } catch (ex: IOException) {
+            } catch (ex: Exception) {
                 ex.printStackTrace()
             }
             val data = ArrayList<OfficeInformation>()
@@ -321,7 +321,7 @@ class Sync {
                             if (tdList.size > 0) data.add(tdList)
                         }
                     }
-                } catch (e: IOException) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                     break
                 }
@@ -363,7 +363,7 @@ class Sync {
                             if (tdList.size > 0) data.add(tdList)
                         }
                     }
-                } catch (e: IOException) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                     break
                 }
@@ -401,7 +401,7 @@ class Sync {
                             if (tdList.size > 0) data.add(tdList)
                         }
                     }
-                } catch (e: IOException) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                     break
                 }
@@ -441,7 +441,7 @@ class Sync {
                         if (tdList.size > 0) data.add(tdList)
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
 
             }
@@ -494,7 +494,7 @@ class Sync {
                     }
                 }
                 application.repository.setBannerUrls(list)
-            } catch (e : IOException){
+            } catch (e : Exception ){
                 e.printStackTrace()
             }
         }
@@ -535,7 +535,7 @@ class Sync {
                             data.add(Employee(i, tdList[0], tdList[1], tdList[2], officeName, tdList[4], tdList[5], tdList[6], Category.OTHER_OFFICES))
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0) {
@@ -573,7 +573,7 @@ class Sync {
                         }
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             if(data.size > 0) {

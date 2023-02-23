@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        syncInitData()
         syncIfRequired()
         checkForMyMenuItems()
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -96,6 +97,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             override fun onDrawerStateChanged(newState: Int) = Unit
         })
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun syncInitData() {
+        launch(Dispatchers.IO) {
+            Utility.downloadContent()
+        }
     }
 
     private fun updateMenu(navigationView: NavigationView) {
@@ -183,7 +190,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         }
         Log.d(TAG, "sync: sync started")
         syncJob = launch(Dispatchers.IO) {
-            Utility.downloadContent()
             Sync.syncAtAGlance(informationViewModel)
             Sync.syncAchievement(achievementViewModel)
             Sync.syncComplainCentre(complainCentreViewModel)
