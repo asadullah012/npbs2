@@ -15,6 +15,7 @@ import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.models.Information
 import com.galib.natorepbs2.sync.Sync
+import com.google.gson.Gson
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
@@ -189,17 +190,67 @@ class Utility {
             }
         }
 
+        fun getInitDataJson(filename:String, context: Context, assetManager: AssetManager) : String?{
+            var json = getJsonFromFile(filename, context)
+            if(json == null){
+                json = getJsonFromAssets(filename, assetManager)
+            }
+            return json
+        }
+
         fun downloadContent(){
             val response: Connection.Response = Jsoup.connect("https://api.github.com/gists/15ef3b96f6850fb2cf653ad96b5a417f").ignoreContentType(true).execute()
             val jsonRootObject = JSONObject(response.body())
             val content = jsonRootObject.optJSONObject("files").optJSONObject("npbs2_init_data.json").getString("content")
+            val contentJson = JSONObject(content)
+            updateURLs(contentJson.getJSONObject("urls"))
             Log.d(TAG, "downloadContent: $content")
+        }
+
+        fun updateURLs(jsonObject: JSONObject){
+            URLs.BASE = jsonObject.getString("BASE")
+            URLs.AT_A_GLANCE = jsonObject.getString("AT_A_GLANCE")
+            URLs.COMPLAIN_CENTRE = jsonObject.getString("COMPLAIN_CENTRE")
+            URLs.ACHIEVEMENTS = jsonObject.getString("ACHIEVEMENTS")
+            URLs.OFFICER_LIST = jsonObject.getString("OFFICER_LIST")
+            URLs.JUNIOR_OFFICER_LIST = jsonObject.getString("JUNIOR_OFFICER_LIST")
+            URLs.BOARD_MEMBER = jsonObject.getString("BOARD_MEMBER")
+            URLs.POWER_OUTAGE_CONTACT = jsonObject.getString("POWER_OUTAGE_CONTACT")
+            URLs.COMPLAIN_GOOGLE_FORM = jsonObject.getString("COMPLAIN_GOOGLE_FORM")
+            URLs.GRS = jsonObject.getString("GRS")
+            URLs.CONNECTION_DOMESTIC = jsonObject.getString("CONNECTION_DOMESTIC")
+            URLs.CONNECTION_INDUSTRY = jsonObject.getString("CONNECTION_INDUSTRY")
+            URLs.CITIZEN_CHARTER = jsonObject.getString("CITIZEN_CHARTER")
+            URLs.FACEBOOK = jsonObject.getString("FACEBOOK")
+            URLs.FACEBOOK_APP_ID = jsonObject.getString("FACEBOOK_APP_ID")
+            URLs.PLAY_STORE_PREFIX = jsonObject.getString("PLAY_STORE_PREFIX")
+            URLs.TENDER = jsonObject.getString("TENDER")
+            URLs.NOTICE = jsonObject.getString("NOTICE")
+            URLs.NEWS = jsonObject.getString("NEWS")
+            URLs.JOB = jsonObject.getString("JOB")
+            URLs.BANNERS = jsonObject.getString("BANNERS")
+            URLs.CONNECTION_DOMESTIC_NEW = jsonObject.getString("CONNECTION_DOMESTIC_NEW")
         }
 
         fun getJsonFromAssets(filename:String, assetManager: AssetManager): String?{
             var json: String? = null
             try {
                 val inputStream: InputStream = assetManager.open(filename)
+                val size: Int = inputStream.available()
+                val buffer = ByteArray(size)
+                inputStream.read(buffer)
+                inputStream.close()
+                json = buffer.toString(Charsets.UTF_8)
+            } catch (ex: IOException) {
+                ex.printStackTrace()
+            }
+            return json
+        }
+
+        fun getJsonFromFile(filename:String, context:Context): String?{
+            var json: String? = null
+            try {
+                val inputStream: InputStream = File(context.filesDir, filename).inputStream()
                 val size: Int = inputStream.available()
                 val buffer = ByteArray(size)
                 inputStream.read(buffer)
