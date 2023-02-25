@@ -23,6 +23,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.MyMenuItem
 import com.galib.natorepbs2.sync.Sync
+import com.galib.natorepbs2.sync.SyncManager
 import com.galib.natorepbs2.ui.*
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.*
@@ -34,12 +35,10 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 
-class MainActivity : AppCompatActivity(), CoroutineScope,
+class MainActivity : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
-    private var syncJob: Job? = null
     private lateinit var drawerLayout:DrawerLayout
-    private var job: Job = Job()
-    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
+
     var repository: NPBS2Repository? = null
 
     private val employeeViewModel: EmployeeViewModel by viewModels {
@@ -70,8 +69,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        syncInitData()
-        syncIfRequired()
+
         checkForMyMenuItems()
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
@@ -97,12 +95,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
             override fun onDrawerStateChanged(newState: Int) = Unit
         })
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun syncInitData() {
-        launch(Dispatchers.IO) {
-            Utility.downloadContent()
-        }
     }
 
     private fun updateMenu(navigationView: NavigationView) {
@@ -144,75 +136,20 @@ class MainActivity : AppCompatActivity(), CoroutineScope,
                 true
             }
             R.id.force_sync -> {
-                if(syncJob == null || !syncJob!!.isActive)
+                if(!SyncManager.isSyncRunning()) {
                     Toast.makeText(applicationContext, "Force sync selected", Toast.LENGTH_LONG).show()
-                else
-                    Toast.makeText(applicationContext, "Sync is already running", Toast.LENGTH_LONG).show()
-                syncUsingCoroutine(System.currentTimeMillis())
+                    SyncManager.startSync(applicationContext, (application as NPBS2Application).repository, true)
+                }
+                else {
+                    Toast.makeText(applicationContext, "Sync is already running", Toast.LENGTH_LONG)
+                        .show()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun syncIfRequired() {
-        launch(Dispatchers.IO) {
-            val result = Sync.getLastUpdateTime()
-            if(result != 0L){
-                val prevVal = getLastUpdateTimeFromPref()
-                Log.d(TAG, "syncIfRequired: prev value- $prevVal cur value- $result")
-                if(prevVal < result){
-                    syncUsingCoroutine(result)
-                }
-            } else{
-                Log.d(TAG, "syncIfRequired: unable to get last updated time")
-            }
-        }
-    }
-
-    private fun setLastUpdateTimeToPref(result: Long) {
-        val sharedPref = getPreferences(Context.MODE_PRIVATE)
-        with (sharedPref.edit()) {
-            putLong(getString(R.string.last_update_time), result)
-            apply()
-        }
-    }
-
-    private fun getLastUpdateTimeFromPref(): Long {
-        val sharedPref = getPreferences(Context.MODE_PRIVATE)
-        return sharedPref.getLong(getString(R.string.last_update_time), 0L)
-    }
-
-    private fun syncUsingCoroutine(updatedOn: Long) {
-        if(syncJob != null && syncJob!!.isActive){
-            Log.e(TAG, "sync: sync is running")
-            return
-        }
-        Log.d(TAG, "sync: sync started")
-        syncJob = launch(Dispatchers.IO) {
-            Sync.syncAtAGlance(informationViewModel)
-            Sync.syncAchievement(achievementViewModel)
-            Sync.syncComplainCentre(complainCentreViewModel)
-            Sync.syncOfficerList(employeeViewModel)
-            Sync.syncJuniorOfficers(employeeViewModel)
-            Sync.syncBoardMember(employeeViewModel)
-            Sync.syncPowerOutageContact(employeeViewModel)
-            Sync.syncOfficeData(officeInfoViewModel, assets)
-            Sync.syncTenderData(tenderInformationViewModel)
-            Sync.syncNoticeData(tenderInformationViewModel)
-            Sync.syncNewsData(tenderInformationViewModel)
-            Sync.syncJobData(tenderInformationViewModel)
-            Sync.syncBankInformation(informationViewModel, assets)
-            Sync.syncOtherOfficeInformation(employeeViewModel, assets)
-            Sync.syncBREBContacts(employeeViewModel)
-            setLastUpdateTimeToPref(updatedOn)
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        job.cancel()
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         Log.d(TAG, "onNavigationItemSelected: ${item.title}")
