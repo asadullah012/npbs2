@@ -1,21 +1,20 @@
 package com.galib.natorepbs2.sync
 
-import android.content.res.AssetManager
+import android.content.Context
+import android.content.res.Resources
 import android.util.Log
 import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.Selectors
 import com.galib.natorepbs2.constants.URLs
-import com.galib.natorepbs2.models.Employee
-import com.galib.natorepbs2.models.Information
-import com.galib.natorepbs2.models.OfficeInformation
+import com.galib.natorepbs2.db.NPBS2Repository
+import com.galib.natorepbs2.models.*
 import com.galib.natorepbs2.utils.Utility
-import com.galib.natorepbs2.viewmodel.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 import org.jsoup.Jsoup
-import java.io.IOException
-import java.io.InputStream
 
 
 class Sync {
@@ -37,7 +36,7 @@ class Sync {
             return lastUpdateTime
         }
 
-        fun syncAchievement(achievementViewModel: AchievementViewModel) {
+        suspend fun syncAchievement(repository: NPBS2Repository) {
             val data = ArrayList<ArrayList<String>>()
             try {
                 val document = Jsoup.connect(URLs.BASE + URLs.ACHIEVEMENTS).get()
@@ -58,14 +57,21 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncAchievement: " + data.size)
-                //achievementViewModel.deleteAllAchievements()
-                achievementViewModel.insertFromArray(data as List<MutableList<String>>)
+                repository.deleteAllAchievements()
+                val achievements: MutableList<Achievement> = ArrayList()
+                for (i in data.indices) {
+                    if (i == 1) continue
+                    achievements.add(
+                        Achievement(data[i][0]!!, data[i][1]!!, data[i][2]!!, data[i][3]!!, data[i][4]!!, i)
+                    )
+                }
+                repository.insertAchievementAll(achievements)
             } else{
                 Log.e(TAG, "sync: unable to get achievement data")
             }
         }
 
-        fun syncAtAGlance(informationViewModel: InformationViewModel) {
+        suspend fun syncAtAGlance(repository: NPBS2Repository) {
             val data = ArrayList<ArrayList<String>>()
             var month = ""
             try {
@@ -90,14 +96,22 @@ class Sync {
             if(data.size > 0){
                 Log.d(TAG, "syncAtAGlance: " + data.size)
                 //informationViewModel.deleteAllByCategory(Category.atAGlance)
-                informationViewModel.insertFromAtAGlance(data as List<MutableList<String>>)
-                informationViewModel.setMonth(month)
+//                informationViewModel.insertFromAtAGlance(data as List<MutableList<String>>)
+                val informationList: MutableList<Information> = ArrayList()
+                for (i in 1 until data.size) {
+                    informationList.add(
+                        Information(data[i][0].toInt(), data[i][1], data[i][2], Category.atAGlance)
+                    )
+                }
+                repository.insertInformations(informationList)
+//                informationViewModel.setMonth(month)
+                repository.setMonth(month)
             } else{
                 Log.e(TAG, "syncAtAGlance: unable to get data from website")
             }
         }
 
-        fun syncComplainCentre(complainCentreViewModel: ComplainCentreViewModel) {
+        suspend fun syncComplainCentre(repository: NPBS2Repository) {
             val data = ArrayList<ArrayList<String>>()
             try {
                 val document = Jsoup.connect(URLs.BASE + URLs.COMPLAIN_CENTRE).get()
@@ -119,13 +133,18 @@ class Sync {
             if(data.size > 0) {
                 Log.d(TAG, "syncComplainCentre: " + data.size)
                 //complainCentreViewModel.deleteAll()
-                complainCentreViewModel.insertFromTable(data as List<MutableList<String>>)
+//                complainCentreViewModel.insertFromTable(data as List<MutableList<String>>)
+                val complainCentreList: MutableList<ComplainCentre> = ArrayList()
+                for (i in 1 until data.size) {
+                    complainCentreList.add(ComplainCentre(data[i][0].toInt(), data[i][1], data[i][2]))
+                }
+                repository.insertAllComplainCentre(complainCentreList)
             } else{
                 Log.e(TAG, "sync: unable to get complain center data")
             }
         }
 
-        fun syncOfficerList(employeeViewModel: EmployeeViewModel) {
+        suspend fun syncOfficerList(repository: NPBS2Repository) {
             val data = ArrayList<ArrayList<String>>()
             try {
                 val document = Jsoup.connect(URLs.BASE + URLs.OFFICER_LIST).get()
@@ -150,13 +169,28 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncOfficerList: " + data.size)
-                employeeViewModel.insertOfficersFromTable(data as List<MutableList<String>>)
+//                employeeViewModel.insertOfficersFromTable(data as List<MutableList<String>>)
+                val officersList: MutableList<Employee> = ArrayList()
+                for (i in data.indices) {
+                    val s = data[i][2].split(", ").toTypedArray()
+                    val designation = s[0]
+                    val office: String = if (s.size == 1) "সদর দপ্তর" else s[1]
+                    officersList.add(
+                        Employee(
+                            i, data[i][0], data[i][1], designation, office,
+                            data[i][4], data[i][5], data[i][6], Category.OFFICERS
+                        )
+                    )
+                    //Log.d(TAG, "insertFromTable: " + i + " " + tableData[i][0] + " " + tableData[i][1] + " " + designation + " " + office + " " + tableData[i][4] + " " + tableData[i][5] + " " + tableData[i][6] + " " + Category.OFFICERS);
+                }
+                repository.deleteEmployeeByType(Category.OFFICERS)
+                repository.insertEmployeeList(officersList)
             } else{
                 Log.e(TAG, "syncOfficerList: unable to get officer data")
             }
         }
 
-        fun syncJuniorOfficers(employeeViewModel: EmployeeViewModel) {
+        suspend fun syncJuniorOfficers(repository: NPBS2Repository) {
             val data = ArrayList<ArrayList<String>>()
             try {
                 //Connect to the website
@@ -182,13 +216,31 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncJuniorOfficer: " + data.size)
-                employeeViewModel.insertJuniorOfficerFromTable(data as List<MutableList<String>>)
+//                employeeViewModel.insertJuniorOfficerFromTable(data as List<MutableList<String>>)
+                val employeeList: MutableList<Employee> = ArrayList()
+                var office: String? = null
+                var i = 0
+                while (i < data.size) {
+                    //Log.d(TAG, "insertJuniorOfficerFromTable: " + Utility.arrayToString(tableData[i]));
+                    if (data[i].size == 1) {
+                        office = data[i][0]
+                        i++ // ignore header row
+                    } else employeeList.add(
+                        Employee(
+                            i, data[i][1], data[i][2], data[i][3],
+                            office!!, data[i][4], data[i][5], "", Category.JUNIOR_OFFICER
+                        )
+                    )
+                    i++
+                }
+                repository.deleteEmployeeByType(Category.JUNIOR_OFFICER)
+                repository.insertEmployeeList(employeeList)
             } else{
                 Log.e(TAG, "syncJuniorOfficer: unable to get junior officer data")
             }
         }
 
-        fun syncBoardMember(employeeViewModel: EmployeeViewModel) {
+        suspend fun syncBoardMember(repository: NPBS2Repository) {
             val data = ArrayList<ArrayList<String>>()
             try {
                 val document = Jsoup.connect(URLs.BASE + URLs.BOARD_MEMBER).get()
@@ -214,13 +266,25 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncBoardMember: " + data.size)
-                employeeViewModel.insertBoardMembersFromTable(data as List<MutableList<String>>)
+//                employeeViewModel.insertBoardMembersFromTable(data as List<MutableList<String>>)
+                val employeeList: MutableList<Employee> = ArrayList()
+                for (i in data.indices) {
+                    //Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
+                    employeeList.add(
+                        Employee(
+                            i, data[i][0], data[i][1], data[i][2],
+                            data[i][3], "", data[i][4], "", Category.BOARD_MEMBER
+                        )
+                    )
+                }
+                repository.deleteEmployeeByType(Category.BOARD_MEMBER)
+                repository.insertEmployeeList(employeeList)
             } else{
                 Log.e(TAG, "syncBoardMember: unable to get board member data")
             }
         }
 
-        fun syncPowerOutageContact(employeeViewModel: EmployeeViewModel) {
+        suspend fun syncPowerOutageContact(repository: NPBS2Repository) {
             val data = ArrayList<ArrayList<String>>()
             try {
                 val document = Jsoup.connect(URLs.BASE + URLs.POWER_OUTAGE_CONTACT).get()
@@ -245,22 +309,37 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncBoardMember: " + data.size)
-                employeeViewModel.insertPowerOutageContactFromTable(
-                    data as List<MutableList<String>>
-                )
+//                employeeViewModel.insertPowerOutageContactFromTable(data as List<MutableList<String>>)
+                val employeeList: MutableList<Employee> = ArrayList()
+                for (i in data.indices) {
+                    //Log.d(TAG, "insertPowerOutageContactFromTable: " + Utility.arrayToString(tableData[i]));
+                    employeeList.add(
+                        Employee(i, data[i][1], data[i][2], data[i][3],
+                            "", "", data[i][4], "", Category.POWER_OUTAGE_CONTACT)
+                    )
+                }
+                repository.deleteEmployeeByType(Category.POWER_OUTAGE_CONTACT)
+                repository.insertEmployeeList(employeeList)
             } else{
                 Log.e(TAG, "syncBoardMember: unable to get board member data")
             }
         }
 
-        fun syncOfficeData(officeInformationViewModel: OfficeInformationViewModel, assets: AssetManager){
+        suspend fun syncOfficeData(repository: NPBS2Repository, context: Context){
             var json: String? = null
             try {
-                val inputStream: InputStream = assets.open("init_data.json")
-                val size: Int = inputStream.available()
+                val assetManager = context.assets
+                val inputStream = assetManager.open("init_data.json")
+                val size = withContext(Dispatchers.IO) {
+                    inputStream.available()
+                }
                 val buffer = ByteArray(size)
-                inputStream.read(buffer)
-                inputStream.close()
+                withContext(Dispatchers.IO) {
+                    inputStream.read(buffer)
+                }
+                withContext(Dispatchers.IO) {
+                    inputStream.close()
+                }
                 json = buffer.toString(Charsets.UTF_8)
             } catch (ex: Exception) {
                 ex.printStackTrace()
@@ -286,13 +365,14 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncOfficeData: " + data.size)
-                officeInformationViewModel.insertAllOfficeInformation(data)
+//                officeInformationViewModel.insertAllOfficeInformation(data)
+                repository.insertAllOfficeInfo(data)
             } else{
                 Log.e(TAG, "syncOfficeData: unable to get office data")
             }
         }
 
-        fun syncTenderData(tenderInformationViewModel: NoticeInformationViewModel){
+        suspend fun syncTenderData(repository: NPBS2Repository){
             val data = ArrayList<ArrayList<String>>()
             for(page in 1..10){
                 try {
@@ -328,13 +408,14 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncTenderData: " + data.size)
-                tenderInformationViewModel.insertAllByCategory(data, Category.TENDER)
+//                tenderInformationViewModel.insertAllByCategory(data, Category.TENDER)
+                insertAllNoticeByCategory(data, repository, Category.TENDER)
             } else{
                 Log.e(TAG, "syncTenderData: unable to get tender data")
             }
         }
 
-        fun syncNoticeData(noticeInformationViewModel: NoticeInformationViewModel){
+        suspend fun syncNoticeData(repository: NPBS2Repository){
             val data = ArrayList<ArrayList<String>>()
             for(page in 1..10){
                 try {
@@ -370,13 +451,14 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncNoticeData: " + data.size)
-                noticeInformationViewModel.insertAllByCategory(data, Category.NOTICE)
+//                noticeInformationViewModel.insertAllByCategory(data, Category.NOTICE)
+                insertAllNoticeByCategory(data, repository, Category.NOTICE)
             } else{
                 Log.e(TAG, "syncNoticeData: unable to get notice data")
             }
         }
 
-        fun syncNewsData(noticeInformationViewModel: NoticeInformationViewModel){
+        suspend fun syncNewsData(repository: NPBS2Repository){
             val data = ArrayList<ArrayList<String>>()
             for(page in 1..10){
                 try {
@@ -408,13 +490,14 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncNewsData: " + data.size)
-                noticeInformationViewModel.insertAllByCategory(data, Category.NEWS)
+//                noticeInformationViewModel.insertAllByCategory(data, Category.NEWS)
+                insertAllNoticeByCategory(data, repository, Category.NEWS)
             } else{
                 Log.e(TAG, "syncNewsData: unable to get news data")
             }
         }
 
-        fun syncJobData(noticeInformationViewModel: NoticeInformationViewModel){
+        suspend fun syncJobData(repository: NPBS2Repository){
             val data = ArrayList<ArrayList<String>>()
             try {
                 val url = URLs.BASE + URLs.JOB
@@ -448,14 +531,15 @@ class Sync {
 
             if(data.size > 0) {
                 Log.d(TAG, "syncJobData: " + data.size)
-                noticeInformationViewModel.insertAllByCategory(data, Category.JOB)
+//                noticeInformationViewModel.insertAllByCategory(data, Category.JOB)
+                insertAllNoticeByCategory(data, repository, Category.JOB)
             } else{
                 Log.e(TAG, "syncJobData: unable to get job data")
             }
         }
 
-        fun syncBankInformation(informationViewModel: InformationViewModel, assets: AssetManager){
-            val json: String? = Utility.getJsonFromAssets("init_data.json", assets)
+        suspend fun syncBankInformation(repository: NPBS2Repository,context: Context){
+            val json: String? = Utility.getJsonFromAssets("init_data.json", context.assets)
             val data = ArrayList<Information>()
             if(json != null){
                 val jsonRootObject = JSONObject(json)
@@ -469,7 +553,8 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncBankInformation: " + data.size)
-                informationViewModel.insertAll(data)
+//                informationViewModel.insertAll(data)
+                repository.insertInformations(data)
             } else{
                 Log.e(TAG, "syncBankInformation: unable to get bank information")
             }
@@ -499,21 +584,21 @@ class Sync {
             }
         }
 
-        fun syncOtherOfficeInformation(employeeViewModel: EmployeeViewModel, assets: AssetManager) {
-            val json: String? = Utility.getJsonFromAssets("init_data.json", assets)
+        suspend fun syncOtherOfficeInformation(repository: NPBS2Repository, context: Context) {
+            val json: String? = Utility.getJsonFromAssets("init_data.json", context.assets)
             if(json != null){
                 val jsonRootObject = JSONObject(json)
                 val jsonArray: JSONArray? = jsonRootObject.optJSONArray("otherOffices")
                 if(jsonArray != null) {
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
-                        syncOfficerListFromURL(jsonObject.getString("name"), jsonObject.getString("url"), employeeViewModel)
+                        syncOfficerListFromURL(jsonObject.getString("name"), jsonObject.getString("url"), repository)
                     }
                 }
             }
         }
 
-        private fun syncOfficerListFromURL(officeName:String, url: String, employeeViewModel: EmployeeViewModel){
+        private suspend fun syncOfficerListFromURL(officeName:String, url: String, repository: NPBS2Repository){
             val absoluteUrl = "$url/bn/site${URLs.OFFICER_LIST}"
             Log.d(TAG, "syncOfficerListFromURL: $officeName, $absoluteUrl")
             val data = ArrayList<Employee>()
@@ -540,13 +625,14 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncOfficerListFromURL: $officeName, ${data.size}")
-                employeeViewModel.insertEmployeeList(data)
+//                repository.insertEmployeeList(data)
+                repository.insertEmployeeList(data)
             } else{
                 Log.e(TAG, "syncOfficerList: unable to get officer data")
             }
         }
 
-        fun syncBREBContacts(employeeViewModel:EmployeeViewModel){
+        suspend fun syncBREBContacts(repository: NPBS2Repository){
             val url = "https://reb.portal.gov.bd/site/view/officer_list/-"
             val data = ArrayList<Employee>()
             try {
@@ -578,10 +664,23 @@ class Sync {
             }
             if(data.size > 0) {
                 Log.d(TAG, "syncBREBContacts: ${data.size}")
-                employeeViewModel.insertEmployeeList(data)
+//                employeeViewModel.insertEmployeeList(data)
+                repository.insertEmployeeList(data)
             } else{
                 Log.e(TAG, "syncBREBContacts: unable to get breb contacts")
             }
+        }
+        private suspend fun insertAllNoticeByCategory(data: ArrayList<ArrayList<String>>, repository: NPBS2Repository, category:String){
+            repository.deleteAllNoticeByType(category)
+            val tenderList = ArrayList<NoticeInformation>()
+            for((i, d) in data.withIndex()){
+//            Log.d(TAG, "insertAllTender: $i $d")
+                if(d.size > 3)
+                    tenderList.add(NoticeInformation(i, d[0], d[1], d[2], d[3], category))
+                else
+                    tenderList.add(NoticeInformation(i, d[0], d[1], d[2], "", category))
+            }
+            repository.insertAllNotice(tenderList)
         }
     }
 }
