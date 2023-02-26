@@ -379,7 +379,7 @@ class Sync {
                     var url = URLs.BASE + URLs.TENDER
                     if(page > 1)
                         url = "$url?page=$page"
-                    val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                    val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
                     val tables = document.select(Selectors.TENDER)
                     for (table in tables) {
                         val trs = table.select("tr")
@@ -422,7 +422,7 @@ class Sync {
                     var url = URLs.BASE + URLs.NOTICE
                     if(page > 1)
                         url = "$url?page=$page"
-                    val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                    val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
                     val tables = document.select(Selectors.NOTICE)
                     for (table in tables) {
                         val trs = table.select("tr")
@@ -465,7 +465,7 @@ class Sync {
                     var url = URLs.BASE + URLs.NEWS
                     if(page > 1)
                         url = "$url?page=$page"
-                    val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                    val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
                     val tables = document.select(Selectors.NEWS)
                     for (table in tables) {
                         val trs = table.select("tr")
@@ -501,7 +501,7 @@ class Sync {
             val data = ArrayList<ArrayList<String>>()
             try {
                 val url = URLs.BASE + URLs.JOB
-                val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
                 val tables = document.select(Selectors.JOB)
                 for (table in tables) {
                     val trs = table.select("tr")
@@ -560,11 +560,11 @@ class Sync {
             }
         }
 
-        fun syncBanners(application: NPBS2Application) {
+        fun syncBanners(repository: NPBS2Repository) {
             val list:MutableList<String> = ArrayList()
             try {
                 val url = URLs.BASE + URLs.BANNERS
-                val document = Jsoup.connect(url).timeout(5 * 1000).get()
+                val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
                 val tables = document.select(Selectors.BANNERS)
                 for (table in tables) {
                     val trs = table.select("tr")
@@ -578,7 +578,7 @@ class Sync {
                             list.add(bannerUrl)
                     }
                 }
-                application.repository.setBannerUrls(list)
+                repository.setBannerUrls(list)
             } catch (e : Exception ){
                 e.printStackTrace()
             }

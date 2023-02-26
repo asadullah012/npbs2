@@ -1,6 +1,5 @@
 package com.galib.natorepbs2
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -22,17 +21,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.MyMenuItem
-import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.sync.SyncManager
 import com.galib.natorepbs2.ui.*
-import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.viewmodel.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 
 class MainActivity : AppCompatActivity(),
@@ -41,24 +34,6 @@ class MainActivity : AppCompatActivity(),
 
     var repository: NPBS2Repository? = null
 
-    private val employeeViewModel: EmployeeViewModel by viewModels {
-        EmployeeViewModelFactory((application as NPBS2Application).repository)
-    }
-    private val achievementViewModel: AchievementViewModel by viewModels {
-        AchievementViewModelFactory((application as NPBS2Application).repository)
-    }
-    private val informationViewModel: InformationViewModel by viewModels {
-        InformationViewModelFactory((application as NPBS2Application).repository)
-    }
-    private val complainCentreViewModel: ComplainCentreViewModel by viewModels {
-        ComplainCentreViewModelFactory((application as NPBS2Application).repository)
-    }
-    private val officeInfoViewModel: OfficeInformationViewModel by viewModels {
-        OfficeViewModelFactory((application as NPBS2Application).repository)
-    }
-    private val tenderInformationViewModel: NoticeInformationViewModel by viewModels {
-        NoticeViewModelFactory((application as NPBS2Application).repository)
-    }
     private val settingsViewModel:SettingsViewModel by viewModels {
         SettingsViewModelFactory((application as NPBS2Application).repository)
     }
@@ -137,17 +112,37 @@ class MainActivity : AppCompatActivity(),
             }
             R.id.force_sync -> {
                 if(!SyncManager.isSyncRunning()) {
-                    Toast.makeText(applicationContext, "Force sync selected", Toast.LENGTH_LONG).show()
-                    SyncManager.startSync(applicationContext, (application as NPBS2Application).repository, true)
+                    showSyncDialog(false)
                 }
                 else {
-                    Toast.makeText(applicationContext, "Sync is already running", Toast.LENGTH_LONG)
-                        .show()
+                    showSyncDialog(true)
                 }
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showSyncDialog(isSyncRunning: Boolean) {
+        val syncDialog = MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+            .setTitle(resources.getString(R.string.force_sync))
+            .setMessage(if (isSyncRunning) resources.getString(R.string.sync_running) else resources.getString(R.string.sync_confirmation))
+        if(isSyncRunning)
+            syncDialog.setPositiveButton(resources.getString(R.string.dismiss)) { dialog, _ ->
+//                Toast.makeText(applicationContext, "Sync is already running", Toast.LENGTH_LONG)
+//                    .show()
+                dialog.dismiss()
+            }
+        else {
+            syncDialog.setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
+                dialog.cancel()
+            }.setPositiveButton(resources.getString(R.string.confirm)) { dialog, _ ->
+                SyncManager.startSync(applicationContext, (application as NPBS2Application).repository, true)
+                Toast.makeText(applicationContext, "Force sync selected", Toast.LENGTH_LONG).show()
+                dialog.dismiss()
+            }
+        }
+        syncDialog.show()
     }
 
 

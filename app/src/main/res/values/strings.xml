@@ -121,6 +121,11 @@
     <string name="menu_settings_choose_favorite_menu">আপনার পছন্দের মেনু সিলেক্ট করুন</string>
     <string name="menu_settings_available_menu">যেসব মেনু পছন্দের মেন হিসেবে ব্যবহার করতে পারবেন</string>
     <string name="menu_home">হোম</string>
+    <string name="sync_running">Sync is already running.</string>
+    <string name="sync_confirmation">Do you want to sync?</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
     <array name="dummy_items">
         <item>One</item>
         <item>Two</item>

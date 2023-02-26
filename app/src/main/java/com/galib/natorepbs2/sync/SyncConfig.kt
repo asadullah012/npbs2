@@ -7,6 +7,7 @@ import com.galib.natorepbs2.utils.Utility
 
 object SyncConfig {
     var failedAttempts = 0
+    const val TIMEOUT = 1000
     private fun syncInitData() {
         Utility.downloadContent()
     }

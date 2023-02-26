@@ -66,6 +66,7 @@ object SyncManager: SyncManagerInterface {
     private suspend fun syncData(repository: NPBS2Repository, context: Context) {
         // Make network call to sync data
         withContext(Dispatchers.IO) {
+            Sync.syncBanners(repository)
             Sync.syncAtAGlance(repository)
             Sync.syncAchievement(repository)
             Sync.syncComplainCentre(repository)

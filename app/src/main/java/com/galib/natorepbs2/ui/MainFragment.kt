@@ -13,12 +13,10 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.customui.carouselview.CarouselView
 import com.galib.natorepbs2.customui.carouselview.ImageListener
 import com.galib.natorepbs2.databinding.FragmentMainBinding
-import com.galib.natorepbs2.sync.Sync
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 
@@ -72,11 +70,6 @@ class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
 
     private fun getBannerImages(): List<String> {
         val apps : NPBS2Application = activity?.application as NPBS2Application
-        if(apps.repository.getBannerUrls().isEmpty())
-            launch(Dispatchers.IO){
-                Sync.syncBanners(apps)
-            }
-
         return apps.repository.getBannerUrls()
     }
 
