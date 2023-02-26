@@ -11,11 +11,7 @@ import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.constants.URLs
-import com.galib.natorepbs2.models.Information
-import com.galib.natorepbs2.sync.Sync
-import com.google.gson.Gson
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
@@ -28,14 +24,10 @@ import okhttp3.ResponseBody
 import okio.Buffer
 import okio.BufferedSink
 import okio.Okio
-import org.json.JSONArray
 import org.json.JSONObject
-import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import java.io.File
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -198,40 +190,6 @@ class Utility {
             return json
         }
 
-        fun downloadContent(){
-            val response: Connection.Response = Jsoup.connect("https://api.github.com/gists/15ef3b96f6850fb2cf653ad96b5a417f").ignoreContentType(true).execute()
-            val jsonRootObject = JSONObject(response.body())
-            val content = jsonRootObject.optJSONObject("files").optJSONObject("npbs2_init_data.json").getString("content")
-            val contentJson = JSONObject(content)
-            updateURLs(contentJson.getJSONObject("urls"))
-            Log.d(TAG, "downloadContent: $content")
-        }
-
-        fun updateURLs(jsonObject: JSONObject){
-            URLs.BASE = jsonObject.getString("BASE")
-            URLs.AT_A_GLANCE = jsonObject.getString("AT_A_GLANCE")
-            URLs.COMPLAIN_CENTRE = jsonObject.getString("COMPLAIN_CENTRE")
-            URLs.ACHIEVEMENTS = jsonObject.getString("ACHIEVEMENTS")
-            URLs.OFFICER_LIST = jsonObject.getString("OFFICER_LIST")
-            URLs.JUNIOR_OFFICER_LIST = jsonObject.getString("JUNIOR_OFFICER_LIST")
-            URLs.BOARD_MEMBER = jsonObject.getString("BOARD_MEMBER")
-            URLs.POWER_OUTAGE_CONTACT = jsonObject.getString("POWER_OUTAGE_CONTACT")
-            URLs.COMPLAIN_GOOGLE_FORM = jsonObject.getString("COMPLAIN_GOOGLE_FORM")
-            URLs.GRS = jsonObject.getString("GRS")
-            URLs.CONNECTION_DOMESTIC = jsonObject.getString("CONNECTION_DOMESTIC")
-            URLs.CONNECTION_INDUSTRY = jsonObject.getString("CONNECTION_INDUSTRY")
-            URLs.CITIZEN_CHARTER = jsonObject.getString("CITIZEN_CHARTER")
-            URLs.FACEBOOK = jsonObject.getString("FACEBOOK")
-            URLs.FACEBOOK_APP_ID = jsonObject.getString("FACEBOOK_APP_ID")
-            URLs.PLAY_STORE_PREFIX = jsonObject.getString("PLAY_STORE_PREFIX")
-            URLs.TENDER = jsonObject.getString("TENDER")
-            URLs.NOTICE = jsonObject.getString("NOTICE")
-            URLs.NEWS = jsonObject.getString("NEWS")
-            URLs.JOB = jsonObject.getString("JOB")
-            URLs.BANNERS = jsonObject.getString("BANNERS")
-            URLs.CONNECTION_DOMESTIC_NEW = jsonObject.getString("CONNECTION_DOMESTIC_NEW")
-        }
-
         fun getJsonFromAssets(filename:String, assetManager: AssetManager): String?{
             var json: String? = null
             try {
@@ -291,19 +249,19 @@ class Utility {
         }
 
         fun getTariffHtml(assetManager: AssetManager): String? {
-            val json = getJsonFromAssets("init_data.json", assetManager) ?: return null
+            val json = getJsonFromAssets("npbs2_sync_data.json", assetManager) ?: return null
             val jsonRootObject = JSONObject(json)
             return jsonRootObject.getString("electricity_tariff")
         }
 
         fun getConnectionRulesHtml(assetManager: AssetManager): String? {
-            val json = getJsonFromAssets("init_data.json", assetManager) ?: return null
+            val json = getJsonFromAssets("npbs2_sync_data.json", assetManager) ?: return null
             val jsonRootObject = JSONObject(json)
             return jsonRootObject.getString("electricity_connection_rules")
         }
 
         fun getHowToGetServiceHtml(assetManager: AssetManager): String? {
-            val json = getJsonFromAssets("init_data.json", assetManager) ?: return null
+            val json = getJsonFromAssets("npbs2_sync_data.json", assetManager) ?: return null
             val jsonRootObject = JSONObject(json)
             return jsonRootObject.getString("how_to_get_service")
         }
@@ -336,6 +294,30 @@ class Utility {
             val json = assets?.let { getJsonFromAssets(file_path, it) } ?: return null
             val jsonRootObject = JSONObject(json)
             return jsonRootObject.getString(object_name)
+        }
+
+        fun writeToFile(data: String, filename: String, context: Context) {
+            val path = context.filesDir
+            val file = File(path, filename)
+            file.createNewFile()
+            val outStream = FileOutputStream(file)
+            outStream.use { stream ->
+                stream.write(data.toByteArray())
+            }
+        }
+
+        fun readFromFile(filename: String, context: Context): String?{
+            val path = context.filesDir
+            val file = File(path, filename)
+            if(file.exists()){
+                val bytes = ByteArray(file.length().toInt())
+                val inputStream = FileInputStream(file)
+                inputStream.use { stream ->
+                    stream.read(bytes)
+                }
+                return String(bytes, Charsets.UTF_8)
+            }
+            return null
         }
 
     }
