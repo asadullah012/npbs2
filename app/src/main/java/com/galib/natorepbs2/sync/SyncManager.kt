@@ -67,6 +67,7 @@ object SyncManager: SyncManagerInterface {
         // Make network call to sync data
         withContext(Dispatchers.IO) {
             Sync.syncBanners(repository)
+            Sync.syncImportantNotice(repository)
             Sync.syncAtAGlance(repository)
             Sync.syncAchievement(repository)
             Sync.syncComplainCentre(repository)

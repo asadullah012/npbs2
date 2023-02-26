@@ -85,7 +85,7 @@
 
     <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
         <item name="android:textColor">@color/teal_900</item>
-        <item name="backgroundTint">@color/teal_300</item>
+        <item name="backgroundTint">@color/teal_100</item>
     </style>
 
 </resources>

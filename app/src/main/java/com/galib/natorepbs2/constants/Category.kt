@@ -8,6 +8,7 @@ object Category {
     const val bank = "bank"
     const val atAGlance = "ataglance"
     const val atAGlanceMonth = "atAGlanceMonth"
+    const val importantNotice = "importantNotice"
     const val OFFICERS = 0
     const val JUNIOR_OFFICER = 1
     const val BOARD_MEMBER = 2

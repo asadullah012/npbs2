@@ -58,8 +58,17 @@ class NPBS2Repository(db: NPBS2DB) {
         insertInformation(Information(0, Category.atAGlanceMonth, month, Category.atAGlanceMonth))
     }
 
-    val month: Flow<Information>
+    @WorkerThread
+    suspend fun setImportantNotice(importantNotice: String) {
+        insertInformation(Information(0, Category.importantNotice, importantNotice, Category.importantNotice))
+    }
+
+
+    val month: Flow<Information?>
         get() = informationDao.getInformationByCategory(Category.atAGlanceMonth)
+
+    val importantNotice: Flow<Information?>
+        get() = informationDao.getInformationByCategory(Category.importantNotice)
 
     @WorkerThread
     suspend fun insertInformations(informationList: List<Information>) {

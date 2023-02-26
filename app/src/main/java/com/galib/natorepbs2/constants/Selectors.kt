@@ -1,6 +1,7 @@
 package com.galib.natorepbs2.constants
 
 object Selectors {
+    val IMPORTANT_NOTICE = "#predefined-partial-marquee > strong > span"
     var COMPLAIN_CENTRE = "#left > div.news.details > div:nth-child(3) > div > div.html_text.body > div.value > table"
     var ACHIEVEMENTS = "#left > div.page.details > div > div > div.html_text.body > div > table"
     var OFFICERS_LIST = "#left > div.officerlist.list > div.table-responsive.chbappy1 > table"

@@ -1,10 +1,9 @@
 package com.galib.natorepbs2.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.galib.natorepbs2.constants.Category
-import com.galib.natorepbs2.models.Information
 import com.galib.natorepbs2.db.NPBS2Repository
+import com.galib.natorepbs2.models.Information
 import com.galib.natorepbs2.models.Instruction
 import kotlinx.coroutines.launch
 
@@ -14,30 +13,14 @@ class InformationViewModel(private val mRepository: NPBS2Repository) : ViewModel
         return mRepository.getInformationByCategory(category).asLiveData()
     }
 
-    fun setMonth(month: String) = viewModelScope.launch{
-        Log.d("InformationViewModel", "setMonth: $month")
-        mRepository.setMonth(month)
-    }
-
-    val month: LiveData<Information>
+    val month: LiveData<Information?>
         get() = mRepository.month.asLiveData()
 
-    fun insertFromAtAGlance(trtd: List<List<String>>) = viewModelScope.launch{
-        val informationList: MutableList<Information> = ArrayList()
-        for (i in 1 until trtd.size) {
-            informationList.add(
-                Information(trtd[i][0].toInt(), trtd[i][1], trtd[i][2], Category.atAGlance)
-            )
-        }
-        mRepository.insertInformations(informationList)
-    }
+    val importantNotice: LiveData<Information?>
+        get() = mRepository.importantNotice.asLiveData()
 
     fun insertAll(data: List<Information>) = viewModelScope.launch{
         mRepository.insertInformations(data)
-    }
-
-    fun deleteAllByCategory(atAGlance: String?) = viewModelScope.launch{
-        mRepository.deleteAllByCategory(Category.atAGlance)
     }
 
     fun getInstructionByType(type: Int): MutableList<Instruction>? {
