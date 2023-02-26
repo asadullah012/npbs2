@@ -2,6 +2,7 @@ package com.galib.natorepbs2.constants
 
 object URLs {
    var BASE = "http://pbs2.natore.gov.bd/bn/site"
+   var NPBS2 = "http://pbs2.natore.gov.bd/"
    var AT_A_GLANCE = "/page/7XSs-এক-নজরে"
    var COMPLAIN_CENTRE = "/news/Kxzl-অভিযোগ-কেন্দ্রের-মোবাইল-নম্বর"
    var ACHIEVEMENTS = "/page/7te7-আমাদের-অর্জন"

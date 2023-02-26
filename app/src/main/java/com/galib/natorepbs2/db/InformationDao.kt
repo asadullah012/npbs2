@@ -22,7 +22,7 @@ interface InformationDao {
     fun getInformationsByCategory(category: String?): Flow<List<Information>>
 
     @Query("SELECT * FROM information_table where category = :category ORDER BY priority ASC LIMIT 1")
-    fun getInformationByCategory(category: String?): Flow<Information>
+    fun getInformationByCategory(category: String?): Flow<Information?>
 
     @get:Query("SELECT COUNT(*) FROM information_table")
     val count: Int

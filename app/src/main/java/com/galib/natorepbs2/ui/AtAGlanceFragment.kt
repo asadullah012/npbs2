@@ -36,9 +36,9 @@ class AtAGlanceFragment : Fragment() {
         informationViewModel.getInformationByCategory(Category.atAGlance).observe(
             viewLifecycleOwner
         ) { list: List<Information?> -> adapter.submitList(list) }
-        informationViewModel.month.observe(viewLifecycleOwner) { information: Information ->
-            binding.month = information.description
-            Log.d("AtAGlanceFragment", "onCreateView: " + information.title)
+        informationViewModel.month.observe(viewLifecycleOwner) { information: Information? ->
+            binding.month = information?.description ?: ""
+            Log.d("AtAGlanceFragment", "onCreateView: " + binding.month)
         }
         binding.adapter = adapter
         return binding.root

@@ -36,6 +36,19 @@ class Sync {
             return lastUpdateTime
         }
 
+        suspend fun syncImportantNotice(repository: NPBS2Repository){
+            try {
+                val document = Jsoup.connect(URLs.NPBS2).get()
+                val importantNotice = document.select(Selectors.IMPORTANT_NOTICE)
+                if (importantNotice != null) {
+                    repository.setImportantNotice(importantNotice.text())
+                    Log.d(TAG, "syncImportantNotice: " + importantNotice.text())
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, e.message.toString())
+            }
+        }
+
         suspend fun syncAchievement(repository: NPBS2Repository) {
             val data = ArrayList<ArrayList<String>>()
             try {

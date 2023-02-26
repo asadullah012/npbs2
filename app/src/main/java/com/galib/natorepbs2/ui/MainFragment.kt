@@ -7,23 +7,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.customui.carouselview.CarouselView
 import com.galib.natorepbs2.customui.carouselview.ImageListener
 import com.galib.natorepbs2.databinding.FragmentMainBinding
+import com.galib.natorepbs2.models.Information
+import com.galib.natorepbs2.viewmodel.InformationViewModel
+import com.galib.natorepbs2.viewmodel.InformationViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlin.coroutines.CoroutineContext
 
 
-class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
-    private var job: Job = Job()
-    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
-
+class MainFragment : Fragment(), MenuOnClickListener {
+    private val informationViewModel: InformationViewModel by viewModels {
+        InformationViewModelFactory((activity?.application as NPBS2Application).repository)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +34,18 @@ class MainFragment : Fragment(), CoroutineScope, MenuOnClickListener {
         binding.title = getString(R.string.title)
         binding.bannerContentDescription = getString(R.string.banner_content_description)
         binding.adapter = MenuAdapter(requireContext(),this, getMenuList())
+        binding.slidingNoticeTextView.isSelected = true
 
+        informationViewModel.importantNotice.observe(viewLifecycleOwner) { information: Information? ->
+            binding.slidingNoticeTextView.text = information?.description ?: getString(R.string.sliding_text)
+        }
+
+        binding.slidingNoticeTextView.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setTitle(getString(R.string.menu_notice))
+                .setMessage(binding.slidingNoticeTextView.text)
+                .show()
+        }
         val carouselView = binding.root.findViewById<CarouselView>(R.id.bannerCarousel)
         setBannerImages(carouselView)
 
