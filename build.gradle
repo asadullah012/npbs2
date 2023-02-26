@@ -3,7 +3,6 @@ buildscript {
     ext.kotlin_version = '1.8.0'
     dependencies {
         def nav_version = "2.5.3"
-        def compiler_version = '3.1.4'
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath 'com.android.tools.build:gradle:7.4.1'
     }

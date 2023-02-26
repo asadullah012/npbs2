@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentOurServicesBinding
+import com.galib.natorepbs2.sync.SyncConfig
 import com.galib.natorepbs2.utils.Utility
 
 class OurServicesFragment : Fragment(), MenuOnClickListener {
@@ -50,7 +50,7 @@ class OurServicesFragment : Fragment(), MenuOnClickListener {
             getString(R.string.menu_citizen_charter) ->{
                 val action = OurServicesFragmentDirections.actionOurServicesFragmentToPDFViewerFragment(
                     getString(R.string.menu_citizen_charter),
-                    URLs.CITIZEN_CHARTER,
+                    SyncConfig.getUrl("CITIZEN_CHARTER", requireContext()),
                     getString(R.string.menu_citizen_charter)
                 )
                 findNavController().navigate(action)

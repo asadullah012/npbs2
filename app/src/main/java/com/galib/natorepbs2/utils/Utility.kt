@@ -11,7 +11,7 @@ import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import com.galib.natorepbs2.constants.URLs
+import com.galib.natorepbs2.sync.SyncConfig
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
@@ -124,7 +124,7 @@ class Utility {
                 context.startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse(URLs.PLAY_STORE_PREFIX + appId)
+                        Uri.parse(SyncConfig.getUrl("PLAY_STORE_PREFIX",context) + appId)
                     )
                 )
                 //            Log.d(TAG, "openPlayStore: play store not found. Trying to find other market apps");
