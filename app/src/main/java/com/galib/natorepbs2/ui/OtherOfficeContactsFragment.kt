@@ -35,7 +35,7 @@ class OtherOfficeContactsFragment : Fragment(), MenuOnClickListener {
     private fun getMenuList(): MutableList<String> {
         val list : MutableList<String> = ArrayList()
         list.add("বাংলাদেশ পল্লী বিদ্যুতায়ন বোর্ড")
-        val json: String? = Utility.getJsonFromAssets("init_data.json", requireContext().assets)
+        val json: String? = Utility.getJsonFromAssets("npbs2_sync_data.json", requireContext().assets)
         if(json != null){
             val jsonRootObject = JSONObject(json)
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("otherOffices")

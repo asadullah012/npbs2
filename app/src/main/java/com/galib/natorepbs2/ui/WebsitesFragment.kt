@@ -36,7 +36,7 @@ class WebsitesFragment : Fragment(), MenuOnClickListener  {
     private fun getMenuList(): MutableList<String> {
         list.clear()
         urlList.clear()
-        val json = Utility.getJsonFromAssets("init_data.json", requireContext().assets)
+        val json = Utility.getJsonFromAssets("npbs2_sync_data.json", requireContext().assets)
         if(json != null){
             val jsonRootObject = JSONObject(json)
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("pbs")

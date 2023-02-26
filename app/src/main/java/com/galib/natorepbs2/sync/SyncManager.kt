@@ -11,8 +11,6 @@ object SyncManager: SyncManagerInterface {
 //    private var job: Job = Job()
 //    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
 
-    private lateinit var syncConfig: SyncConfig
-
     fun isSyncRunning():Boolean{
         return syncJob?.isActive == true
     }
@@ -43,8 +41,9 @@ object SyncManager: SyncManagerInterface {
                 SyncConfig.setSyncFailedAttempts(0)
             } catch (e: Exception) {
                 // Sync failed, update config with failed attempt and last sync time
-                SyncConfig.setLastSyncTime(context, System.currentTimeMillis())
+                SyncConfig.setLastSyncTime(context, 0)
                 SyncConfig.setSyncFailedAttempts(SyncConfig.getSyncFailedAttempts()+1)
+                SyncConfig.updateConfigFile(context)
                 delay(3000) // Add a delay of 5 seconds before trying again
                 startSync(context, repository, forceSync) // Call startSync() again after the delay
             }
@@ -52,7 +51,7 @@ object SyncManager: SyncManagerInterface {
     }
 
     private fun isSyncAvailable(context: Context): Boolean {
-        val lastUpdateTime = Sync.getLastUpdateTime()
+        val lastUpdateTime = Sync.getLastUpdateTime(context)
         return if(lastUpdateTime != 0L){
             val lastSyncTime = SyncConfig.getLastSyncTime(context)
             Log.d(TAG, "isSyncAvailable: last sync time- $lastSyncTime last update time- $lastUpdateTime")
@@ -66,23 +65,23 @@ object SyncManager: SyncManagerInterface {
     private suspend fun syncData(repository: NPBS2Repository, context: Context) {
         // Make network call to sync data
         withContext(Dispatchers.IO) {
-            Sync.syncBanners(repository)
-            Sync.syncImportantNotice(repository)
-            Sync.syncAtAGlance(repository)
-            Sync.syncAchievement(repository)
-            Sync.syncComplainCentre(repository)
-            Sync.syncOfficerList(repository)
-            Sync.syncJuniorOfficers(repository)
-            Sync.syncBoardMember(repository)
-            Sync.syncPowerOutageContact(repository)
-            Sync.syncOfficeData(repository,context)
-            Sync.syncTenderData(repository)
-            Sync.syncNoticeData(repository)
-            Sync.syncNewsData(repository)
-            Sync.syncJobData(repository)
-            Sync.syncBankInformation(repository,context)
+            Sync.syncBanners(repository, context)
+            Sync.syncImportantNotice(repository, context)
+            Sync.syncAtAGlance(repository, context)
+            Sync.syncAchievement(repository, context)
+            Sync.syncComplainCentre(repository, context)
+            Sync.syncOfficerList(repository, context)
+            Sync.syncJuniorOfficers(repository, context)
+            Sync.syncBoardMember(repository, context)
+            Sync.syncPowerOutageContact(repository, context)
+            Sync.syncOfficeData(repository, context)
+            Sync.syncTenderData(repository, context)
+            Sync.syncNoticeData(repository, context)
+            Sync.syncNewsData(repository, context)
+            Sync.syncJobData(repository, context)
+            Sync.syncBankInformation(repository, context)
             Sync.syncOtherOfficeInformation(repository, context)
-            Sync.syncBREBContacts(repository)
+            Sync.syncBREBContacts(repository, context)
         }
     }
 }
