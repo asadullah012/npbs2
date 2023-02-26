@@ -6,10 +6,8 @@ import com.galib.natorepbs2.db.NPBS2Repository
 import kotlinx.coroutines.*
 
 object SyncManager: SyncManagerInterface {
-    const val TAG = "SyncManager"
+    private const val TAG = "SyncManager"
     private var syncJob: Job? = null
-//    private var job: Job = Job()
-//    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
 
     fun isSyncRunning():Boolean{
         return syncJob?.isActive == true
@@ -81,7 +79,7 @@ object SyncManager: SyncManagerInterface {
             Sync.syncJobData(repository, context)
             Sync.syncBankInformation(repository, context)
             Sync.syncOtherOfficeInformation(repository, context)
-            Sync.syncBREBContacts(repository, context)
+            Sync.syncBREBContacts(repository)
         }
     }
 }

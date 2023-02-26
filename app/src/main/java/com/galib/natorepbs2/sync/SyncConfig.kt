@@ -37,7 +37,7 @@ object SyncConfig {
         }
     }
 
-    fun getConfigJson(context: Context): JSONObject?{
+    private fun getConfigJson(context: Context): JSONObject?{
         var json = Utility.readFromFile(fileConfig, context) // try to read from file
         if(json == null){
             json = Utility.getJsonFromAssets(fileConfig, context.assets) // if not present in file, read from asset
@@ -46,20 +46,24 @@ object SyncConfig {
         return null
     }
 
-    fun getUrl(type : String, context: Context): String?{
+    fun getUrl(type : String, context: Context): String{
         if(jsonUrls == null){
-            val configJson = getConfigJson(context) ?: return null
+            val configJson = getConfigJson(context) ?: return ""
             jsonUrls = configJson.optJSONObject("urls")
         }
-        return jsonUrls?.optString(type)
+        if(jsonUrls != null)
+            return jsonUrls!!.optString(type)
+        return ""
     }
 
-    fun getSelector(type : String, context: Context): String?{
+    fun getSelector(type : String, context: Context): String{
         if(jsonSelectors == null){
-            val configJson = getConfigJson(context) ?: return null
+            val configJson = getConfigJson(context) ?: return ""
             jsonSelectors = configJson.optJSONObject("selectors")
         }
-        return jsonSelectors?.optString(type)
+        if(jsonSelectors != null)
+            return jsonSelectors!!.optString(type)
+        return ""
     }
 
     fun getConfigVersion(context: Context): Int {

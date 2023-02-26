@@ -10,7 +10,6 @@ class NPBS2Application : Application() {
     val repository by lazy { NPBS2Repository(database) }
     override fun onCreate() {
         super.onCreate()
-
         SyncManager.startSync(this, repository, false)
     }
 }

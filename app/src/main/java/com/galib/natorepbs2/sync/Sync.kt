@@ -2,6 +2,7 @@ package com.galib.natorepbs2.sync
 
 import android.content.Context
 import android.util.Log
+import androidx.room.ColumnInfo
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.*
@@ -20,7 +21,7 @@ object Sync {
         var lastUpdateTime = 0L
         val url = SyncConfig.getUrl("NPBS2", context)
         val selector = SyncConfig.getSelector("LAST_UPDATE_TIME", context)
-        if(url == null || selector == null) return 0L
+        if(url.isEmpty() || selector.isEmpty()) return 0L
         try {
             val document = Jsoup.connect(url).get()
             val element = document.select(selector).first()
@@ -37,10 +38,10 @@ object Sync {
     suspend fun syncImportantNotice(repository: NPBS2Repository, context: Context){
         val url = SyncConfig.getUrl("NPBS2", context)
         val selector = SyncConfig.getSelector("IMPORTANT_NOTICE", context)
-        if(url == null || selector == null) return
+        if(url.isEmpty() || selector.isEmpty()) return
         try {
             val document = Jsoup.connect(url).get()
-            val importantNotice = document.select(selector)
+            val importantNotice = document.select(selector).first()
             if (importantNotice != null) {
                 repository.setImportantNotice(importantNotice.text())
                 Log.d(TAG, "syncImportantNotice: " + importantNotice.text())
@@ -53,7 +54,7 @@ object Sync {
     suspend fun syncAchievement(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("ACHIEVEMENTS", context)
         val selector = SyncConfig.getSelector("ACHIEVEMENTS", context)
-        if(url == null || selector == null) return
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         try {
             val document = Jsoup.connect(url).get()
@@ -79,7 +80,7 @@ object Sync {
             for (i in data.indices) {
                 if (i == 1) continue
                 achievements.add(
-                    Achievement(data[i][0]!!, data[i][1]!!, data[i][2]!!, data[i][3]!!, data[i][4]!!, i)
+                    Achievement(data[i][0], data[i][1], data[i][2], data[i][3], data[i][4], i)
                 )
             }
             repository.insertAchievementAll(achievements)
@@ -92,7 +93,7 @@ object Sync {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("AT_A_GLANCE", context)
         val selector = SyncConfig.getSelector("AT_A_GLANCE", context)
         val selectorMonth = SyncConfig.getSelector("AT_A_GLANCE_MONTH", context)
-        if(url == null || selector == null) return
+        if(url.isEmpty() || selector.isEmpty() || selectorMonth.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         var month = ""
         try {
@@ -133,10 +134,13 @@ object Sync {
     }
 
     suspend fun syncComplainCentre(repository: NPBS2Repository, context: Context) {
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("COMPLAIN_CENTRE", context)
+        val selector = SyncConfig.getSelector("COMPLAIN_CENTRE", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         try {
-            val document = Jsoup.connect(URLs.BASE + URLs.COMPLAIN_CENTRE).get()
-            val tables = document.select(Selectors.COMPLAIN_CENTRE)
+            val document = Jsoup.connect(url).get()
+            val tables = document.select(selector)
             for (table in tables) {
                 val trs = table.select("tr")
                 for (i in trs.indices) {
@@ -166,10 +170,13 @@ object Sync {
     }
 
     suspend fun syncOfficerList(repository: NPBS2Repository, context: Context) {
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("OFFICER_LIST", context)
+        val selector = SyncConfig.getSelector("OFFICER_LIST", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         try {
-            val document = Jsoup.connect(URLs.BASE + URLs.OFFICER_LIST).get()
-            val tables = document.select(Selectors.OFFICERS_LIST)
+            val document = Jsoup.connect(url).get()
+            val tables = document.select(selector)
             for (table in tables) {
                 val trs = table.select("tr")
                 for (i in 1 until trs.size) {
@@ -212,11 +219,14 @@ object Sync {
     }
 
     suspend fun syncJuniorOfficers(repository: NPBS2Repository, context: Context) {
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("JUNIOR_OFFICER_LIST", context)
+        val selector = SyncConfig.getSelector("JUNIOR_OFFICER_LIST", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         try {
             //Connect to the website
-            val document = Jsoup.connect(URLs.BASE + URLs.JUNIOR_OFFICER_LIST).get()
-            val tables = document.select(Selectors.JUNIOR_OFFICER_LIST)
+            val document = Jsoup.connect(url).get()
+            val tables = document.select(selector)
             for (table in tables) {
                 val trs = table.select("tr")
                 for (i in trs.indices) {
@@ -262,10 +272,13 @@ object Sync {
     }
 
     suspend fun syncBoardMember(repository: NPBS2Repository, context: Context) {
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("BOARD_MEMBER", context)
+        val selector = SyncConfig.getSelector("BOARD_MEMBER", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         try {
-            val document = Jsoup.connect(URLs.BASE + URLs.BOARD_MEMBER).get()
-            val tables = document.select(Selectors.BOARD_MEMBER)
+            val document = Jsoup.connect(url).get()
+            val tables = document.select(selector)
             for (table in tables) {
                 val trs = table.select("tr")
                 for (i in 1 until trs.size) {
@@ -306,10 +319,13 @@ object Sync {
     }
 
     suspend fun syncPowerOutageContact(repository: NPBS2Repository, context: Context) {
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("POWER_OUTAGE_CONTACT", context)
+        val selector = SyncConfig.getSelector("POWER_OUTAGE_CONTACT", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         try {
-            val document = Jsoup.connect(URLs.BASE + URLs.POWER_OUTAGE_CONTACT).get()
-            val tables = document.select(Selectors.POWER_OUTAGE_CONTACT)
+            val document = Jsoup.connect(url).get()
+            val tables = document.select(selector)
             for (table in tables) {
                 val trs = table.select("tr")
                 for (i in 1 until trs.size) {
@@ -368,7 +384,7 @@ object Sync {
         val data = ArrayList<OfficeInformation>()
         if(json != null){
             val jsonRootObject = JSONObject(json)
-            val jsonArray: JSONArray? = jsonRootObject.optJSONArray("officeInformation")
+            val jsonArray: JSONArray? = jsonRootObject.optJSONArray("office_information_table")
             if(jsonArray != null){
                 for (i in 0 until jsonArray.length()) {
                     val jsonObject = jsonArray.getJSONObject(i)
@@ -393,28 +409,29 @@ object Sync {
         }
     }
 
-    suspend fun syncTenderData(repository: NPBS2Repository, context: Context){
+    suspend fun syncTenderData(repository: NPBS2Repository, context: Context) {
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("TENDER", context)
+        val selector = SyncConfig.getSelector("TENDER", context)
+        if (url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
-        for(page in 1..10){
+        for (page in 1..10) {
             try {
-                var url = URLs.BASE + URLs.TENDER
-                if(page > 1)
-                    url = "$url?page=$page"
-                val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
-                val tables = document.select(Selectors.TENDER)
+                val document = Jsoup.connect(if (page == 1) url else "$url?page=$page")
+                    .timeout(SyncConfig.TIMEOUT).get()
+                val tables = document.select(selector)
                 for (table in tables) {
                     val trs = table.select("tr")
                     for (i in 1 until trs.size) {
                         val tds = trs[i].select("td")
                         val tdList = ArrayList<String>()
                         tdList.add(tds[0].text())
-                        if(tds.size > 0 && tds[0].select("a").first() != null){
+                        if (tds.size > 0 && tds[0].select("a").first() != null) {
                             tdList.add(tds[0].select("a").first()!!.absUrl("href"))
                         } else {
                             tdList.add("")
                         }
                         tdList.add(tds[1].text())
-                        if(tds.size > 2 && tds[2].select("a").first() != null)
+                        if (tds.size > 2 && tds[2].select("a").first() != null)
                             tdList.add(tds[2].select("a").first()!!.attr("href"))
                         else
                             tdList.add("")
@@ -427,24 +444,24 @@ object Sync {
                 break
             }
         }
-        if(data.size > 0) {
+        if (data.size > 0) {
             Log.d(TAG, "syncTenderData: " + data.size)
 //                tenderInformationViewModel.insertAllByCategory(data, Category.TENDER)
             insertAllNoticeByCategory(data, repository, Category.TENDER)
-        } else{
+        } else {
             Log.e(TAG, "syncTenderData: unable to get tender data")
         }
     }
 
     suspend fun syncNoticeData(repository: NPBS2Repository, context: Context){
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("NOTICE", context)
+        val selector = SyncConfig.getSelector("NOTICE", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         for(page in 1..10){
             try {
-                var url = URLs.BASE + URLs.NOTICE
-                if(page > 1)
-                    url = "$url?page=$page"
-                val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
-                val tables = document.select(Selectors.NOTICE)
+                val document = Jsoup.connect(if (page == 1) url else "$url?page=$page").timeout(SyncConfig.TIMEOUT).get()
+                val tables = document.select(selector)
                 for (table in tables) {
                     val trs = table.select("tr")
                     for (i in 1 until trs.size) {
@@ -480,14 +497,14 @@ object Sync {
     }
 
     suspend fun syncNewsData(repository: NPBS2Repository, context: Context){
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("NEWS", context)
+        val selector = SyncConfig.getSelector("NEWS", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         for(page in 1..10){
             try {
-                var url = URLs.BASE + URLs.NEWS
-                if(page > 1)
-                    url = "$url?page=$page"
-                val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
-                val tables = document.select(Selectors.NEWS)
+                val document = Jsoup.connect(if (page == 1) url else "$url?page=$page").timeout(SyncConfig.TIMEOUT).get()
+                val tables = document.select(selector)
                 for (table in tables) {
                     val trs = table.select("tr")
                     for (i in 1 until trs.size) {
@@ -519,11 +536,13 @@ object Sync {
     }
 
     suspend fun syncJobData(repository: NPBS2Repository, context: Context){
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("JOB", context)
+        val selector = SyncConfig.getSelector("JOB", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val data = ArrayList<ArrayList<String>>()
         try {
-            val url = URLs.BASE + URLs.JOB
             val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
-            val tables = document.select(Selectors.JOB)
+            val tables = document.select(selector)
             for (table in tables) {
                 val trs = table.select("tr")
                 for (i in 1 until trs.size) {
@@ -582,11 +601,13 @@ object Sync {
     }
 
     fun syncBanners(repository: NPBS2Repository, context: Context) {
+        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("BANNERS", context)
+        val selector = SyncConfig.getSelector("BANNERS", context)
+        if(url.isEmpty() || selector.isEmpty()) return
         val list:MutableList<String> = ArrayList()
         try {
-            val url = URLs.BASE + URLs.BANNERS
             val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
-            val tables = document.select(Selectors.BANNERS)
+            val tables = document.select(selector)
             for (table in tables) {
                 val trs = table.select("tr")
                 for (i in 0 until trs.size) {
@@ -613,19 +634,22 @@ object Sync {
             if(jsonArray != null) {
                 for (i in 0 until jsonArray.length()) {
                     val jsonObject = jsonArray.getJSONObject(i)
-                    syncOfficerListFromURL(jsonObject.getString("name"), jsonObject.getString("url"), repository)
+                    syncOfficerListFromURL(jsonObject.getString("name"), jsonObject.getString("url"), repository, context)
                 }
             }
         }
     }
 
-    private suspend fun syncOfficerListFromURL(officeName:String, url: String, repository: NPBS2Repository){
-        val absoluteUrl = "$url/bn/site${URLs.OFFICER_LIST}"
+    private suspend fun syncOfficerListFromURL(officeName:String, officeUrl: String, repository: NPBS2Repository, context: Context){
+        val url = SyncConfig.getUrl("OFFICER_LIST", context)
+        val selector = SyncConfig.getSelector("OFFICERS_LIST", context)
+        if(url.isEmpty() || selector.isEmpty() || officeUrl.isEmpty()) return
+        val absoluteUrl = "$officeUrl/bn/site$url"
         Log.d(TAG, "syncOfficerListFromURL: $officeName, $absoluteUrl")
         val data = ArrayList<Employee>()
         try {
             val document = Jsoup.connect(absoluteUrl).get()
-            val tables = document.select(Selectors.OFFICERS_LIST)
+            val tables = document.select(selector)
             for (table in tables) {
                 val trs = table.select("tr")
                 for (i in 1 until trs.size) {
@@ -653,7 +677,7 @@ object Sync {
         }
     }
 
-    suspend fun syncBREBContacts(repository: NPBS2Repository, context: Context){
+    suspend fun syncBREBContacts(repository: NPBS2Repository){
         val url = "https://reb.portal.gov.bd/site/view/officer_list/-"
         val data = ArrayList<Employee>()
         try {
@@ -663,9 +687,9 @@ object Sync {
                 val trs = table.select("tr")
                 for (i in 0 until trs.size) {
                     var imageUrl:String? = trs[i].select("td:nth-child(2) > img").first()?.absUrl("src")
-                    var name: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(2)").first()?.text()
-                    var designation: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(2) > td:nth-child(2)").first()?.text()
-                    var office: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2)").first()?.text()
+                    val name: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(2)").first()?.text()
+                    val designation: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(2) > td:nth-child(2)").first()?.text()
+                    val office: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2)").first()?.text()
                     var email: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(4) > td:nth-child(2) > a").first()?.text()
                     var mobile: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(2)").first()?.text()
                     var phone: String? = trs[i].select("td:nth-child(3) > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td:nth-child(2)").first()?.text()

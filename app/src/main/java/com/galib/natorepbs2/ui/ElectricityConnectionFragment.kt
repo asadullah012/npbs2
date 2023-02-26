@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentElectricityConnectionBinding
+import com.galib.natorepbs2.sync.SyncConfig
 import com.galib.natorepbs2.utils.Utility
 
 class ElectricityConnectionFragment : Fragment(), MenuOnClickListener {
@@ -46,9 +46,9 @@ class ElectricityConnectionFragment : Fragment(), MenuOnClickListener {
         var action:NavDirections? = null
         when(menuText){
             getString(R.string.menu_electricity_connection_rules) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_electricity_connection_rules), null, Utility.getConnectionRulesHtml(requireContext().assets), null)
-            getString(R.string.menu_connection_domestic) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic), URLs.CONNECTION_DOMESTIC, null, null)
-            getString(R.string.menu_connection_domestic_new) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic_new), URLs.CONNECTION_DOMESTIC_NEW, null, null)
-            getString(R.string.menu_connection_industry) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic), URLs.CONNECTION_INDUSTRY, null, null)
+            getString(R.string.menu_connection_domestic) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic), SyncConfig.getUrl("CONNECTION_DOMESTIC", requireContext()), null, null)
+            getString(R.string.menu_connection_domestic_new) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic_new), SyncConfig.getUrl("CONNECTION_DOMESTIC_NEW", requireContext()), null, null)
+            getString(R.string.menu_connection_industry) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic), SyncConfig.getUrl("CONNECTION_INDUSTRY", requireContext()), null, null)
             getString(R.string.menu_sms_connection) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToConnectionMessageFragment()
         }
         if(action != null)

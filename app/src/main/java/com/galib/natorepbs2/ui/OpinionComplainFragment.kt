@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
-import com.galib.natorepbs2.constants.URLs
 import com.galib.natorepbs2.databinding.FragmentOpinionComplainBinding
+import com.galib.natorepbs2.sync.SyncConfig
 
 class OpinionComplainFragment : Fragment(), MenuOnClickListener {
 
@@ -40,8 +40,8 @@ class OpinionComplainFragment : Fragment(), MenuOnClickListener {
     override fun menuOnClick(menuText: String) {
         var action: NavDirections? = null
         when (menuText) {
-            getString(R.string.menu_complain_google_form) -> action = OpinionComplainFragmentDirections.actionOpinionComplainFragmentToWebViewFragment(getString(R.string.menu_complain_google_form), URLs.COMPLAIN_GOOGLE_FORM, null, null)
-            getString(R.string.menu_grs) -> action = OpinionComplainFragmentDirections.actionOpinionComplainFragmentToWebViewFragment(getString(R.string.menu_grs), URLs.GRS, null, null)
+            getString(R.string.menu_complain_google_form) -> action = OpinionComplainFragmentDirections.actionOpinionComplainFragmentToWebViewFragment(getString(R.string.menu_complain_google_form), SyncConfig.getUrl("COMPLAIN_GOOGLE_FORM", requireContext()), null, null)
+            getString(R.string.menu_grs) -> action = OpinionComplainFragmentDirections.actionOpinionComplainFragmentToWebViewFragment(getString(R.string.menu_grs), SyncConfig.getUrl("GRS", requireContext()), null, null)
         }
         if(action != null)
             findNavController().navigate(action)
