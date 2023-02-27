@@ -14,8 +14,8 @@ object SyncConfig {
     private const val sharedPrefName = "SyncPrefs"
 
     private const val gistConfigApi = "https://api.github.com/gists/15ef3b96f6850fb2cf653ad96b5a417f"
-    const val gistDataApi  = "https://api.github.com/gists/8af830cabedca188a82965b2d6b149a9"
-    const val fileData = "npbs2_sync_data.json"
+    private const val gistDataApi  = "https://api.github.com/gists/8af830cabedca188a82965b2d6b149a9"
+    private const val fileData = "npbs2_sync_data.json"
     private const val fileConfig = "npbs2_sync_config.json"
     private const val TAG = "SyncConfig"
     var failedAttempts = 0
@@ -30,10 +30,42 @@ object SyncConfig {
             val jsonRootObject = JSONObject(response.body())
             val syncConfig = jsonRootObject.optJSONObject("files")?.optJSONObject(fileConfig)
                 ?.getString("content")
-            syncConfig?.let { Utility.writeToFile(it, fileConfig, context) }
-            Log.d(TAG, "updateConfigFile: $syncConfig")
+            syncConfig?.let {
+                Utility.writeToFile(it, fileConfig, context)
+                jsonUrls = null
+                jsonSelectors = null
+            }
+//            Log.d(TAG, "updateConfigFile: $syncConfig")
+            updateDataFile(context)
         } catch (e:java.lang.Exception){
             Log.e(TAG, "updateConfigFile: ${e.localizedMessage}")
+        }
+    }
+
+    fun updateDataFile(context: Context) {
+        val configJson = getConfigJson(context)
+        val dataJson = getSyncDataJson(context)
+        if(configJson != null && dataJson != null){
+            val dataVersionInConfig = configJson.optInt("dataFileVersion")
+            val dataVersion = dataJson.optInt("version")
+            Log.d(TAG, "updateDataFile: $dataVersionInConfig $dataVersion")
+            if(dataVersionInConfig <= dataVersion) {
+                return
+            }
+        }
+        try {
+            val response: Connection.Response = Jsoup.connect(gistDataApi).ignoreContentType(true).execute()
+            val jsonRootObject = JSONObject(response.body())
+            val syncConfig = jsonRootObject.optJSONObject("files")?.optJSONObject(fileData)
+                ?.getString("content")
+            syncConfig?.let {
+                Utility.writeToFile(it, fileConfig, context)
+                jsonUrls = null
+                jsonSelectors = null
+            }
+            Log.d(TAG, "updateDataFile: $syncConfig")
+        } catch (e:java.lang.Exception){
+            Log.e(TAG, "updateDataFile: ${e.localizedMessage}")
         }
     }
 
@@ -41,6 +73,15 @@ object SyncConfig {
         var json = Utility.readFromFile(fileConfig, context) // try to read from file
         if(json == null){
             json = Utility.getJsonFromAssets(fileConfig, context.assets) // if not present in file, read from asset
+        }
+        if(json != null) return JSONObject(json)
+        return null
+    }
+
+    fun getSyncDataJson(context: Context): JSONObject?{
+        var json = Utility.readFromFile(fileData, context) // try to read from file
+        if(json == null){
+            json = Utility.getJsonFromAssets(fileData, context.assets) // if not present in file, read from asset
         }
         if(json != null) return JSONObject(json)
         return null
@@ -104,4 +145,6 @@ object SyncConfig {
     fun setSyncFailedAttempts(attempts:Int){
         failedAttempts = attempts
     }
+
+
 }

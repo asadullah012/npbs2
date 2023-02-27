@@ -300,6 +300,7 @@ class Utility {
             val path = context.filesDir
             val file = File(path, filename)
             file.createNewFile()
+            Log.d(TAG, "writeToFile: ${file.absolutePath}")
             val outStream = FileOutputStream(file)
             outStream.use { stream ->
                 stream.write(data.toByteArray())
@@ -316,8 +317,20 @@ class Utility {
                     stream.read(bytes)
                 }
                 return String(bytes, Charsets.UTF_8)
+            } else {
+                Log.d(TAG, "readFromFile: ${file.absolutePath} not found")
             }
             return null
+        }
+
+        fun getElectricityRate(context: Context, tariff: String, slab: Int): Double {
+            val syncDataJson = SyncConfig.getSyncDataJson(context)
+            return (syncDataJson?.optJSONObject("tariff")?.optJSONArray(tariff)?.getDouble(slab) ?: 0) as Double
+        }
+
+        fun getDemandCharge(context: Context, tariff: String): Double {
+            val syncDataJson = SyncConfig.getSyncDataJson(context)
+            return (syncDataJson?.optJSONObject("demand_charge")?.optDouble(tariff) ?: 0) as Double
         }
 
     }

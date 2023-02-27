@@ -2,7 +2,6 @@ package com.galib.natorepbs2.sync
 
 import android.content.Context
 import android.util.Log
-import androidx.room.ColumnInfo
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.*
@@ -72,6 +71,7 @@ object Sync {
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            throw SyncException("Sync achievement failed $url $selector")
         }
         if(data.size > 0) {
             Log.d(TAG, "syncAchievement: " + data.size)
@@ -86,7 +86,9 @@ object Sync {
             repository.insertAchievementAll(achievements)
         } else{
             Log.e(TAG, "sync: unable to get achievement data")
+            throw SyncException("Sync achievement failed $url $selector")
         }
+
     }
 
     suspend fun syncAtAGlance(repository: NPBS2Repository, context: Context) {
