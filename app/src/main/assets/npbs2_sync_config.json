@@ -1,5 +1,6 @@
 {
-  "version" : 1,
+  "version" : 0,
+  "dataFileVersion" : 0,
   "urls": {
     "NPBS2" : "http://pbs2.natore.gov.bd",
     "BASE": "http://pbs2.natore.gov.bd/bn/site",

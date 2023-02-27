@@ -13,21 +13,24 @@ object SyncManager: SyncManagerInterface {
         return syncJob?.isActive == true
     }
     override fun startSync(context: Context, repository: NPBS2Repository, forceSync:Boolean) {
+        var needToSyncAgain = false
         if (syncJob?.isActive == true) {
             // A sync job is already running, do nothing
             return
         }
-
+        Log.d(TAG, "startSync: called")
         syncJob = CoroutineScope(Dispatchers.IO).launch {
 
             if (SyncConfig.getSyncFailedAttempts() >= 3) {
                 // Sync has failed 3 times or more, do nothing
+                Log.d(TAG, "startSync: sync failed more than 3 times")
                 SyncConfig.setSyncFailedAttempts(0)
                 return@launch
             }
 
             if (!isSyncAvailable(context) && !forceSync) {
                 // Sync is not currently available, update config and return
+                Log.d(TAG, "startSync: sync not available $forceSync")
                 SyncConfig.setLastSyncTime(context, System.currentTimeMillis())
                 return@launch
             }
@@ -37,15 +40,25 @@ object SyncManager: SyncManagerInterface {
                 // Sync successful, reset failed attempts in config
                 SyncConfig.setLastSyncTime(context, System.currentTimeMillis())
                 SyncConfig.setSyncFailedAttempts(0)
+                Log.d(TAG, "startSync: complete")
             } catch (e: Exception) {
                 // Sync failed, update config with failed attempt and last sync time
+                Log.e(TAG, "startSync: ${e.localizedMessage}")
                 SyncConfig.setLastSyncTime(context, 0)
                 SyncConfig.setSyncFailedAttempts(SyncConfig.getSyncFailedAttempts()+1)
                 SyncConfig.updateConfigFile(context)
                 delay(3000) // Add a delay of 5 seconds before trying again
+                needToSyncAgain = true
+                Log.d(TAG, "startSync: sync failed. trying again")
+            }
+        }
+        runBlocking {
+            syncJob?.join()
+            if(needToSyncAgain) {
                 startSync(context, repository, forceSync) // Call startSync() again after the delay
             }
         }
+
     }
 
     private fun isSyncAvailable(context: Context): Boolean {
