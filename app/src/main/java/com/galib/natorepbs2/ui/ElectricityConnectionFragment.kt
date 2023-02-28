@@ -45,7 +45,7 @@ class ElectricityConnectionFragment : Fragment(), MenuOnClickListener {
     override fun menuOnClick(menuText: String) {
         var action:NavDirections? = null
         when(menuText){
-            getString(R.string.menu_electricity_connection_rules) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_electricity_connection_rules), null, Utility.getConnectionRulesHtml(requireContext().assets), null)
+            getString(R.string.menu_electricity_connection_rules) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_electricity_connection_rules), null, Utility.getStringFromSyncData(requireContext(), "electricity_connection_rules"), null)
             getString(R.string.menu_connection_domestic) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic), SyncConfig.getUrl("CONNECTION_DOMESTIC", requireContext()), null, null)
             getString(R.string.menu_connection_domestic_new) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic_new), SyncConfig.getUrl("CONNECTION_DOMESTIC_NEW", requireContext()), null, null)
             getString(R.string.menu_connection_industry) -> action = ElectricityConnectionFragmentDirections.actionElectricityConnectionFragmentToWebViewFragment(getString(R.string.menu_connection_domestic), SyncConfig.getUrl("CONNECTION_INDUSTRY", requireContext()), null, null)

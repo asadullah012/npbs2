@@ -11,6 +11,7 @@ import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.sync.SyncConfig
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -248,24 +249,6 @@ class Utility {
             return list
         }
 
-        fun getTariffHtml(assetManager: AssetManager): String? {
-            val json = getJsonFromAssets("npbs2_sync_data.json", assetManager) ?: return null
-            val jsonRootObject = JSONObject(json)
-            return jsonRootObject.getString("electricity_tariff")
-        }
-
-        fun getConnectionRulesHtml(assetManager: AssetManager): String? {
-            val json = getJsonFromAssets("npbs2_sync_data.json", assetManager) ?: return null
-            val jsonRootObject = JSONObject(json)
-            return jsonRootObject.getString("electricity_connection_rules")
-        }
-
-        fun getHowToGetServiceHtml(assetManager: AssetManager): String? {
-            val json = getJsonFromAssets("npbs2_sync_data.json", assetManager) ?: return null
-            val jsonRootObject = JSONObject(json)
-            return jsonRootObject.getString("how_to_get_service")
-        }
-
         fun loadImageInPicasso(sampleImages: List<String>, position: Int, imageView:ImageView, resources:Resources) {
             Picasso.get()
                 .load(if (sampleImages[position] == null || sampleImages[position].isEmpty()) null else sampleImages[position])
@@ -290,10 +273,11 @@ class Utility {
             context.startActivity(intent)
         }
 
-        fun getHtmlFromAsset(assets: AssetManager?, file_path: String, object_name: String): String? {
-            val json = assets?.let { getJsonFromAssets(file_path, it) } ?: return null
-            val jsonRootObject = JSONObject(json)
-            return jsonRootObject.getString(object_name)
+        fun getStringFromSyncData(context: Context, object_name:String):String?{
+            val jsonRootObject = SyncConfig.getSyncDataJson(context)
+            val data = jsonRootObject?.optString(object_name)
+            Log.d(TAG, "getStringFromSyncData: $data")
+            return data
         }
 
         fun writeToFile(data: String, filename: String, context: Context) {

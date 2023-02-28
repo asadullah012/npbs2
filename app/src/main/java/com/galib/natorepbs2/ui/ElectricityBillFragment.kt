@@ -45,7 +45,7 @@ class ElectricityBillFragment : Fragment(),MenuOnClickListener {
         when(menuText){
             getString(R.string.menu_bill_collection_bank) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBankInformationFragment()
             getString(R.string.menu_bill_from_home) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillFromHomeFragment()
-            getString(R.string.menu_electricity_tariff) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToWebViewFragment(getString(R.string.menu_electricity_tariff), null, Utility.getTariffHtml(requireContext().assets), null)
+            getString(R.string.menu_electricity_tariff) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToWebViewFragment(getString(R.string.menu_electricity_tariff), null, Utility.getStringFromSyncData(requireContext(), "electricity_tariff"), null)
             getString(R.string.menu_electricity_bill_calculator) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillCalculatorFragment()
             getString(R.string.menu_sms_electricity_bill) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillMessageFragment()
         }

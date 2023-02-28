@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentSocialMediaBinding
+import com.galib.natorepbs2.sync.SyncConfig
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.utils.Utility.Companion.getFacebookPageURL
 import org.json.JSONArray
@@ -40,9 +41,8 @@ class SocialMediaFragment : Fragment(), MenuOnClickListener {
     private fun getMenuList(): MutableList<String> {
         list.clear()
         urlList.clear()
-        val json = Utility.getJsonFromAssets("npbs2_sync_data.json", requireContext().assets)
-        if(json != null){
-            val jsonRootObject = JSONObject(json)
+        val jsonRootObject = SyncConfig.getSyncDataJson(requireContext())
+        if(jsonRootObject != null){
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("pbsFacebook")
             if(jsonArray != null) {
                 for (i in 0 until jsonArray.length()) {

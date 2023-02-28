@@ -18,11 +18,11 @@ object SyncConfig {
     private const val fileData = "npbs2_sync_data.json"
     private const val fileConfig = "npbs2_sync_config.json"
     private const val TAG = "SyncConfig"
-    var failedAttempts = 0
+    private var failedAttempts = 0
     const val TIMEOUT = 1000
 
-    var jsonUrls : JSONObject? = null
-    var jsonSelectors:JSONObject? = null
+    private var jsonUrls : JSONObject? = null
+    private var jsonSelectors:JSONObject? = null
 
     fun updateConfigFile(context: Context) {
         try {
@@ -35,35 +35,34 @@ object SyncConfig {
                 jsonUrls = null
                 jsonSelectors = null
             }
-//            Log.d(TAG, "updateConfigFile: $syncConfig")
-            updateDataFile(context)
+            updateDataFileIfRequired(context)
         } catch (e:java.lang.Exception){
             Log.e(TAG, "updateConfigFile: ${e.localizedMessage}")
         }
     }
 
-    fun updateDataFile(context: Context) {
+    fun updateDataFileIfRequired(context: Context){
         val configJson = getConfigJson(context)
         val dataJson = getSyncDataJson(context)
         if(configJson != null && dataJson != null){
             val dataVersionInConfig = configJson.optInt("dataFileVersion")
             val dataVersion = dataJson.optInt("version")
             Log.d(TAG, "updateDataFile: $dataVersionInConfig $dataVersion")
-            if(dataVersionInConfig <= dataVersion) {
-                return
+            if(dataVersionInConfig > dataVersion) {
+                updateDataFile(context)
             }
         }
+    }
+
+    fun updateDataFile(context: Context) {
         try {
             val response: Connection.Response = Jsoup.connect(gistDataApi).ignoreContentType(true).execute()
             val jsonRootObject = JSONObject(response.body())
-            val syncConfig = jsonRootObject.optJSONObject("files")?.optJSONObject(fileData)
+            val syncData = jsonRootObject.optJSONObject("files")?.optJSONObject(fileData)
                 ?.getString("content")
-            syncConfig?.let {
-                Utility.writeToFile(it, fileConfig, context)
-                jsonUrls = null
-                jsonSelectors = null
+            syncData?.let {
+                Utility.writeToFile(it, fileData, context)
             }
-            Log.d(TAG, "updateDataFile: $syncConfig")
         } catch (e:java.lang.Exception){
             Log.e(TAG, "updateDataFile: ${e.localizedMessage}")
         }

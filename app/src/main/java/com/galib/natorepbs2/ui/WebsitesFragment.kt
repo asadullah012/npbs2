@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentWebsitesBinding
+import com.galib.natorepbs2.sync.SyncConfig
 import com.galib.natorepbs2.utils.Utility
 import org.json.JSONArray
 import org.json.JSONObject
@@ -36,9 +37,8 @@ class WebsitesFragment : Fragment(), MenuOnClickListener  {
     private fun getMenuList(): MutableList<String> {
         list.clear()
         urlList.clear()
-        val json = Utility.getJsonFromAssets("npbs2_sync_data.json", requireContext().assets)
-        if(json != null){
-            val jsonRootObject = JSONObject(json)
+        val jsonRootObject = SyncConfig.getSyncDataJson(requireContext())
+        if(jsonRootObject != null){
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("pbs")
             if(jsonArray != null) {
                 for (i in 0 until jsonArray.length()) {
