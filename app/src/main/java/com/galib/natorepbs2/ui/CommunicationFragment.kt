@@ -41,7 +41,7 @@ class CommunicationFragment : Fragment(), MenuOnClickListener {
 
     override fun menuOnClick(menuText: String) {
         when (menuText) {
-            getString(R.string.menu_communication_post) -> findNavController().navigate(CommunicationFragmentDirections.actionCommunicationFragmentToWebViewFragment(getString(R.string.menu_communication_post), null, Utility.getHtmlFromAsset(requireContext().assets, "npbs2_sync_data.json", "communication_post"), null))
+            getString(R.string.menu_communication_post) -> findNavController().navigate(CommunicationFragmentDirections.actionCommunicationFragmentToWebViewFragment(getString(R.string.menu_communication_post), null, Utility.getStringFromSyncData(requireContext(), "communication_post"), null))
             getString(R.string.menu_communication_map) -> openMap(requireContext(), "Natore+Palli+Bidyut+Samity-2,+Bonpara,+Natore", 24.295823, 89.0811235)
             getString(R.string.menu_communication_call) -> Utility.makeCall(requireContext(), "01769-404040")
         }

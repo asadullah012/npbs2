@@ -43,7 +43,7 @@ class OurServicesFragment : Fragment(), MenuOnClickListener {
             getString(R.string.menu_service_list) -> {
                 val action = OurServicesFragmentDirections.actionOurServicesFragmentToWebViewFragment(
                     getString(R.string.menu_service_list),
-                    null, Utility.getHowToGetServiceHtml(requireContext().assets), null
+                    null, Utility.getStringFromSyncData(requireContext(), "how_to_get_service"), null
                 )
                 findNavController().navigate(action)
             }

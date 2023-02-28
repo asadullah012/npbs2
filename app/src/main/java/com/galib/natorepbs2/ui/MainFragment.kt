@@ -38,6 +38,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
 
         informationViewModel.importantNotice.observe(viewLifecycleOwner) { information: Information? ->
             binding.slidingNoticeTextView.text = information?.description ?: getString(R.string.sliding_text)
+            binding.slidingNoticeTextView.isSelected = true
         }
 
         binding.slidingNoticeTextView.setOnClickListener {

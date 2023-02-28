@@ -17,8 +17,9 @@ class NPBS2Application : Application() {
         super.onCreate()
         val job = CoroutineScope(Dispatchers.IO).launch{
             SyncConfig.updateConfigFile(applicationContext)
+            SyncConfig.updateDataFile(applicationContext)
         }
-        runBlocking{
+        CoroutineScope(Dispatchers.IO).launch{
             job.join()
             SyncManager.startSync(applicationContext, repository, false)
         }

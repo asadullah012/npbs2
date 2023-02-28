@@ -6,10 +6,7 @@ import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.*
 import com.galib.natorepbs2.utils.Utility
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.json.JSONArray
-import org.json.JSONObject
 import org.jsoup.Jsoup
 
 
@@ -71,7 +68,7 @@ object Sync {
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            throw SyncException("Sync achievement failed $url $selector")
+//            throw SyncException("Sync achievement failed $url $selector")
         }
         if(data.size > 0) {
             Log.d(TAG, "syncAchievement: " + data.size)
@@ -86,7 +83,7 @@ object Sync {
             repository.insertAchievementAll(achievements)
         } else{
             Log.e(TAG, "sync: unable to get achievement data")
-            throw SyncException("Sync achievement failed $url $selector")
+//            throw SyncException("Sync achievement failed $url $selector")
         }
 
     }
@@ -365,27 +362,9 @@ object Sync {
     }
 
     suspend fun syncOfficeData(repository: NPBS2Repository, context: Context){
-        var json: String? = null
-        try {
-            val assetManager = context.assets
-            val inputStream = assetManager.open("npbs2_sync_data.json")
-            val size = withContext(Dispatchers.IO) {
-                inputStream.available()
-            }
-            val buffer = ByteArray(size)
-            withContext(Dispatchers.IO) {
-                inputStream.read(buffer)
-            }
-            withContext(Dispatchers.IO) {
-                inputStream.close()
-            }
-            json = buffer.toString(Charsets.UTF_8)
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
+        val jsonRootObject = SyncConfig.getSyncDataJson(context)
         val data = ArrayList<OfficeInformation>()
-        if(json != null){
-            val jsonRootObject = JSONObject(json)
+        if(jsonRootObject != null){
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("office_information_table")
             if(jsonArray != null){
                 for (i in 0 until jsonArray.length()) {
@@ -408,6 +387,7 @@ object Sync {
             repository.insertAllOfficeInfo(data)
         } else{
             Log.e(TAG, "syncOfficeData: unable to get office data")
+//            throw SyncException("office_information_table")
         }
     }
 
@@ -581,10 +561,9 @@ object Sync {
     }
 
     suspend fun syncBankInformation(repository: NPBS2Repository,context: Context){
-        val json: String? = Utility.getJsonFromAssets("npbs2_sync_data.json", context.assets)
+        val jsonRootObject = SyncConfig.getSyncDataJson(context)
         val data = ArrayList<Information>()
-        if(json != null){
-            val jsonRootObject = JSONObject(json)
+        if(jsonRootObject != null){
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("bankInformation")
             if(jsonArray != null) {
                 for (i in 0 until jsonArray.length()) {
@@ -629,9 +608,8 @@ object Sync {
     }
 
     suspend fun syncOtherOfficeInformation(repository: NPBS2Repository, context: Context) {
-        val json: String? = Utility.getJsonFromAssets("npbs2_sync_data.json", context.assets)
-        if(json != null){
-            val jsonRootObject = JSONObject(json)
+        val jsonRootObject = SyncConfig.getSyncDataJson(context)
+        if(jsonRootObject != null){
             val jsonArray: JSONArray? = jsonRootObject.optJSONArray("otherOffices")
             if(jsonArray != null) {
                 for (i in 0 until jsonArray.length()) {

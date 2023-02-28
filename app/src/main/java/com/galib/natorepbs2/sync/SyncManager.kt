@@ -18,7 +18,7 @@ object SyncManager: SyncManagerInterface {
             // A sync job is already running, do nothing
             return
         }
-        Log.d(TAG, "startSync: called")
+        Log.d(TAG, "startSync: called $forceSync")
         syncJob = CoroutineScope(Dispatchers.IO).launch {
 
             if (SyncConfig.getSyncFailedAttempts() >= 3) {
@@ -30,12 +30,13 @@ object SyncManager: SyncManagerInterface {
 
             if (!isSyncAvailable(context) && !forceSync) {
                 // Sync is not currently available, update config and return
-                Log.d(TAG, "startSync: sync not available $forceSync")
+                Log.d(TAG, "startSync: sync not available")
                 SyncConfig.setLastSyncTime(context, System.currentTimeMillis())
                 return@launch
             }
 
             try {
+                SyncConfig.updateConfigFile(context)
                 syncData(repository, context)
                 // Sync successful, reset failed attempts in config
                 SyncConfig.setLastSyncTime(context, System.currentTimeMillis())
