@@ -52,7 +52,7 @@ object SyncManager: SyncManagerInterface {
                 Log.d(TAG, "startSync: sync failed. trying again")
             }
         }
-        runBlocking {
+        CoroutineScope(Dispatchers.IO).launch {
             syncJob?.join()
             if(needToSyncAgain) {
                 startSync(context, repository, forceSync) // Call startSync() again after the delay
