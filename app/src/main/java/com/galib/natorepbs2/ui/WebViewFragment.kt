@@ -1,10 +1,12 @@
 package com.galib.natorepbs2.ui
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.webkit.WebSettingsCompat
@@ -48,7 +51,12 @@ class WebViewFragment : Fragment(), CoroutineScope {
             button.visibility = View.VISIBLE
             button.setOnClickListener {
                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(browserIntent)
+                try {
+                    startActivity(browserIntent)
+                } catch (ex: ActivityNotFoundException) {
+                    Log.e("WebViewFragment", "onClick Open In browser: Activity not found")
+                    Toast.makeText(requireContext(), "Unable to open url in browser. You might not have suitable browser", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         return root
