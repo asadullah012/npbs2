@@ -106,21 +106,6 @@ object SyncConfig {
         return ""
     }
 
-    fun getConfigVersion(context: Context): Int {
-        val sharedPref: SharedPreferences =
-            context.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE)
-        return sharedPref.getInt(CONFIG_VERSION, 0)
-    }
-
-    fun setConfigVersion(context: Context, configVersion: Int){
-        val sharedPref: SharedPreferences =
-            context.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE)
-        with (sharedPref.edit()) {
-            putInt(CONFIG_VERSION, configVersion)
-            apply()
-        }
-    }
-
 
     fun setLastSyncTime(context: Context, lastSyncTime: Long){
         val sharedPref: SharedPreferences =

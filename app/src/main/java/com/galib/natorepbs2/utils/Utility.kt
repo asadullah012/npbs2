@@ -5,27 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
-import android.content.res.Resources
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.util.Log
-import android.widget.ImageView
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import com.galib.natorepbs2.sync.Sync
 import com.galib.natorepbs2.sync.SyncConfig
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.ResponseBody
-import okio.Buffer
-import okio.BufferedSink
-import okio.Okio
-import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.*
@@ -155,42 +140,6 @@ class Utility {
             }.await()
         }
 
-        fun downloadAndSave(bannerUrl: String, name: String, bannerDir: File) {
-            val file = File(bannerDir, name)
-            if(file.exists()) return
-            try {
-                val client = OkHttpClient()
-                val request = Request.Builder().url(bannerUrl).build()
-                val response: Response = client.newCall(request).execute()
-                val body: ResponseBody? = response.body()
-                val source = body!!.source()
-
-                val sink: BufferedSink = Okio.buffer(Okio.sink(file))
-                val sinkBuffer: Buffer = sink.buffer()
-
-                val bufferSize: Long = 8 * 1024
-                var bytesRead: Long = source.read(sinkBuffer, bufferSize)
-                while (bytesRead != -1L) {
-                    sink.emit()
-                    bytesRead = source.read(sinkBuffer, bufferSize)
-                }
-                sink.flush()
-                sink.close()
-                source.close()
-                Log.d(TAG, "Downloading... ${file.absolutePath}")
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-
-        fun getInitDataJson(filename:String, context: Context, assetManager: AssetManager) : String?{
-            var json = getJsonFromFile(filename, context)
-            if(json == null){
-                json = getJsonFromAssets(filename, assetManager)
-            }
-            return json
-        }
-
         fun getJsonFromAssets(filename:String, assetManager: AssetManager): String?{
             var json: String? = null
             try {
@@ -219,51 +168,6 @@ class Utility {
                 ex.printStackTrace()
             }
             return json
-        }
-
-        fun getConsumerClass() : List<String>{
-            val list : MutableList<String> = ArrayList()
-            list.add("এলটি-এ: আবাসিক")
-            list.add("এলটি-বি: সেচ/কৃষিকাজে ব্যবহৃত পাম্প")
-            list.add("এলটি-সি ১: ক্ষুদ্র শিল্প")
-            list.add("এলটি-সি ২: নির্মাণ")
-            list.add("এলটি-ডি ১: শিক্ষা, ধর্মীয় ও দাতব্য প্রতিষ্ঠান এবং হাসপাতাল")
-            list.add("এলটি-ডি ২: রাস্তার বাতি ও পানির পাম্প")
-            list.add("এলটি-ডি ৩: ব্যাটারি চার্জিং স্টেশন")
-            list.add("এলটি-ই: বানিজ্যিক ও অফিস")
-            list.add("এলটি-টি: অস্থায়ী")
-            list.add("এমটি-১: আবাসিক")
-            list.add("এমটি-২: বানিজ্যিক ও অফিস")
-            list.add("এমটি-৩: শিল্প")
-            list.add("এমটি-৪: নির্মাণ")
-            list.add("এমটি-৫: সাধারণ")
-            list.add("এমটি-৬: অস্থায়ী")
-            list.add("এমটি-৭: ব্যাটারি চার্জিং স্টেশন")
-            list.add("এমটি-৮: সেচ/কৃষিকাজে ব্যবহৃত পাম্প")
-            list.add("এইচটি -১: সাধারণ")
-            list.add("এইচটি-২: বানিজ্যিক ও অফিস")
-            list.add("এইচটি-৩: শিল্প")
-            list.add("এইচটি-৪: নির্মাণ")
-            list.add("ইএইচটি -১: সাধারণ (২০ মে.ও. থেকে অনূর্ধ্ব ১৪০ মে.ও.)")
-            list.add("ইএইচটি -২: সাধারণ (১৪০ মে.ও. এর উর্ধ্বে)")
-            return list
-        }
-
-        fun loadImageInPicasso(sampleImages: List<String>, position: Int, imageView:ImageView, resources:Resources) {
-            Picasso.get()
-                .load(if (sampleImages[position] == null || sampleImages[position].isEmpty()) null else sampleImages[position])
-                .into(imageView,  object: Callback {
-                    override fun onSuccess() {
-                        val src = (imageView.drawable as BitmapDrawable).bitmap
-                        val dr = RoundedBitmapDrawableFactory.create(resources, src)
-                        dr.cornerRadius = src.height/10.0F
-                        imageView.setImageDrawable(dr)
-                    }
-
-                    override fun onError(e: java.lang.Exception?) {
-                        e?.printStackTrace()
-                    }
-                })
         }
 
         fun makeCall(context: Context, mobile: String) {

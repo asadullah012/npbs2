@@ -10,14 +10,6 @@ class ComplainCentreViewModel(private val mRepository: NPBS2Repository) : ViewMo
     val allComplainCentre: LiveData<List<ComplainCentre>>
         get() = mRepository.allComplainCentre.asLiveData()
 
-    fun insertFromTable(trtd: List<List<String>>) = viewModelScope.launch{
-        val complainCentreList: MutableList<ComplainCentre> = ArrayList()
-        for (i in 1 until trtd.size) {
-            complainCentreList.add(ComplainCentre(trtd[i][0].toInt(), trtd[i][1], trtd[i][2]))
-        }
-        mRepository.insertAllComplainCentre(complainCentreList)
-    }
-
     fun deleteAll() = viewModelScope.launch{
         mRepository.deleteAllComplainCentre()
     }

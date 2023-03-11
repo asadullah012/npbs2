@@ -10,9 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentWebsitesBinding
 import com.galib.natorepbs2.sync.SyncConfig
-import com.galib.natorepbs2.utils.Utility
 import org.json.JSONArray
-import org.json.JSONObject
 
 class WebsitesFragment : Fragment(), MenuOnClickListener  {
     val list : MutableList<String> = ArrayList()

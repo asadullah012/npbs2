@@ -12,17 +12,6 @@
         <item name="colorOnSurfaceVariant">@color/teal_900</item>
     </style>
 
-    <style name="menu_button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/menu_height</item>
-        <item name="android:elevation">10dp</item>
-        <item name="android:background">@drawable/home_item_bg</item>
-        <item name="android:layout_margin">@dimen/menu_margin</item>
-        <item name="android:padding">@dimen/menu_margin</item>
-        <item name="android:translationZ">10dp</item>
-        <item name="android:textSize">@dimen/menu_title_text_size</item>
-        <item name="android:textAlignment">center</item>
-    </style>
     <style name="page_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -34,42 +23,15 @@
         <item name="android:layout_marginStart">5dp</item>
         <item name="android:layout_marginEnd">5dp</item>
     </style>
-    <style name="body_text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/body_margin</item>
-        <item name="android:layout_marginBottom">@dimen/body_margin</item>
-        <item name="android:textSize">@dimen/body_text_size</item>
-        <item name="android:textAlignment">textStart</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+
     <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="@style/Theme.NatorePBS2">
         <item name="android:textColor">@android:color/transparent</item>
         <item name="android:textSize">0.1sp</item>
     </style>
-    <style name="Widget.MaterialComponents.Button.IconOnly">
-        <item name="iconPadding">0dp</item>
-        <item name="android:insetTop">0dp</item>
-        <item name="android:insetBottom">0dp</item>
-        <item name="android:paddingLeft">12dp</item>
-        <item name="android:paddingRight">12dp</item>
-        <item name="android:minWidth">12dp</item>
-        <item name="android:minHeight">12dp</item>
-        <item name="iconGravity">textStart</item>
-    </style>
+
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">8dp</item>
-    </style>
-    <style name="NavMenuItemStyle">
-        <item name="android:textSize">20sp</item>
-        <item name="android:listPreferredItemHeightSmall">40dp</item>
-        <item name="listPreferredItemHeightSmall">40dp</item>
-        <item name="android:listPreferredItemPaddingLeft">8dp</item>
-        <item name="listPreferredItemPaddingLeft">8dp</item>
-        <item name="android:listPreferredItemPaddingRight">8dp</item>
-        <item name="listPreferredItemPaddingRight">8dp</item>
     </style>
 
     <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.Material3">

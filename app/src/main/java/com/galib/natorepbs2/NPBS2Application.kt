@@ -8,7 +8,6 @@ import com.galib.natorepbs2.sync.SyncManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class NPBS2Application : Application() {
     private val database by lazy { NPBS2DB.getDatabase(this) }

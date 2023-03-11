@@ -10,20 +10,6 @@ class AchievementViewModel(private val mRepository: NPBS2Repository) : ViewModel
     val allAchievement: LiveData<List<Achievement>>
         get() = mRepository.allAchievement.asLiveData()
 
-    fun insertFromArray(trtd: List<List<String?>>) = viewModelScope.launch{
-        mRepository.deleteAllAchievements()
-        val achievements: MutableList<Achievement> = ArrayList()
-        for (i in trtd.indices) {
-            if (i == 1) continue
-            achievements.add(
-                Achievement(
-                    trtd[i][0]!!, trtd[i][1]!!,
-                    trtd[i][2]!!, trtd[i][3]!!, trtd[i][4]!!, i
-                )
-            )
-        }
-        mRepository.insertAchievementAll(achievements)
-    }
 }
 
 class AchievementViewModelFactory(private val repository: NPBS2Repository) : ViewModelProvider.Factory {
