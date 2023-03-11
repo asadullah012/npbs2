@@ -2,11 +2,6 @@
     <string name="app_name">নাটোর পল্লী বিদ্যুৎ সমিতি-২</string>
     <string name="title">নাটোর পল্লী বিদ্যুৎ সমিতি-২\nডিজিটাল সেবা</string>
 
-    <string name="sms_consumer">গ্রাহককে সেবা সংক্রান্ত এসএমএস প্রদান</string>
-    <string name="sms_consumer_details">গ্রাহককে সেবা সংক্রান্ত যে সব এসএমএস প্রদান করা হয়:</string>
-    <string name="sms_application_1">১. নতুন সংযোগ সংক্রান্ত সকল তথ্য</string>
-    <string name="sms_application_2">২. প্রতি মাসের বিদ্যুৎ বিল সংক্রান্ত তথ্য</string>
-
     <string name="sms_new_connection_complete_title">অনলাইন আবেদন সম্পন্ন সংক্রান্ত এসএমএসঃ</string>
     <string name="sms_new_connection_complete_desc">অনলাইন আবেদন ঠিকভাবে সম্পন্ন হলে ট্র্যাকিং নং ও পিনকোড সহ ওয়্যারিং সম্পন্ন করে কনফার্ম করার জন্য একটি এসএমএস পাঠানো হয়। এই এসএমএসের একটি নমুনা হল- </string>
     <string name="sms_new_connection_complete_sample">Success.Your Tracking ID:XXXXXXXXXXXXXXX and Pin Code:XXXXXXXX.Complete House Wiring and Confirm Through Online.Palli Bidyut</string>
@@ -18,18 +13,11 @@
     <string name="sms_bill_desc">প্রতি মাসে গ্রাহককে তার বিদ্যুুৎ বিল পরিশোধের সর্বশেষ তারিখসহ প্রেরণ করা হয়। একটি নমুনা এসএমএস হলো-</string>
     <string name="sms_bill_sample">হিঃ XXX/XXXX অক্টোবর বিল XX টাকা। DD/MM/YY মধ্যে পরিশোধ করুন। পবিস</string>
 
-    <string name="nothi">নথি | অফিস ব্যবস্থাপনা</string>
-    <string name="nothi_url">https://nothi.gov.bd/</string>
-    <string name="complain_pbs">বিদ্যুৎ সেবা সম্পর্কে মতামত প্রদান</string>
-    <string name="complain_pbs_url">http://www.rebpbs.com/UI/frm_feedback.aspx</string>
-    <string name="complain_centre">অভিযোগ কেন্দ্র যোগাযোগ</string>
     <string name="achievement_details">নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর অসাধারণ অর্জন\nবিগত ৩০বছর বনাম বর্তমান সরকারের ১৪ বছর</string>
-    <string name="vision_mission">ভিশন ও মিশন</string>
     <string name="vision_title">ভিশন (রূপকল্প)</string>
     <string name="vision">নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর আওতাধীন সকল জনগনকে গুনগত মানের বিদ্যুৎ সরবরাহের মাধ্যমে গ্রাহক সেবা নিশ্চিত করা।</string>
     <string name="mission_title">মিশন (অভিলক্ষ্য)</string>
     <string name="mission">নতুন সংযোগের আবেদনের প্রেক্ষিতে স্বল্প সময়ের মধ্যে দ্রুত, সংযোগ প্রত্যাশী সকলকে বিদ্যুৎ সুবিধা পৌছে দেওয়া।</string>
-    <string name="employee_list">কর্মকর্তাবৃন্দ</string>
     <string name="banner_content_description">নাটোর পল্লী বিদ্যুৎ সমিতি-২</string>
 
     <string name="menu_about_us">আমাদের সম্পর্কে</string>
@@ -64,19 +52,14 @@
     <string name="menu_citizen_charter">সিটিজেন চার্টার</string>
 
     <string name="menu_websites">প্রয়োজনীয় ওয়েবসাইট সমূহ</string>
-    <string name="menu_breb">বাপবিবো</string>
-    <string name="menu_natore_pbs2">নাটোর পবিস-২</string>
 
     <string name="menu_social_media">সোস্যাল মিডিয়া</string>
-    <string name="menu_facebook_page"> এর ফেসবুক পেজ</string>
 
     <string name="menu_opinion_complain">বিদ্যুৎ বা অফিস সংক্রান্ত মতামত ও অভিযোগ</string>
     <string name="menu_grs">অভিযোগ প্রতিকার ব্যবস্থা (GRS)</string>
     <string name="menu_complain_google_form">সরাসরি অফিসে অভিযোগ (Google Form)</string>
 
     <string name="menu_related_apps">রিলেটেড অ্যাপসমূহ</string>
-    <string name="menu_digital_phonebook">পল্লী বিদ্যুৎ ডিজিটাল ফোনবুক</string>
-    <string name="menu_nothi">নথি | অফিস ব্যবস্থাপনা</string>
 
     <string name="menu_notice_tender">নোটিশ ও দরপত্র</string>
     <string name="menu_notice">নোটিশ</string>
@@ -90,13 +73,10 @@
 
     <string name="menu_awareness">বিদ্যুৎ ব্যবহার সংক্রান্ত সচেতনতা</string>
 
-    <string name="text_call">Call</string>
     <string name="web_view_title">Web View</string>
     <string name="open_in_browser">Open in Browser</string>
-    <string name="text_send_email">Send Email</string>
     <string name="last_update_time">last_update_time</string>
     <string name="force_sync">Force Sync</string>
-    <string name="show_in_map">Google Map</string>
     <string name="menu_service_list">কী সেবা কীভাবে পাবেন</string>
     <string name="nav_open">ওপেন</string>
     <string name="nav_close">বন্ধ</string>
@@ -127,16 +107,4 @@
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="sliding_text">বিদ্যুৎ জাতীয় সম্পদ, আসুন বিদ্যুৎ অপচয় রোধ করি। ঘর থেকে বের হওয়ার সময় বৈদ্যুতিক সুইচ বন্ধ রাখি, বৈদ্যুতিক দুর্ঘটনা এড়িয়ে চলি। নিরবচ্ছিন্ন বিদ্যুৎ সরবরাহ অব্যাহত রাখতে নিয়মিত বিদ্যুৎ বিল পরিশোধ করি, ঘরে বসেই বিদ্যুৎ বিল দেওয়ার অপূর্ব সুযোগ গ্রহণ করি।</string>
-    <array name="dummy_items">
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
-        <item>Four</item>
-        <item>Five</item>
-        <item>Six</item>
-        <item>Seven</item>
-        <item>Eight</item>
-        <item>Nine</item>
-        <item>Ten</item>
-    </array>
 </resources>

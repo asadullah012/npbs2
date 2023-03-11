@@ -1,6 +1,5 @@
 package com.galib.natorepbs2.db
 
-import android.content.Context
 import android.util.Log
 import androidx.annotation.WorkerThread
 import com.galib.natorepbs2.constants.Category
@@ -74,10 +73,6 @@ class NPBS2Repository(db: NPBS2DB) {
     suspend fun insertInformations(informationList: List<Information>) {
         informationDao.insertInfos(informationList)
     }
-    
-    fun deleteAllByCategory(category: String) {
-        informationDao.deleteAllByCategory(category)
-    }
 
     @WorkerThread
     suspend fun insertAllComplainCentre(complainCentreList: List<ComplainCentre>) {
@@ -122,10 +117,6 @@ class NPBS2Repository(db: NPBS2DB) {
         if(office == "বাংলাদেশ পল্লী বিদ্যুতায়ন বোর্ড")
             return employeeDao.getAllByType(Category.REB)
         return employeeDao.getOfficerListByOffice(office, Category.OTHER_OFFICES)
-    }
-
-    fun getOfficerListREB():  Flow<List<Employee>> {
-        return employeeDao.getAllByType(Category.OTHER_OFFICES)
     }
 
     val allOfficeInformation: Flow<List<OfficeInformation>>

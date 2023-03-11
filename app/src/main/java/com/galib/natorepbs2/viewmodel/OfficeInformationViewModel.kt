@@ -11,9 +11,6 @@ class OfficeInformationViewModel(private val mRepository: NPBS2Repository) : Vie
         return mRepository.allOfficeInformation.asLiveData()
     }
 
-    fun insertAllOfficeInformation(data: ArrayList<OfficeInformation>)= viewModelScope.launch{
-        mRepository.insertAllOfficeInfo(data)
-    }
 }
 
 class OfficeViewModelFactory(private val repository: NPBS2Repository) : ViewModelProvider.Factory {

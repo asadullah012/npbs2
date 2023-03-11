@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -64,7 +65,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
 //                    val src = BitmapFactory.decodeResource(resources, R.drawable.npbs2)
 //                    val dr = RoundedBitmapDrawableFactory.create(resources, src)
 //                    dr.cornerRadius = src.height/10.0F
-                    imageView.setImageDrawable(resources.getDrawable(R.drawable.npbs2, requireContext().theme))
+                    imageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.npbs2))
                 }
             }
         } else {

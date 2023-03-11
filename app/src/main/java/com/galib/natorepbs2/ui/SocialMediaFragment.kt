@@ -11,10 +11,8 @@ import androidx.fragment.app.Fragment
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentSocialMediaBinding
 import com.galib.natorepbs2.sync.SyncConfig
-import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.utils.Utility.Companion.getFacebookPageURL
 import org.json.JSONArray
-import org.json.JSONObject
 
 class SocialMediaFragment : Fragment(), MenuOnClickListener {
     val list : MutableList<String> = ArrayList()

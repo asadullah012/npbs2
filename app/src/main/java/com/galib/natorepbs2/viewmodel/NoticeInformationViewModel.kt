@@ -24,19 +24,6 @@ class NoticeInformationViewModel(private val mRepository: NPBS2Repository) : Vie
         return mRepository.getAllNoticeByCategory(Category.JOB).asLiveData()
     }
 
-    fun insertAllByCategory(data: ArrayList<ArrayList<String>>, category:String) = viewModelScope.launch{
-        mRepository.deleteAllNoticeByType(category)
-        val tenderList = ArrayList<NoticeInformation>()
-        for((i, d) in data.withIndex()){
-//            Log.d(TAG, "insertAllTender: $i $d")
-            if(d.size > 3)
-                tenderList.add(NoticeInformation(i, d[0], d[1], d[2], d[3], category))
-            else
-                tenderList.add(NoticeInformation(i, d[0], d[1], d[2], "", category))
-        }
-        mRepository.insertAllNotice(tenderList)
-    }
-
 }
 
 class NoticeViewModelFactory(private val repository: NPBS2Repository) : ViewModelProvider.Factory {
