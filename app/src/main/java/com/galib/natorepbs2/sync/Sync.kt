@@ -162,6 +162,7 @@ object Sync {
             for (i in 1 until data.size) {
                 complainCentreList.add(ComplainCentre(data[i][0].toInt(), data[i][1], data[i][2]))
             }
+            repository.deleteAllComplainCentre()
             repository.insertAllComplainCentre(complainCentreList)
         } else{
             Log.e(TAG, "sync: unable to get complain center data")
