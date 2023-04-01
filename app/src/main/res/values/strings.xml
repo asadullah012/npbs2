@@ -107,4 +107,6 @@
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="sliding_text">বিদ্যুৎ জাতীয় সম্পদ, আসুন বিদ্যুৎ অপচয় রোধ করি। ঘর থেকে বের হওয়ার সময় বৈদ্যুতিক সুইচ বন্ধ রাখি, বৈদ্যুতিক দুর্ঘটনা এড়িয়ে চলি। নিরবচ্ছিন্ন বিদ্যুৎ সরবরাহ অব্যাহত রাখতে নিয়মিত বিদ্যুৎ বিল পরিশোধ করি, ঘরে বসেই বিদ্যুৎ বিল দেওয়ার অপূর্ব সুযোগ গ্রহণ করি।</string>
+    <string name="update_available_title">An Update Available in play store!</string>
+    <string name="update_available_content">To update this app, tap on this notification</string>
 </resources>
