@@ -23,6 +23,7 @@ import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.MyMenuItem
 import com.galib.natorepbs2.sync.SyncManager
 import com.galib.natorepbs2.ui.*
+import com.galib.natorepbs2.updater.UpdateManager
 import com.galib.natorepbs2.viewmodel.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        UpdateManager.checkForUpdatesAndNotify(this)
         this.repository = (application as NPBS2Application).repository
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))

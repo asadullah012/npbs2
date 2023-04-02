@@ -8,12 +8,13 @@ import android.net.Uri
 import android.util.Log
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.notifications.NotificationManager
+import com.galib.natorepbs2.sync.SyncConfig
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 
 object UpdateManager {
-    private val REQUEST_CODE_UPDATE = 998
+    private const val REQUEST_CODE_UPDATE = 998
     private const val TAG = "UpdateManager"
     fun checkForUpdatesAndNotify(context: Context) {
         val appUpdateManager = AppUpdateManagerFactory.create(context)
@@ -40,7 +41,11 @@ object UpdateManager {
 
     // function to get pending intent to open app update page on Play Store
     private fun getUpdatePendingIntent(context: Context): PendingIntent {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.packageName))
+        var intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.packageName))
+        intent.setPackage("com.android.vending")
+        if (intent.resolveActivity(context.packageManager) != null) {
+            intent = Intent(Intent.ACTION_VIEW, Uri.parse(SyncConfig.getUrl("PLAY_STORE_PREFIX",context) + context.packageName))
+        }
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
     }
