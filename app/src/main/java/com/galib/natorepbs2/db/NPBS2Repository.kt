@@ -1,8 +1,8 @@
 package com.galib.natorepbs2.db
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import com.galib.natorepbs2.constants.Category
+import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.models.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
@@ -48,7 +48,7 @@ class NPBS2Repository(db: NPBS2DB) {
 
     @WorkerThread
     suspend fun insertInformation(information: Information) {
-            Log.d(TAG, "insertInformation: " + information.category + " " + information.description)
+            LogUtils.d(TAG, "insertInformation: ${information.category} ${information.description}")
             informationDao.insert(information)
     }
 

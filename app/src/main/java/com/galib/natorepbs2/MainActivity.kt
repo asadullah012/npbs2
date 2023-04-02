@@ -1,7 +1,7 @@
 package com.galib.natorepbs2
 
 import android.os.Bundle
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.SubMenu
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity(),
                 }
             }
         } else{
-            Log.e(TAG, "updateSubMenus: repository is null")
+            LogUtils.e(TAG, "updateSubMenus: repository is null")
         }
     }
 
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d(TAG, "onOptionsItemSelected: ${item.title}")
+        LogUtils.d(TAG, "onOptionsItemSelected: ${item.title}")
         return when (item.itemId) {
             android.R.id.home -> {
                 drawerLayout.openDrawer(GravityCompat.START)
@@ -149,8 +149,7 @@ class MainActivity : AppCompatActivity(),
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        Log.d(TAG, "onNavigationItemSelected: ${item.title}")
-
+        LogUtils.d(TAG, "onNavigationItemSelected: ${item.title}")
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val fragment = navHostFragment.childFragmentManager.fragments[0]
@@ -212,7 +211,7 @@ class MainActivity : AppCompatActivity(),
             MyMenuItem(getString(R.string.menu_awareness),  true)
         )
         val count = settingsViewModel.getMyMenuCount()
-        Log.d(TAG, "checkForMyMenuItems: $count ${menuList.size}")
+        LogUtils.d(TAG, "checkForMyMenuItems: $count ${menuList.size}")
         if(count != menuList.size){
             settingsViewModel.addMenus(menuList)
         }

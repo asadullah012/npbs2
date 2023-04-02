@@ -1,7 +1,7 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +38,7 @@ class AtAGlanceFragment : Fragment() {
         ) { list: List<Information?> -> adapter.submitList(list) }
         informationViewModel.month.observe(viewLifecycleOwner) { information: Information? ->
             binding.month = information?.description ?: ""
-            Log.d("AtAGlanceFragment", "onCreateView: " + binding.month)
+            LogUtils.d("AtAGlanceFragment", "onCreateView: " + binding.month)
         }
         binding.adapter = adapter
         return binding.root

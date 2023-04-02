@@ -6,6 +6,7 @@ import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.sync.SyncConfig
 import com.galib.natorepbs2.sync.SyncManager
 import com.galib.natorepbs2.updater.UpdateManager
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ class NPBS2Application : Application() {
     val repository by lazy { NPBS2Repository(database) }
     override fun onCreate() {
         super.onCreate()
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         val job = CoroutineScope(Dispatchers.IO).launch{
             SyncConfig.updateConfigFile(applicationContext)
             SyncConfig.updateDataFile(applicationContext)

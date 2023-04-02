@@ -1,7 +1,7 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +47,7 @@ class BillCalculatorFragment : Fragment() {
         )
         binding.pageTitle = getString(R.string.menu_electricity_bill_calculator)
         binding.root.findViewById<EditText>(R.id.KWHInput).doOnTextChanged { text, _, _, _ ->
-            Log.d("Bill Calculator", "onCreateView: KWHInput $text")
+            LogUtils.d("Bill Calculator", "onCreateView: KWHInput $text")
             resetVariables()
             kWH = try{
                 text.toString().toInt()
@@ -58,7 +58,7 @@ class BillCalculatorFragment : Fragment() {
             updateBill()
         }
         binding.root.findViewById<EditText>(R.id.demandInput).doOnTextChanged { text, _, _, _ ->
-            Log.d("Bill Calculator", "onCreateView: demandInput $text")
+            LogUtils.d("Bill Calculator", "onCreateView: demandInput $text")
             resetVariables()
             try{
                 demand = ceil(text.toString().toFloat()).toInt()

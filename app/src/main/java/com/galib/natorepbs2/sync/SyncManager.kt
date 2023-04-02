@@ -1,7 +1,7 @@
 package com.galib.natorepbs2.sync
 
 import android.content.Context
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.db.NPBS2Repository
 import kotlinx.coroutines.*
 
@@ -18,19 +18,19 @@ object SyncManager: SyncManagerInterface {
             // A sync job is already running, do nothing
             return
         }
-        Log.d(TAG, "startSync: called $forceSync")
+        LogUtils.d(TAG, "startSync: called $forceSync")
         syncJob = CoroutineScope(Dispatchers.IO).launch {
 
             if (SyncConfig.getSyncFailedAttempts() >= 3) {
                 // Sync has failed 3 times or more, do nothing
-                Log.d(TAG, "startSync: sync failed more than 3 times")
+                LogUtils.d(TAG, "startSync: sync failed more than 3 times")
                 SyncConfig.setSyncFailedAttempts(0)
                 return@launch
             }
 
             if (!isSyncAvailable(context) && !forceSync) {
                 // Sync is not currently available, update config and return
-                Log.d(TAG, "startSync: sync not available")
+                LogUtils.d(TAG, "startSync: sync not available")
                 SyncConfig.setLastSyncTime(context, System.currentTimeMillis())
                 return@launch
             }
@@ -41,16 +41,16 @@ object SyncManager: SyncManagerInterface {
                 // Sync successful, reset failed attempts in config
                 SyncConfig.setLastSyncTime(context, System.currentTimeMillis())
                 SyncConfig.setSyncFailedAttempts(0)
-                Log.d(TAG, "startSync: complete")
+                LogUtils.d(TAG, "startSync: complete")
             } catch (e: Exception) {
                 // Sync failed, update config with failed attempt and last sync time
-                Log.e(TAG, "startSync: ${e.localizedMessage}")
+                LogUtils.e(TAG, "startSync: ${e.localizedMessage}")
                 SyncConfig.setLastSyncTime(context, 0)
                 SyncConfig.setSyncFailedAttempts(SyncConfig.getSyncFailedAttempts()+1)
                 SyncConfig.updateConfigFile(context)
                 delay(3000) // Add a delay of 5 seconds before trying again
                 needToSyncAgain = true
-                Log.d(TAG, "startSync: sync failed. trying again")
+                LogUtils.d(TAG, "startSync: sync failed. trying again")
             }
         }
         CoroutineScope(Dispatchers.IO).launch {
@@ -66,10 +66,10 @@ object SyncManager: SyncManagerInterface {
         val lastUpdateTime = Sync.getLastUpdateTime(context)
         return if(lastUpdateTime != 0L){
             val lastSyncTime = SyncConfig.getLastSyncTime(context)
-            Log.d(TAG, "isSyncAvailable: last sync time- $lastSyncTime last update time- $lastUpdateTime")
+            LogUtils.d(TAG, "isSyncAvailable: last sync time- $lastSyncTime last update time- $lastUpdateTime")
             lastSyncTime < lastUpdateTime
         } else{
-            Log.d(TAG, "isSyncAvailable: unable to get last updated time")
+            LogUtils.d(TAG, "isSyncAvailable: unable to get last updated time")
             false
         }
     }
