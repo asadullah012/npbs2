@@ -5,7 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.notifications.NotificationManager
 import com.galib.natorepbs2.sync.SyncConfig
@@ -34,7 +34,7 @@ object UpdateManager {
                     )
                 }
             } else {
-                Log.d(TAG, "checkForUpdatesAndNotify: No update available ${appUpdateInfo.updateAvailability()}")
+                LogUtils.d(TAG, "checkForUpdatesAndNotify: No update available ${appUpdateInfo.updateAvailability()}")
             }
         }
     }
