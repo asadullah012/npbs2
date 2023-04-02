@@ -15,7 +15,6 @@ class NPBS2Application : Application() {
     val repository by lazy { NPBS2Repository(database) }
     override fun onCreate() {
         super.onCreate()
-        UpdateManager.checkForUpdatesAndNotify(applicationContext)
         val job = CoroutineScope(Dispatchers.IO).launch{
             SyncConfig.updateConfigFile(applicationContext)
             SyncConfig.updateDataFile(applicationContext)
