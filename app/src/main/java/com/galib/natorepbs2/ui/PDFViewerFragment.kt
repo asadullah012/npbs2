@@ -1,7 +1,7 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,12 +40,12 @@ class PDFViewerFragment : Fragment(), CoroutineScope{
         val file = File(requireContext().filesDir, args.fileName + ".pdf")
         if(file.exists()) {
             pdfViewer.fromFile(file).load()
-            Log.d("PDFView", "onCreateView: ${file.absolutePath} exist")
+            LogUtils.d("PDFView", "onCreateView: ${file.absolutePath} exist")
         }
         else {
             if(args.url != null)
                 downloadAndLoad(args.url!!, file)
-            Log.e("PDFView", "onCreateView: ${file.absolutePath} does not exist")
+            LogUtils.e("PDFView", "onCreateView: ${file.absolutePath} does not exist")
         }
         return root
     }
@@ -83,7 +83,7 @@ class PDFViewerFragment : Fragment(), CoroutineScope{
                 }
             }
             pdfViewer.fromFile(file).load()
-            Log.d("PDFView", "downloadAndLoad: ${file.absolutePath} done")
+            LogUtils.d("PDFView", "downloadAndLoad: ${file.absolutePath} done")
         }
         progressBar.visibility = View.GONE
     }

@@ -1,7 +1,7 @@
 package com.galib.natorepbs2.sync
 
 import android.content.Context
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.models.*
@@ -23,10 +23,10 @@ object Sync {
             val element = document.select(selector).first()
             if (element != null) {
                 lastUpdateTime = Utility.dateStringToEpoch(Utility.bnDigitToEnDigit(element.text()), "yyyy-MM-DD HH:mm:ss")
-                Log.d(TAG, "getLastUpdateTime: " + element.text() + " " + lastUpdateTime)
+                LogUtils.d(TAG, "getLastUpdateTime: " + element.text() + " " + lastUpdateTime)
             }
         } catch (e: Exception) {
-            Log.e(TAG, e.message.toString())
+            LogUtils.e(TAG, e.message.toString())
         }
         return lastUpdateTime
     }
@@ -40,10 +40,10 @@ object Sync {
             val importantNotice = document.select(selector).first()
             if (importantNotice != null) {
                 repository.setImportantNotice(importantNotice.text())
-                Log.d(TAG, "syncImportantNotice: " + importantNotice.text())
+                LogUtils.d(TAG, "syncImportantNotice: " + importantNotice.text())
             }
         } catch (e: Exception) {
-            Log.e(TAG, e.message.toString())
+            LogUtils.e(TAG, e.message.toString())
         }
     }
 
@@ -71,7 +71,7 @@ object Sync {
 //            throw SyncException("Sync achievement failed $url $selector")
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncAchievement: " + data.size)
+            LogUtils.d(TAG, "syncAchievement: " + data.size)
             repository.deleteAllAchievements()
             val achievements: MutableList<Achievement> = ArrayList()
             for (i in data.indices) {
@@ -82,7 +82,7 @@ object Sync {
             }
             repository.insertAchievementAll(achievements)
         } else{
-            Log.e(TAG, "sync: unable to get achievement data")
+            LogUtils.e(TAG, "sync: unable to get achievement data $url")
 //            throw SyncException("Sync achievement failed $url $selector")
         }
 
@@ -115,7 +115,7 @@ object Sync {
             e.printStackTrace()
         }
         if(data.size > 0){
-            Log.d(TAG, "syncAtAGlance: " + data.size)
+            LogUtils.d(TAG, "syncAtAGlance: " + data.size)
             //informationViewModel.deleteAllByCategory(Category.atAGlance)
 //                informationViewModel.insertFromAtAGlance(data as List<MutableList<String>>)
             val informationList: MutableList<Information> = ArrayList()
@@ -128,7 +128,7 @@ object Sync {
 //                informationViewModel.setMonth(month)
             repository.setMonth(month)
         } else{
-            Log.e(TAG, "syncAtAGlance: unable to get data from website")
+            LogUtils.e(TAG, "syncAtAGlance: unable to get data from website $url")
         }
     }
 
@@ -155,16 +155,17 @@ object Sync {
             e.printStackTrace()
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncComplainCentre: " + data.size)
+            LogUtils.d(TAG, "syncComplainCentre: " + data.size)
             //complainCentreViewModel.deleteAll()
 //                complainCentreViewModel.insertFromTable(data as List<MutableList<String>>)
             val complainCentreList: MutableList<ComplainCentre> = ArrayList()
             for (i in 1 until data.size) {
                 complainCentreList.add(ComplainCentre(data[i][0].toInt(), data[i][1], data[i][2]))
             }
+            repository.deleteAllComplainCentre()
             repository.insertAllComplainCentre(complainCentreList)
         } else{
-            Log.e(TAG, "sync: unable to get complain center data")
+            LogUtils.e(TAG, "sync: unable to get complain center data  $url")
         }
     }
 
@@ -195,7 +196,7 @@ object Sync {
             e.printStackTrace()
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncOfficerList: " + data.size)
+            LogUtils.d(TAG, "syncOfficerList: " + data.size)
 //                employeeViewModel.insertOfficersFromTable(data as List<MutableList<String>>)
             val officersList: MutableList<Employee> = ArrayList()
             for (i in data.indices) {
@@ -208,12 +209,12 @@ object Sync {
                         data[i][4], data[i][5], data[i][6], Category.OFFICERS
                     )
                 )
-                //Log.d(TAG, "insertFromTable: " + i + " " + tableData[i][0] + " " + tableData[i][1] + " " + designation + " " + office + " " + tableData[i][4] + " " + tableData[i][5] + " " + tableData[i][6] + " " + Category.OFFICERS);
+                //LogUtils.d(TAG, "insertFromTable: " + i + " " + tableData[i][0] + " " + tableData[i][1] + " " + designation + " " + office + " " + tableData[i][4] + " " + tableData[i][5] + " " + tableData[i][6] + " " + Category.OFFICERS);
             }
             repository.deleteEmployeeByType(Category.OFFICERS)
             repository.insertEmployeeList(officersList)
         } else{
-            Log.e(TAG, "syncOfficerList: unable to get officer data")
+            LogUtils.e(TAG, "syncOfficerList: unable to get officer data  $url")
         }
     }
 
@@ -245,13 +246,13 @@ object Sync {
             e.printStackTrace()
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncJuniorOfficer: " + data.size)
+            LogUtils.d(TAG, "syncJuniorOfficer: " + data.size)
 //                employeeViewModel.insertJuniorOfficerFromTable(data as List<MutableList<String>>)
             val employeeList: MutableList<Employee> = ArrayList()
             var office: String? = null
             var i = 0
             while (i < data.size) {
-                //Log.d(TAG, "insertJuniorOfficerFromTable: " + Utility.arrayToString(tableData[i]));
+                //LogUtils.d(TAG, "insertJuniorOfficerFromTable: " + Utility.arrayToString(tableData[i]));
                 if (data[i].size == 1) {
                     office = data[i][0]
                     i++ // ignore header row
@@ -266,7 +267,7 @@ object Sync {
             repository.deleteEmployeeByType(Category.JUNIOR_OFFICER)
             repository.insertEmployeeList(employeeList)
         } else{
-            Log.e(TAG, "syncJuniorOfficer: unable to get junior officer data")
+            LogUtils.e(TAG, "syncJuniorOfficer: unable to get junior officer data $url")
         }
     }
 
@@ -298,11 +299,11 @@ object Sync {
             e.printStackTrace()
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncBoardMember: " + data.size)
+            LogUtils.d(TAG, "syncBoardMember: " + data.size)
 //                employeeViewModel.insertBoardMembersFromTable(data as List<MutableList<String>>)
             val employeeList: MutableList<Employee> = ArrayList()
             for (i in data.indices) {
-                //Log.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
+                //LogUtils.d(TAG, "insertBoardMembersFromTable: " + Utility.arrayToString(tableData[i]));
                 employeeList.add(
                     Employee(
                         i, data[i][0], data[i][1], data[i][2],
@@ -313,7 +314,7 @@ object Sync {
             repository.deleteEmployeeByType(Category.BOARD_MEMBER)
             repository.insertEmployeeList(employeeList)
         } else{
-            Log.e(TAG, "syncBoardMember: unable to get board member data")
+            LogUtils.e(TAG, "syncBoardMember: unable to get board member data  $url")
         }
     }
 
@@ -344,11 +345,11 @@ object Sync {
             e.printStackTrace()
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncBoardMember: " + data.size)
+            LogUtils.d(TAG, "syncBoardMember: " + data.size)
 //                employeeViewModel.insertPowerOutageContactFromTable(data as List<MutableList<String>>)
             val employeeList: MutableList<Employee> = ArrayList()
             for (i in data.indices) {
-                //Log.d(TAG, "insertPowerOutageContactFromTable: " + Utility.arrayToString(tableData[i]));
+                //LogUtils.d(TAG, "insertPowerOutageContactFromTable: " + Utility.arrayToString(tableData[i]));
                 employeeList.add(
                     Employee(i, data[i][1], data[i][2], data[i][3],
                         "", "", data[i][4], "", Category.POWER_OUTAGE_CONTACT)
@@ -357,7 +358,7 @@ object Sync {
             repository.deleteEmployeeByType(Category.POWER_OUTAGE_CONTACT)
             repository.insertEmployeeList(employeeList)
         } else{
-            Log.e(TAG, "syncBoardMember: unable to get board member data")
+            LogUtils.e(TAG, "syncBoardMember: unable to get board member data  $url")
         }
     }
 
@@ -382,11 +383,11 @@ object Sync {
             }
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncOfficeData: " + data.size)
+            LogUtils.d(TAG, "syncOfficeData: " + data.size)
 //                officeInformationViewModel.insertAllOfficeInformation(data)
             repository.insertAllOfficeInfo(data)
         } else{
-            Log.e(TAG, "syncOfficeData: unable to get office data")
+            LogUtils.e(TAG, "syncOfficeData: unable to get office data")
 //            throw SyncException("office_information_table")
         }
     }
@@ -427,11 +428,11 @@ object Sync {
             }
         }
         if (data.size > 0) {
-            Log.d(TAG, "syncTenderData: " + data.size)
+            LogUtils.d(TAG, "syncTenderData: " + data.size)
 //                tenderInformationViewModel.insertAllByCategory(data, Category.TENDER)
             insertAllNoticeByCategory(data, repository, Category.TENDER)
         } else {
-            Log.e(TAG, "syncTenderData: unable to get tender data")
+            LogUtils.e(TAG, "syncTenderData: unable to get tender data $url")
         }
     }
 
@@ -470,11 +471,11 @@ object Sync {
             }
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncNoticeData: " + data.size)
+            LogUtils.d(TAG, "syncNoticeData: " + data.size)
 //                noticeInformationViewModel.insertAllByCategory(data, Category.NOTICE)
             insertAllNoticeByCategory(data, repository, Category.NOTICE)
         } else{
-            Log.e(TAG, "syncNoticeData: unable to get notice data")
+            LogUtils.e(TAG, "syncNoticeData: unable to get notice data $url")
         }
     }
 
@@ -509,11 +510,11 @@ object Sync {
             }
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncNewsData: " + data.size)
+            LogUtils.d(TAG, "syncNewsData: " + data.size)
 //                noticeInformationViewModel.insertAllByCategory(data, Category.NEWS)
             insertAllNoticeByCategory(data, repository, Category.NEWS)
         } else{
-            Log.e(TAG, "syncNewsData: unable to get news data")
+            LogUtils.e(TAG, "syncNewsData: unable to get news data $url")
         }
     }
 
@@ -552,11 +553,11 @@ object Sync {
         }
 
         if(data.size > 0) {
-            Log.d(TAG, "syncJobData: " + data.size)
+            LogUtils.d(TAG, "syncJobData: " + data.size)
 //                noticeInformationViewModel.insertAllByCategory(data, Category.JOB)
             insertAllNoticeByCategory(data, repository, Category.JOB)
         } else{
-            Log.e(TAG, "syncJobData: unable to get job data")
+            LogUtils.e(TAG, "syncJobData: unable to get job data $url")
         }
     }
 
@@ -573,11 +574,11 @@ object Sync {
             }
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncBankInformation: " + data.size)
+            LogUtils.d(TAG, "syncBankInformation: " + data.size)
 //                informationViewModel.insertAll(data)
             repository.insertInformations(data)
         } else{
-            Log.e(TAG, "syncBankInformation: unable to get bank information")
+            LogUtils.e(TAG, "syncBankInformation: unable to get bank information")
         }
     }
 
@@ -625,7 +626,7 @@ object Sync {
         val selector = SyncConfig.getSelector("OFFICERS_LIST", context)
         if(url.isEmpty() || selector.isEmpty() || officeUrl.isEmpty()) return
         val absoluteUrl = "$officeUrl/bn/site$url"
-        Log.d(TAG, "syncOfficerListFromURL: $officeName, $absoluteUrl")
+        LogUtils.d(TAG, "syncOfficerListFromURL: $officeName, $absoluteUrl")
         val data = ArrayList<Employee>()
         try {
             val document = Jsoup.connect(absoluteUrl).get()
@@ -649,11 +650,11 @@ object Sync {
             e.printStackTrace()
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncOfficerListFromURL: $officeName, ${data.size}")
+            LogUtils.d(TAG, "syncOfficerListFromURL: $officeName, ${data.size}")
 //                repository.insertEmployeeList(data)
             repository.insertEmployeeList(data)
         } else{
-            Log.e(TAG, "syncOfficerList: unable to get officer data")
+            LogUtils.e(TAG, "syncOfficerList: unable to get officer data $url")
         }
     }
 
@@ -679,8 +680,8 @@ object Sync {
                     if(email == null) email = ""
                     if(name != null && designation != null && office != null && mobile != null && mobile.isNotEmpty()){
                         data.add(Employee(i, imageUrl, name, designation, office, email, mobile, phone, Category.REB))
-//                            Log.d(TAG, "syncBREBContacts: $imageUrl $name $designation $office $email $mobile $phone")
-//                            Log.d(TAG, "syncBREBContacts: ${data.last()}")
+//                            LogUtils.d(TAG, "syncBREBContacts: $imageUrl $name $designation $office $email $mobile $phone")
+//                            LogUtils.d(TAG, "syncBREBContacts: ${data.last()}")
                     }
                 }
             }
@@ -688,18 +689,18 @@ object Sync {
             e.printStackTrace()
         }
         if(data.size > 0) {
-            Log.d(TAG, "syncBREBContacts: ${data.size}")
+            LogUtils.d(TAG, "syncBREBContacts: ${data.size}")
 //                employeeViewModel.insertEmployeeList(data)
             repository.insertEmployeeList(data)
         } else{
-            Log.e(TAG, "syncBREBContacts: unable to get breb contacts")
+            LogUtils.e(TAG, "syncBREBContacts: unable to get breb contacts $url")
         }
     }
     private suspend fun insertAllNoticeByCategory(data: ArrayList<ArrayList<String>>, repository: NPBS2Repository, category:String){
         repository.deleteAllNoticeByType(category)
         val tenderList = ArrayList<NoticeInformation>()
         for((i, d) in data.withIndex()){
-//            Log.d(TAG, "insertAllTender: $i $d")
+//            LogUtils.d(TAG, "insertAllTender: $i $d")
             if(d.size > 3)
                 tenderList.add(NoticeInformation(i, d[0], d[1], d[2], d[3], category))
             else

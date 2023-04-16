@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,7 +54,7 @@ class WebViewFragment : Fragment(), CoroutineScope {
                 try {
                     startActivity(browserIntent)
                 } catch (ex: ActivityNotFoundException) {
-                    Log.e("WebViewFragment", "onClick Open In browser: Activity not found")
+                    LogUtils.e("WebViewFragment", "onClick Open In browser: Activity not found")
                     Toast.makeText(requireContext(), "Unable to open url in browser. You might not have suitable browser", Toast.LENGTH_SHORT).show()
                 }
             }
