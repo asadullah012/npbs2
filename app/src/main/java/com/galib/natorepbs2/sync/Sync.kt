@@ -17,7 +17,10 @@ object Sync {
         var lastUpdateTime = 0L
         val url = SyncConfig.getUrl("NPBS2", context)
         val selector = SyncConfig.getSelector("LAST_UPDATE_TIME", context)
-        if(url.isEmpty() || selector.isEmpty()) return 0L
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "getLastUpdateTime: empty Url or selector $url $selector")
+            return 0L
+        }
         try {
             val document = Jsoup.connect(url).get()
             val element = document.select(selector).first()
@@ -34,7 +37,10 @@ object Sync {
     suspend fun syncImportantNotice(repository: NPBS2Repository, context: Context){
         val url = SyncConfig.getUrl("NPBS2", context)
         val selector = SyncConfig.getSelector("IMPORTANT_NOTICE", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncImportantNotice: empty Url or selector $url $selector")
+            return
+        }
         try {
             val document = Jsoup.connect(url).get()
             val importantNotice = document.select(selector).first()
@@ -50,7 +56,10 @@ object Sync {
     suspend fun syncAchievement(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("ACHIEVEMENTS", context)
         val selector = SyncConfig.getSelector("ACHIEVEMENTS", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncAchievement: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         try {
             val document = Jsoup.connect(url).get()
@@ -92,7 +101,10 @@ object Sync {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("AT_A_GLANCE", context)
         val selector = SyncConfig.getSelector("AT_A_GLANCE", context)
         val selectorMonth = SyncConfig.getSelector("AT_A_GLANCE_MONTH", context)
-        if(url.isEmpty() || selector.isEmpty() || selectorMonth.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty() || selectorMonth.isEmpty()) {
+            LogUtils.e(TAG, "syncAtAGlance: Invalid urls $url $selector $selectorMonth")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         var month = ""
         try {
@@ -135,7 +147,10 @@ object Sync {
     suspend fun syncComplainCentre(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("COMPLAIN_CENTRE", context)
         val selector = SyncConfig.getSelector("COMPLAIN_CENTRE", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncComplainCentre: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         try {
             val document = Jsoup.connect(url).get()
@@ -171,8 +186,11 @@ object Sync {
 
     suspend fun syncOfficerList(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("OFFICER_LIST", context)
-        val selector = SyncConfig.getSelector("OFFICER_LIST", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        val selector = SyncConfig.getSelector("OFFICERS_LIST", context)
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncOfficerList: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         try {
             val document = Jsoup.connect(url).get()
@@ -221,7 +239,10 @@ object Sync {
     suspend fun syncJuniorOfficers(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("JUNIOR_OFFICER_LIST", context)
         val selector = SyncConfig.getSelector("JUNIOR_OFFICER_LIST", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncJuniorOfficers: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         try {
             //Connect to the website
@@ -274,7 +295,10 @@ object Sync {
     suspend fun syncBoardMember(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("BOARD_MEMBER", context)
         val selector = SyncConfig.getSelector("BOARD_MEMBER", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncBoardMember: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         try {
             val document = Jsoup.connect(url).get()
@@ -321,7 +345,10 @@ object Sync {
     suspend fun syncPowerOutageContact(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("POWER_OUTAGE_CONTACT", context)
         val selector = SyncConfig.getSelector("POWER_OUTAGE_CONTACT", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncPowerOutageContact: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         try {
             val document = Jsoup.connect(url).get()
@@ -372,12 +399,12 @@ object Sync {
                     val jsonObject = jsonArray.getJSONObject(i)
                     data.add(
                         OfficeInformation(jsonObject.optString("name").toString(),
-                        jsonObject.optString("address").toString(),
-                        jsonObject.optString("mobile").toString(),
-                        jsonObject.optString("telephone").toString(),
-                        jsonObject.optString("email").toString(),
-                        jsonObject.optString("google_map_url").toString(),
-                        i)
+                            jsonObject.optString("address").toString(),
+                            jsonObject.optString("mobile").toString(),
+                            jsonObject.optString("telephone").toString(),
+                            jsonObject.optString("email").toString(),
+                            jsonObject.optString("google_map_url").toString(),
+                            i)
                     )
                 }
             }
@@ -395,7 +422,10 @@ object Sync {
     suspend fun syncTenderData(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("TENDER", context)
         val selector = SyncConfig.getSelector("TENDER", context)
-        if (url.isEmpty() || selector.isEmpty()) return
+        if (url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncTenderData: $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         for (page in 1..10) {
             try {
@@ -439,7 +469,10 @@ object Sync {
     suspend fun syncNoticeData(repository: NPBS2Repository, context: Context){
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("NOTICE", context)
         val selector = SyncConfig.getSelector("NOTICE", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncNoticeData: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         for(page in 1..10){
             try {
@@ -482,7 +515,10 @@ object Sync {
     suspend fun syncNewsData(repository: NPBS2Repository, context: Context){
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("NEWS", context)
         val selector = SyncConfig.getSelector("NEWS", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncNewsData: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         for(page in 1..10){
             try {
@@ -521,7 +557,10 @@ object Sync {
     suspend fun syncJobData(repository: NPBS2Repository, context: Context){
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("JOB", context)
         val selector = SyncConfig.getSelector("JOB", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncJobData: empty Url or selector $url $selector")
+            return
+        }
         val data = ArrayList<ArrayList<String>>()
         try {
             val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
@@ -585,7 +624,10 @@ object Sync {
     fun syncBanners(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("BANNERS", context)
         val selector = SyncConfig.getSelector("BANNERS", context)
-        if(url.isEmpty() || selector.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty()) {
+            LogUtils.e(TAG, "syncBanners: empty Url or selector $url $selector")
+            return
+        }
         val list:MutableList<String> = ArrayList()
         try {
             val document = Jsoup.connect(url).timeout(SyncConfig.TIMEOUT).get()
@@ -624,7 +666,10 @@ object Sync {
     private suspend fun syncOfficerListFromURL(officeName:String, officeUrl: String, repository: NPBS2Repository, context: Context){
         val url = SyncConfig.getUrl("OFFICER_LIST", context)
         val selector = SyncConfig.getSelector("OFFICERS_LIST", context)
-        if(url.isEmpty() || selector.isEmpty() || officeUrl.isEmpty()) return
+        if(url.isEmpty() || selector.isEmpty() || officeUrl.isEmpty()){
+            LogUtils.e(TAG, "syncOfficerListFromURL: Invalid urls $url $selector $officeUrl")
+            return
+        }
         val absoluteUrl = "$officeUrl/bn/site$url"
         LogUtils.d(TAG, "syncOfficerListFromURL: $officeName, $absoluteUrl")
         val data = ArrayList<Employee>()
