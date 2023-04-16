@@ -2,7 +2,7 @@ package com.galib.natorepbs2.sync
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.utils.Utility
 import org.json.JSONObject
@@ -37,7 +37,7 @@ object SyncConfig {
             }
             updateDataFileIfRequired(context)
         } catch (e:java.lang.Exception){
-            Log.e(TAG, "updateConfigFile: ${e.localizedMessage}")
+            LogUtils.e(TAG, "updateConfigFile: ${e.localizedMessage}")
         }
     }
 
@@ -47,7 +47,7 @@ object SyncConfig {
         if(configJson != null && dataJson != null){
             val dataVersionInConfig = configJson.optInt("dataFileVersion")
             val dataVersion = dataJson.optInt("version")
-            Log.d(TAG, "updateDataFile: $dataVersionInConfig $dataVersion")
+            LogUtils.d(TAG, "updateDataFile: $dataVersionInConfig $dataVersion")
             if(dataVersionInConfig > dataVersion) {
                 updateDataFile(context)
             }
@@ -64,7 +64,7 @@ object SyncConfig {
                 Utility.writeToFile(it, fileData, context)
             }
         } catch (e:java.lang.Exception){
-            Log.e(TAG, "updateDataFile: ${e.localizedMessage}")
+            LogUtils.e(TAG, "updateDataFile: ${e.localizedMessage}")
         }
     }
 

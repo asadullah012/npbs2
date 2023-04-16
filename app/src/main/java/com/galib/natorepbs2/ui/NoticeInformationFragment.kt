@@ -1,7 +1,7 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +31,7 @@ class NoticeInformationFragment : Fragment() {
         try{
             title = args.title
         } catch (e: InvocationTargetException){
-            Log.e("NoticeInfoFragment", "onCreateView: ${e.localizedMessage}")
+            LogUtils.e("NoticeInfoFragment", "onCreateView: ${e.localizedMessage}")
         }
         if(title == null)
             title = arguments?.getString("title")

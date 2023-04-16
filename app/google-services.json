@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "355140138292",
+    "project_id": "natore-pbs-2",
+    "storage_bucket": "natore-pbs-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355140138292:android:0df41eeaf56333a1d4a161",
+        "android_client_info": {
+          "package_name": "com.galib.natorepbs2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355140138292-4junuj4u22jrkn6ghh09bqijlkt3d0pv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUcWAmJjiVZixWQrRfx6lhJpv74j9M9s8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355140138292-4junuj4u22jrkn6ghh09bqijlkt3d0pv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

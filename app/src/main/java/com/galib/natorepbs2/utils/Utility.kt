@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
 import android.net.Uri
-import android.util.Log
+import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.sync.SyncConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,14 +26,14 @@ class Utility {
             val packageManager = context.packageManager
             return try {
                 val appInfo = packageManager.getPackageInfo("com.facebook.katana", 0)
-                Log.d("NPBS2", "fb" + appInfo.versionCode)
+                LogUtils.d("NPBS2", "fb" + appInfo.versionCode)
                 if (appInfo.versionCode >= 3002850) {
                     "fb://facewebmodal/f?href=$url"
                 } else {
                     url
                 }
             } catch (e: PackageManager.NameNotFoundException) {
-                Log.d("NPBS2", "fb app not found " + e.localizedMessage)
+                LogUtils.d("NPBS2", "fb app not found " + e.localizedMessage)
                 url //normal web url
             }
         }
@@ -54,7 +54,7 @@ class Utility {
                 val date: Date? = df.parse(dateTime)
                 return date?.time ?: 0L
             } catch (e : IllegalArgumentException){
-                Log.e(TAG, "dateStringToEpoch: $dateTime $format")
+                LogUtils.e(TAG, "dateStringToEpoch: $dateTime $format")
                 e.printStackTrace()
             }
             return 0L
@@ -78,7 +78,7 @@ class Utility {
                     val unrestrictedIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
                     context.startActivity(unrestrictedIntent)
                 } catch (innerEx: ActivityNotFoundException) {
-                    Log.d(TAG, "openMap: " + innerEx.localizedMessage)
+                    LogUtils.d(TAG, "openMap: " + innerEx.localizedMessage)
                 }
             }
         }
@@ -94,7 +94,7 @@ class Utility {
                     val unrestrictedIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     context.startActivity(unrestrictedIntent)
                 } catch (innerEx: ActivityNotFoundException) {
-                    Log.d(TAG, "openMap: " + innerEx.localizedMessage)
+                    LogUtils.d(TAG, "openMap: " + innerEx.localizedMessage)
                 }
             }
         }
@@ -113,12 +113,12 @@ class Utility {
                         Uri.parse(SyncConfig.getUrl("PLAY_STORE_PREFIX",context) + appId)
                     )
                 )
-                //            Log.d(TAG, "openPlayStore: play store not found. Trying to find other market apps");
+                //            LogUtils.d(TAG, "openPlayStore: play store not found. Trying to find other market apps");
 //            try {
 //                Intent storeIntent = new Intent(Intent.ACTION_VIEW, marketUri);
 //                context.startActivity(storeIntent);
 //            } catch (android.content.ActivityNotFoundException anfe) {
-//                Log.d(TAG, "openPlayStore: no market apps found. opening browser " + anfe.getLocalizedMessage());
+//                LogUtils.d(TAG, "openPlayStore: no market apps found. opening browser " + anfe.getLocalizedMessage());
 //                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URLs.PLAY_STORE_PREFIX + appId)));
 //            }
             }
@@ -131,7 +131,7 @@ class Utility {
                 try {
                     document = Jsoup.connect(url).get()
                 } catch (e: IOException) {
-                    Log.d(TAG, "fetchHtml: " + e.localizedMessage)
+                    LogUtils.d(TAG, "fetchHtml: " + e.localizedMessage)
                 }
                 if (document != null) {
                     html = document.select(selector).html()
@@ -180,7 +180,7 @@ class Utility {
         fun getStringFromSyncData(context: Context, object_name:String):String?{
             val jsonRootObject = SyncConfig.getSyncDataJson(context)
             val data = jsonRootObject?.optString(object_name)
-            Log.d(TAG, "getStringFromSyncData: $data")
+            LogUtils.d(TAG, "getStringFromSyncData: $data")
             return data
         }
 
@@ -188,7 +188,7 @@ class Utility {
             val path = context.filesDir
             val file = File(path, filename)
             file.createNewFile()
-            Log.d(TAG, "writeToFile: ${file.absolutePath}")
+            LogUtils.d(TAG, "writeToFile: ${file.absolutePath}")
             val outStream = FileOutputStream(file)
             outStream.use { stream ->
                 stream.write(data.toByteArray())
@@ -206,7 +206,7 @@ class Utility {
                 }
                 return String(bytes, Charsets.UTF_8)
             } else {
-                Log.d(TAG, "readFromFile: ${file.absolutePath} not found")
+                LogUtils.d(TAG, "readFromFile: ${file.absolutePath} not found")
             }
             return null
         }
