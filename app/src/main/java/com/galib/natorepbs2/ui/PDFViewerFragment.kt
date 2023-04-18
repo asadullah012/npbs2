@@ -1,7 +1,7 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
-import com.galib.natorepbs2.logger.LogUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +10,24 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.galib.natorepbs2.R
+import com.galib.natorepbs2.logger.LogUtils
 import com.github.barteksc.pdfviewer.PDFView
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.ResponseBody
 import okio.Buffer
 import okio.BufferedSink
-import okio.Okio
+import okio.buffer
+import okio.sink
 import java.io.File
 import java.io.IOException
+
 
 class PDFViewerFragment : Fragment(), CoroutineScope{
     private val args: PDFViewerFragmentArgs by navArgs()
@@ -51,6 +58,7 @@ class PDFViewerFragment : Fragment(), CoroutineScope{
     }
 
     private fun downloadAndLoad(url: String, file: File) {
+        Log.d("TAG", "downloadAndLoad: $url ${file.absolutePath}")
         progressBar.visibility = View.VISIBLE
         launch {
             withContext(Dispatchers.IO) {
@@ -58,12 +66,12 @@ class PDFViewerFragment : Fragment(), CoroutineScope{
                     val client = OkHttpClient()
                     val request = Request.Builder().url(url).build()
                     val response: Response = client.newCall(request).execute()
-                    val body: ResponseBody? = response.body()
+                    val body: ResponseBody? = response.body
                     val contentLength = body!!.contentLength()
                     val source = body.source()
 
-                    val sink: BufferedSink = Okio.buffer(Okio.sink(file))
-                    val sinkBuffer: Buffer = sink.buffer()
+                    val sink: BufferedSink = file.sink().buffer()
+                    val sinkBuffer: Buffer = sink.buffer
 
                     var totalBytesRead: Long = 0
                     val bufferSize : Long = 8 * 1024

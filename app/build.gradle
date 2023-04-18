@@ -40,8 +40,8 @@ android {
         enabled true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     packagingOptions {
         resources {
@@ -50,7 +50,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     namespace 'com.galib.natorepbs2'
 }
@@ -98,6 +98,7 @@ dependencies {
     implementation "org.jsoup:jsoup:$rootProject.jsoupVersion"
     implementation "com.github.mhiew:android-pdf-viewer:$rootProject.pdfViewerVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
     implementation 'com.google.code.gson:gson:2.10.1'
 
     // Testing

@@ -3,10 +3,8 @@ package com.galib.natorepbs2.ui
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import com.galib.natorepbs2.logger.LogUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +15,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import androidx.webkit.WebSettingsCompat
-import androidx.webkit.WebViewFeature
 import com.galib.natorepbs2.R
+import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.utils.Utility
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -83,17 +80,5 @@ class WebViewFragment : Fragment(), CoroutineScope {
         val webSettings = mWebView.settings
         webSettings.javaScriptEnabled = true
         mWebView.webViewClient = WebViewClient()
-        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
-            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_YES -> WebSettingsCompat.setForceDark(
-                    mWebView.settings,
-                    WebSettingsCompat.FORCE_DARK_ON
-                )
-                Configuration.UI_MODE_NIGHT_NO, Configuration.UI_MODE_NIGHT_UNDEFINED -> WebSettingsCompat.setForceDark(
-                    mWebView.settings,
-                    WebSettingsCompat.FORCE_DARK_OFF
-                )
-            }
-        }
     }
 }
