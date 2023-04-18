@@ -445,7 +445,7 @@ object Sync {
                         }
                         tdList.add(tds[1].text())
                         if (tds.size > 2 && tds[2].select("a").first() != null)
-                            tdList.add(tds[2].select("a").first()!!.attr("href"))
+                            tdList.add(tds[2].select("a").first()!!.absUrl("href"))
                         else
                             tdList.add("")
 
@@ -458,7 +458,7 @@ object Sync {
             }
         }
         if (data.size > 0) {
-            LogUtils.d(TAG, "syncTenderData: " + data.size)
+            LogUtils.d(TAG, "syncTenderData: ${data.size}")
 //                tenderInformationViewModel.insertAllByCategory(data, Category.TENDER)
             insertAllNoticeByCategory(data, repository, Category.TENDER)
         } else {
@@ -491,7 +491,7 @@ object Sync {
                         }
                         tdList.add(tds[1].text())
                         if(tds.size > 2 && tds[2].select("a").first() != null)
-                            tdList.add(tds[2].select("a").first()!!.attr("href"))
+                            tdList.add(tds[2].select("a").first()!!.absUrl("href"))
                         else
                             tdList.add("")
 
