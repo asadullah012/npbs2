@@ -80,7 +80,7 @@
     <string name="menu_service_list">কী সেবা কীভাবে পাবেন</string>
     <string name="nav_open">ওপেন</string>
     <string name="nav_close">বন্ধ</string>
-    <string name="menu_settings">সেটিংসসমূহ</string>
+    <string name="menu_settings">সেটিংস</string>
     <string name="menu_about_app">অ্যাপ সম্পর্কে</string>
     <string name="menu_favorites">আপনার পছন্দের মেনুসমূহ</string>
     <string name="menu_bill_rocket_app">রকেট অ্যাপ</string>
@@ -111,4 +111,6 @@
     <string name="update_available_content">অ্যাপটি আপডেট করার জন্য আপডেট বাটনে ট্যাপ করুন, প্লে স্টোর ওপেন হলে আপডেট বাটনে ট্যাপ করুন</string>
     <string name="about_app_data_collection">অ্যাপে ব্যবহৃত সকল তথ্য সংশ্লিষ্ট প্রতিষ্ঠানের ওয়েবসাইট থেকে সংগ্রহ করা হয়েছে। আপনি যদি মনে করেন কোন তথ্যে ভূল আছে, তাহলে অ্যাপ ডেভেলপারের সাথে সরাসরি যোগাযোগ করতে পারেন।</string>
     <string name="about_app_data_collect">অ্যাপের তথ্য সংগ্রহ সংক্রান্তঃ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

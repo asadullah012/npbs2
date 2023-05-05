@@ -1,22 +1,19 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.galib.natorepbs2.NPBS2Application
+import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentSettingsBinding
-import com.galib.natorepbs2.viewmodel.SettingsViewModel
-import com.galib.natorepbs2.viewmodel.SettingsViewModelFactory
+import com.galib.natorepbs2.settings.Setting
 
-class SettingsFragment : Fragment(), SettingsOnClickListener  {
-    private val settingsViewModel: SettingsViewModel by viewModels {
-        SettingsViewModelFactory((activity?.application as NPBS2Application).repository)
-    }
+class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,31 +24,12 @@ class SettingsFragment : Fragment(), SettingsOnClickListener  {
             container,
             false
         )
-
-        val favoriteMenuAdapter = SettingsAdapter(requireContext(),this, true)
-        val availableMenuAdapter = SettingsAdapter(requireContext(), this, false)
-        binding.favoriteMenuAdapter = favoriteMenuAdapter
-        binding.availableMenuAdapter = availableMenuAdapter
-
-        settingsViewModel.favoriteMenu.observe(viewLifecycleOwner) { menuList ->
-            menuList?.let { favoriteMenuAdapter.submitList(it) }
+        binding.s1 = Setting(getString(R.string.menu_favorites), AppCompatResources.getDrawable(requireContext(),R.drawable.ic_favorite_menu)) {
+            Log.d("Settings", "onCreateView: Call button clicked!")
+            findNavController().navigate(R.id.favMenuSettingsFragment)
         }
-        settingsViewModel.availableMenu.observe(viewLifecycleOwner) { menuList ->
-            menuList?.let { availableMenuAdapter.submitList(it) }
-        }
-        binding.pageTitle = getString(R.string.menu_settings)
-        binding.choseFavoriteMenu = getString(R.string.menu_settings_choose_favorite_menu)
-        binding.favoriteMenu = getString(R.string.menu_settings_favorite_menu)
-        binding.availableMenu = getString(R.string.menu_settings_available_menu)
+        binding.s2 = Setting("App Theme", null, null)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
-
-    override fun settingsOnClick(name:String, isFavoriteAdapter: Boolean) {
-        if(isFavoriteAdapter)
-            settingsViewModel.removeFromFavoriteMenu(name)
-        else
-            settingsViewModel.addToFavoriteMenu(name)
-    }
-
 }

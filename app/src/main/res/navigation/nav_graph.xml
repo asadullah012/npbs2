@@ -410,6 +410,10 @@
         android:name="com.galib.natorepbs2.ui.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/favMenuSettingsFragment"
+        android:name="com.galib.natorepbs2.ui.FavMenuSettingsFragment"
+        android:label="FavMenuSettingsFragment" />
 
 
 </navigation>

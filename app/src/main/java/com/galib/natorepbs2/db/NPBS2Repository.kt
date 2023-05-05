@@ -235,8 +235,8 @@ class NPBS2Repository(db: NPBS2DB) {
     val favoriteMenu : Flow<List<MyMenuItem>>
         get() = myMenuItemDao.favoriteMenu
 
-    val availableMenu : Flow<List<MyMenuItem>>
-        get() = myMenuItemDao.availableMenu
+    val allMenu : Flow<List<MyMenuItem>>
+        get() = myMenuItemDao.allMenu
 
     fun getMyMenuCount(): Int = runBlocking {
         val count = async {
@@ -252,7 +252,7 @@ class NPBS2Repository(db: NPBS2DB) {
     }
 
     @WorkerThread
-    suspend fun updateMyMenu(name:String, isFavorite : Int){
+    suspend fun updateMyMenu(name:String, isFavorite : Boolean){
         myMenuItemDao.updateFavorite(name, isFavorite)
     }
 
