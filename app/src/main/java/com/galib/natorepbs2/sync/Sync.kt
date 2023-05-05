@@ -1,6 +1,7 @@
 package com.galib.natorepbs2.sync
 
 import android.content.Context
+import android.util.Log
 import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository

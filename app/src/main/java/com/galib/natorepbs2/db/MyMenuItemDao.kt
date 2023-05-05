@@ -19,11 +19,11 @@ interface MyMenuItemDao {
     suspend fun countMyMenuItem(): Int
 
     @Query("UPDATE my_menu_table SET is_favorite = :isFavorite where name = :name")
-    suspend fun updateFavorite(name : String, isFavorite: Int)
+    suspend fun updateFavorite(name : String, isFavorite: Boolean)
 
     @get:Query("SELECT * FROM my_menu_table where is_favorite = 1")
     val favoriteMenu: Flow<List<MyMenuItem>>
 
-    @get:Query("SELECT * FROM my_menu_table where is_favorite = 0")
-    val availableMenu: Flow<List<MyMenuItem>>
+    @get:Query("SELECT * FROM my_menu_table")
+    val allMenu: Flow<List<MyMenuItem>>
 }

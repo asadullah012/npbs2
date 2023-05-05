@@ -6,11 +6,9 @@ import com.galib.natorepbs2.models.MyMenuItem
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(private val mRepository: NPBS2Repository) : ViewModel() {
-    val favoriteMenu: LiveData<List<MyMenuItem>>
-        get() = mRepository.favoriteMenu.asLiveData()
 
-    val availableMenu: LiveData<List<MyMenuItem>>
-        get() = mRepository.availableMenu.asLiveData()
+    val allMenu: LiveData<List<MyMenuItem>>
+        get() = mRepository.allMenu.asLiveData()
 
     fun getMyMenuCount(): Int {
         return mRepository.getMyMenuCount()
@@ -19,12 +17,8 @@ class SettingsViewModel(private val mRepository: NPBS2Repository) : ViewModel() 
         mRepository.deleteAllMyMenu()
         mRepository.insertAllMenu(allMenu)
     }
-    fun addToFavoriteMenu(name:String) = viewModelScope.launch {
-        mRepository.updateMyMenu(name, 1)
-    }
-
-    fun removeFromFavoriteMenu(name: String) = viewModelScope.launch {
-        mRepository.updateMyMenu(name, 0)
+    fun updateMyMenu(name:String, isFavorite:Boolean) = viewModelScope.launch {
+        mRepository.updateMyMenu(name, isFavorite)
     }
 }
 
