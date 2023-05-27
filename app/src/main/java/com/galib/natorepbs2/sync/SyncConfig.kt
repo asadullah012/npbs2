@@ -71,7 +71,7 @@ object SyncConfig {
     private fun getConfigJson(context: Context): JSONObject?{
         var json = Utility.readFromFile(fileConfig, context) // try to read from file
         if(json == null){
-            json = Utility.getJsonFromAssets(fileConfig, context.assets) // if not present in file, read from asset
+            json = Utility.getJsonFromAssets(fileConfig, context.resources.assets) // if not present in file, read from asset
         }
         if(json != null) return JSONObject(json)
         return null

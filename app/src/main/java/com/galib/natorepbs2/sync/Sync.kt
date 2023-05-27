@@ -1,11 +1,15 @@
 package com.galib.natorepbs2.sync
 
 import android.content.Context
-import android.util.Log
-import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
-import com.galib.natorepbs2.models.*
+import com.galib.natorepbs2.logger.LogUtils
+import com.galib.natorepbs2.models.Achievement
+import com.galib.natorepbs2.models.ComplainCentre
+import com.galib.natorepbs2.models.Employee
+import com.galib.natorepbs2.models.Information
+import com.galib.natorepbs2.models.NoticeInformation
+import com.galib.natorepbs2.models.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import org.json.JSONArray
 import org.jsoup.Jsoup
@@ -724,7 +728,7 @@ object Sync {
                     if(mobile == null && phone != null) mobile = phone
                     if(phone == null) phone = ""
                     if(email == null) email = ""
-                    if(name != null && designation != null && office != null && mobile != null && mobile.isNotEmpty()){
+                    if(name != null && designation != null && office != null && !mobile.isNullOrEmpty()){
                         data.add(Employee(i, imageUrl, name, designation, office, email, mobile, phone, Category.REB))
 //                            LogUtils.d(TAG, "syncBREBContacts: $imageUrl $name $designation $office $email $mobile $phone")
 //                            LogUtils.d(TAG, "syncBREBContacts: ${data.last()}")
