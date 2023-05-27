@@ -48,7 +48,9 @@ android {
             excludes += ['META-INF/atomicfu.kotlin_module']
         }
     }
-
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -56,9 +58,9 @@ android {
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:31.5.0')
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.6'
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.2'
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.7'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.3.0'
     implementation "androidx.core:core-ktx:$rootProject.coreVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
@@ -85,14 +87,14 @@ dependencies {
     // UI
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
-    implementation 'androidx.core:core-splashscreen:1.0.0'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
     kapt "com.android.databinding:compiler:$rootProject.bindingVersion"
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation "androidx.webkit:webkit:$rootProject.webKitVersion"
 
     //In-app Update
-    implementation 'com.google.android.play:app-update:2.0.1'
-    implementation 'com.google.android.play:app-update-ktx:2.0.1'
+    implementation 'com.google.android.play:app-update:2.1.0'
+    implementation 'com.google.android.play:app-update-ktx:2.1.0'
 
     // Other
     implementation "org.jsoup:jsoup:$rootProject.jsoupVersion"
@@ -103,6 +105,12 @@ dependencies {
 
     // Testing
     testImplementation "junit:junit:$rootProject.junitVersion"
+    // Optional -- Mockito framework
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    // Optional -- mockito-kotlin
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockitoKotlinVersion"
+    // Optional -- Mockk framework
+    testImplementation "io.mockk:mockk:$rootProject.mockkVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation ("androidx.test.espresso:espresso-core:$rootProject.espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
