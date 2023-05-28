@@ -19,7 +19,7 @@ object SyncConfig {
     private const val fileConfig = "npbs2_sync_config.json"
     private const val TAG = "SyncConfig"
     private var failedAttempts = 0
-    const val TIMEOUT = 1000
+    const val TIMEOUT = 3000
 
     private var jsonUrls : JSONObject? = null
     private var jsonSelectors:JSONObject? = null

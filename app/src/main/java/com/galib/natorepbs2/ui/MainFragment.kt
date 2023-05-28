@@ -1,6 +1,7 @@
 package com.galib.natorepbs2.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +58,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
 
     private fun setBannerImages(carouselView: CarouselView){
         val sampleImages = getBannerImages()
+        Log.d("MainFragment", "setBannerImages: $sampleImages")
         lateinit var imageListener: ImageListener
         if(sampleImages.isEmpty()){
             carouselView.pageCount = 1
@@ -83,7 +85,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
     }
 
     private fun getBannerImages(): List<String> {
-        val apps : NPBS2Application = activity?.application as NPBS2Application
+        val apps : NPBS2Application = requireActivity().application as NPBS2Application
         return apps.repository.getBannerUrls()
     }
 

@@ -28,7 +28,6 @@ class SettingsFragment : Fragment() {
             Log.d("Settings", "onCreateView: Call button clicked!")
             findNavController().navigate(R.id.favMenuSettingsFragment)
         }
-        binding.s2 = Setting("App Theme", null, null)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }

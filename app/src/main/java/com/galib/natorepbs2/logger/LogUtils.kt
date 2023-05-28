@@ -42,7 +42,7 @@ object LogUtils{
 
     fun e(tag: String?, msg: String): Int {
         val exception = Exception("Error log - $msg")
-//        FirebaseCrashlytics.getInstance().recordException(exception)
+        FirebaseCrashlytics.getInstance().recordException(exception)
         return Log.e(tag,msg)
     }
 
