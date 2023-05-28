@@ -29,4 +29,6 @@ interface InformationDao {
 
     @Query("DELETE FROM information_table where category = :category")
     fun deleteAllByCategory(category: String?)
+    @Query("SELECT title FROM information_table where category = :category")
+    fun getBannersUrl(category: String): Flow<List<String>>
 }

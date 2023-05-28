@@ -1,5 +1,6 @@
 package com.galib.natorepbs2.db
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.logger.LogUtils
@@ -16,7 +17,6 @@ class NPBS2Repository(db: NPBS2DB) {
     private val officeInformationDao: OfficeInformationDao
     private val noticeInformationDao: NoticeInformationDao
     private val myMenuItemDao: MyMenuItemDao
-    private val bannerUrls : MutableList<String>
 
     init {
         informationDao = db.informationDao()
@@ -26,7 +26,6 @@ class NPBS2Repository(db: NPBS2DB) {
         officeInformationDao = db.officeInformationDao()
         noticeInformationDao = db.noticeInformationDao()
         myMenuItemDao = db.myMenuItemDao()
-        bannerUrls = ArrayList()
     }
 
     val allAchievement: Flow<List<Achievement>>
@@ -136,13 +135,16 @@ class NPBS2Repository(db: NPBS2DB) {
         return noticeInformationDao.getAllNoticeByCategory(category)
     }
 
-    fun getBannerUrls(): List<String> {
-        return bannerUrls
-    }
+    val bannersUrl: Flow<List<String>>
+        get() = informationDao.getBannersUrl(Category.BANNER)
 
-    fun setBannerUrls(list : List<String>){
-        bannerUrls.clear()
-        bannerUrls.addAll(list)
+    @WorkerThread
+    suspend fun setBannerUrls(list : List<String>){
+        val bannersUrl: MutableList<Information> = ArrayList()
+        for(l in list){
+            bannersUrl.add(Information(0,l,"",Category.BANNER))
+        }
+        informationDao.insertInfos(bannersUrl)
     }
 
     fun getInstructionByType(type: Int): MutableList<Instruction> {
