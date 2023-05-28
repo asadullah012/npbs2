@@ -627,7 +627,7 @@ object Sync {
         }
     }
 
-    fun syncBanners(repository: NPBS2Repository, context: Context) {
+    suspend fun syncBanners(repository: NPBS2Repository, context: Context) {
         val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("BANNERS", context)
         val selector = SyncConfig.getSelector("BANNERS", context)
         if(url.isEmpty() || selector.isEmpty()) {
@@ -653,7 +653,7 @@ object Sync {
             }
             if(list.size > 0){
                 repository.setBannerUrls(list)
-                LogUtils.d(TAG, "$list")
+                LogUtils.d(TAG, "${list.size}")
             } else {
                 LogUtils.e(TAG, "unable to get banner image $url $selector")
             }

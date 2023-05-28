@@ -18,6 +18,9 @@ class InformationViewModel(private val mRepository: NPBS2Repository) : ViewModel
     val importantNotice: LiveData<Information?>
         get() = mRepository.importantNotice.asLiveData()
 
+    val bannerUrl: LiveData<List<String>>
+        get() = mRepository.bannersUrl.asLiveData()
+
     fun insertAll(data: List<Information>) = viewModelScope.launch{
         mRepository.insertInformations(data)
     }

@@ -49,16 +49,19 @@ class MainFragment : Fragment(), MenuOnClickListener {
                 .setMessage(binding.slidingNoticeTextView.text)
                 .show()
         }
+
         val carouselView = binding.root.findViewById<CarouselView>(R.id.bannerCarousel)
-        setBannerImages(carouselView)
+
+        informationViewModel.bannerUrl.observe(viewLifecycleOwner) { bannersList : List<String> ->
+            setBannerImages(carouselView, bannersList)
+        }
 
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
-    private fun setBannerImages(carouselView: CarouselView){
-        val sampleImages = getBannerImages()
-        Log.d("MainFragment", "setBannerImages: $sampleImages")
+    private fun setBannerImages(carouselView: CarouselView, sampleImages:List<String>){
+        Log.d("MainFragment", "setBannerImages: ${sampleImages.size}")
         lateinit var imageListener: ImageListener
         if(sampleImages.isEmpty()){
             carouselView.pageCount = 1
@@ -82,11 +85,6 @@ class MainFragment : Fragment(), MenuOnClickListener {
             }
         }
         carouselView.setImageListener(imageListener)
-    }
-
-    private fun getBannerImages(): List<String> {
-        val apps : NPBS2Application = requireActivity().application as NPBS2Application
-        return apps.repository.getBannerUrls()
     }
 
     private fun getMenuList(): MutableList<String> {
