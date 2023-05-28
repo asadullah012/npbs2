@@ -56,31 +56,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-                        <View
-                            android:id="@+id/divider_1"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="40dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@android:color/darker_gray"
-                            app:layout_constraintTop_toBottomOf="@id/settings_1"
-                            app:layout_constraintBottom_toTopOf="@id/settings_2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-
-                        <include
-                            android:id="@+id/settings_2"
-                            android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginTop="5dp"
-                            layout="@layout/item_settings"
-                            app:settings="@{s2}"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/divider_1" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

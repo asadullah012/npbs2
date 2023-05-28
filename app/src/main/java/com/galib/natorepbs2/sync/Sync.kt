@@ -1,6 +1,7 @@
 package com.galib.natorepbs2.sync
 
 import android.content.Context
+import android.util.Log
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.logger.LogUtils
@@ -648,8 +649,14 @@ object Sync {
                     if(bannerUrl != null)
                         list.add(bannerUrl)
                 }
+
             }
-            repository.setBannerUrls(list)
+            if(list.size > 0){
+                repository.setBannerUrls(list)
+                LogUtils.d(TAG, "$list")
+            } else {
+                LogUtils.e(TAG, "unable to get banner image $url $selector")
+            }
         } catch (e : Exception ){
             e.printStackTrace()
         }

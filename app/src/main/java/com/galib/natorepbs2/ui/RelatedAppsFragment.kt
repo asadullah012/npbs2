@@ -38,8 +38,8 @@ class RelatedAppsFragment : Fragment(), MenuOnClickListener {
         appIds.add("com.mysoftheaven.natore")
         appList.add("বিপিডিবি")
         appIds.add("com.sarwar.bpdb")
-        appList.add("নথি | অফিস ব্যবস্থাপনা")
-        appIds.add("com.tappware.nothipro")
+        appList.add("dNothi System")
+        appIds.add("com.tappware.enothipro")
         return appList
     }
 

@@ -37,7 +37,7 @@
     "POWER_OUTAGE_CONTACT_HEADER": "#left > div.news.details > div:nth-child(4) > div > div.html_text.body > div.value > div:nth-child(1) > span",
     "POWER_OUTAGE_CONTACT_FOOTER": "#left > div.news.details > div:nth-child(4) > div > div.html_text.body > div.value > div:nth-child(5) > p > span",
     "LAST_UPDATE_TIME": "#footer-menu > div > span",
-    "AT_A_GLANCE_MONTH": "#left > div.page.details > div > div > div.html_text.body > div > p:nth-child(2)",
+    "AT_A_GLANCE_MONTH": "#left > div.page.details > div > div > div.html_text.body > div > p:nth-child(1)",
     "AT_A_GLANCE": "#left > div.page.details > div > div > div.html_text.body > div > table",
     "TENDER": "#left > div.revenuemodeltender.list > div.table-responsive.chbappy1 > table",
     "NOTICE": "#left > div.notices.list > div.table-responsive.chbappy1 > table",
