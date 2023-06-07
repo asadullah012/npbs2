@@ -1,7 +1,6 @@
 package com.galib.natorepbs2
 
 import android.os.Bundle
-import com.galib.natorepbs2.logger.LogUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.SubMenu
@@ -20,11 +19,23 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.galib.natorepbs2.db.NPBS2Repository
+import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.models.MyMenuItem
 import com.galib.natorepbs2.sync.SyncManager
-import com.galib.natorepbs2.ui.*
+import com.galib.natorepbs2.ui.AboutAppFragment
+import com.galib.natorepbs2.ui.AwarenessFragment
+import com.galib.natorepbs2.ui.BillFromHomeFragment
+import com.galib.natorepbs2.ui.CommunicationFragment
+import com.galib.natorepbs2.ui.ComplainCentreFragment
+import com.galib.natorepbs2.ui.ElectricityConnectionFragment
+import com.galib.natorepbs2.ui.JuniorOfficerFragment
+import com.galib.natorepbs2.ui.MainFragment
+import com.galib.natorepbs2.ui.NoticeInformationFragment
+import com.galib.natorepbs2.ui.OfficersFragment
+import com.galib.natorepbs2.ui.SettingsFragment
 import com.galib.natorepbs2.updater.UpdateManager
-import com.galib.natorepbs2.viewmodel.*
+import com.galib.natorepbs2.viewmodel.SettingsViewModel
+import com.galib.natorepbs2.viewmodel.SettingsViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 
