@@ -414,6 +414,11 @@
         android:id="@+id/favMenuSettingsFragment"
         android:name="com.galib.natorepbs2.ui.FavMenuSettingsFragment"
         android:label="FavMenuSettingsFragment" />
+    <fragment
+        android:id="@+id/interruptionEntryFragment"
+        android:name="com.galib.natorepbs2.ui.InterruptionEntryFragment"
+        android:label="fragment_interruption_entry"
+        tools:layout="@layout/fragment_interruption_entry" />
 
 
 </navigation>
