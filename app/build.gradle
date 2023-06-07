@@ -15,8 +15,8 @@ android {
         applicationId "com.galib.natorepbs2"
         minSdk 21
         targetSdk 33
-        versionCode 6
-        versionName "1.1.1"
+        versionCode 7
+        versionName "1.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,6 +48,7 @@ android {
             excludes += ['META-INF/atomicfu.kotlin_module']
         }
     }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -101,7 +102,15 @@ dependencies {
     implementation "com.github.mhiew:android-pdf-viewer:$rootProject.pdfViewerVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
-    implementation 'com.google.code.gson:gson:2.10.1'
+
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    implementation('com.google.api-client:google-api-client-android:1.23.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    implementation('com.google.apis:google-api-services-sheets:v4-rev516-1.23.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
     implementation('com.google.api-client:google-api-client-android:1.23.0') {

@@ -51,7 +51,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
         }
 
         val carouselView = binding.root.findViewById<CarouselView>(R.id.bannerCarousel)
-
+        setBannerImages(carouselView, null)
         informationViewModel.bannerUrl.observe(viewLifecycleOwner) { bannersList : List<String> ->
             setBannerImages(carouselView, bannersList)
         }
@@ -60,10 +60,11 @@ class MainFragment : Fragment(), MenuOnClickListener {
         return binding.root
     }
 
-    private fun setBannerImages(carouselView: CarouselView, sampleImages:List<String>){
-        Log.d("MainFragment", "setBannerImages: ${sampleImages.size}")
+    private fun setBannerImages(carouselView: CarouselView, sampleImages: List<String>?){
+        Log.d("MainFragment", "setBannerImages: ${sampleImages?.size}")
         lateinit var imageListener: ImageListener
-        if(sampleImages.isEmpty()){
+        if(sampleImages.isNullOrEmpty()){
+            Log.d("MainFragment", "setBannerImages: setting page count 1")
             carouselView.pageCount = 1
             imageListener = object : ImageListener {
                 override fun setImageForPosition(position: Int, imageView: ImageView) {
@@ -74,6 +75,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
                 }
             }
         } else {
+            Log.d("MainFragment", "setBannerImages: setting page count 1")
             carouselView.pageCount = sampleImages.size
             imageListener = object : ImageListener {
                 override fun setImageForPosition(position: Int, imageView: ImageView) {

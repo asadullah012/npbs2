@@ -653,7 +653,6 @@ object Sync {
             }
             if(list.size > 0){
                 repository.setBannerUrls(list)
-                LogUtils.d(TAG, "${list.size}")
             } else {
                 LogUtils.e(TAG, "unable to get banner image $url $selector")
             }
