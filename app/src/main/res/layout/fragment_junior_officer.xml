@@ -27,7 +27,7 @@
             android:layout_marginTop="5dp"
             android:textSize="16sp"
             android:textStyle="normal"
-            android:text="(জ্যেষ্ঠতার ক্রমানুসারে নয়)"
+            android:text="@string/not_according_to_seniority"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleTextView" />

@@ -1,6 +1,12 @@
 package com.galib.natorepbs2.constants
 
 object Category {
+    const val TariffObjectName = "electricity_tariff"
+    const val CommunicationObjectName = "communication_post"
+    const val ConnectionRulesObjectName = "electricity_connection_rules"
+    const val ConnectionDomesticObjectName = "CONNECTION_DOMESTIC"
+    const val ConnectionDomesticNewObjectName = "CONNECTION_DOMESTIC_NEW"
+    const val ConnectionIndustryObjectName = "CONNECTION_INDUSTRY"
     const val BANNER = "BANNER"
     const val JOB = "JOB"
     const val NEWS = "NEWS"

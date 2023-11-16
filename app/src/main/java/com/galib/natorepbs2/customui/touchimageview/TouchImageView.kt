@@ -803,18 +803,13 @@ open class TouchImageView @JvmOverloads constructor(context: Context, attrs: Att
         }
 
         override fun onFling(
-            e1: MotionEvent,
-            e2: MotionEvent,
-            velocityX: Float,
+            e1: MotionEvent?, e2: MotionEvent, velocityX: Float,
             velocityY: Float
         ): Boolean {
-            // If a previous fling is still active, it should be cancelled so that two flings
-            // are not run simultaneously.
             fling?.cancelFling()
             fling = Fling(velocityX.toInt(), velocityY.toInt()).also { compatPostOnAnimation(it) }
             return super.onFling(e1, e2, velocityX, velocityY)
         }
-
         override fun onDoubleTap(e: MotionEvent): Boolean {
             var consumed = false
             if (isZoomEnabled) {

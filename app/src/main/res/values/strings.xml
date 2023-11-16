@@ -113,4 +113,31 @@
     <string name="about_app_data_collect">অ্যাপের তথ্য সংগ্রহ সংক্রান্তঃ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="information_desc">তথ্যের বিবরণ</string>
+    <string name="sl_no">ক্রমিক নং</string>
+    <string name="bank_name">ব্যাংকের নাম</string>
+    <string name="branches">শাখাসমূহ</string>
+    <string name="total_consumption_kwh">মোট ব্যবহার(কি:ও:ঘ:)</string>
+    <string name="zero">0</string>
+    <string name="cont_load">চুক্তিবদ্ধ লোড:</string>
+    <string name="life_line_consumption">লাইফ লাইনঃ (০-৫০ ইউনিট)</string>
+    <string name="first_slab_consumption">প্রথম ধাপঃ (০-৭৫ ইউনিট)</string>
+    <string name="second_slab_consumption">দ্বিতীয় ধাপঃ (৭৬-২০০ ইউনিট)</string>
+    <string name="third_slab_consumption">তৃতীয় ধাপঃ (২০১-৩০০ ইউনিট)</string>
+    <string name="fourth_slab_consumption">চতুর্থ ধাপঃ (৩০১-৪০০ ইউনিট)</string>
+    <string name="fifth_slab_consumption">পঞ্চম ধাপঃ (৪০১-৬০০ ইউনিট)</string>
+    <string name="sixth_slab_consumption">ষষ্ঠ ধাপঃ (৬০০ ইউনিট এর উর্ধ্বে)</string>
+    <string name="energy_charge">এনার্জি/মিনিমাম চার্জ</string>
+    <string name="demand_charge">ডিমান্ড চার্জ</string>
+    <string name="net_bill">নীট বিল</string>
+    <string name="vat">ভ্যাট</string>
+    <string name="meter_rent">মিটার ভাড়া</string>
+    <string name="total_bill">মোট বিল</string>
+    <string name="late_payment_fee">বিলম্ব মাশুলঃ নীট বিলের ৫%</string>
+    <string name="total_bill_with_lpc">বিলম্ব মাশুলসহ সর্বমোট বিল</string>
+    <string name="not_according_to_seniority">(জ্যেষ্ঠতার ক্রমানুসারে নয়)</string>
+    <string name="description">বিবরণ</string>
+    <string name="date">তারিখ</string>
+    <string name="pdf">পিডিএফ</string>
+    <string name="g_map_loc">Natore+Palli+Bidyut+Samity-2,+Bonpara,+Natore</string>
 </resources>

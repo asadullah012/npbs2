@@ -103,7 +103,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
         list.add(getString(R.string.menu_communication))
         list.add(getString(R.string.menu_awareness))
         list.add(getString(R.string.menu_other_official_contacts))
-        list.add("Interuption")
+        list.add("Interruption")
         return list
     }
 
@@ -121,7 +121,7 @@ class MainFragment : Fragment(), MenuOnClickListener {
             getString(R.string.menu_communication) -> findNavController().navigate(R.id.action_main_to_communicationFragment)
             getString(R.string.menu_awareness) -> findNavController().navigate(R.id.action_main_to_awarenessFragment)
             getString(R.string.menu_other_official_contacts) -> findNavController().navigate(R.id.action_mainFragment_to_otherOfficeContactsFragment)
-            "Interuption" ->findNavController().navigate(R.id.interruptionEntryFragment)
+            "Interruption" ->findNavController().navigate(R.id.interruptionsFragment)
         }
     }
 }
