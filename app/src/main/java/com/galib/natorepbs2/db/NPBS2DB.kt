@@ -9,7 +9,7 @@ import com.galib.natorepbs2.models.*
 
 @Database(
     entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class, Interruption::class],
-    version = 2,
+    version = 4,
     exportSchema = false
 )
 abstract class NPBS2DB : RoomDatabase() {

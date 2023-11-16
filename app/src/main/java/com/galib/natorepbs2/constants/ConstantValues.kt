@@ -6,6 +6,8 @@ object ConstantValues{
     const val DATABASE_NAME = "npbs2_database"
     const val GSheetName = "CCConst"
     const val GSheetID = ""
+    const val GSheetIDInterruptions = ""
+    const val GSheetNameInterruptions = "Interruptions"
     const val GSheetBaseUrl = "https://sheets.googleapis.com/v4/"
     const val GSheetApiKey = ""
     const val HQMobile = "01769-404040"

@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.galib.natorepbs2.BR
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.models.Interruption
+import com.galib.natorepbs2.utils.Utility
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class InterruptionsAdapter(context: Context) : ListAdapter<Interruption, InterruptionsAdapter.InterruptionViewHolder>(
+class InterruptionsAdapter(var context: Context) : ListAdapter<Interruption, InterruptionsAdapter.InterruptionViewHolder>(
     InterruptionDiff()
 ) {
+
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_interruption
     }
@@ -30,9 +33,17 @@ class InterruptionsAdapter(context: Context) : ListAdapter<Interruption, Interru
     }
 
     override fun onBindViewHolder(holder: InterruptionViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val interruption = getItem(position)
+        holder.bind(interruption)
         holder.itemView.setOnClickListener {
-            Log.d("TAG", "onBindViewHolder: ${getItem(position).creationTime}")
+            val title = "বিদ্যুৎ বিভ্রাটের বিজ্ঞপ্তি"
+            val description = "নাটোর পল্লী বিদ্যুৎ সমিতি-২ এর ${interruption.office} অফিসের আওতাধীন সম্মানিত গ্রাহকগণের সদয় অবগতির জন্য জানানো যাচ্ছে যে আগামী ${interruption.date} ইং তারিখে ${interruption.reason} জন্য ${interruption.substation} উপকেন্দ্রের ${interruption.feeder} ফিডারের আওতায় ${interruption.area} গ্রামে সকাল ${interruption.startTime} টা থেকে বিকেল ${interruption.endTime} ঘটিকা পর্যন্ত বিদ্যুৎ সরবরাহ বন্ধ থাকবে। বিদ্যুৎ সরবরাহ সাময়িক ভাবে বন্ধের জন্য কর্তৃপক্ষ আন্তরিক ভাবে দুঃখিত।\nপ্রচারে,\nকর্তৃপক্ষ,\nনাটোর পল্লী বিদ্যুৎ সমিতি-২"
+            Log.d("TAG", "onBindViewHolder: $title $description")
+
+            MaterialAlertDialogBuilder(context)
+                .setTitle(title)
+                .setMessage(description)
+                .show()
         }
     }
 
