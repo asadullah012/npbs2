@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import com.galib.natorepbs2.NPBS2Application
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.databinding.FragmentViewInterruptionsBinding
-import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.viewmodel.InterruptionsViewModel
 import com.galib.natorepbs2.viewmodel.InterruptionsViewModelFactory
 
@@ -25,7 +24,6 @@ class InterruptionsFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentViewInterruptionsBinding>(inflater, R.layout.fragment_view_interruptions, container, false)
         binding.viewModel = interruptionViewModel
         binding.refreshButton.setOnClickListener {
-            LogUtils.d("TAG", "onRefreshClicked: On refresh clicked")
             interruptionViewModel.onRefreshClicked()
         }
         val adapter = InterruptionsAdapter(requireContext())

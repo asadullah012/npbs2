@@ -15,6 +15,7 @@ object LogUtils{
 
     fun d(tag: String, msg: String) {
         Timber.tag(tag).d(msg)
+        Log.d(tag, msg)
     }
     
     fun d(tag: String, msg: String, tr: Throwable?) {
@@ -45,6 +46,7 @@ object LogUtils{
         val exception = Exception("Error log - $msg")
         FirebaseCrashlytics.getInstance().recordException(exception)
         Timber.tag(tag).e(msg)
+        Log.e(tag, msg)
     }
 
     fun e(tag: String, msg: String?, tr: Throwable?) {
