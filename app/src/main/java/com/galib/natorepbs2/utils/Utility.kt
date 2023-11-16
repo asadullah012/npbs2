@@ -26,8 +26,8 @@ class Utility {
             val packageManager = context.packageManager
             return try {
                 val appInfo = packageManager.getPackageInfo("com.facebook.katana", 0)
-                LogUtils.d("NPBS2", "fb" + appInfo.versionCode)
-                if (appInfo.versionCode >= 3002850) {
+                LogUtils.d("NPBS2", "fb" + appInfo.longVersionCode)
+                if (appInfo.longVersionCode >= 3002850) {
                     "fb://facewebmodal/f?href=$url"
                 } else {
                     url

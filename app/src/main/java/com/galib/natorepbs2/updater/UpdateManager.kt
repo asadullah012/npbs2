@@ -10,6 +10,7 @@ import com.galib.natorepbs2.R
 import com.galib.natorepbs2.notifications.NotificationManager
 import com.galib.natorepbs2.sync.SyncConfig
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 
@@ -28,8 +29,8 @@ object UpdateManager {
                     // start immediate update flow
                     appUpdateManager.startUpdateFlowForResult(
                         appUpdateInfo,
-                        AppUpdateType.IMMEDIATE,
                         context as Activity,
+                        AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build(),
                         REQUEST_CODE_UPDATE
                     )
                 }

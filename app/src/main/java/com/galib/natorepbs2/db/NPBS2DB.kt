@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.galib.natorepbs2.constants.ConstantValues
 import com.galib.natorepbs2.models.*
 
 @Database(
-    entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class],
-    version = 1,
+    entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class, Interruption::class],
+    version = 2,
     exportSchema = false
 )
 abstract class NPBS2DB : RoomDatabase() {
@@ -19,6 +20,7 @@ abstract class NPBS2DB : RoomDatabase() {
     abstract fun officeInformationDao(): OfficeInformationDao
     abstract fun noticeInformationDao(): NoticeInformationDao
     abstract fun myMenuItemDao(): MyMenuItemDao
+    abstract fun interruptionDao():InterruptionDao
 
     companion object {
         @Volatile
@@ -28,9 +30,9 @@ abstract class NPBS2DB : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     NPBS2DB::class.java,
-                    "npbs2_database"
+                    ConstantValues.DATABASE_NAME
                 )
-                    .createFromAsset("database/npbs2_database") // db file database version must be same as current db version
+                    .createFromAsset(ConstantValues.DATABASE_PATH) // db file database version must be same as current db version
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

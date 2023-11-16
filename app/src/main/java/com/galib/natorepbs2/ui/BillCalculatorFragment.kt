@@ -16,6 +16,7 @@ import kotlin.math.ceil
 import kotlin.math.roundToInt
 
 class BillCalculatorFragment : Fragment() {
+    val TAG = "BillCalculatorFragment"
     private var slabLifeline = 0.0
     private var slab1 = 0.0
     private var slab2 = 0.0
@@ -47,7 +48,7 @@ class BillCalculatorFragment : Fragment() {
         )
         binding.pageTitle = getString(R.string.menu_electricity_bill_calculator)
         binding.root.findViewById<EditText>(R.id.KWHInput).doOnTextChanged { text, _, _, _ ->
-            LogUtils.d("Bill Calculator", "onCreateView: KWHInput $text")
+            LogUtils.d(TAG, "onCreateView: KWHInput $text")
             resetVariables()
             kWH = try{
                 text.toString().toInt()
@@ -58,7 +59,7 @@ class BillCalculatorFragment : Fragment() {
             updateBill()
         }
         binding.root.findViewById<EditText>(R.id.demandInput).doOnTextChanged { text, _, _, _ ->
-            LogUtils.d("Bill Calculator", "onCreateView: demandInput $text")
+            LogUtils.d(TAG, "onCreateView: demandInput $text")
             resetVariables()
             try{
                 demand = ceil(text.toString().toFloat()).toInt()

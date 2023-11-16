@@ -3,6 +3,7 @@ package com.galib.natorepbs2.db
 import android.util.Log
 import androidx.annotation.WorkerThread
 import com.galib.natorepbs2.constants.Category
+import com.galib.natorepbs2.constants.ConstantValues
 import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.models.*
 import kotlinx.coroutines.async
@@ -17,6 +18,7 @@ class NPBS2Repository(db: NPBS2DB) {
     private val officeInformationDao: OfficeInformationDao
     private val noticeInformationDao: NoticeInformationDao
     private val myMenuItemDao: MyMenuItemDao
+    private val interruptionDao:InterruptionDao
 
     init {
         informationDao = db.informationDao()
@@ -26,6 +28,7 @@ class NPBS2Repository(db: NPBS2DB) {
         officeInformationDao = db.officeInformationDao()
         noticeInformationDao = db.noticeInformationDao()
         myMenuItemDao = db.myMenuItemDao()
+        interruptionDao = db.interruptionDao()
     }
 
     val allAchievement: Flow<List<Achievement>>
@@ -113,7 +116,7 @@ class NPBS2Repository(db: NPBS2DB) {
     }
 
     fun getOfficerListByOffice(office: String): Flow<List<Employee>> {
-        if(office == "বাংলাদেশ পল্লী বিদ্যুতায়ন বোর্ড")
+        if(office == ConstantValues.BREB)
             return employeeDao.getAllByType(Category.REB)
         return employeeDao.getOfficerListByOffice(office, Category.OTHER_OFFICES)
     }
@@ -261,6 +264,17 @@ class NPBS2Repository(db: NPBS2DB) {
     @WorkerThread
     suspend fun deleteAllMyMenu(){
         myMenuItemDao.deleteAll()
+    }
+
+    val allInterruption:Flow<List<Interruption>>
+        get() = interruptionDao.allInterruption
+    @WorkerThread
+    suspend fun insertAllInterruption(interruptionList : List<Interruption>){
+        interruptionDao.insertAll(interruptionList)
+    }
+    @WorkerThread
+    suspend fun deleteAllInterruption(){
+        interruptionDao.deleteAll()
     }
 
     companion object {

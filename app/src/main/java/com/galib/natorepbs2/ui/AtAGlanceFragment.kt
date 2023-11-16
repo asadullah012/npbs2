@@ -17,6 +17,7 @@ import com.galib.natorepbs2.viewmodel.InformationViewModel
 import com.galib.natorepbs2.viewmodel.InformationViewModelFactory
 
 class AtAGlanceFragment : Fragment() {
+    val TAG = "AtAGlanceFragment"
     private val informationViewModel: InformationViewModel by viewModels {
         InformationViewModelFactory((activity?.application as NPBS2Application).repository)
     }
@@ -38,7 +39,7 @@ class AtAGlanceFragment : Fragment() {
         ) { list: List<Information?> -> adapter.submitList(list) }
         informationViewModel.month.observe(viewLifecycleOwner) { information: Information? ->
             binding.month = information?.description ?: ""
-            LogUtils.d("AtAGlanceFragment", "onCreateView: " + binding.month)
+            LogUtils.d(TAG, "onCreateView: ${binding.month}")
         }
         binding.adapter = adapter
         return binding.root

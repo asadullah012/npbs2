@@ -2,71 +2,72 @@ package com.galib.natorepbs2.logger
 
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import timber.log.Timber
 
 object LogUtils{
-    fun v(tag: String?, msg: String): Int {
-        return Log.v(tag,msg)
+    fun v(tag: String, msg: String) {
+         Timber.tag(tag).v(msg)
     }
 
-    fun v(tag: String?, msg: String?, tr: Throwable?): Int {
-        return Log.v(tag,msg,tr)
+    fun v(tag: String, msg: String?, tr: Throwable?) {
+         Timber.tag(tag).v(tr, msg)
     }
 
-    fun d(tag: String?, msg: String): Int {
-        return Log.d(tag, msg)
+    fun d(tag: String, msg: String) {
+        Timber.tag(tag).d(msg)
     }
     
-    fun d(tag: String?, msg: String?, tr: Throwable?): Int {
-        return Log.d(tag,msg,tr)
+    fun d(tag: String, msg: String, tr: Throwable?) {
+        Timber.tag(tag).d(tr, msg)
     }
 
-    fun i(tag: String?, msg: String): Int {
-        return Log.i(tag,msg)
+    fun i(tag: String, msg: String) {
+        Timber.tag(tag).i(msg)
     }
 
-    fun i(tag: String?, msg: String?, tr: Throwable?): Int {
-        return Log.i(tag,msg,tr)
+    fun i(tag: String, msg: String, tr: Throwable?) {
+        Timber.tag(tag).i(tr, msg)
     }
 
-    fun w(tag: String?, msg: String): Int {
-        return Log.w(tag,msg)
+    fun w(tag: String, msg: String) {
+        Timber.tag(tag).w(msg)
     }
 
-    fun w(tag: String?, msg: String?, tr: Throwable?): Int {
-        return Log.w(tag,msg,tr)
+    fun w(tag: String, msg: String, tr: Throwable?) {
+        Timber.tag(tag).w(tr, msg)
     }
 
-    fun w(tag: String?, tr: Throwable?): Int {
-        return Log.w(tag,tr)
+    fun w(tag: String, tr: Throwable?) {
+        Timber.tag(tag).w(tr)
     }
 
-    fun e(tag: String?, msg: String): Int {
+    fun e(tag: String, msg: String) {
         val exception = Exception("Error log - $msg")
         FirebaseCrashlytics.getInstance().recordException(exception)
-        return Log.e(tag,msg)
+        Timber.tag(tag).e(msg)
     }
 
-    fun e(tag: String?, msg: String?, tr: Throwable?): Int {
-        return Log.e(tag,msg,tr)
+    fun e(tag: String, msg: String?, tr: Throwable?) {
+        Timber.tag(tag).e(tr, msg)
     }
 
-    fun wtf(tag: String?, msg: String?): Int {
-        return Log.wtf(tag,msg)
+    fun wtf(tag: String, msg: String?) {
+        Timber.tag(tag).wtf(msg)
     }
 
-    fun wtf(tag: String?, tr: Throwable): Int {
-        return Log.wtf(tag,tr)
+    fun wtf(tag: String, tr: Throwable) {
+        Timber.tag(tag).wtf(tr)
     }
 
-    fun wtf(tag: String?, msg: String?, tr: Throwable?): Int {
-        return Log.wtf(tag,msg,tr)
+    fun wtf(tag: String, msg: String?, tr: Throwable?) {
+        Timber.tag(tag).wtf(tr, msg)
     }
 
     fun getStackTraceString(tr: Throwable?): String {
-        return Log.getStackTraceString(tr)
+         return Log.getStackTraceString(tr)
     }
 
-    fun println(priority: Int, tag: String?, msg: String): Int {
-        return Log.println(priority, tag, msg)
+    fun println(priority:Int, tag: String?, msg: String) {
+         Log.println(priority, tag, msg)
     }
 }

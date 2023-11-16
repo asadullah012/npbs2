@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
+import com.galib.natorepbs2.constants.Category
+import com.galib.natorepbs2.constants.ConstantValues
 import com.galib.natorepbs2.databinding.FragmentCommunicationBinding
 import com.galib.natorepbs2.utils.Utility
 import com.galib.natorepbs2.utils.Utility.Companion.openMap
@@ -41,9 +43,9 @@ class CommunicationFragment : Fragment(), MenuOnClickListener {
 
     override fun menuOnClick(menuText: String) {
         when (menuText) {
-            getString(R.string.menu_communication_post) -> findNavController().navigate(CommunicationFragmentDirections.actionCommunicationFragmentToWebViewFragment(getString(R.string.menu_communication_post), null, Utility.getStringFromSyncData(requireContext(), "communication_post"), null))
-            getString(R.string.menu_communication_map) -> openMap(requireContext(), "Natore+Palli+Bidyut+Samity-2,+Bonpara,+Natore", 24.295823, 89.0811235)
-            getString(R.string.menu_communication_call) -> Utility.makeCall(requireContext(), "01769-404040")
+            getString(R.string.menu_communication_post) -> findNavController().navigate(CommunicationFragmentDirections.actionCommunicationFragmentToWebViewFragment(getString(R.string.menu_communication_post), null, Utility.getStringFromSyncData(requireContext(), Category.CommunicationObjectName), null))
+            getString(R.string.menu_communication_map) -> openMap(requireContext(), getString(R.string.g_map_loc), ConstantValues.HQLat, ConstantValues.HQLon)
+            getString(R.string.menu_communication_call) -> Utility.makeCall(requireContext(), ConstantValues.HQMobile)
         }
     }
 }

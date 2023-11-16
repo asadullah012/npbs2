@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.galib.natorepbs2.R
+import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.databinding.FragmentElectricityBillBinding
 import com.galib.natorepbs2.utils.Utility
 
@@ -45,7 +46,7 @@ class ElectricityBillFragment : Fragment(),MenuOnClickListener {
         when(menuText){
             getString(R.string.menu_bill_collection_bank) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBankInformationFragment()
             getString(R.string.menu_bill_from_home) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillFromHomeFragment()
-            getString(R.string.menu_electricity_tariff) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToWebViewFragment(getString(R.string.menu_electricity_tariff), null, Utility.getStringFromSyncData(requireContext(), "electricity_tariff"), null)
+            getString(R.string.menu_electricity_tariff) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToWebViewFragment(getString(R.string.menu_electricity_tariff), null, Utility.getStringFromSyncData(requireContext(), Category.TariffObjectName), null)
             getString(R.string.menu_electricity_bill_calculator) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillCalculatorFragment()
             getString(R.string.menu_sms_electricity_bill) -> action = ElectricityBillFragmentDirections.actionElectricityBillFragmentToBillMessageFragment()
         }
