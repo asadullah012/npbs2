@@ -3,7 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven { url "https://jcenter.bintray.com" }
+        maven("https://jcenter.bintray.com")
     }
 }
 dependencyResolutionManagement {
@@ -14,4 +14,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Natore PBS 2"
-include ':app'
+include(":app")
