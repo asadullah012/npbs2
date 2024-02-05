@@ -60,6 +60,13 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
 }
 
 configurations {
@@ -70,7 +77,7 @@ configurations {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
     implementation(libs.firebase.crashlytics.ktx)
     implementation(libs.firebase.analytics.ktx)
     implementation(libs.core.ktx)
@@ -99,24 +106,27 @@ dependencies {
     // UI
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
-    implementation( libs.androidx.core.splashscreen)
     kapt (libs.compiler)
     implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.webkit)
+
+    //Compose
+    implementation(platform("androidx.compose:compose-bom:2024.01.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material3:material3-window-size-class")
+    implementation(libs.androidx.constraintlayout.compose)
+    debugImplementation(libs.androidx.ui.tooling)
+
 
     //In-app Update
     implementation(libs.app.update)
-    implementation(libs.app.update.ktx)
 
     // Other
     implementation(libs.jsoup)
     implementation(libs.android.pdf.viewer)
     implementation(libs.picasso)
-    implementation( libs.okhttp)
-    implementation(libs.listenablefuture)
-    implementation(libs.guava)
-    implementation(libs.androidx.multidex)
-
+    implementation(libs.okhttp)
 
     // Testing
     testImplementation (libs.junit)

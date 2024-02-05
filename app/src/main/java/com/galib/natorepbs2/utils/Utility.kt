@@ -13,9 +13,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import java.io.*
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class Utility {
     companion object{
@@ -174,6 +179,10 @@ class Utility {
             val intent = Intent(
                 Intent.ACTION_DIAL, Uri.parse("tel:" + bnDigitToEnDigit(mobile))
             )
+            context.startActivity(intent)
+        }
+        fun sendEmail(context: Context, email: String) {
+            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$email"))
             context.startActivity(intent)
         }
 
