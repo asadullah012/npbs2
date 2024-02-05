@@ -103,7 +103,6 @@ class MainFragment : Fragment(), MenuOnClickListener {
         list.add(getString(R.string.menu_communication))
         list.add(getString(R.string.menu_awareness))
         list.add(getString(R.string.menu_other_official_contacts))
-        list.add("Interuption")
         return list
     }
 
