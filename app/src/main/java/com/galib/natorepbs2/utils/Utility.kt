@@ -89,6 +89,26 @@ class Utility {
         }
 
         @JvmStatic
+        fun openMap(context: Context, destLong: Double?, destLat: Double?) {
+            val uri = String.format(
+                Locale.ENGLISH,
+                "http://maps.google.com/maps?q=loc:$destLong,$destLat",
+            )
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            intent.setPackage("com.google.android.apps.maps")
+            try {
+                context.startActivity(intent)
+            } catch (ex: ActivityNotFoundException) {
+                try {
+                    val unrestrictedIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                    context.startActivity(unrestrictedIntent)
+                } catch (innerEx: ActivityNotFoundException) {
+                    LogUtils.d(TAG, "openMap: " + innerEx.localizedMessage)
+                }
+            }
+        }
+
+        @JvmStatic
         fun openMap(context: Context, url: String){
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             intent.setPackage("com.google.android.apps.maps")

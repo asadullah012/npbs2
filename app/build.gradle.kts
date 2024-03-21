@@ -117,7 +117,8 @@ dependencies {
     implementation("androidx.compose.material3:material3-window-size-class")
     implementation(libs.androidx.constraintlayout.compose)
     debugImplementation(libs.androidx.ui.tooling)
-
+    implementation(libs.runtime)
+    implementation(libs.androidx.runtime.livedata)
 
     //In-app Update
     implementation(libs.app.update)

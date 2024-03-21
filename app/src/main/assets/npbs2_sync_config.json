@@ -24,7 +24,8 @@
     "CITIZEN_CHARTER": "http://file-rajshahi.portal.gov.bd/uploads/6308cc57-deef-40df-8824-b74ebd640b81//637/b26/6a1/637b266a1f1a3579521120.pdf",
     "FACEBOOK": "https://facebook.com/natorepbstwo",
     "FACEBOOK_APP_ID": "100068895832922",
-    "PLAY_STORE_PREFIX": "https://play.google.com/store/apps/details?id="
+    "PLAY_STORE_PREFIX": "https://play.google.com/store/apps/details?id=",
+    "CCGist": "https://gist.githubusercontent.com/NatorePBS2/75616e5027e4d1942bddbcf489da17d2/raw/a409a169978a4561cbb6919dec399ee47d4e35cc/complain_center_description.json"
   },
   "selectors": {
     "IMPORTANT_NOTICE" : "#predefined-partial-marquee > strong > span",

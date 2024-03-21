@@ -18,6 +18,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
@@ -31,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.galib.natorepbs2.R
+import com.google.common.io.Resources
 
 @Composable
 fun PersonCard(context: Context, name:String, designation:String, skills:String, mobile:String, email:String) {
@@ -55,6 +59,9 @@ fun PersonCard(context: Context, name:String, designation:String, skills:String,
         ) {
             OutlinedCard(
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = colorResource(R.color.item_background),
+                ),
                 border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground)
             ) {
                 Column(
@@ -83,14 +90,16 @@ fun PersonCard(context: Context, name:String, designation:String, skills:String,
                                 fontWeight = FontWeight.W300,
                                 color = Color.Black
                             )
-                            Spacer(modifier = Modifier.size(10.dp))
-                            Text(
-                                text = skills,
-                                textAlign = TextAlign.Start,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.W300,
-                                color = Color.Black
-                            )
+                            if(!skills.isNullOrBlank()){
+                                Spacer(modifier = Modifier.size(10.dp))
+                                Text(
+                                    text = skills,
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.W300,
+                                    color = Color.Black
+                                )
+                            }
                             Spacer(modifier = Modifier.size(10.dp))
                             Row(
                                 modifier = Modifier.fillMaxWidth(),

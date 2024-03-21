@@ -7,14 +7,15 @@ import androidx.room.RoomDatabase
 import com.galib.natorepbs2.models.*
 
 @Database(
-    entities = [Information::class, Achievement::class, ComplainCentre::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class],
-    version = 1,
+    entities = [Information::class, Achievement::class, ComplainCentre::class, AccountByCC::class, Employee::class, OfficeInformation::class, NoticeInformation::class, MyMenuItem::class],
+    version = 3,
     exportSchema = false
 )
 abstract class NPBS2DB : RoomDatabase() {
     abstract fun informationDao(): InformationDao
     abstract fun achievementDao(): AchievementDao
     abstract fun complainCentreDao(): ComplainCentreDao
+    abstract fun accountByCCDao(): AccountByCCDao
     abstract fun employeeDao(): EmployeeDao
     abstract fun officeInformationDao(): OfficeInformationDao
     abstract fun noticeInformationDao(): NoticeInformationDao
