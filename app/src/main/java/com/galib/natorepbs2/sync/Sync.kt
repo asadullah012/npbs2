@@ -5,6 +5,7 @@ import android.util.Log
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.logger.LogUtils
+import com.galib.natorepbs2.models.AccountByCC
 import com.galib.natorepbs2.models.Achievement
 import com.galib.natorepbs2.models.ComplainCentre
 import com.galib.natorepbs2.models.Employee
@@ -13,6 +14,7 @@ import com.galib.natorepbs2.models.NoticeInformation
 import com.galib.natorepbs2.models.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import org.json.JSONArray
+import org.jsoup.Connection
 import org.jsoup.Jsoup
 
 
@@ -151,42 +153,80 @@ object Sync {
     }
 
     suspend fun syncComplainCentre(repository: NPBS2Repository, context: Context) {
-        val url = SyncConfig.getUrl("BASE", context) + SyncConfig.getUrl("COMPLAIN_CENTRE", context)
-        val selector = SyncConfig.getSelector("COMPLAIN_CENTRE", context)
-        if(url.isEmpty() || selector.isEmpty()) {
-            LogUtils.e(TAG, "syncComplainCentre: empty Url or selector $url $selector")
-            return
-        }
-        val data = ArrayList<ArrayList<String>>()
+        val url = "https://gist.githubusercontent.com/NatorePBS2/75616e5027e4d1942bddbcf489da17d2/raw/a409a169978a4561cbb6919dec399ee47d4e35cc/complain_center_description.json"
+        val complainCentreList: MutableList<ComplainCentre> = ArrayList()
         try {
-            val document = Jsoup.connect(url).get()
-            val tables = document.select(selector)
-            for (table in tables) {
-                val trs = table.select("tr")
-                for (i in trs.indices) {
-                    val tds = trs[i].select("td")
-                    val tdList = ArrayList<String>()
-                    for (j in tds.indices) {
-                        tdList.add(tds[j].text())
-                    }
-                    data.add(tdList)
-                }
+            val response: Connection.Response = Jsoup.connect(url).ignoreContentType(true).execute()
+            val jsonArray = JSONArray(response.body())
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val name = jsonObject.getString("Name")
+                val address = jsonObject.getString("Address")
+                val mobile = jsonObject.getString("Mobile")
+                val telephone = jsonObject.getString("Telephone")
+                val email = jsonObject.getString("Email")
+                val latitude = jsonObject.getDouble("Latitude")
+                val longitude = jsonObject.getDouble("Longitude")
+
+                val complainCentre = ComplainCentre(
+                    priority = i,
+                    name = name,
+                    address = address,
+                    mobileNo = mobile,
+                    telephoneNo = telephone,
+                    email = email,
+                    latitude = latitude,
+                    longitude = longitude
+                )
+                complainCentreList.add(complainCentre)
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        if(data.size > 0) {
-            LogUtils.d(TAG, "syncComplainCentre: " + data.size)
-            //complainCentreViewModel.deleteAll()
-//                complainCentreViewModel.insertFromTable(data as List<MutableList<String>>)
-            val complainCentreList: MutableList<ComplainCentre> = ArrayList()
-            for (i in 1 until data.size) {
-                complainCentreList.add(ComplainCentre(data[i][0].toInt(), data[i][1], data[i][2]))
-            }
+        if(complainCentreList.size > 0) {
+            LogUtils.d(TAG, "syncComplainCentre: " + complainCentreList.size)
             repository.deleteAllComplainCentre()
             repository.insertAllComplainCentre(complainCentreList)
         } else{
-            LogUtils.e(TAG, "sync: unable to get complain center data  $url")
+            LogUtils.e(TAG, "syncComplainCentre: unable to get complain center data  $url")
+        }
+    }
+
+    suspend fun syncAccountByCC(repository: NPBS2Repository, context: Context) {
+        val url = "https://gist.githubusercontent.com/NatorePBS2/c144cf50ee1e50be949e30671901fc39/raw/52cf94b811c83fd57f4e551c0dcfa04d05f25927/acc_no_complain_center.json"
+        val accountByCCList: MutableList<AccountByCC> = ArrayList()
+        try {
+            val response: Connection.Response = Jsoup.connect(url).ignoreContentType(true).execute()
+            val jsonArray = JSONArray(response.body())
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val ccName = jsonObject.getString("complain_center")
+                val zoneCode = jsonObject.getInt("zone_code")
+                val completeBlocks = jsonObject.getJSONArray("complete_blocks")
+                for(j in 0 until  completeBlocks.length()){
+                    val block = completeBlocks.getInt(j)
+                    accountByCCList.add(AccountByCC(ccName, "$zoneCode$block"))
+                }
+                val partialBlocks = jsonObject.getJSONArray("partial_blocks")
+                for(j in 0 until  partialBlocks.length()){
+                    val block = partialBlocks.getJSONObject(j).getInt("block")
+                    val accounts = partialBlocks.getJSONObject(j).getJSONArray("acc_no")
+                    for(k in 0 until accounts.length()) {
+                        val account = accounts.getInt(k)
+                        accountByCCList.add(AccountByCC(ccName, "$zoneCode$block$account"))
+                    }
+                }
+                LogUtils.d(TAG, "syncAccountByCC: $accountByCCList")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        if(accountByCCList.size > 0) {
+            LogUtils.d(TAG, "syncAccountByCC: " + accountByCCList.size)
+            repository.deleteAllAccountByCC()
+            repository.insertAllAccountByCC(accountByCCList)
+        } else{
+            LogUtils.e(TAG, "syncAccountByCC: unable to get account by cc data  $url")
         }
     }
 

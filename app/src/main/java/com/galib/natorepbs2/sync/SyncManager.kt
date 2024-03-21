@@ -82,6 +82,7 @@ object SyncManager: SyncManagerInterface {
             Sync.syncAtAGlance(repository, context)
             Sync.syncAchievement(repository, context)
             Sync.syncComplainCentre(repository, context)
+            Sync.syncAccountByCC(repository, context)
             Sync.syncOfficerList(repository, context)
             Sync.syncJuniorOfficers(repository, context)
             Sync.syncBoardMember(repository, context)
