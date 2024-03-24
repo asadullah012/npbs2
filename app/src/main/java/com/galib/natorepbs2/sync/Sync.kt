@@ -1,7 +1,6 @@
 package com.galib.natorepbs2.sync
 
 import android.content.Context
-import android.util.Log
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.db.NPBS2Repository
 import com.galib.natorepbs2.logger.LogUtils
@@ -14,6 +13,7 @@ import com.galib.natorepbs2.models.NoticeInformation
 import com.galib.natorepbs2.models.OfficeInformation
 import com.galib.natorepbs2.utils.Utility
 import org.json.JSONArray
+import org.json.JSONObject
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 
@@ -153,20 +153,23 @@ object Sync {
     }
 
     suspend fun syncComplainCentre(repository: NPBS2Repository, context: Context) {
-        val url = "https://gist.githubusercontent.com/NatorePBS2/75616e5027e4d1942bddbcf489da17d2/raw/a409a169978a4561cbb6919dec399ee47d4e35cc/complain_center_description.json"
+        val url = "https://api.github.com/gists/75616e5027e4d1942bddbcf489da17d2"
         val complainCentreList: MutableList<ComplainCentre> = ArrayList()
         try {
             val response: Connection.Response = Jsoup.connect(url).ignoreContentType(true).execute()
-            val jsonArray = JSONArray(response.body())
+            val jsonRootObject = JSONObject(response.body())
+            val content = jsonRootObject.optJSONObject("files")?.optJSONObject("complain_center_description.json")
+                ?.getString("content")
+            val jsonArray = JSONArray(content)
             for (i in 0 until jsonArray.length()) {
                 val jsonObject = jsonArray.getJSONObject(i)
-                val name = jsonObject.getString("Name")
-                val address = jsonObject.getString("Address")
-                val mobile = jsonObject.getString("Mobile")
-                val telephone = jsonObject.getString("Telephone")
-                val email = jsonObject.getString("Email")
-                val latitude = jsonObject.getDouble("Latitude")
-                val longitude = jsonObject.getDouble("Longitude")
+                val name = jsonObject.getString("name")
+                val address = jsonObject.getString("address")
+                val mobile = jsonObject.getString("mobileNo")
+                val telephone = jsonObject.getString("telephone_no")
+                val email = jsonObject.getString("email")
+                val latitude = jsonObject.getDouble("latitude")
+                val longitude = jsonObject.getDouble("longitude")
 
                 val complainCentre = ComplainCentre(
                     priority = i,
@@ -193,11 +196,14 @@ object Sync {
     }
 
     suspend fun syncAccountByCC(repository: NPBS2Repository, context: Context) {
-        val url = "https://gist.githubusercontent.com/NatorePBS2/c144cf50ee1e50be949e30671901fc39/raw/52cf94b811c83fd57f4e551c0dcfa04d05f25927/acc_no_complain_center.json"
+        val url = "https://api.github.com/gists/c144cf50ee1e50be949e30671901fc39"
         val accountByCCList: MutableList<AccountByCC> = ArrayList()
         try {
             val response: Connection.Response = Jsoup.connect(url).ignoreContentType(true).execute()
-            val jsonArray = JSONArray(response.body())
+            val jsonRootObject = JSONObject(response.body())
+            val content = jsonRootObject.optJSONObject("files")?.optJSONObject("acc_no_complain_center.json")
+                ?.getString("content")
+            val jsonArray = JSONArray(content)
             for (i in 0 until jsonArray.length()) {
                 val jsonObject = jsonArray.getJSONObject(i)
                 val ccName = jsonObject.getString("complain_center")
