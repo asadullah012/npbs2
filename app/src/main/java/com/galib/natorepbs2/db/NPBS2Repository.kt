@@ -1,6 +1,8 @@
 package com.galib.natorepbs2.db
 
+import android.util.Log
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.asLiveData
 import com.galib.natorepbs2.constants.Category
 import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.models.AccountByCC
@@ -105,7 +107,9 @@ class NPBS2Repository(db: NPBS2DB) {
         accountByCCDao.deleteAll()
     }
     fun getCCByAccount(account: String): Flow<List<String>> {
-        return accountByCCDao.getCCByAccount(account)
+        val data = accountByCCDao.getCCByAccount(account)
+        Log.d(TAG, "getCCByAccount: $account ${data.asLiveData().value}")
+        return data
     }
 
     //Employee
