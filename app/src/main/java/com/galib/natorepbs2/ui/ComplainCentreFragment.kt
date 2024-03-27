@@ -16,9 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -36,7 +34,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -91,7 +88,8 @@ class ComplainCentreFragment : Fragment() {
         Column(modifier = Modifier.fillMaxSize()) {
             SearchBar(
                 modifier = Modifier
-                    .fillMaxWidth().padding(horizontal = 10.dp),
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp),
                 query = searchText,
                 onQueryChange = complainCentreViewModel::onSearchTextChange,
                 onSearch = complainCentreViewModel::onSearchTextChange,
@@ -127,7 +125,16 @@ class ComplainCentreFragment : Fragment() {
     @Composable
     fun ComplainCentreList(context: Context, complainCentreList: List<ComplainCentre>?) {
         if (complainCentreList.isNullOrEmpty()) {
-            Text("No Complain Centre found")
+            Column (
+                modifier = Modifier.fillMaxWidth()
+                    .padding(10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "এই হিসাব নং দিয়ে কোন অভিযোগ কেন্দ্র পাওয়া যায় নি!",
+                    color = Color.Red,
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp)
+            }
         } else {
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -204,7 +211,6 @@ class ComplainCentreFragment : Fragment() {
                             Utility.openMap(context, complainCentre.latitude, complainCentre.longitude)
                         }
                     }
-
                 }
             }
         }
