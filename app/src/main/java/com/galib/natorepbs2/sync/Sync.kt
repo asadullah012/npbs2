@@ -210,15 +210,15 @@ object Sync {
                 val zoneCode = jsonObject.getInt("zone_code")
                 val completeBlocks = jsonObject.getJSONArray("complete_blocks")
                 for(j in 0 until  completeBlocks.length()){
-                    val block = completeBlocks.getInt(j)
+                    val block = String.format("%03d", completeBlocks.getInt(j))
                     accountByCCList.add(AccountByCC(ccName, "$zoneCode$block"))
                 }
                 val partialBlocks = jsonObject.getJSONArray("partial_blocks")
                 for(j in 0 until  partialBlocks.length()){
-                    val block = partialBlocks.getJSONObject(j).getInt("block")
+                    val block = String.format("%03d", partialBlocks.getJSONObject(j).getInt("block"))
                     val accounts = partialBlocks.getJSONObject(j).getJSONArray("acc_no")
                     for(k in 0 until accounts.length()) {
-                        val account = accounts.getInt(k)
+                        val account = String.format("%04d", accounts.getInt(k))
                         accountByCCList.add(AccountByCC(ccName, "$zoneCode$block$account"))
                     }
                 }
