@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -71,7 +74,7 @@ class ComplainCentreFragment : Fragment() {
         }
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
+    @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     @Composable
     fun ComplainCentreUI(context: Context) {
         val allComplainCentre by remember { complainCentreViewModel.allComplainCentre }.collectAsState()
@@ -80,11 +83,9 @@ class ComplainCentreFragment : Fragment() {
         val isSearching by complainCentreViewModel.isSearching.collectAsState()
 
         LaunchedEffect(key1 = true, block = {
-            // we will get the student details when ever the screen is created
-            // Launched effect is a side effect
             complainCentreViewModel.getAllComplainCenter()
         })
-
+        val scroll = rememberScrollState(0)
         Column(modifier = Modifier.fillMaxSize()) {
             SearchBar(
                 modifier = Modifier
@@ -98,7 +99,8 @@ class ComplainCentreFragment : Fragment() {
                     complainCentreViewModel.onToggleSearch()
                 },
                 placeholder = {
-                    Text(text = "আপনার ১৩ সংখ্যার হিসাব নং দিন")
+                    Text(text = "বিদ্যুৎ বিলে উল্লেখিত ১৩ সংখ্যার হিসাব নং দিন",
+                        modifier = Modifier.basicMarquee())
                 },
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Search, contentDescription = "Search")

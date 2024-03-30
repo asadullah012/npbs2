@@ -170,6 +170,7 @@ class NPBS2Repository(db: NPBS2DB) {
         for(l in list){
             bannersUrl.add(Information(0,l,"",Category.BANNER))
         }
+        informationDao.deleteAllByCategory(Category.BANNER)
         informationDao.insertInfos(bannersUrl)
     }
 
