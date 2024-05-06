@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import com.galib.natorepbs2.logger.LogUtils
 import com.galib.natorepbs2.R
 import com.galib.natorepbs2.notifications.NotificationManager
@@ -47,7 +48,12 @@ object UpdateManager {
             intent = Intent(Intent.ACTION_VIEW, Uri.parse(SyncConfig.getUrl("PLAY_STORE_PREFIX",context) + context.packageName))
         }
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val notifyPendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+        return notifyPendingIntent
     }
 
 }
