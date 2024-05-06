@@ -17,8 +17,8 @@ android {
         applicationId = "com.galib.natorepbs2"
         minSdk = 21
         targetSdk = 34
-        versionCode = 7
-        versionName = "2.0.0"
+        versionCode = 9
+        versionName = "2.0.1"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -110,7 +110,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
 
     //Compose
-    implementation(platform("androidx.compose:compose-bom:2024.01.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.04.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")

@@ -782,7 +782,7 @@ object Sync {
                     if(email == null) email = ""
                     if(name != null && designation != null && office != null && !mobile.isNullOrEmpty()){
                         data.add(Employee(i, imageUrl, name, designation, office, email, mobile, phone, Category.REB))
-//                            LogUtils.d(TAG, "syncBREBContacts: $imageUrl $name $designation $office $email $mobile $phone")
+                            LogUtils.d(TAG, "syncBREBContacts: $imageUrl $name $designation $office $email $mobile $phone")
 //                            LogUtils.d(TAG, "syncBREBContacts: ${data.last()}")
                     }
                 }
