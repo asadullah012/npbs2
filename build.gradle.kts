@@ -14,12 +14,13 @@ buildscript {
 }
 
 plugins {
-    id("com.android.application") version "8.2.0" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
-    id("com.google.devtools.ksp") version "1.9.22-1.0.16" apply false
-    id("com.autonomousapps.dependency-analysis") version "1.28.0"
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.com.google.devtools.ksp) apply false
+    alias(libs.plugins.com.autonomousapps.dependencyanalysis) 
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 tasks.register<Delete>("clean").configure {
-    delete(rootProject.buildDir)
+    delete(rootProject.layout.buildDirectory)
 }
