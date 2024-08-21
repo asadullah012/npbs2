@@ -1,26 +1,56 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+class AppConfig {
+    val id = "com.galib.natorepbs2"
+    val versionCode = 9
+    val versionName = "2.0.1"
+
+    val compileSdk = libs.versions.compileSdk.get().toInt()
+    val minSdk = libs.versions.minSdk.get().toInt()
+    val targetSdk = libs.versions.targetSdk.get().toInt()
+
+    val jvmTarget = JvmTarget.JVM_17
+    val javaVersion = JavaVersion.VERSION_17
+    val multiDexEnabled = true
+    val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+}
+
+
 plugins {
-    id("com.android.application")
+    alias(libs.plugins.android.application)
     id("androidx.navigation.safeargs")
     id("kotlin-android")
     id("kotlin-kapt")
-    id("com.google.devtools.ksp")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.com.google.devtools.ksp)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    alias(libs.plugins.compose.compiler)
 }
 
+val appConfig = AppConfig()
+
 android {
-    namespace = "com.galib.natorepbs2"
-    compileSdk = 34
+    namespace = appConfig.id
+    compileSdk = appConfig.compileSdk
 
     defaultConfig {
-        applicationId = "com.galib.natorepbs2"
-        minSdk = 21
-        targetSdk = 34
-        versionCode = 9
-        versionName = "2.0.1"
-        multiDexEnabled = true
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        applicationId = appConfig.id
+        minSdk = appConfig.minSdk
+        targetSdk = appConfig.targetSdk
+        versionCode = appConfig.versionCode
+        versionName = appConfig.versionName
+        multiDexEnabled = appConfig.multiDexEnabled
+        testInstrumentationRunner = appConfig.testInstrumentationRunner
+    }
+
+    compileOptions {
+        sourceCompatibility = appConfig.javaVersion
+        targetCompatibility = appConfig.javaVersion
+    }
+
+    buildFeatures {
+        compose = true
     }
 
     buildTypes {
@@ -33,8 +63,6 @@ android {
             )
         }
         getByName("debug") {
-            isMinifyEnabled = true
-            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -45,10 +73,6 @@ android {
     dataBinding {
         enable = true
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
     packaging {
         resources {
             excludes += "/META-INF/atomicfu.kotlin_module"
@@ -57,15 +81,11 @@ android {
 //    testOptions {
 //        unitTests.returnDefaultValues = true
 //    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-    buildFeatures {
-        compose = true
-    }
+}
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
+kotlin {
+    compilerOptions {
+        jvmTarget.set(appConfig.jvmTarget)
     }
 }
 
@@ -77,7 +97,7 @@ configurations {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics.ktx)
     implementation(libs.firebase.analytics.ktx)
     implementation(libs.core.ktx)
@@ -89,7 +109,7 @@ dependencies {
     implementation(libs.room.ktx)
     implementation( libs.flexbox)
     ksp(libs.room.compiler)
-    annotationProcessor(libs.androidx.room.room.compiler)
+    annotationProcessor(libs.room.compiler)
     androidTestImplementation (libs.androidx.room.testing)
 
     // Lifecycle components
@@ -106,15 +126,15 @@ dependencies {
     // UI
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
-    kapt (libs.compiler)
+    ksp (libs.compiler)
     implementation(libs.androidx.navigation.fragment.ktx)
 
     //Compose
-    implementation(platform("androidx.compose:compose-bom:2024.04.01"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material3:material3-window-size-class")
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material3.window.sizeclass)
     implementation(libs.androidx.constraintlayout.compose)
     debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.runtime)
@@ -138,7 +158,7 @@ dependencies {
     // Optional -- Mockk framework
     testImplementation (libs.mockk)
     androidTestImplementation (libs.androidx.core.testing)
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1") {
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.6.1") {
         exclude(group = "com.android.support", module = "support-annotations")
     }
     androidTestImplementation (libs.androidx.junit)
