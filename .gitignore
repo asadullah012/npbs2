@@ -14,3 +14,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Secrets: never in the repository. Removed from the history on 2026-09-19.
+*.jks
+*.keystore
+app/google-services.json
